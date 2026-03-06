@@ -35,7 +35,7 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-primary text-primary-foreground">
+    <footer className="border-t border-border bg-dark-surface text-dark-surface-foreground">
       <div className="container py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
