@@ -10,9 +10,7 @@ export const navigation: NavItem[] = [
     href: "/solucoes",
     children: [
       { label: "Ressonância Magnética", href: "/solucoes/ressonancia-magnetica" },
-      { label: "Bombas Injetoras", href: "/solucoes/bombas-injetoras" },
       { label: "HexAI", href: "/solucoes/hexai" },
-      { label: "Área Veterinária", href: "/solucoes/veterinario" },
     ],
   },
   {
@@ -34,7 +32,6 @@ export const navigation: NavItem[] = [
       { label: "Hospitais", href: "/segmentos/hospitais" },
       { label: "Centros de Imagem", href: "/segmentos/centros-de-imagem" },
       { label: "Universidades", href: "/segmentos/universidades" },
-      { label: "Veterinário", href: "/segmentos/veterinario" },
     ],
   },
   {

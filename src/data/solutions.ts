@@ -1,4 +1,4 @@
-import { Magnet, Syringe, Brain, PawPrint } from "lucide-react";
+import { Magnet, Brain } from "lucide-react";
 
 export interface SolutionHighlight {
   value: string;
@@ -39,22 +39,10 @@ export const solutionCategories = [
     products: ["rm-magnifico-open", "rm-s-scan", "rm-o-scan", "rm-g-scan"],
   },
   {
-    slug: "bombas-injetoras",
-    title: "Bombas Injetoras",
-    description: "Soluções em bombas injetoras de contraste com manutenção e suporte especializados para centros de imagem.",
-    icon: Syringe,
-  },
-  {
     slug: "hexai",
     title: "HexAI",
     description: "Inteligência artificial aplicada ao diagnóstico por imagem para maior precisão, produtividade e assertividade clínica.",
     icon: Brain,
-  },
-  {
-    slug: "veterinario",
-    title: "Área Veterinária",
-    description: "Equipamentos Esaote dedicados ao diagnóstico veterinário: Magnífico Vet, Vet-MR Grande e O-Scan Equine.",
-    icon: PawPrint,
   },
 ];
 
@@ -455,49 +443,6 @@ export const solutions: Record<string, Solution> = {
     ],
   },
 
-  "bombas-injetoras": {
-    slug: "bombas-injetoras",
-    title: "Bombas Injetoras de Contraste",
-    shortTitle: "Bombas Injetoras",
-    description: "Soluções em bombas injetoras de contraste com manutenção e suporte especializados para centros de diagnóstico por imagem.",
-    icon: Syringe,
-    heroHeadline: "Bombas Injetoras de Contraste",
-    heroSubtitle: "Equipamentos de injeção de contraste de alta precisão para exames de tomografia e ressonância, com suporte técnico completo e cobertura nacional.",
-    audience: [
-      "Centros de diagnóstico por imagem",
-      "Hospitais com departamento de radiologia",
-      "Clínicas de tomografia e ressonância",
-    ],
-    problems: [
-      "Injeção manual de contraste com risco de erro de dosagem",
-      "Equipamentos antigos sem conectividade e controle preciso",
-      "Falta de suporte técnico especializado para bombas injetoras",
-    ],
-    steps: [
-      { title: "Avaliação", description: "Análise do volume de exames e tipos de procedimentos." },
-      { title: "Proposta", description: "Equipamento e plano de suporte ideais." },
-      { title: "Instalação", description: "Instalação, integração e treinamento da equipe." },
-      { title: "Manutenção", description: "Suporte contínuo e manutenção preventiva." },
-    ],
-    differentials: [
-      "Suporte técnico nacional especializado",
-      "Manutenção preventiva programada",
-      "Peças originais e insumos garantidos",
-      "Treinamento operacional completo",
-    ],
-    specs: [
-      { label: "Tipo", value: "Bombas injetoras de contraste" },
-      { label: "Aplicações", value: "Tomografia e Ressonância Magnética" },
-      { label: "Suporte", value: "Nacional com SLA garantido" },
-    ],
-    faq: [
-      {
-        question: "Vocês fazem manutenção de bombas injetoras?",
-        answer: "Sim, oferecemos manutenção preventiva e corretiva para bombas injetoras de contraste, com suporte técnico especializado e peças originais.",
-      },
-    ],
-  },
-
   "hexai": {
     slug: "hexai",
     title: "HexAI — Inteligência Artificial Diagnóstica",
@@ -549,54 +494,4 @@ export const solutions: Record<string, Solution> = {
     ],
   },
 
-  "veterinario": {
-    slug: "veterinario",
-    title: "Ressonância Magnética Veterinária",
-    shortTitle: "Área Veterinária",
-    description: "Soluções de RM veterinária Esaote: Magnífico Vet, Vet-MR Grande e O-Scan Equine para diagnósticos precisos em pequenos e grandes animais.",
-    icon: PawPrint,
-    heroHeadline: "RM Veterinária: Diagnóstico por Imagem de Alta Precisão",
-    heroSubtitle: "Oferecemos ressonância magnética com os mais altos padrões de qualidade do mercado para diagnóstico veterinário. Precisão, otimização energética e soluções para pequenos e grandes animais.",
-    audience: [
-      "Hospitais veterinários de referência",
-      "Clínicas veterinárias especializadas",
-      "Centros de pesquisa animal",
-      "Hipismo e esporte equestre",
-    ],
-    problems: [
-      "Falta de equipamentos dedicados ao diagnóstico por imagem veterinário",
-      "Necessidade de RM para grandes animais (equinos)",
-      "Alto custo de exames em centros humanos adaptados",
-      "Diagnósticos imprecisos com ultrassom e radiografia convencionais",
-    ],
-    steps: [
-      { title: "Consultoria Veterinária", description: "Análise do perfil de pacientes e demanda de exames." },
-      { title: "Escolha do Equipamento", description: "Magnífico Vet, Vet-MR Grande ou O-Scan Equine." },
-      { title: "Instalação Dedicada", description: "Projeto e instalação adaptados ao ambiente veterinário." },
-      { title: "Treinamento e Suporte", description: "Capacitação da equipe e suporte contínuo." },
-    ],
-    differentials: [
-      "Equipamentos Esaote dedicados ao uso veterinário",
-      "Linha completa: pequenos animais e equinos",
-      "Magnífico Vet, Vet-MR Grande e O-Scan Equine",
-      "Suporte técnico especializado nacional",
-      "Protocolos otimizados para anatomia animal",
-    ],
-    specs: [
-      { label: "Magnífico Vet", value: "RM aberta para pequenos e médios animais" },
-      { label: "Vet-MR Grande", value: "RM de grande porte para cães e animais maiores" },
-      { label: "O-Scan Equine", value: "RM dedicada para extremidades equinas" },
-      { label: "Suporte", value: "Nacional com equipe especializada" },
-    ],
-    faq: [
-      {
-        question: "Quais equipamentos de RM veterinária vocês oferecem?",
-        answer: "Oferecemos três modelos Esaote: Magnífico Vet (pequenos e médios animais), Vet-MR Grande (cães e animais maiores) e O-Scan Equine (extremidades de equinos).",
-      },
-      {
-        question: "O O-Scan Equine é portátil?",
-        answer: "O O-Scan Equine é projetado para ser utilizado em clínicas equinas e centros de hipismo, com design compacto que facilita a instalação em diferentes ambientes.",
-      },
-    ],
-  },
 };

@@ -3,14 +3,13 @@ import { Helmet } from "react-helmet-async";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/sections/HeroSection";
 import CTABanner from "@/components/sections/CTABanner";
-import { Building2, Hospital, Stethoscope, GraduationCap, PawPrint } from "lucide-react";
+import { Building2, Hospital, Stethoscope, GraduationCap } from "lucide-react";
 
 const segments = {
   clinicas: { title: "Soluções para Clínicas", icon: Building2, desc: "Equipamentos e serviços para elevar produtividade e qualidade diagnóstica em clínicas de imagem." },
   hospitais: { title: "Soluções para Hospitais", icon: Hospital, desc: "Projetos robustos para operação hospitalar com alta disponibilidade e suporte especializado." },
   "centros-de-imagem": { title: "Soluções para Centros de Imagem", icon: Stethoscope, desc: "Arquitetura técnica e comercial para operações de alto volume e eficiência contínua." },
   universidades: { title: "Soluções para Universidades", icon: GraduationCap, desc: "Apoio técnico para ensino, pesquisa e formação em diagnóstico por imagem." },
-  veterinario: { title: "Soluções para Veterinário", icon: PawPrint, desc: "Linha dedicada para diagnóstico veterinário em pequenos e grandes animais." },
 } as const;
 
 const SegmentPage = () => {

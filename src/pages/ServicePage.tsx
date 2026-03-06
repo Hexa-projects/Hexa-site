@@ -78,11 +78,11 @@ const ServicePage = () => {
                   Equipe Certificada Internacionalmente
                 </h3>
               </div>
-              <div className="mb-5 overflow-hidden rounded-xl border border-border">
+              <div className="mb-5 flex h-48 items-center justify-center rounded-xl border border-border bg-white p-4">
                 <img
                   src={serviceHeroMedia[service.slug]}
                   alt={service.title}
-                  className="h-44 w-full object-cover"
+                  className="max-h-full max-w-full object-contain"
                   loading="lazy"
                   decoding="async"
                 />

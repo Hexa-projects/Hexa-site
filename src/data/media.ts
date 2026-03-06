@@ -5,9 +5,7 @@ export const hexaMedia = {
   contatoHero: "/assets/hexa/Hexamedical-Website-19-1024x576.webp",
   solutions: {
     "ressonancia-magnetica": "/assets/hexa/magnifico-open.jpg",
-    "bombas-injetoras": "/assets/hexa/Hexamedical-Website-17-1024x576.webp",
     "hexai": "/assets/hexa/varredura-hexai-1024x576.webp",
-    "veterinario": "/assets/hexa/Hexamedical-Ressonancia-Vet-2.webp",
     "rm-magnifico-open": "/assets/hexa/magnifico-open.jpg",
     "rm-s-scan": "/assets/hexa/csm_esaote-s-scan-hero_46ed91e4e2.webp",
     "rm-o-scan": "/assets/hexa/oscan.webp",

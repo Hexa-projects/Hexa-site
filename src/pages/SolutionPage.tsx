@@ -69,11 +69,11 @@ const SolutionPage = () => {
                   <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">{block.title}</h2>
                   <p className="text-muted-foreground leading-relaxed">{block.description}</p>
                 </div>
-                <div className={`overflow-hidden rounded-2xl border border-border ${i % 2 === 1 ? "lg:order-1" : ""}`}>
+                <div className={`flex h-80 items-center justify-center rounded-2xl border border-border bg-white p-6 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
                   <img
                     src={hexaMedia.solutions[solution.slug as keyof typeof hexaMedia.solutions]}
                     alt={solution.shortTitle || solution.title}
-                    className="h-72 w-full object-cover"
+                    className="max-h-full max-w-full object-contain"
                     loading="lazy"
                     decoding="async"
                   />
@@ -102,11 +102,11 @@ const SolutionPage = () => {
                 ))}
               </ul>
             </div>
-            <div className="overflow-hidden rounded-2xl border border-border">
+            <div className="flex h-80 items-center justify-center rounded-2xl border border-border bg-white p-6">
               <img
                 src={hexaMedia.solutions[solution.slug as keyof typeof hexaMedia.solutions]}
                 alt={solution.shortTitle || solution.title}
-                className="h-72 w-full object-cover"
+                className="max-h-full max-w-full object-contain"
                 loading="lazy"
                 decoding="async"
               />
