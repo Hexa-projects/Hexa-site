@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
+import logoIcon from "@/assets/logo-icon.png";
 
 const footerLinks = [
   {
@@ -39,13 +40,11 @@ const Footer = () => {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="mb-4 flex items-center gap-1.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent">
-                <span className="text-lg font-bold text-accent-foreground">H</span>
-              </div>
+            <div className="mb-4 flex items-center gap-2">
+              <img src={logoIcon} alt="Hexamedical" className="h-10 w-10" />
               <div className="flex flex-col leading-none">
-                <span className="text-base font-bold tracking-tight">HEXA</span>
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-accent">MEDICAL</span>
+                <span className="text-base font-bold tracking-tight">HEXA<span className="text-primary-foreground/60">MEDICAL</span></span>
+                <span className="text-[9px] font-medium uppercase tracking-widest text-primary-foreground/50">Taking Care Your Equipment</span>
               </div>
             </div>
             <p className="mb-6 max-w-sm text-sm text-primary-foreground/70">
