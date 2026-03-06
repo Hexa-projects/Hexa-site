@@ -8,6 +8,7 @@ import CTABanner from "@/components/sections/CTABanner";
 import DifferentialsGrid from "@/components/sections/DifferentialsGrid";
 import TrustBlock from "@/components/sections/TrustBlock";
 import { solutions } from "@/data/solutions";
+import { hexaMedia } from "@/data/media";
 import { CheckCircle2, Target, AlertTriangle, ArrowRight, Quote, Circle } from "lucide-react";
 
 const SolutionPage = () => {
@@ -37,6 +38,7 @@ const SolutionPage = () => {
         ctaPrimaryLabel="Solicitar Avaliação Técnica"
         ctaSecondaryLabel="Falar com Especialista"
         ctaSecondaryHref="/contato"
+        backgroundImage={hexaMedia.solutions[solution.slug as keyof typeof hexaMedia.solutions]}
       />
 
       {/* Highlights Grid (specs visuais) */}
@@ -67,8 +69,14 @@ const SolutionPage = () => {
                   <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">{block.title}</h2>
                   <p className="text-muted-foreground leading-relaxed">{block.description}</p>
                 </div>
-                <div className={`rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 p-12 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <solution.icon className="mx-auto h-32 w-32 text-primary/20" />
+                <div className={`overflow-hidden rounded-2xl border border-border ${i % 2 === 1 ? "lg:order-1" : ""}`}>
+                  <img
+                    src={hexaMedia.solutions[solution.slug as keyof typeof hexaMedia.solutions]}
+                    alt={solution.shortTitle || solution.title}
+                    className="h-72 w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
               </div>
             ))}
@@ -94,8 +102,14 @@ const SolutionPage = () => {
                 ))}
               </ul>
             </div>
-            <div className="rounded-2xl bg-gradient-to-br from-primary/5 to-accent/5 p-12">
-              <solution.icon className="mx-auto h-32 w-32 text-primary/20" />
+            <div className="overflow-hidden rounded-2xl border border-border">
+              <img
+                src={hexaMedia.solutions[solution.slug as keyof typeof hexaMedia.solutions]}
+                alt={solution.shortTitle || solution.title}
+                className="h-72 w-full object-cover"
+                loading="lazy"
+                decoding="async"
+              />
             </div>
           </div>
         </div>

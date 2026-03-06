@@ -10,6 +10,7 @@ interface HeroSectionProps {
   ctaSecondaryLabel?: string;
   ctaSecondaryHref?: string;
   variant?: "dark" | "light";
+  backgroundImage?: string;
 }
 
 const HeroSection = ({
@@ -20,6 +21,7 @@ const HeroSection = ({
   ctaSecondaryLabel,
   ctaSecondaryHref,
   variant = "dark",
+  backgroundImage,
 }: HeroSectionProps) => {
   const isDark = variant === "dark";
 
@@ -29,10 +31,23 @@ const HeroSection = ({
         isDark ? "bg-dark-surface text-dark-surface-foreground" : "bg-background text-foreground"
       }`}
     >
+      {backgroundImage && (
+        <div className="absolute inset-0">
+          <img
+            src={backgroundImage}
+            alt=""
+            className="h-full w-full object-cover"
+            loading="eager"
+            decoding="async"
+          />
+          <div className={`absolute inset-0 ${isDark ? "bg-dark-surface/80" : "bg-background/75"}`} />
+        </div>
+      )}
+
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className={`absolute -right-40 -top-40 h-96 w-96 rounded-full ${isDark ? "bg-secondary/30" : "bg-accent/5"} blur-3xl`} />
-        <div className={`absolute -bottom-20 -left-20 h-72 w-72 rounded-full ${isDark ? "bg-accent/10" : "bg-primary/5"} blur-3xl`} />
+        <div className={`absolute -right-40 -top-40 h-96 w-96 rounded-full ${isDark ? "bg-secondary/20" : "bg-accent/5"} blur-3xl`} />
+        <div className={`absolute -bottom-20 -left-20 h-72 w-72 rounded-full ${isDark ? "bg-accent/20" : "bg-primary/5"} blur-3xl`} />
       </div>
 
       <div className="container relative z-10 py-16 md:py-24 lg:py-32">

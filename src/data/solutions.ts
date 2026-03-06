@@ -59,6 +59,49 @@ export const solutionCategories = [
 ];
 
 export const solutions: Record<string, Solution> = {
+  "ressonancia-magnetica": {
+    slug: "ressonancia-magnetica",
+    title: "Linha de Ressonância Magnética Esaote",
+    shortTitle: "Ressonância Magnética",
+    description: "Portfólio completo de sistemas de RM Esaote para diferentes perfis operacionais.",
+    icon: Magnet,
+    heroHeadline: "Linha de Ressonância Magnética Esaote",
+    heroSubtitle: "Soluções de RM para clínicas, hospitais e centros de imagem: Magnifico Open, S-Scan, O-Scan e G-Scan Brio.",
+    audience: [
+      "Clínicas de imagem em expansão",
+      "Hospitais com demanda de alta disponibilidade",
+      "Centros de ortopedia e medicina esportiva",
+      "Operações que buscam previsibilidade técnica e financeira"
+    ],
+    problems: [
+      "Dificuldade em escolher o sistema adequado para o perfil de exames",
+      "Custo operacional elevado com equipamentos inadequados",
+      "Baixa previsibilidade de manutenção e performance",
+      "Necessidade de ganho de qualidade diagnóstica"
+    ],
+    steps: [
+      { title: "Diagnóstico de Cenário", description: "Mapeamos aplicação clínica, volume e estrutura." },
+      { title: "Seleção do Sistema", description: "Indicamos a configuração mais aderente ao seu contexto." },
+      { title: "Implantação", description: "Projeto técnico, instalação e treinamento operacional." },
+      { title: "Suporte Contínuo", description: "Acompanhamento técnico e manutenção para alta disponibilidade." }
+    ],
+    differentials: [
+      "Portfólio completo Esaote para diferentes necessidades",
+      "Suporte técnico especializado com cobertura nacional",
+      "Modelos compactos e de baixo consumo energético",
+      "Abordagem consultiva orientada a resultado"
+    ],
+    specs: [
+      { label: "Modelos", value: "Magnifico Open, S-Scan, O-Scan, G-Scan Brio" },
+      { label: "Aplicações", value: "MSK, coluna, extremidades e rotinas específicas" },
+      { label: "Implantação", value: "Projeto técnico e instalação assistida" },
+      { label: "Suporte", value: "Nacional com contratos flexíveis" }
+    ],
+    faq: [
+      { question: "Qual modelo de RM é ideal para minha operação?", answer: "Depende do perfil clínico, volume e estrutura disponível. Nossa equipe faz essa recomendação de forma consultiva." },
+      { question: "A Hexamedical oferece suporte após a instalação?", answer: "Sim, com manutenção preventiva, corretiva e contratos sob medida para garantir alta disponibilidade." }
+    ]
+  },
   "rm-magnifico-open": {
     slug: "rm-magnifico-open",
     title: "RM Esaote Magnifico Open",

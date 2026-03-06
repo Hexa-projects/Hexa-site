@@ -6,14 +6,27 @@ interface ServiceCardProps {
   description: string;
   href: string;
   icon: LucideIcon;
+  image?: string;
 }
 
-const ServiceCard = ({ title, description, href, icon: Icon }: ServiceCardProps) => {
+const ServiceCard = ({ title, description, href, icon: Icon, image }: ServiceCardProps) => {
   return (
     <Link
       to={href}
-      className="group flex items-start gap-4 rounded-xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-md"
+      className="group flex overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-md"
     >
+      {image && (
+        <div className="hidden w-48 overflow-hidden bg-white p-2 sm:block">
+          <img
+            src={image}
+            alt={title}
+            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      )}
+      <div className="flex items-start gap-4 p-5">
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
         <Icon className="h-5 w-5" />
       </div>
@@ -24,6 +37,7 @@ const ServiceCard = ({ title, description, href, icon: Icon }: ServiceCardProps)
           Ver detalhes
           <ArrowRight className="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
         </span>
+      </div>
       </div>
     </Link>
   );

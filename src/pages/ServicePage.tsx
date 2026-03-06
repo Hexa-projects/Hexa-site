@@ -7,6 +7,7 @@ import FAQSection from "@/components/sections/FAQSection";
 import CTABanner from "@/components/sections/CTABanner";
 import TrustBlock from "@/components/sections/TrustBlock";
 import { services } from "@/data/services";
+import { hexaMedia } from "@/data/media";
 import { CheckCircle2, MapPin, Users } from "lucide-react";
 
 const ServicePage = () => {
@@ -35,6 +36,7 @@ const ServicePage = () => {
         ctaPrimaryLabel="Solicitar Orçamento"
         ctaSecondaryLabel="Falar com Especialista"
         ctaSecondaryHref="/contato"
+        backgroundImage={hexaMedia.services[service.slug as keyof typeof hexaMedia.services]}
       />
 
       {/* Escopo do serviço */}
@@ -75,6 +77,15 @@ const ServicePage = () => {
                 <h3 className="text-xl font-bold text-foreground">
                   Equipe Certificada Internacionalmente
                 </h3>
+              </div>
+              <div className="mb-5 overflow-hidden rounded-xl border border-border">
+                <img
+                  src={serviceHeroMedia[service.slug]}
+                  alt={service.title}
+                  className="h-44 w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <ul className="space-y-3">
                 {service.teamHighlights.map((item) => (

@@ -6,14 +6,27 @@ interface SolutionCardProps {
   description: string;
   href: string;
   icon: LucideIcon;
+  image?: string;
 }
 
-const SolutionCard = ({ title, description, href, icon: Icon }: SolutionCardProps) => {
+const SolutionCard = ({ title, description, href, icon: Icon, image }: SolutionCardProps) => {
   return (
     <Link
       to={href}
-      className="group flex flex-col rounded-xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg"
+      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg"
     >
+      {image && (
+        <div className="h-44 w-full overflow-hidden bg-white p-2">
+          <img
+            src={image}
+            alt={title}
+            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      )}
+      <div className="p-6">
       <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10 text-accent transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
         <Icon className="h-6 w-6" />
       </div>
@@ -23,6 +36,7 @@ const SolutionCard = ({ title, description, href, icon: Icon }: SolutionCardProp
         Saiba mais
         <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-1" />
       </span>
+      </div>
     </Link>
   );
 };

@@ -28,7 +28,7 @@ export const navigation: NavItem[] = [
   },
   {
     label: "Segmentos",
-    href: "#",
+    href: "/segmentos",
     children: [
       { label: "Clínicas", href: "/segmentos/clinicas" },
       { label: "Hospitais", href: "/segmentos/hospitais" },
@@ -39,7 +39,7 @@ export const navigation: NavItem[] = [
   },
   {
     label: "Conteúdo",
-    href: "#",
+    href: "/conteudo",
     children: [
       { label: "Blog", href: "/blog" },
       { label: "Materiais de Apoio", href: "/materiais" },
@@ -48,7 +48,7 @@ export const navigation: NavItem[] = [
   },
   {
     label: "Empresa",
-    href: "#",
+    href: "/empresa",
     children: [
       { label: "Estrutura", href: "/estrutura" },
       { label: "Sobre a Hexamedical", href: "/sobre" },

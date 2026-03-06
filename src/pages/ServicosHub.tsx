@@ -5,6 +5,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import ServiceCard from "@/components/sections/ServiceCard";
 import CTABanner from "@/components/sections/CTABanner";
 import { services } from "@/data/services";
+import { hexaMedia } from "@/data/media";
 
 const ServicosHub = () => {
   return (
@@ -22,6 +23,7 @@ const ServicosHub = () => {
         ctaSecondaryLabel="Ver soluções"
         ctaSecondaryHref="/solucoes"
         variant="light"
+        backgroundImage={hexaMedia.servicesHubHero}
       />
 
       <section className="py-16 md:py-24">
@@ -42,6 +44,7 @@ const ServicosHub = () => {
                 description={svc.description}
                 href={`/servicos/${svc.slug}`}
                 icon={svc.icon}
+                image={hexaMedia.services[svc.slug as keyof typeof hexaMedia.services]}
               />
             ))}
           </div>

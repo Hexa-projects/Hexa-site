@@ -2,6 +2,8 @@ import { Helmet } from "react-helmet-async";
 import Layout from "@/components/layout/Layout";
 import PageBreadcrumb from "@/components/layout/PageBreadcrumb";
 import ContactForm from "@/components/sections/ContactForm";
+import HeroSection from "@/components/sections/HeroSection";
+import { hexaMedia } from "@/data/media";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const contactInfo = [
@@ -21,7 +23,16 @@ const Contato = () => {
 
       <PageBreadcrumb items={[{ label: "Contato" }]} />
 
-      <section className="py-16 md:py-24">
+      <HeroSection
+        headline="Fale com um especialista Hexamedical"
+        subtitle="Conte com orientação consultiva para solução, serviço e planejamento da sua operação de diagnóstico por imagem."
+        ctaPrimaryLabel="Enviar solicitação"
+        ctaPrimaryHref="#form-contato"
+        variant="light"
+        backgroundImage={hexaMedia.contatoHero}
+      />
+
+      <section id="form-contato" className="py-16 md:py-24">
         <div className="container">
           <div className="mb-12 text-center">
             <h1 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">

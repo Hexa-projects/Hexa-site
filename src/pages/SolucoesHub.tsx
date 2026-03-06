@@ -4,9 +4,11 @@ import PageBreadcrumb from "@/components/layout/PageBreadcrumb";
 import HeroSection from "@/components/sections/HeroSection";
 import SolutionCard from "@/components/sections/SolutionCard";
 import CTABanner from "@/components/sections/CTABanner";
+import ProductsCatalogSection from "@/components/sections/ProductsCatalogSection";
 import { solutionCategories } from "@/data/solutions";
 import { Link } from "react-router-dom";
 import { ArrowRight, Magnet } from "lucide-react";
+import { hexaMedia } from "@/data/media";
 
 const rmProducts = [
   { slug: "rm-magnifico-open", title: "Magnifico Open", description: "Sistema aberto de alto campo para exames de corpo inteiro." },
@@ -31,6 +33,7 @@ const SolucoesHub = () => {
         ctaSecondaryLabel="Ver serviços"
         ctaSecondaryHref="/servicos"
         variant="light"
+        backgroundImage={hexaMedia.solutionsHubHero}
       />
 
       {/* Categories */}
@@ -49,6 +52,7 @@ const SolucoesHub = () => {
                 description={sol.description}
                 href={`/solucoes/${sol.slug}`}
                 icon={sol.icon}
+                image={hexaMedia.solutions[sol.slug as keyof typeof hexaMedia.solutions]}
               />
             ))}
           </div>
@@ -71,8 +75,18 @@ const SolucoesHub = () => {
               <Link
                 key={product.slug}
                 to={`/solucoes/${product.slug}`}
-                className="group flex flex-col rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg"
+                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg"
               >
+                <div className="h-44 w-full overflow-hidden bg-white p-2">
+                  <img
+                    src={hexaMedia.solutions[product.slug as keyof typeof hexaMedia.solutions]}
+                    alt={product.title}
+                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <div className="p-6">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Magnet className="h-6 w-6" />
                 </div>
@@ -81,12 +95,14 @@ const SolucoesHub = () => {
                 <span className="inline-flex items-center text-sm font-semibold text-accent group-hover:text-accent/80">
                   Ver detalhes <ArrowRight className="ml-1.5 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
+                </div>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
+      <ProductsCatalogSection />
       <CTABanner />
     </Layout>
   );
