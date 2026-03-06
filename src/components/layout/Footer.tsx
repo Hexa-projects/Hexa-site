@@ -92,8 +92,8 @@ const Footer = () => {
         <div className="container flex flex-col items-center justify-between gap-4 py-6 text-xs text-dark-surface-foreground/50 sm:flex-row">
           <p>© {new Date().getFullYear()} Hexamedical. Todos os direitos reservados.</p>
           <div className="flex gap-4">
-            <Link to="/politica-de-privacidade" className="hover:text-accent">Política de Privacidade</Link>
-            <Link to="/termos" className="hover:text-accent">Termos de Uso</Link>
+            <Link to="/politica-de-privacidade" className="hover:text-primary">Política de Privacidade</Link>
+            <Link to="/termos" className="hover:text-primary">Termos de Uso</Link>
           </div>
         </div>
       </div>
