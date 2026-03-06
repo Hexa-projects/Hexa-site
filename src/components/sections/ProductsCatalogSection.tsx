@@ -16,16 +16,16 @@ const ProductsCatalogSection = () => {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {productCatalog.map((item) => {
             const content = (
-              <>
-                <div className="h-44 w-full overflow-hidden bg-white p-2">
-                  <img src={item.image} alt={item.name} className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" />
+              <div className="flex h-full flex-col">
+                <div className="flex h-48 w-full items-center justify-center p-4 bg-white">
+                  <img src={item.image} alt={item.name} className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" />
                 </div>
-                <div className="p-5">
-                  <Badge variant="secondary" className="mb-3">{item.category}</Badge>
-                  <h3 className="mb-2 text-base font-bold text-foreground">{item.name}</h3>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                <div className="flex flex-1 flex-col p-5 bg-card">
+                  <Badge variant="secondary" className="mb-3 w-fit">{item.category}</Badge>
+                  <h3 className="mb-2 text-lg font-bold text-foreground">{item.name}</h3>
+                  <p className="text-sm text-muted-foreground flex-1">{item.description}</p>
                 </div>
-              </>
+              </div>
             );
 
             if (item.href) {

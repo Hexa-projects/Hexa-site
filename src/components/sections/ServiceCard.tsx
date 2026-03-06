@@ -16,17 +16,17 @@ const ServiceCard = ({ title, description, href, icon: Icon, image }: ServiceCar
       className="group flex overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-md"
     >
       {image && (
-        <div className="hidden w-48 overflow-hidden bg-white p-2 sm:block">
+        <div className="hidden w-48 items-center justify-center p-4 bg-white sm:flex">
           <img
             src={image}
             alt={title}
-            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+            className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
             decoding="async"
           />
         </div>
       )}
-      <div className="flex items-start gap-4 p-5">
+      <div className="flex flex-1 items-start gap-4 p-5 bg-card">
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
         <Icon className="h-5 w-5" />
       </div>

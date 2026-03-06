@@ -75,18 +75,18 @@ const SolucoesHub = () => {
               <Link
                 key={product.slug}
                 to={`/solucoes/${product.slug}`}
-                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg"
+                className="group flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg"
               >
-                <div className="h-44 w-full overflow-hidden bg-white p-2">
+                <div className="flex h-48 w-full items-center justify-center p-4 bg-white">
                   <img
                     src={hexaMedia.solutions[product.slug as keyof typeof hexaMedia.solutions]}
                     alt={product.title}
-                    className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                     decoding="async"
                   />
                 </div>
-                <div className="p-6">
+                <div className="flex flex-1 flex-col p-6 bg-card">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10 text-primary">
                   <Magnet className="h-6 w-6" />
                 </div>

@@ -36,11 +36,11 @@ const HeroSection = ({
           <img
             src={backgroundImage}
             alt=""
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-center"
             loading="eager"
             decoding="async"
           />
-          <div className={`absolute inset-0 ${isDark ? "bg-dark-surface/80" : "bg-background/75"}`} />
+          <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? "from-dark-surface/95 via-dark-surface/80 to-dark-surface/40" : "from-background/95 via-background/80 to-background/40"}`} />
         </div>
       )}
 
