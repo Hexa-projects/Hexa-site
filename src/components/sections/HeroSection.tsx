@@ -26,7 +26,7 @@ const HeroSection = ({
   return (
     <section
       className={`relative overflow-hidden ${
-        isDark ? "bg-primary text-primary-foreground" : "bg-background text-foreground"
+        isDark ? "bg-dark-surface text-dark-surface-foreground" : "bg-background text-foreground"
       }`}
     >
       {/* Decorative elements */}
@@ -40,11 +40,11 @@ const HeroSection = ({
           <h1 className="mb-6 text-3xl font-extrabold leading-tight tracking-tight text-balance md:text-4xl lg:text-5xl xl:text-6xl">
             {headline}
           </h1>
-          <p className={`mb-8 max-w-2xl text-lg leading-relaxed ${isDark ? "text-primary-foreground/80" : "text-muted-foreground"} md:text-xl`}>
+          <p className={`mb-8 max-w-2xl text-lg leading-relaxed ${isDark ? "text-dark-surface-foreground/80" : "text-muted-foreground"} md:text-xl`}>
             {subtitle}
           </p>
           <div className="flex flex-col gap-4 sm:flex-row">
-            <Button asChild size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
               <Link to={ctaPrimaryHref}>
                 <Phone className="mr-2 h-4 w-4" />
                 {ctaPrimaryLabel}
@@ -55,7 +55,7 @@ const HeroSection = ({
                 asChild
                 size="lg"
                 variant={isDark ? "outline" : "secondary"}
-                className={isDark ? "border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" : ""}
+                className={isDark ? "border-dark-surface-foreground/30 text-dark-surface-foreground hover:bg-dark-surface-foreground/10" : ""}
               >
                 <Link to={ctaSecondaryHref}>
                   {ctaSecondaryLabel}

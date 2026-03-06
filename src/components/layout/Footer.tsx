@@ -35,7 +35,7 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-primary text-primary-foreground">
+    <footer className="border-t border-border bg-dark-surface text-dark-surface-foreground">
       <div className="container py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
@@ -47,14 +47,14 @@ const Footer = () => {
                 <span className="text-[9px] font-medium uppercase tracking-widest text-primary-foreground/50">Taking Care Your Equipment</span>
               </div>
             </div>
-            <p className="mb-6 max-w-sm text-sm text-primary-foreground/70">
+            <p className="mb-6 max-w-sm text-sm text-dark-surface-foreground/70">
               Especialistas em soluções de Ressonância Magnética, serviços técnicos e suporte de alta performance para instituições de saúde.
             </p>
-            <div className="space-y-2 text-sm text-primary-foreground/70">
-              <a href="tel:+551140028922" className="flex items-center gap-2 hover:text-accent">
+            <div className="space-y-2 text-sm text-dark-surface-foreground/70">
+              <a href="tel:+551140028922" className="flex items-center gap-2 hover:text-primary">
                 <Phone className="h-4 w-4" /> (11) 4002-8922
               </a>
-              <a href="mailto:contato@hexamedical.com.br" className="flex items-center gap-2 hover:text-accent">
+              <a href="mailto:contato@hexamedical.com.br" className="flex items-center gap-2 hover:text-primary">
                 <Mail className="h-4 w-4" /> contato@hexamedical.com.br
               </a>
               <div className="flex items-start gap-2">
@@ -67,7 +67,7 @@ const Footer = () => {
           {/* Links */}
           {footerLinks.map((group) => (
             <div key={group.title}>
-              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-accent">
+              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
                 {group.title}
               </h4>
               <ul className="space-y-2.5">
@@ -75,7 +75,7 @@ const Footer = () => {
                   <li key={link.href}>
                     <Link
                       to={link.href}
-                      className="text-sm text-primary-foreground/70 transition-colors hover:text-accent"
+                      className="text-sm text-dark-surface-foreground/70 transition-colors hover:text-primary"
                     >
                       {link.label}
                     </Link>
@@ -88,12 +88,12 @@ const Footer = () => {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-primary-foreground/10">
-        <div className="container flex flex-col items-center justify-between gap-4 py-6 text-xs text-primary-foreground/50 sm:flex-row">
+      <div className="border-t border-dark-surface-foreground/10">
+        <div className="container flex flex-col items-center justify-between gap-4 py-6 text-xs text-dark-surface-foreground/50 sm:flex-row">
           <p>© {new Date().getFullYear()} Hexamedical. Todos os direitos reservados.</p>
           <div className="flex gap-4">
-            <Link to="/politica-de-privacidade" className="hover:text-accent">Política de Privacidade</Link>
-            <Link to="/termos" className="hover:text-accent">Termos de Uso</Link>
+            <Link to="/politica-de-privacidade" className="hover:text-primary">Política de Privacidade</Link>
+            <Link to="/termos" className="hover:text-primary">Termos de Uso</Link>
           </div>
         </div>
       </div>

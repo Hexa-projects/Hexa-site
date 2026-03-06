@@ -196,14 +196,14 @@ const SolutionPage = () => {
 
       {/* Testimonial */}
       {solution.testimonial && (
-        <section className="border-t border-border bg-primary py-16 md:py-24">
+        <section className="border-t border-border bg-dark-surface py-16 md:py-24">
           <div className="container">
             <div className="mx-auto max-w-3xl text-center">
-              <Quote className="mx-auto mb-6 h-10 w-10 text-accent" />
-              <blockquote className="mb-6 text-lg italic leading-relaxed text-primary-foreground/90 md:text-xl">
+              <Quote className="mx-auto mb-6 h-10 w-10 text-primary" />
+              <blockquote className="mb-6 text-lg italic leading-relaxed text-dark-surface-foreground/90 md:text-xl">
                 "{solution.testimonial.quote}"
               </blockquote>
-              <cite className="text-sm font-medium text-accent not-italic">
+              <cite className="text-sm font-medium text-primary not-italic">
                 {solution.testimonial.author}
               </cite>
             </div>

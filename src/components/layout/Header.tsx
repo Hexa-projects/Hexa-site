@@ -60,7 +60,7 @@ const Header = () => {
 
         {/* CTA + Mobile Toggle */}
         <div className="flex items-center gap-3">
-          <Button asChild className="hidden bg-accent text-accent-foreground hover:bg-accent/90 sm:inline-flex">
+          <Button asChild className="hidden bg-primary text-primary-foreground hover:bg-primary/90 sm:inline-flex">
             <Link to="/contato">
               <Phone className="mr-1.5 h-4 w-4" />
               Falar com Especialista
@@ -108,7 +108,7 @@ const Header = () => {
               </div>
             ))}
             <div className="pt-3">
-              <Button asChild className="w-full bg-accent text-accent-foreground hover:bg-accent/90">
+              <Button asChild className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
                 <Link to="/contato" onClick={() => setMobileOpen(false)}>
                   <Phone className="mr-1.5 h-4 w-4" />
                   Falar com Especialista
