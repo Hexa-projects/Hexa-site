@@ -19,13 +19,13 @@ const Index = () => {
     <Layout>
       <Helmet>
         <title>Hexamedical — Especialistas em Ressonância Magnética</title>
-        <meta name="description" content="Soluções completas em Ressonância Magnética, serviços técnicos especializados e suporte de alta performance para clínicas, hospitais e centros de imagem." />
+        <meta name="description" content="Soluções completas em Ressonância Magnética Esaote, serviços técnicos especializados e suporte com 16 anos de experiência. Cobertura nacional para clínicas, hospitais e centros de imagem." />
       </Helmet>
 
       {/* 1. Hero */}
       <HeroSection
-        headline="Especialistas em Ressonância Magnética"
-        subtitle="Soluções completas em equipamentos, serviços técnicos e suporte de alta performance para clínicas, hospitais e centros de imagem em todo o Brasil."
+        headline="Seu negócio merece as soluções certas em Ressonância Magnética"
+        subtitle="Oferecemos equipamentos Esaote de alta performance, serviços técnicos especializados e suporte contínuo. Eleve o padrão do seu atendimento, reduza riscos operacionais e amplie sua lucratividade com investimento seguro."
         ctaPrimaryLabel="Falar com Especialista"
         ctaPrimaryHref="/contato"
         ctaSecondaryLabel="Conheça nossas soluções"
@@ -40,7 +40,7 @@ const Index = () => {
               Soluções certas para cada realidade
             </h2>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              De equipamentos de alta performance a inteligência artificial diagnóstica, temos a solução ideal para sua instituição.
+              Entregamos mais que produtos — soluções personalizadas para atender as necessidades de serviços exigentes, sejam clínicas, universidades ou hospitais.
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -62,10 +62,10 @@ const Index = () => {
         <div className="container">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-              Serviços técnicos especializados
+              Tecnologia e expertise reunidas em um só lugar
             </h2>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Manutenção, contratos, instalação e suporte com equipe certificada e cobertura nacional.
+              Um centro equipado para atender todas as demandas em manutenção, testes e reparos de equipamentos médicos, com equipe certificada internacionalmente e cobertura nacional.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -122,7 +122,11 @@ const Index = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 rounded-full bg-accent" />
-                  Proposta personalizada para sua realidade
+                  16 anos de experiência em equipamentos médicos
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-accent" />
+                  Cobertura em todo o território nacional
                 </div>
               </div>
             </div>
