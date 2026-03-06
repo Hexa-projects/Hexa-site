@@ -10,6 +10,7 @@ import HexAIHighlight from "@/components/sections/HexAIHighlight";
 import BlogHighlight from "@/components/sections/BlogHighlight";
 import TestimonialsBlock from "@/components/sections/TestimonialsBlock";
 import ProductsCatalogSection from "@/components/sections/ProductsCatalogSection";
+import MetricsStrip from "@/components/sections/MetricsStrip";
 import CTABanner from "@/components/sections/CTABanner";
 import ContactForm from "@/components/sections/ContactForm";
 import { solutionCategories } from "@/data/solutions";
@@ -28,23 +29,26 @@ const Index = () => {
       </Helmet>
 
       <HeroSection
-        headline="Seu negócio merece as soluções certas em Ressonância Magnética"
-        subtitle="Oferecemos equipamentos Esaote de alta performance, serviços técnicos especializados e suporte contínuo. Eleve o padrão do seu atendimento, reduza riscos operacionais e amplie sua lucratividade com investimento seguro."
+        headline="A plataforma consultiva para sua operação de Ressonância Magnética"
+        subtitle="Projetos completos em RM Esaote, serviços técnicos especializados, HexAI e suporte nacional. Clareza técnica, previsibilidade operacional e ROI real para clínicas e hospitais."
         ctaPrimaryLabel="Falar com Especialista"
         ctaPrimaryHref="/contato"
-        ctaSecondaryLabel="Conheça nossas soluções"
+        ctaSecondaryLabel="Explorar soluções"
         ctaSecondaryHref="/solucoes"
         backgroundImage={hexaMedia.homeHero}
       />
 
+      <MetricsStrip />
+
       <section className="py-16 md:py-24">
         <div className="container">
           <div className="mb-12 text-center">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-accent">NOSSOS PRODUTOS POR CATEGORIA</p>
             <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
               Soluções certas para cada realidade
             </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Entregamos mais que produtos — soluções personalizadas para atender as necessidades de serviços exigentes, sejam clínicas, universidades ou hospitais.
+            <p className="mx-auto max-w-2xl text-muted-foreground">
+              Do equipamento certo ao suporte técnico completo — estruturamos a solução ideal para sua operação.
             </p>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -65,11 +69,12 @@ const Index = () => {
       <section className="border-t border-border bg-muted/30 py-16 md:py-24">
         <div className="container">
           <div className="mb-12 text-center">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-accent">SERVIÇOS CRÍTICOS</p>
             <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
               Tecnologia e expertise reunidas em um só lugar
             </h2>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Um centro equipado para atender todas as demandas em manutenção, testes e reparos de equipamentos médicos, com equipe certificada internacionalmente e cobertura nacional.
+              Manutenção, contratos e instalação com equipe certificada e laboratório próprio para máxima disponibilidade.
             </p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -90,7 +95,22 @@ const Index = () => {
       <HexAIHighlight />
       <ProductsCatalogSection />
       <DifferentialsGrid />
-      <SegmentsGrid />
+
+      <section className="border-t border-border bg-muted/30 py-16 md:py-24">
+        <div className="container">
+          <div className="mb-12 text-center">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-accent">SEGMENTOS</p>
+            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
+              Segmentos que atendemos
+            </h2>
+            <p className="mx-auto max-w-2xl text-muted-foreground">
+              Soluções dimensionadas para a realidade de cada tipo de instituição de saúde.
+            </p>
+          </div>
+          <SegmentsGrid />
+        </div>
+      </section>
+
       <TrustBlock />
       <TestimonialsBlock />
       <BlogHighlight />
