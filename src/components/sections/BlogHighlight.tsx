@@ -35,7 +35,7 @@ const BlogHighlight = () => {
                   {post.category}
                 </span>
                 <h3 className="mb-2 font-bold text-foreground group-hover:text-accent transition-colors">{post.title}</h3>
-                <p className="mb-4 flex-1 text-sm text-muted-foreground">{post.excerpt}</p>
+                <p className="mb-4 flex-1 text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>
                 <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                   <Calendar className="h-3.5 w-3.5" />
                   {new Date(post.date).toLocaleDateString("pt-BR")}

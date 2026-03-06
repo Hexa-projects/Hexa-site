@@ -13,7 +13,7 @@ const ServiceCard = ({ title, description, href, icon: Icon, image }: ServiceCar
   return (
     <Link
       to={href}
-      className="group flex overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-md"
+      className="group flex h-full overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/50 hover:shadow-md"
     >
       {image && (
         <div className="hidden w-48 items-center justify-center p-4 bg-white sm:flex">

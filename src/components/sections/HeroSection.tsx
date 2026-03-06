@@ -40,7 +40,8 @@ const HeroSection = ({
             loading="eager"
             decoding="async"
           />
-          <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? "from-dark-surface/95 via-dark-surface/80 to-dark-surface/40" : "from-background/95 via-background/80 to-background/40"}`} />
+          <div className={`absolute inset-0 bg-gradient-to-r ${isDark ? "from-dark-surface/95 via-dark-surface/70 to-dark-surface/25" : "from-background/98 via-background/85 to-background/45"}`} />
+          <div className={isDark ? "absolute inset-0 bg-black/10" : "absolute inset-0 bg-white/10"} />
         </div>
       )}
 

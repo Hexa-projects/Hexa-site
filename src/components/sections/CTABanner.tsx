@@ -27,7 +27,12 @@ const CTABanner = ({
       </div>
       <div className="container relative z-10 text-center">
         <h2 className="mb-4 text-2xl font-bold md:text-3xl lg:text-4xl">{headline}</h2>
-        <p className="mx-auto mb-8 max-w-2xl text-lg text-dark-surface-foreground/80">{subtitle}</p>
+        <p className="mx-auto mb-6 max-w-2xl text-lg text-dark-surface-foreground/80">{subtitle}</p>
+        <div className="mx-auto mb-8 flex flex-wrap items-center justify-center gap-3 text-xs uppercase tracking-widest text-dark-surface-foreground/70">
+          <span className="rounded-full border border-dark-surface-foreground/20 px-3 py-1">+16 anos de experiência</span>
+          <span className="rounded-full border border-dark-surface-foreground/20 px-3 py-1">Distribuidor oficial Esaote</span>
+          <span className="rounded-full border border-dark-surface-foreground/20 px-3 py-1">Laboratório próprio</span>
+        </div>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
             <Link to={ctaHref}>

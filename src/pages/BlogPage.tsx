@@ -26,7 +26,7 @@ const BlogPage = () => {
                 <div className="flex flex-1 flex-col p-6 bg-card">
                   <span className="mb-2 inline-block rounded-full bg-accent/10 px-3 py-0.5 text-xs font-semibold text-accent">{post.category}</span>
                   <h2 className="mb-2 text-lg font-bold">{post.title}</h2>
-                  <p className="mb-3 text-sm text-muted-foreground">{post.excerpt}</p>
+                  <p className="mb-3 text-sm text-muted-foreground line-clamp-3">{post.excerpt}</p>
                   <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
                     <Calendar className="h-3.5 w-3.5" />
                     {new Date(post.date).toLocaleDateString("pt-BR")}
