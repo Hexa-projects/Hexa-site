@@ -1,0 +1,97 @@
+import { useLayoutEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { showroomFilters, type ShowroomFilter, type ShowroomItem } from "@/data/home";
+import { duration, ease, Flip, gsap, ScrollTrigger } from "@/lib/motion";
+import { useMotionScope } from "@/motion/useMotionScope";
+import { tweenStage } from "@/motion/stage/align";
+import type { StageMode } from "@/motion/capability";
+
+const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/** H3: o portfólio inteiro no palco, com filtro por modalidade. */
+const Showroom = ({ items, mode }: { items: ShowroomItem[]; mode: StageMode }) => {
+  const root = useRef<HTMLElement>(null);
+  const grid = useRef<HTMLUListElement>(null);
+  const flipState = useRef<Flip.FlipState | null>(null);
+  const [filter, setFilter] = useState<ShowroomFilter>("todos");
+
+  const choose = (next: ShowroomFilter) => {
+    if (next === filter) return;
+    if (grid.current && !reducedMotion()) {
+      flipState.current = Flip.getState(grid.current.querySelectorAll(".showroom__item"));
+    }
+    setFilter(next);
+  };
+
+  // Depois do re-render, os itens deslizam para as novas posições.
+  useLayoutEffect(() => {
+    const state = flipState.current;
+    if (!state) return;
+    flipState.current = null;
+    Flip.from(state, {
+      duration: duration.base,
+      ease: ease.out,
+      absolute: false,
+      onEnter: (elements) => gsap.fromTo(elements, { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: duration.base, ease: ease.out }),
+    });
+  }, [filter]);
+
+  useMotionScope(
+    root,
+    ({ desktop }) => {
+      if (desktop && mode === "immersive") {
+        const toBackdrop = () => tweenStage({ center: [0.36, 0.3], aperture: 0, glow: 0.25, rings: 12 });
+        ScrollTrigger.create({ trigger: root.current, start: "top 55%", end: "bottom 45%", onEnter: toBackdrop, onEnterBack: toBackdrop });
+      }
+    },
+    [mode],
+  );
+
+  return (
+    <section ref={root} className="showroom" aria-labelledby="showroom-title">
+      <div className="showroom__head">
+        <h2 id="showroom-title">Portfólio</h2>
+        <p>Ressonância, tomografia veterinária, radiografia digital, bombas injetoras e software. Cada linha tem página própria, com dados do fabricante.</p>
+      </div>
+
+      <div className="showroom__filters" role="group" aria-label="Filtrar por modalidade">
+        {showroomFilters.map((option) => (
+          <button key={option.id} type="button" className="chip" aria-pressed={filter === option.id} onClick={() => choose(option.id)}>
+            {option.label}
+          </button>
+        ))}
+      </div>
+
+      <ul ref={grid} className="showroom__grid">
+        {items.map((item) => {
+          const hidden = filter !== "todos" && !item.filters.includes(filter as Exclude<ShowroomFilter, "todos">);
+          const body = (
+            <>
+              <span className="showroom__plinth">
+                <img src={item.image.src} width={item.image.width} height={item.image.height} alt={item.image.alt} loading="lazy" decoding="async" />
+              </span>
+              <span className="showroom__name">{item.name}</span>
+              <span className="showroom__line">{item.line}</span>
+              <span className="showroom__go">
+                {item.external ? "Página do equipamento" : "Ver equipamento"}
+                {item.external ? <ArrowUpRight aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+              </span>
+            </>
+          );
+          return (
+            <li key={item.id} className="showroom__item" data-flip-id={item.id} hidden={hidden}>
+              {item.external ? (
+                <a href={item.href} className="showroom__link">{body}</a>
+              ) : (
+                <Link to={item.href} className="showroom__link">{body}</Link>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  );
+};
+
+export default Showroom;

@@ -1,0 +1,672 @@
+/* Home: o palco grafite. O anel do túnel (canvas fixo) atravessa as seções por trás do conteúdo. */
+
+.home {
+  position: relative;
+  isolation: isolate;
+  background: var(--graphite-950);
+  color: var(--on-dark);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+.home h2,
+.home h3 {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.home h2 {
+  font-size: var(--step-4);
+  font-weight: 640;
+  line-height: 1;
+}
+
+.home p {
+  text-wrap: pretty;
+}
+
+.stage-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  display: block;
+  pointer-events: none;
+}
+
+.stage-fallback {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 100svh;
+  z-index: -1;
+  color: var(--on-dark-3);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.stage-fallback svg {
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+
+.stage-fallback__rim {
+  stroke: var(--orange);
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  color: var(--orange);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--dur-quick) var(--ease-out);
+}
+
+.text-link:hover {
+  text-decoration-color: currentColor;
+}
+
+.text-link svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+/* ---------- H1: abertura do túnel ---------- */
+
+.hero__frame {
+  --r: 20vmin;
+  --cx: 70%;
+  position: relative;
+  display: grid;
+  align-items: center;
+  height: 100svh;
+  min-height: 640px;
+  padding: calc(var(--header-h, 5rem) + var(--space-5)) var(--gutter) var(--space-7);
+  overflow: hidden;
+}
+
+.hero__aperture {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  clip-path: circle(var(--r) at var(--cx) 50%);
+  background: var(--graphite-800);
+}
+
+/* O centro do vídeo acompanha o centro da abertura, então o equipamento fica no anel. */
+.hero__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translateX(calc(var(--cx) - 50%));
+}
+
+.hero__credit {
+  position: absolute;
+  left: var(--cx);
+  top: calc(50% + var(--r) + var(--space-4));
+  transform: translateX(-50%);
+  color: var(--on-dark-3);
+  font-size: var(--step--1);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.hero__copy {
+  position: relative;
+  z-index: 2;
+  max-width: min(36rem, 44vw);
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: clamp(2.75rem, 1.1rem + 4.4vw, 5.25rem);
+  font-weight: 650;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.hero__lead {
+  max-width: 40ch;
+  margin-top: var(--space-5);
+  color: var(--on-dark-2);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+.hero__pause {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--space-5);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--rule-dark);
+  border-radius: 999px;
+  color: var(--on-dark-2);
+  font-size: var(--step--1);
+  font-weight: 600;
+  background: rgba(12, 14, 16, 0.6);
+  transition: color var(--dur-quick) var(--ease-out), border-color var(--dur-quick) var(--ease-out);
+}
+
+.hero__pause:hover {
+  color: var(--on-dark);
+  border-color: var(--on-dark-3);
+}
+
+.hero__pause svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* No modo leve do desktop o anel estático acompanha a abertura deslocada. */
+@media (min-width: 1024px) {
+  .home[data-stage="light"] .stage-fallback svg {
+    transform: translateX(20%);
+  }
+}
+
+/* ---------- H2: a vida inteira do equipamento ---------- */
+
+.lifecycle,
+.showroom,
+.proof,
+.triage {
+  position: relative;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-9) var(--gutter);
+}
+
+.lifecycle__intro,
+.showroom__head,
+.proof__head,
+.triage__head {
+  max-width: 46rem;
+}
+
+.lifecycle__intro p,
+.showroom__head p,
+.proof__head p,
+.triage__head p {
+  max-width: 52ch;
+  margin-top: var(--space-5);
+  color: var(--on-dark-2);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.lifecycle__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: var(--space-8);
+  margin-top: var(--space-7);
+}
+
+.lifecycle__sticky {
+  position: sticky;
+  top: calc(50vh - min(19vw, 18rem));
+  width: min(38vw, 36rem);
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+
+.lifecycle__ring {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.lifecycle__ring-track {
+  fill: none;
+  stroke: var(--rule-dark);
+  stroke-width: 0.25;
+}
+
+.lifecycle__ring-progress {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 0.45;
+}
+
+.lifecycle__marker {
+  fill: var(--graphite-950);
+  stroke: var(--on-dark-3);
+  stroke-width: 0.3;
+  transition: fill var(--dur-base) var(--ease-out), stroke var(--dur-base) var(--ease-out);
+}
+
+.lifecycle__marker.is-reached {
+  fill: var(--orange);
+  stroke: var(--orange);
+}
+
+.lifecycle__portal {
+  position: absolute;
+  inset: 9%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--graphite-800);
+}
+
+.lifecycle__photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lifecycle__scan {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  width: 1px;
+  background: var(--scan);
+  box-shadow: 0 0 14px 2px rgba(233, 246, 255, 0.55);
+  opacity: 0;
+}
+
+.lifecycle__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lifecycle__stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 70vh;
+  padding-block: var(--space-7);
+}
+
+.lifecycle__stage h3 {
+  color: var(--on-dark-3);
+  font-size: var(--step-3);
+  font-weight: 620;
+  line-height: 1.05;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.lifecycle__stage p {
+  max-width: 36ch;
+  margin-top: var(--space-4);
+  color: var(--on-dark-2);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.lifecycle__stage .text-link {
+  margin-top: var(--space-4);
+}
+
+.lifecycle__stage.is-active h3 {
+  color: var(--on-dark);
+}
+
+.lifecycle__inline-photo {
+  display: none;
+}
+
+/* ---------- H3: portfólio ---------- */
+
+.showroom__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+}
+
+.chip {
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--rule-dark);
+  border-radius: 999px;
+  color: var(--on-dark-2);
+  font: 600 0.9375rem / 1 var(--font-body);
+  background: transparent;
+  transition: color var(--dur-quick) var(--ease-out), background-color var(--dur-quick) var(--ease-out), border-color var(--dur-quick) var(--ease-out);
+}
+
+.chip:hover {
+  color: var(--on-dark);
+  border-color: var(--on-dark-3);
+}
+
+.chip[aria-pressed="true"] {
+  color: var(--ink);
+  background: var(--on-dark);
+  border-color: var(--on-dark);
+}
+
+.showroom__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
+  gap: var(--space-6) var(--space-5);
+  margin: var(--space-6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.showroom__item[hidden] {
+  display: none;
+}
+
+.showroom__link {
+  display: grid;
+  gap: var(--space-2);
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+}
+
+.showroom__plinth {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  transition: box-shadow var(--dur-base) var(--ease-out);
+}
+
+/* O equipamento inteiro, nunca cortado (regra do DESIGN.md). */
+.showroom__plinth img {
+  position: absolute;
+  inset: var(--space-5);
+  width: calc(100% - 2 * var(--space-5));
+  height: calc(100% - 2 * var(--space-5));
+  object-fit: contain;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.showroom__link:hover .showroom__plinth {
+  box-shadow: 0 22px 36px -22px rgba(0, 0, 0, 0.9);
+}
+
+.showroom__link:hover .showroom__plinth img {
+  transform: scale(1.035);
+}
+
+.showroom__name {
+  margin-top: var(--space-3);
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-1);
+  font-weight: 620;
+  letter-spacing: -0.02em;
+}
+
+.showroom__line {
+  color: var(--on-dark-2);
+}
+
+.showroom__go {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--orange);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.showroom__go svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* ---------- Prova ---------- */
+
+.proof__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.316fr);
+  gap: var(--space-5);
+  align-items: start;
+  margin-top: var(--space-7);
+}
+
+.proof figure {
+  margin: 0;
+}
+
+.proof video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  background: #000;
+}
+
+.proof figcaption {
+  max-width: 52ch;
+  margin-top: var(--space-3);
+  color: var(--on-dark-2);
+}
+
+/* ---------- H4: triagem ---------- */
+
+.triage__list {
+  display: grid;
+  gap: var(--space-3);
+  margin: var(--space-7) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.triage__row {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+  gap: var(--space-6);
+  align-items: center;
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--graphite-900);
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+
+.triage__row:hover,
+.triage__row:focus-within {
+  background: var(--graphite-800);
+}
+
+.triage__shape {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.triage__shape path {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 2;
+}
+
+.triage__copy h3 {
+  font-size: var(--step-2);
+  font-weight: 620;
+  line-height: 1.1;
+}
+
+.triage__copy p {
+  max-width: 52ch;
+  margin-top: var(--space-2);
+  color: var(--on-dark-2);
+}
+
+.triage__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3) var(--space-5);
+}
+
+.triage__channels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-top: var(--space-6);
+}
+
+.triage__channels a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  color: var(--on-dark-2);
+  text-decoration: none;
+  transition: color var(--dur-quick) var(--ease-out);
+}
+
+.triage__channels a:hover {
+  color: var(--on-dark);
+}
+
+.triage__channels svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+/* ---------- Celular e tablet: sem fixar nada, conteúdo antes da imagem ---------- */
+
+@media (max-width: 1023px) {
+  .hero__frame {
+    height: auto;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+    padding-bottom: var(--space-8);
+  }
+
+  .hero__copy {
+    max-width: 40rem;
+  }
+
+  .hero__aperture {
+    --a: 0.94;
+    position: relative;
+    inset: auto;
+    order: 2;
+    width: 100%;
+    max-width: 34rem;
+    aspect-ratio: 4 / 5;
+    margin-inline: auto;
+    container-type: inline-size;
+    clip-path: circle(calc(var(--a) * 50cqw) at 50% 50%);
+  }
+
+  .hero__credit {
+    position: static;
+    order: 3;
+    transform: none;
+    text-align: center;
+  }
+
+  .hero__pause {
+    position: static;
+    order: 4;
+    justify-self: center;
+  }
+
+  .lifecycle,
+  .showroom,
+  .proof,
+  .triage {
+    padding-block: var(--space-8);
+  }
+
+  .lifecycle__body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-top: var(--space-5);
+  }
+
+  .lifecycle__visual {
+    display: none;
+  }
+
+  .lifecycle__stage {
+    min-height: 0;
+    padding-block: var(--space-6);
+  }
+
+  .lifecycle__stage h3 {
+    color: var(--on-dark);
+  }
+
+  .lifecycle__inline-photo {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    margin-bottom: var(--space-5);
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    background: var(--graphite-800);
+  }
+
+  .proof__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .proof__side {
+    max-width: 22rem;
+  }
+
+  .triage__row {
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+
+  .triage__shape {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .triage__actions {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-link,
+  .hero__pause,
+  .lifecycle__marker,
+  .lifecycle__stage h3,
+  .chip,
+  .showroom__plinth,
+  .showroom__plinth img,
+  .triage__row,
+  .triage__channels a {
+    transition: none;
+  }
+
+  .showroom__link:hover .showroom__plinth img {
+    transform: none;
+  }
+}

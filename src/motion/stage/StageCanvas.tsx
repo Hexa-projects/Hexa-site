@@ -45,11 +45,12 @@ const StageCanvas = ({ mode, onDowngrade }: StageCanvasProps) => {
     }
 
     const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
-    const resize = () => stage.resize(window.innerWidth, window.innerHeight, dpr);
+    // O tamanho vem do próprio canvas (sem a barra de rolagem), o mesmo referencial do CSS.
+    const resize = () => stage.resize(canvas.clientWidth, canvas.clientHeight, dpr);
     resize();
 
     const onPointer = (event: PointerEvent) => {
-      stageState.params.pointer = [event.clientX, window.innerHeight - event.clientY];
+      stageState.params.pointer = [event.clientX, canvas.clientHeight - event.clientY];
     };
 
     let frame = 0;
