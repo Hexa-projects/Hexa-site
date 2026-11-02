@@ -56,6 +56,31 @@ for name, src in jobs.items():
         im = im.resize((1280, round(im.height * 1280 / im.width)), Image.LANCZOS)
     im.save(out / name, "WEBP", quality=82, method=6)
     print(f"{name} {im.width}x{im.height} {(out / name).stat().st_size // 1024}k")
+# Showroom: fotos oficiais de produto achatadas sobre branco, no máximo 960 px.
+show = out / "showroom"
+show.mkdir(exist_ok=True)
+products = {
+    "magnifico-open": "public/assets/hexa/magnifico-open.jpg",
+    "s-scan-open": "public/assets/esaote/s-scan-open.webp",
+    "o-scan-smart": "public/assets/esaote/o-scan-smart.webp",
+    "g-scan-open": "public/assets/esaote/g-scan-open.webp",
+    "vet-mr-grande": "public/assets/hexa/Esaote-Grande-VET-MR.png",
+    "ispace-1-5t-vet": "public/assets/wdm/ispace-1-5t-vet-hero.webp",
+    "turbotom-1s-vet": "public/assets/wdm/turbotom-1s-vet-hero-clean.webp",
+    "turbotom-1s-lite-vet": "public/assets/wdm/turbotom-1s-lite-vet-hero.webp",
+    "accutron-mr": "public/assets/esaote/bombas-accutron-mr.png",
+    "digieye-350": "public/assets/esaote/mindray-digieye-350.png",
+    "hexai": "media-src/oficial/varredura-hexai.png",
+}
+for name, src in products.items():
+    im = Image.open(src).convert("RGBA")
+    flat = Image.new("RGBA", im.size, (255, 255, 255, 255))
+    flat.alpha_composite(im)
+    flat = flat.convert("RGB")
+    if flat.width > 960:
+        flat = flat.resize((960, round(flat.height * 960 / flat.width)), Image.LANCZOS)
+    flat.save(show / f"{name}.webp", "WEBP", quality=84, method=6)
+    print(f"showroom/{name}.webp {flat.width}x{flat.height} {(show / f'{name}.webp').stat().st_size // 1024}k")
 for tmp in out.glob("*.png"):
     tmp.unlink()
 PY
