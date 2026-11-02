@@ -1,0 +1,62 @@
+/*
+ * Tokens do sistema Hexamedical.
+ * Palco grafite para equipamento, campo mineral para leitura e um único laranja de sinal.
+ * Contrastes conferidos: laranja sobre grafite 6,9:1; grafite sobre laranja 6,3:1;
+ * --orange-ink sobre mineral 5,4:1; --on-dark-2 sobre grafite 8,7:1.
+ */
+:root {
+  --graphite-950: #0c0e10;
+  --graphite-900: #121518;
+  --graphite-800: #1b1f23;
+  --graphite-700: #2a2f34;
+  --graphite-600: #3d444a;
+  --mineral-50: #f2f3f1;
+  --mineral-100: #e6e8e5;
+  --white: #ffffff;
+
+  --ink: #16191c;
+  --ink-2: #4b535a;
+  --on-dark: #eef0ee;
+  --on-dark-2: #a7afb5;
+  --on-dark-3: #8a939a;
+  --rule-dark: rgba(238, 240, 238, 0.14);
+  --rule-light: rgba(22, 25, 28, 0.14);
+
+  --orange: #f87517;
+  --orange-ink: #a34800;
+  --scan: #e9f6ff;
+
+  --font-display: "Archivo", "Source Sans 3", system-ui, sans-serif;
+  --font-body: "Source Sans 3", system-ui, sans-serif;
+  --display-stretch: 112%;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.3125rem;
+  --step-2: clamp(1.5rem, 1.2rem + 1.1vw, 2rem);
+  --step-3: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  --step-4: clamp(2.5rem, 1.5rem + 4.4vw, 5rem);
+  --step-5: clamp(2.75rem, 1.4rem + 6vw, 6rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --content-max: 88rem;
+
+  --radius-sm: 6px;
+  --radius-md: 14px;
+
+  --dur-instant: 120ms;
+  --dur-quick: 240ms;
+  --dur-base: 450ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+}

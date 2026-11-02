@@ -17,7 +17,7 @@ export default {
       fontFamily: {
         sans: ["Source Sans 3", "system-ui", "sans-serif"],
         heading: ["Source Sans 3", "system-ui", "sans-serif"],
-        display: ["ADLaM Display", "Source Sans 3", "system-ui", "sans-serif"],
+        display: ["Archivo", "Source Sans 3", "system-ui", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

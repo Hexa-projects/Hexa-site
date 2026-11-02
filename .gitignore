@@ -32,3 +32,5 @@ _tmp_*/
 node_modules.stale-codex-path/
 scripts/__pycache__/
 .impeccable/review/
+
+.superpowers/

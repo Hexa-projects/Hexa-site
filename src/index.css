@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Source+Sans+3:wght@400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -592,20 +590,6 @@
     font-family: "Source Sans 3", system-ui, sans-serif;
   }
 
-  ::selection {
-    background: #f87517;
-    color: #111416;
-  }
-
-  :focus-visible {
-    outline: 2px solid #f87517;
-    outline-offset: 4px;
-  }
-
-  html {
-    scrollbar-color: #f87517 #111416;
-    scrollbar-width: thin;
-  }
 }
 
 @layer utilities {
