@@ -11,8 +11,8 @@ Gerada por `scripts/build-home-media.sh` em 2026-11-02. Os arquivos de origem fo
 | `etapa-escolha.webp` | `public/assets/hexa/Foto-Solucao-ideal-com-baixo-risco.png` (acervo do site oficial) | WebP |
 | `etapa-projeto.webp` | `wp-content/uploads/2026/04/estrutura-1.png` | WebP |
 | `etapa-instalacao.webp` | `public/assets/hexa/Desinstalacao-e-Instalacao.webp` (acervo do site oficial) | WebP |
-| `etapa-operacao.webp` | `wp-content/uploads/2026/04/varredura-hexai.png` | WebP, 1280 px |
+| `etapa-operacao.webp`, `showroom/hexai.webp` | `wp-content/uploads/2026/04/varredura-hexai.png` | Recorte de 400×400 só do painel "Varredura acelerada + SwiftMR" |
 | `etapa-manutencao.webp` | `wp-content/uploads/2026/04/Imagem-manutencao.png` | WebP |
 | `etapa-laboratorio.webp` | `public/assets/hexa/Reparo-de-Pecas-e-Eletronicas-foto.webp` (acervo do site oficial) | WebP, 1280 px |
 
-**Pendência antes de publicar:** confirmar o direito de uso do vídeo de fabricante da Esaote fora do site atual, e confirmar se as fotos de manutenção e laboratório são próprias ou de banco de imagens.
+**Decisões pendentes do Lucas antes de publicar:** confirmar o direito de uso do vídeo de fabricante da Esaote fora do site atual, e confirmar se as fotos de manutenção e laboratório são próprias ou de banco de imagens.

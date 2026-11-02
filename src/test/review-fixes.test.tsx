@@ -95,6 +95,14 @@ describe("home: ajustes da revisão", () => {
     for (const row of region.querySelectorAll(".triage__row")) expect(row).toHaveClass("is-ring");
   });
 
+  it("cada anel da triagem marca a etapa da vida do equipamento que responde", () => {
+    renderHome();
+    const region = screen.getByRole("region", { name: "Como podemos ajudar?" });
+    const marks = Array.from(region.querySelectorAll(".triage__node")).map((node) => node.getAttribute("data-stage"));
+    expect(marks).toEqual(["escolha", "manutencao", "laboratorio"]);
+    expect(within(region).getByText("Etapa: Escolha", { exact: false })).toBeInTheDocument();
+  });
+
   it("cada etapa no celular tem a foto no anel com os seis hexágonos", () => {
     renderHome();
     const region = screen.getByRole("region", { name: "A vida inteira do equipamento" });

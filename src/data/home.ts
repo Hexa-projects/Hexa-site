@@ -177,7 +177,7 @@ export const showroom: ShowroomItem[] = [
     name: "HexAI",
     line: "Inteligência artificial para o fluxo de imagem",
     filters: ["software"],
-    image: shot("hexai", 470, 470, "HexAI: corte axial de coluna lombar em varredura acelerada com SwiftMR"),
+    image: shot("hexai", 400, 400, "HexAI: corte axial de coluna lombar em varredura acelerada com SwiftMR"),
     href: "/solucoes/hexai",
     fill: true,
   },
@@ -191,6 +191,8 @@ export function whatsappHref(text: string): string {
 
 export type TriagePath = {
   id: "comprar" | "manter" | "reparar";
+  /** A etapa da vida do equipamento que este caminho responde (marcada no anel). */
+  stage: StageId;
   title: string;
   body: string;
   whatsappText: string;
@@ -202,6 +204,7 @@ export type TriagePath = {
 export const triage: TriagePath[] = [
   {
     id: "comprar",
+    stage: "escolha",
     title: "Quero um equipamento",
     body: "Ressonância, tomografia veterinária, radiografia, bombas injetoras ou software. Conte o perfil de exames e o espaço disponível.",
     whatsappText: "Olá! Quero conversar sobre a compra de um equipamento de diagnóstico por imagem.",
@@ -210,6 +213,7 @@ export const triage: TriagePath[] = [
   },
   {
     id: "manter",
+    stage: "manutencao",
     title: "Preciso de manutenção",
     body: "Preventiva, corretiva ou contrato para equipamentos de RM, TC e hemodinâmica de diversos fabricantes.",
     whatsappText: "Olá! Preciso de manutenção para um equipamento de diagnóstico por imagem.",
@@ -218,6 +222,7 @@ export const triage: TriagePath[] = [
   },
   {
     id: "reparar",
+    stage: "laboratorio",
     title: "Tenho uma peça para reparo",
     body: "Placas, peças e periféricos avaliados no laboratório técnico antes de qualquer substituição.",
     whatsappText: "Olá! Tenho uma peça ou placa para avaliação e reparo.",

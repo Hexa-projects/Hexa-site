@@ -66,8 +66,8 @@ export const homeMedia: {
     },
     operacao: {
       src: `${base}/etapa-operacao.webp`,
-      width: 470,
-      height: 470,
+      width: 400,
+      height: 400,
       alt: "Corte axial de coluna lombar em varredura acelerada com SwiftMR, apresentado pelo HexAI",
     },
     manutencao: {

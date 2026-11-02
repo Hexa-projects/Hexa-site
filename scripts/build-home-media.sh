@@ -21,8 +21,8 @@ $FF -i "$TUNNEL_SRC" -filter_complex "$TUNNEL_FILTER,scale=1280:720" -an \
   -c:v libvpx-vp9 -b:v 0 -crf 31 -row-mt 1 "$OUT/tunel-1280.webm"
 $FF -i "$TUNNEL_SRC" -filter_complex "$TUNNEL_FILTER,crop=864:1080:528:0,scale=720:900" -an \
   -c:v libx264 -preset slow -crf 24 -profile:v high -movflags +faststart "$OUT/tunel-720x900.mp4"
-$FF -ss 16.8 -i "$TUNNEL_SRC" -frames:v 1 -vf scale=1280:720 "$OUT/tunel-poster.png"
-$FF -ss 16.8 -i "$TUNNEL_SRC" -frames:v 1 -vf "crop=864:1080:528:0,scale=720:900" "$OUT/tunel-poster-720x900.png"
+$FF -ss 18 -i "$TUNNEL_SRC" -frames:v 1 -vf scale=1280:720 "$OUT/tunel-poster.png"
+$FF -ss 18 -i "$TUNNEL_SRC" -frames:v 1 -vf "crop=864:1080:528:0,scale=720:900" "$OUT/tunel-poster-720x900.png"
 
 # CEO: vídeo institucional completo, com legendas já queimadas no original.
 $FF -i "$SRC/V3-1920-x-1080-Horizontal-1.mp4" -vf scale=1280:720 \
@@ -89,10 +89,10 @@ for name, src in products.items():
     flat.save(show / f"{name}.webp", "WEBP", quality=84, method=6)
     print(f"showroom/{name}.webp {flat.width}x{flat.height} {(show / f'{name}.webp').stat().st_size // 1024}k")
 # Operação: só o painel "Varredura acelerada + SwiftMR" (com o hexágono do HexAI), que preenche o círculo.
-panel = Image.open("media-src/oficial/varredura-hexai.png").convert("RGB").crop((1370, 360, 1840, 830))
+panel = Image.open("media-src/oficial/varredura-hexai.png").convert("RGB").crop((1430, 405, 1830, 805))
 panel.save(out / "etapa-operacao.webp", "WEBP", quality=86, method=6)
 panel.save(show / "hexai.webp", "WEBP", quality=86, method=6)
-print(f"etapa-operacao.webp {panel.width}x{panel.height}")
+print(f"etapa-operacao.webp {panel.width}x{panel.height}")  # 400x400
 
 for tmp in out.glob("*.png"):
     tmp.unlink()

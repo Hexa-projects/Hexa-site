@@ -31,6 +31,14 @@ const Index = () => {
         end: "bottom top",
         onToggle: (self) => stageState.set({ visible: self.isActive }),
       });
+      // O palco esmaece antes do rodapé: nenhum anel cortado pela borda dele.
+      ScrollTrigger.create({
+        trigger: home.current,
+        start: "bottom bottom",
+        end: "bottom 55%",
+        scrub: true,
+        onUpdate: (self) => home.current?.style.setProperty("--stage-fade", String(1 - self.progress)),
+      });
     },
     { scope: home },
   );

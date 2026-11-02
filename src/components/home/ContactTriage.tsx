@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { whatsappHref, type TriagePath } from "@/data/home";
+import { lifecycle, whatsappHref, type TriagePath } from "@/data/home";
 import { ScrollTrigger } from "@/lib/motion";
 import { useMotionScope } from "@/motion/useMotionScope";
 import { tweenStage } from "@/motion/stage/align";
@@ -12,6 +12,19 @@ import type { StageMode } from "@/motion/capability";
  * Os dois caminhos têm seis curvas, então o navegador interpola um no outro.
  */
 const HEXAGON = "M24 5 C29.48 8.17 34.97 11.33 40.45 14.5 C40.45 20.83 40.45 27.17 40.45 33.5 C34.97 36.67 29.48 39.83 24 43 C18.52 39.83 13.03 36.67 7.55 33.5 C7.55 27.17 7.55 20.83 7.55 14.5 C13.03 11.33 18.52 8.17 24 5 Z";
+
+/** Posição da etapa no anel (mesmos vértices de hexágono da linha do tempo), no viewBox 48. */
+const stageNode = (stage: TriagePath["stage"]) => {
+  const index = lifecycle.findIndex((item) => item.id === stage);
+  const angle = (-90 + index * 60) * (Math.PI / 180);
+  const x = 24 + 19 * Math.cos(angle);
+  const y = 24 + 19 * Math.sin(angle);
+  const points = Array.from({ length: 6 }, (_, k) => {
+    const a = (k * 60 - 90) * (Math.PI / 180);
+    return `${(x + 3.4 * Math.cos(a)).toFixed(2)},${(y + 3.4 * Math.sin(a)).toFixed(2)}`;
+  }).join(" ");
+  return { points, title: lifecycle[index]?.title ?? "" };
+};
 
 /** H4: contato como triagem. Cada caminho já abre a conversa com o assunto certo. */
 const ContactTriage = ({ items, mode }: { items: TriagePath[]; mode: StageMode }) => {
@@ -63,10 +76,12 @@ const ContactTriage = ({ items, mode }: { items: TriagePath[]; mode: StageMode }
           <li key={item.id} className={ringed.has(item.id) ? "triage__row is-ring" : "triage__row"} data-path={item.id}>
             <svg className="triage__shape" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
               <path d={HEXAGON} />
+              <polygon className="triage__node" data-stage={item.stage} points={stageNode(item.stage).points} />
             </svg>
             <div className="triage__copy">
               <h3>{item.title}</h3>
               <p>{item.body}</p>
+              <p className="triage__stage">Etapa: {stageNode(item.stage).title}</p>
             </div>
             <div className="triage__actions">
               <a className="button button--primary" href={whatsappHref(item.whatsappText)} target="_blank" rel="noopener noreferrer">

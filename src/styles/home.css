@@ -29,6 +29,7 @@
 }
 
 .stage-canvas {
+  opacity: var(--stage-fade, 1);
   position: fixed;
   inset: 0;
   width: 100%;
@@ -194,6 +195,19 @@
 @media (min-width: 1024px) {
   .home[data-stage="light"] .stage-fallback svg {
     transform: translateX(20%);
+  }
+}
+
+/* Movimento reduzido no desktop: a abertura não cresce, então o quadro inteiro (equipamento
+   e paciente) é encaixado no círculo, em vez de mostrar só o centro do vídeo. */
+@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .hero__video {
+    position: absolute;
+    left: calc(var(--cx) - var(--r) * 1.8);
+    top: calc(var(--cy) - var(--r) * 1.0125);
+    width: calc(var(--r) * 3.6);
+    height: calc(var(--r) * 2.025);
+    transform: none;
   }
 }
 
@@ -598,6 +612,23 @@
   transition: d 800ms var(--ease-out);
 }
 
+/* O nó da etapa aparece quando o hexágono já virou anel: o caminho aponta para a linha do tempo. */
+.triage__node {
+  fill: var(--orange);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out) 600ms;
+}
+
+.triage__row.is-ring .triage__node {
+  opacity: 1;
+}
+
+.triage__stage {
+  margin-top: var(--space-2);
+  color: var(--on-dark-3);
+  font-size: var(--step--1);
+}
+
 /* O hexágono do logo vira o anel do túnel quando o caminho entra na tela. */
 .triage__row.is-ring .triage__shape path {
   d: path("M24 5 C30.79 5 37.06 8.62 40.45 14.5 C43.85 20.38 43.85 27.62 40.45 33.5 C37.06 39.38 30.79 43 24 43 C17.21 43 10.94 39.38 7.55 33.5 C4.15 27.62 4.15 20.38 7.55 14.5 C10.94 8.62 17.21 5 24 5 Z");
@@ -791,6 +822,11 @@
   .triage__shape path,
   .triage__channels a,
   .proof__play {
+    transition: none;
+  }
+
+  .triage__node {
+    opacity: 1;
     transition: none;
   }
 
