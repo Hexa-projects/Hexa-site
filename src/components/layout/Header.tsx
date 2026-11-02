@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import { navigation } from "@/data/navigation";
@@ -7,18 +7,56 @@ import { cn } from "@/lib/utils";
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const header = useRef<HTMLElement>(null);
   const location = useLocation();
+  // Na home o cabeçalho fica sobre o palco grafite.
+  const onStage = location.pathname === "/";
 
   useEffect(() => {
     setMobileOpen(false);
     setOpenDropdown(null);
   }, [location.pathname]);
 
+  // Some ao rolar para baixo e volta ao subir; nunca some com o menu aberto ou com foco dentro.
+  useEffect(() => {
+    let last = window.scrollY;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      const focusInside = header.current?.contains(document.activeElement) ?? false;
+      setScrolled(y > 24);
+      if (Math.abs(y - last) < 6) return;
+      setHidden(y > last && y > 160 && !mobileOpen && !focusInside);
+      last = y;
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(frame);
+    };
+  }, [mobileOpen]);
+
   return (
-    <header className="site-header">
+    <header
+      ref={header}
+      className={cn("site-header", onStage && "site-header--stage", scrolled && "is-scrolled", hidden && "is-hidden")}
+      onFocusCapture={() => setHidden(false)}
+    >
       <div className="site-header__inner">
         <Link to="/" className="site-header__brand" aria-label="Hexamedical — página inicial">
-          <img src="/assets/hexa/Logo-Hexamedical.png" alt="Hexamedical" className="site-header__logo" />
+          <img
+            src={onStage ? "/assets/brand/hexamedical-logo-light.webp" : "/assets/brand/hexamedical-logo.webp"}
+            alt="Hexamedical"
+            width={176}
+            height={45}
+            className="site-header__logo"
+          />
         </Link>
 
         <nav className="site-header__nav" aria-label="Navegação principal">

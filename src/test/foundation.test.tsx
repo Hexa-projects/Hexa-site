@@ -30,6 +30,27 @@ describe("layout", () => {
   });
 });
 
+describe("cabeçalho e rodapé", () => {
+  it("na home, o cabeçalho fica sobre o palco com o logo claro", () => {
+    const { container } = renderAt(<Layout><p>home</p></Layout>, "/");
+    expect(container.querySelector(".site-header")).toHaveClass("site-header--stage");
+    expect(screen.getAllByAltText("Hexamedical")[0]).toHaveAttribute("src", "/assets/brand/hexamedical-logo-light.webp");
+  });
+
+  it("nas páginas internas, o cabeçalho é o claro, com o logo original", () => {
+    const { container } = renderAt(<Layout><p>contato</p></Layout>, "/contato");
+    expect(container.querySelector(".site-header")).not.toHaveClass("site-header--stage");
+    expect(screen.getAllByAltText("Hexamedical")[0]).toHaveAttribute("src", "/assets/brand/hexamedical-logo.webp");
+  });
+
+  it("o rodapé mantém telefone e e-mail comerciais", () => {
+    renderAt(<Layout><p>x</p></Layout>, "/contato");
+    const footer = screen.getByRole("contentinfo");
+    expect(footer.querySelector('a[href="tel:+5511973140914"]')).not.toBeNull();
+    expect(footer.querySelector('a[href="mailto:comercial@hexamedical.com.br"]')).not.toBeNull();
+  });
+});
+
 describe("página não encontrada", () => {
   it("fala português e leva de volta ao site", () => {
     renderAt(<NotFound />, "/nao-existe");

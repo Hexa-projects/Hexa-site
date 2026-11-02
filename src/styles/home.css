@@ -572,11 +572,15 @@
     inset: auto;
     order: 2;
     width: 100%;
-    max-width: 34rem;
-    aspect-ratio: 4 / 5;
+    max-width: 30rem;
+    aspect-ratio: 1;
     margin-inline: auto;
     container-type: inline-size;
     clip-path: circle(calc(var(--a) * 50cqw) at 50% 50%);
+  }
+
+  .hero__video {
+    transform: none;
   }
 
   .hero__credit {

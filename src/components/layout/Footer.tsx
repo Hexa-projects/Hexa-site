@@ -37,7 +37,7 @@ const Footer = () => {
     <footer className="site-footer">
       <div className="site-footer__top">
         <div className="site-footer__brand">
-          <img src="/assets/hexa/Logo-Hexamedical.png" alt="Hexamedical" />
+          <img src="/assets/brand/hexamedical-logo-light.webp" alt="Hexamedical" width={240} height={62} loading="lazy" />
           <p>Tecnologia médica, implementação e suporte para serviços de diagnóstico que não podem parar.</p>
           <Link to="/contato" className="site-footer__contact-link">
             Falar com um especialista <ArrowUpRight aria-hidden="true" />

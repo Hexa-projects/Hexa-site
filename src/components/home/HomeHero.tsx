@@ -60,7 +60,8 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
         const state = { progress: 0, aperture: APERTURE_START, cx: CENTER_START };
         const apply = () => {
           const unit = 0.5 * Math.min(box.clientWidth, box.clientHeight);
-          box.style.setProperty("--r", `${state.aperture * unit}px`);
+          // 3 px a menos que o anel, para a borda laranja do palco aparecer em volta do vídeo.
+          box.style.setProperty("--r", `${Math.max(0, state.aperture * unit - 3)}px`);
           box.style.setProperty("--cx", `${50 + state.cx * 100}%`);
           stageState.set({ progress: state.progress, aperture: state.aperture, center: [state.cx, 0], glow: 0.7, rings: 20 });
         };
