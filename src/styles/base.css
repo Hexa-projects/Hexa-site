@@ -72,7 +72,7 @@ a {
 }
 
 .button--primary:hover {
-  background: #ff8a33;
+  background: var(--orange-hover);
 }
 
 .button--quiet {

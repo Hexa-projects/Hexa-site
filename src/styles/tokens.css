@@ -21,8 +21,10 @@
   --on-dark-3: #8a939a;
   --rule-dark: rgba(238, 240, 238, 0.14);
   --rule-light: rgba(22, 25, 28, 0.14);
+  --stage-veil: rgba(12, 14, 16, 0.92);
 
   --orange: #f87517;
+  --orange-hover: #ff8a33;
   --orange-ink: #a34800;
   --scan: #e9f6ff;
 
@@ -57,6 +59,7 @@
   --dur-instant: 120ms;
   --dur-quick: 240ms;
   --dur-base: 450ms;
+  --dur-focal: 800ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
 }

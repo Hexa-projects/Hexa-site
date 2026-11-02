@@ -1,6 +1,6 @@
 # Plano de motion — GSAP + vídeo por código gratuito + design próprio
 
-**Status:** proposta para decisão. Nada foi instalado nem implementado.
+**Status:** fases 0 e 1 (fundação e home imersiva A+B) implementadas na branch `reinvencao/fase-0-1` em 2026-11-02, só com material do site oficial. Execução: `docs/superpowers/plans/2026-11-02-reinvencao-fase-0-1.md`. Nada publicado.
 **Data:** 2026-11-02
 **Atualização (2026-11-02):** o Remotion saiu do plano, a pedido do Lucas, por ter licença paga. Em seu lugar entram só ferramentas gratuitas: HyperFrames, com FFmpeg e Revideo de reserva (seção 8). O nome do arquivo foi mantido para não quebrar links.
 **Base:**

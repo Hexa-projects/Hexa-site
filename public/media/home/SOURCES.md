@@ -12,6 +12,11 @@ Gerada por `scripts/build-home-media.sh` em 2026-11-02. Os arquivos de origem fo
 | `etapa-projeto.webp` | `wp-content/uploads/2026/04/estrutura-1.png` | WebP |
 | `etapa-instalacao.webp` | `public/assets/hexa/Desinstalacao-e-Instalacao.webp` (acervo do site oficial) | WebP |
 | `etapa-operacao.webp`, `showroom/hexai.webp` | `wp-content/uploads/2026/04/varredura-hexai.png` | Recorte de 400×400 só do painel "Varredura acelerada + SwiftMR" |
+| `showroom/magnifico-open.webp` | `public/assets/hexa/magnifico-open.jpg` (acervo do site oficial) | Fundo branco, recorte da sobra, até 960 px |
+| `showroom/s-scan-open.webp`, `o-scan-smart.webp`, `g-scan-open.webp` | `public/assets/esaote/*.webp` (fotos oficiais Esaote, ver `public/assets/esaote/SOURCES.md`) | Fundo branco, recorte da sobra, até 960 px |
+| `showroom/vet-mr-grande.webp` | `public/assets/hexa/Esaote-Grande-VET-MR.png` (acervo do site oficial) | Foto de cena, até 960 px, sem recorte |
+| `showroom/ispace-1-5t-vet.webp`, `turbotom-1s-vet.webp`, `turbotom-1s-lite-vet.webp` | `public/assets/wdm/*-hero*.webp` (renderizações oficiais WDM) | Fundo branco, recorte da sobra, até 960 px |
+| `showroom/accutron-mr.webp`, `digieye-350.webp` | `public/assets/esaote/bombas-accutron-mr.png`, `mindray-digieye-350.png` (acervo do site oficial) | Transparência achatada em branco, recorte da sobra |
 | `etapa-manutencao.webp` | `wp-content/uploads/2026/04/Imagem-manutencao.png` | WebP |
 | `etapa-laboratorio.webp` | `public/assets/hexa/Reparo-de-Pecas-e-Eletronicas-foto.webp` (acervo do site oficial) | WebP, 1280 px |
 

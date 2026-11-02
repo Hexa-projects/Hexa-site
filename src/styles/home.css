@@ -540,7 +540,7 @@
   background: #000;
 }
 
-/* O mesmo controle em pílula do hero, sobre o pôster. */
+/* Pílula de ação sobre o pôster: laranja porque inicia a reprodução (a do hero é discreta porque só pausa). */
 .proof__play {
   position: absolute;
   left: var(--space-4);
@@ -559,7 +559,7 @@
 }
 
 .proof__play:hover {
-  background: #ff8a33;
+  background: var(--orange-hover);
 }
 
 .proof__play svg {
@@ -609,7 +609,7 @@
   fill: none;
   stroke: var(--orange);
   stroke-width: 2;
-  transition: d 800ms var(--ease-out);
+  transition: d var(--dur-focal) var(--ease-out);
 }
 
 /* O nó da etapa aparece quando o hexágono já virou anel: o caminho aponta para a linha do tempo. */
