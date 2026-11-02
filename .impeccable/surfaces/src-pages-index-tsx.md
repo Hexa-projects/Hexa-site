@@ -1,31 +1,41 @@
 ---
-version: 1
+version: 2
 slug: "src-pages-index-tsx"
 primary_target: "src/pages/Index.tsx"
-related_targets: ["src/components/layout/Layout.tsx","src/pages/SolutionPage.tsx","src/pages/ServicePage.tsx","src/pages/SolucoesHub.tsx","src/pages/ServicosHub.tsx","src/pages/EmpresaHub.tsx","src/pages/ConteudoHub.tsx"]
-approved_comp: ".impeccable/mocks/home-a2-quiet-operation.png"
+related_targets: ["src/components/home/HomeHero.tsx","src/components/home/LifecycleTimeline.tsx","src/components/home/Showroom.tsx","src/components/home/ProofVideos.tsx","src/components/home/ContactTriage.tsx","src/motion/stage/StageCanvas.tsx","src/components/layout/Header.tsx","src/components/layout/Footer.tsx"]
+approved_comp: null
 ---
 
-# Home e sistema público Hexamedical
+# Home Hexamedical
 
-Modo: Persuade. Escopo: home e sistema de templates das páginas públicas, excluindo Magnifico Open e Careverse Digital Heart.
+Modo: Persuade. Escopo: home e cabeçalho/rodapé globais, excluindo Magnifico Open e Careverse Digital Heart.
 
-Audiência: decisores de hospitais, clínicas e centros de imagem que precisam avaliar equipamento, implantação e suporte. Trabalho: entender rapidamente onde a Hexamedical atua, comparar caminhos e iniciar uma conversa qualificada. Ação principal: encontrar a solução adequada e falar com um especialista. Provas: equipamentos, instalações, equipe, laboratório, processos, imagens clínicas e vídeos reais do acervo existente.
+Audiência: decisores de hospitais, clínicas e centros de imagem que avaliam equipamento, implantação e suporte. Trabalho: entender que a Hexamedical vende, instala, mantém e repara, e abrir uma conversa qualificada. Provas: vídeo real do equipamento, fotos de cada etapa, portfólio completo, entrevista do CEO e depoimentos, todos do site oficial.
+
+Direção substituída: "Rede em Operação / A2 Operação Serena" (base clara), trocada pela escolha do Lucas em 2026-11-02 — híbrido A+B do `docs/plano-motion-gsap-remotion-2026-11-02.md`, só com material do site oficial.
 
 ## Direction contract
 
-THESIS: **Rede em Operação** transforma o site em uma visão viva da infraestrutura médica que a Hexamedical coloca e mantém em funcionamento. Recusa o hero genérico seguido por grades de cards.
+THESIS: A vida inteira do equipamento vista de dentro do túnel. A home é um percurso contínuo pelo anel da ressonância, da escolha ao laboratório. Recusa o hero genérico seguido de grade de cards e o folheto que só se mexe.
 
-OWN-WORLD: branco mineral e grafite clínico formam grandes campos; laranja Hexa sinaliza ação e um azul frio organiza dados. Fotografias e vídeos reais dominam a página, ligados por linhas finas, coordenadas, etiquetas técnicas e recortes editoriais precisos.
+OWN-WORLD: palco grafite #0c0e10 contínuo, com um anel procedural em WebGL (anéis em perspectiva, linhas de campo finas, borda laranja #f87517 e luz que segue o cursor). Equipamentos inteiros sobre bases brancas. Archivo expandida (112%) nos títulos e Source Sans 3 no texto. O hexágono do logo marca as etapas e vira anel na triagem. A varredura, uma linha clara de 1 px, revela as fotos.
 
-STORY: o visitante vê tecnologia em escala real, escolhe entre equipamento, implantação ou suporte, encontra provas operacionais e avança para uma conversa contextualizada.
+STORY: o visitante entra no túnel até o equipamento real ocupar a tela. Depois percorre as seis etapas da vida do equipamento, vê o portfólio inteiro com filtro, ouve o CEO e os depoimentos, escolhe comprar, manter ou reparar e abre o WhatsApp oficial com o assunto certo.
 
-FIRST VIEWPORT: navegação baixa e precisa; uma composição de mídia em escala arquitetônica ocupa a maior parte do quadro. O texto “Tecnologia médica. Em operação.” surge curto sobre uma área calma, acompanhado do CTA “Encontrar a solução certa”. Uma faixa de sinais reais antecipa equipamento, engenharia e suporte.
+FIRST VIEWPORT: o cabeçalho fica transparente sobre o palco.
+- À esquerda, numa coluna de até 44vw:
+  - o título "Do projeto da sala à última manutenção.", em Archivo 650, até 5,25 rem;
+  - o texto de apoio;
+  - os CTAs "Encontrar a solução certa" (laranja) e "Falar com especialista" (contorno).
+- À direita, com centro a 70% da largura, a abertura circular mostra o vídeo real do Magnifico Open, contornada pela borda laranja e pelos anéis do túnel.
+- No canto inferior direito, o controle para pausar o vídeo.
+- Interação de assinatura: o scroll fixa a cena, avança a câmera pelo túnel e abre a abertura até o vídeo ocupar a tela. Em seguida, o anel passa a contornar a foto de cada etapa.
 
-APPROVED COMPOSITION: **A2 — Operação Serena**. Um único campo textual, uma fotografia clínica dominante, dois caminhos de ação e uma faixa curta de atuação. A renderização não deve ser literalizada: texto, navegação, ações e estrutura permanecem semânticos; apenas a fotografia é raster. Setas, etiquetas, pessoas ou equipamento inventados pelo mockup não são ativos aprovados — a implementação usa somente mídia real do acervo.
-
-FORM: sexto sistema da lista fundamentada, escolhido pelo seed `4e0b4c01`. A linguagem vem de centrais de engenharia e mapas de implantação, elevada pela disciplina de anotação, proveniência de mídia e sincronização entre provas.
+FORM: direção fixada pelo usuário (híbrido A+B do plano de motion), sem sorteio de conceito. Forma tirada do bore da RM e do hexágono do logo. Seed: n/a (pinned).
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
 
-Restrições: preservar URLs e conteúdo técnico confirmado; nenhuma alteração nas experiências Magnifico Open e Careverse; formulário real antes da produção; publicação somente com autorização explícita.
+## Pendências
+
+- Direito de uso fora do site atual do vídeo de fabricante (Esaote) e origem das fotos de manutenção e laboratório: própria ou banco de imagens.
+- Notebook de referência para o teste de 60 fps: não definido.

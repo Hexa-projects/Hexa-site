@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Pause, Play } from "lucide-react";
 import { homeMedia } from "@/data/homeMedia";
-import { duration, ease, gsap, ScrollTrigger, SplitText } from "@/lib/motion";
+import { duration, ease, gsap, ScrollTrigger } from "@/lib/motion";
 import { useMotionScope } from "@/motion/useMotionScope";
 import { stageState } from "@/motion/stage/stageState";
 import type { StageMode } from "@/motion/capability";
@@ -45,14 +45,9 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
   useMotionScope(
     root,
     ({ desktop, mobile }) => {
+      // O título sobe por trás de uma máscara, uma vez, no carregamento.
       if (title.current && (desktop || mobile)) {
-        SplitText.create(title.current, {
-          type: "lines",
-          mask: "lines",
-          autoSplit: true,
-          onSplit: (self) =>
-            gsap.from(self.lines, { yPercent: 105, duration: duration.focal, ease: ease.out, stagger: 0.08, delay: 0.1 }),
-        });
+        gsap.from(title.current, { clipPath: "inset(0 0 100% 0)", yPercent: 18, duration: duration.focal, ease: ease.out, delay: 0.1 });
       }
 
       if (desktop && frame.current && figure.current && copy.current) {

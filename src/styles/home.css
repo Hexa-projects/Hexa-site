@@ -278,6 +278,12 @@
   object-fit: cover;
 }
 
+/* A comparação do HexAI é um gráfico: inteira, sobre o fundo escuro, sem corte. */
+.lifecycle__photo[data-stage="operacao"] {
+  object-fit: contain;
+  background: #000;
+}
+
 .lifecycle__scan {
   position: absolute;
   top: 0;
@@ -503,6 +509,12 @@
   fill: none;
   stroke: var(--orange);
   stroke-width: 2;
+  transition: d var(--dur-quick) var(--ease-out);
+}
+
+.triage__row:hover .triage__shape path,
+.triage__row:focus-within .triage__shape path {
+  d: path("M24 5 C30.79 5 37.06 8.62 40.45 14.5 C43.85 20.38 43.85 27.62 40.45 33.5 C37.06 39.38 30.79 43 24 43 C17.21 43 10.94 39.38 7.55 33.5 C4.15 27.62 4.15 20.38 7.55 14.5 C10.94 8.62 17.21 5 24 5 Z");
 }
 
 .triage__copy h3 {
@@ -657,6 +669,32 @@
   }
 }
 
+@media (max-width: 639px) {
+  .showroom__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5) var(--space-3);
+  }
+
+  .showroom__plinth img {
+    inset: var(--space-3);
+    width: calc(100% - 2 * var(--space-3));
+    height: calc(100% - 2 * var(--space-3));
+  }
+
+  .showroom__name {
+    font-size: var(--step-0);
+  }
+
+  .showroom__line {
+    font-size: var(--step--1);
+  }
+
+  /* No celular o anel laranja da reserva passaria atrás dos botões. */
+  .stage-fallback__rim {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .text-link,
   .hero__pause,
@@ -666,6 +704,7 @@
   .showroom__plinth,
   .showroom__plinth img,
   .triage__row,
+  .triage__shape path,
   .triage__channels a {
     transition: none;
   }

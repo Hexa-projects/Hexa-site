@@ -1,10 +1,7 @@
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SplitText } from "gsap/SplitText";
-import { Flip } from "gsap/Flip";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
-import { MorphSVGPlugin } from "gsap/MorphSVGPlugin";
 
 /** Tokens de movimento (spec, seção 3). Espelhados em --dur-* e --ease-* no CSS. */
 export const duration = { instant: 0.12, quick: 0.24, base: 0.45, focal: 0.8 } as const;
@@ -23,8 +20,15 @@ let registered = false;
 /** Registra os plugins num único lugar. Pode ser chamado várias vezes. */
 export function registerMotion(): void {
   if (registered) return;
-  gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText, Flip, DrawSVGPlugin, MorphSVGPlugin);
+  gsap.registerPlugin(useGSAP, ScrollTrigger, DrawSVGPlugin);
   registered = true;
 }
 
-export { gsap, ScrollTrigger, SplitText, Flip };
+/** O Flip só desce quando o visitante usa o filtro do portfólio. */
+export async function loadFlip() {
+  const { Flip } = await import("gsap/Flip");
+  gsap.registerPlugin(Flip);
+  return Flip;
+}
+
+export { gsap, ScrollTrigger };

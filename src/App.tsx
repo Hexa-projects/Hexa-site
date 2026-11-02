@@ -3,27 +3,28 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import Index from "./pages/Index";
-import SolucoesHub from "./pages/SolucoesHub";
-import ServicosHub from "./pages/ServicosHub";
-import ProductEditorialPage from "./pages/ProductEditorialPage";
-import WdmVetPage from "./pages/WdmVetPage";
-import ServicePage from "./pages/ServicePage";
-import Contato from "./pages/Contato";
-import SegmentPage from "./pages/SegmentPage";
-import StaticContentPage from "./pages/StaticContentPage";
-import BlogPage from "./pages/BlogPage";
-import BlogPostPage from "./pages/BlogPostPage";
-import SegmentosHub from "./pages/SegmentosHub";
-import ConteudoHub from "./pages/ConteudoHub";
-import EmpresaHub from "./pages/EmpresaHub";
-import SobrePage from "./pages/SobrePage";
-import EstruturaPage from "./pages/EstruturaPage";
-import MateriaisPage from "./pages/MateriaisPage";
-import CasesPage from "./pages/CasesPage";
-import PrivacyPage from "./pages/PrivacyPage";
-import TermsPage from "./pages/TermsPage";
-import NotFound from "./pages/NotFound";
+import { lazy, Suspense } from "react";
+const Index = lazy(() => import("./pages/Index"));
+const SolucoesHub = lazy(() => import("./pages/SolucoesHub"));
+const ServicosHub = lazy(() => import("./pages/ServicosHub"));
+const ProductEditorialPage = lazy(() => import("./pages/ProductEditorialPage"));
+const WdmVetPage = lazy(() => import("./pages/WdmVetPage"));
+const ServicePage = lazy(() => import("./pages/ServicePage"));
+const Contato = lazy(() => import("./pages/Contato"));
+const SegmentPage = lazy(() => import("./pages/SegmentPage"));
+const StaticContentPage = lazy(() => import("./pages/StaticContentPage"));
+const BlogPage = lazy(() => import("./pages/BlogPage"));
+const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
+const SegmentosHub = lazy(() => import("./pages/SegmentosHub"));
+const ConteudoHub = lazy(() => import("./pages/ConteudoHub"));
+const EmpresaHub = lazy(() => import("./pages/EmpresaHub"));
+const SobrePage = lazy(() => import("./pages/SobrePage"));
+const EstruturaPage = lazy(() => import("./pages/EstruturaPage"));
+const MateriaisPage = lazy(() => import("./pages/MateriaisPage"));
+const CasesPage = lazy(() => import("./pages/CasesPage"));
+const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
+const TermsPage = lazy(() => import("./pages/TermsPage"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 const queryClient = new QueryClient();
 
@@ -33,6 +34,8 @@ const App = () => (
       <TooltipProvider>
         <Sonner />
         <BrowserRouter>
+          {/* Cada rota é um pacote próprio: o GSAP e o palco só descem na home. */}
+          <Suspense fallback={<div className="route-loading" aria-hidden="true" />}>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/solucoes" element={<SolucoesHub />} />
@@ -57,6 +60,7 @@ const App = () => (
             <Route path="/termos" element={<TermsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </Suspense>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

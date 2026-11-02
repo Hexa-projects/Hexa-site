@@ -64,8 +64,9 @@ const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: Sta
         articles.forEach((article, index) => {
           ScrollTrigger.create({
             trigger: article,
-            start: "top 60%",
-            end: "bottom 60%",
+            // A etapa ativa é a que cruza o meio da tela: foto e texto mudam juntos.
+            start: "top center",
+            end: "bottom center",
             onToggle: (self) => self.isActive && activate(index),
           });
         });
@@ -104,7 +105,7 @@ const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: Sta
       <div className="lifecycle__intro">
         <h2 id="lifecycle-title">A vida inteira do equipamento</h2>
         <p>
-          Da escolha do sistema ao reparo de uma placa, a mesma equipe acompanha o equipamento. São seis etapas, e cada uma tem uma área da Hexamedical por trás.
+          Da escolha do sistema ao reparo de uma placa, a mesma empresa acompanha o equipamento em seis etapas.
         </p>
       </div>
 
@@ -128,6 +129,7 @@ const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: Sta
                 <img
                   key={item.id}
                   className="lifecycle__photo"
+                  data-stage={item.id}
                   src={item.image.src}
                   width={item.image.width}
                   height={item.image.height}

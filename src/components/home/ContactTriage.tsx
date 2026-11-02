@@ -2,26 +2,20 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Mail, Phone } from "lucide-react";
 import { whatsappHref, type TriagePath } from "@/data/home";
-import { duration, ease, gsap, ScrollTrigger } from "@/lib/motion";
+import { ScrollTrigger } from "@/lib/motion";
 import { useMotionScope } from "@/motion/useMotionScope";
 import { tweenStage } from "@/motion/stage/align";
 import type { StageMode } from "@/motion/capability";
 
-/** O hexágono do logo e o anel do túnel: a mesma forma em dois estados. */
-const HEXAGON = "M24 5 L40.45 14.5 L40.45 33.5 L24 43 L7.55 33.5 L7.55 14.5 Z";
-const RING = "M24 5 C34.49 5 43 13.51 43 24 C43 34.49 34.49 43 24 43 C13.51 43 5 34.49 5 24 C5 13.51 13.51 5 24 5 Z";
-
-const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+/**
+ * O hexágono do logo vira o anel do túnel ao passar o mouse ou focar (transição CSS de `d`).
+ * Os dois caminhos têm seis curvas, então o navegador interpola um no outro.
+ */
+const HEXAGON = "M24 5 C29.48 8.17 34.97 11.33 40.45 14.5 C40.45 20.83 40.45 27.17 40.45 33.5 C34.97 36.67 29.48 39.83 24 43 C18.52 39.83 13.03 36.67 7.55 33.5 C7.55 27.17 7.55 20.83 7.55 14.5 C13.03 11.33 18.52 8.17 24 5 Z";
 
 /** H4: contato como triagem. Cada caminho já abre a conversa com o assunto certo. */
 const ContactTriage = ({ items, mode }: { items: TriagePath[]; mode: StageMode }) => {
   const root = useRef<HTMLElement>(null);
-
-  const morph = (row: HTMLElement, toRing: boolean) => {
-    if (reducedMotion()) return;
-    const shape = row.querySelector("path");
-    if (shape) gsap.to(shape, { morphSVG: toRing ? RING : HEXAGON, duration: duration.quick, ease: ease.out, overwrite: true });
-  };
 
   useMotionScope(
     root,
@@ -44,16 +38,7 @@ const ContactTriage = ({ items, mode }: { items: TriagePath[]; mode: StageMode }
 
       <ul className="triage__list">
         {items.map((item) => (
-          <li
-            key={item.id}
-            className="triage__row"
-            onPointerEnter={(event) => morph(event.currentTarget, true)}
-            onPointerLeave={(event) => morph(event.currentTarget, false)}
-            onFocus={(event) => morph(event.currentTarget, true)}
-            onBlur={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) morph(event.currentTarget, false);
-            }}
-          >
+          <li key={item.id} className="triage__row">
             <svg className="triage__shape" viewBox="0 0 48 48" aria-hidden="true" focusable="false">
               <path d={HEXAGON} />
             </svg>

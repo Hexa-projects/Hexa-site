@@ -2,7 +2,8 @@ import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { showroomFilters, type ShowroomFilter, type ShowroomItem } from "@/data/home";
-import { duration, ease, Flip, gsap, ScrollTrigger } from "@/lib/motion";
+import type { Flip as FlipPlugin } from "gsap/Flip";
+import { duration, ease, gsap, loadFlip, ScrollTrigger } from "@/lib/motion";
 import { useMotionScope } from "@/motion/useMotionScope";
 import { tweenStage } from "@/motion/stage/align";
 import type { StageMode } from "@/motion/capability";
@@ -13,13 +14,18 @@ const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)"
 const Showroom = ({ items, mode }: { items: ShowroomItem[]; mode: StageMode }) => {
   const root = useRef<HTMLElement>(null);
   const grid = useRef<HTMLUListElement>(null);
-  const flipState = useRef<Flip.FlipState | null>(null);
+  const flipState = useRef<ReturnType<typeof FlipPlugin.getState> | null>(null);
+  const flip = useRef<typeof FlipPlugin | null>(null);
   const [filter, setFilter] = useState<ShowroomFilter>("todos");
+
+  const preloadFlip = () => {
+    if (!flip.current && !reducedMotion()) void loadFlip().then((plugin) => (flip.current = plugin));
+  };
 
   const choose = (next: ShowroomFilter) => {
     if (next === filter) return;
-    if (grid.current && !reducedMotion()) {
-      flipState.current = Flip.getState(grid.current.querySelectorAll(".showroom__item"));
+    if (grid.current && flip.current && !reducedMotion()) {
+      flipState.current = flip.current.getState(grid.current.querySelectorAll(".showroom__item"));
     }
     setFilter(next);
   };
@@ -27,9 +33,9 @@ const Showroom = ({ items, mode }: { items: ShowroomItem[]; mode: StageMode }) =
   // Depois do re-render, os itens deslizam para as novas posições.
   useLayoutEffect(() => {
     const state = flipState.current;
-    if (!state) return;
+    if (!state || !flip.current) return;
     flipState.current = null;
-    Flip.from(state, {
+    flip.current.from(state, {
       duration: duration.base,
       ease: ease.out,
       absolute: false,
@@ -55,7 +61,7 @@ const Showroom = ({ items, mode }: { items: ShowroomItem[]; mode: StageMode }) =
         <p>Ressonância, tomografia veterinária, radiografia digital, bombas injetoras e software. Cada linha tem página própria, com dados do fabricante.</p>
       </div>
 
-      <div className="showroom__filters" role="group" aria-label="Filtrar por modalidade">
+      <div className="showroom__filters" role="group" aria-label="Filtrar por modalidade" onPointerEnter={preloadFlip} onFocus={preloadFlip}>
         {showroomFilters.map((option) => (
           <button key={option.id} type="button" className="chip" aria-pressed={filter === option.id} onClick={() => choose(option.id)}>
             {option.label}
