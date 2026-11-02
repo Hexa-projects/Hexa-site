@@ -28,10 +28,20 @@ function hasWebGL(): boolean {
   }
 }
 
-/** Lê os sinais do navegador. `?palco=leve` força o modo leve, para teste e revisão. */
+/** `?palco=leve` ou `?palco=imersivo` fixam o modo, para teste e revisão. */
+export function forcedStageMode(): StageMode | null {
+  if (typeof window === "undefined") return null;
+  const value = new URLSearchParams(window.location.search).get("palco");
+  if (value === "leve") return "light";
+  if (value === "imersivo") return "immersive";
+  return null;
+}
+
+/** Lê os sinais do navegador. */
 export function detectStageMode(): StageMode {
   if (typeof window === "undefined") return "light";
-  if (new URLSearchParams(window.location.search).get("palco") === "leve") return "light";
+  const forced = forcedStageMode();
+  if (forced) return forced;
   const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
   return decideStageMode({
     reducedMotion: window.matchMedia("(prefers-reduced-motion: reduce)").matches,
