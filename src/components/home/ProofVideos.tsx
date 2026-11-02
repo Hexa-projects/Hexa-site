@@ -1,18 +1,54 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { Play } from "lucide-react";
 import type { MediaVideo } from "@/data/homeMedia";
 import { ScrollTrigger } from "@/lib/motion";
 import { useMotionScope } from "@/motion/useMotionScope";
 import { tweenStage } from "@/motion/stage/align";
 import type { StageMode } from "@/motion/capability";
 
-const ProofVideo = ({ video, caption, className }: { video: MediaVideo; caption: string; className: string }) => (
-  <figure className={className}>
-    <video controls preload="none" playsInline poster={video.poster} width={video.width} height={video.height} aria-label={video.label}>
-      <source src={video.mp4} type="video/mp4" />
-    </video>
-    <figcaption>{caption}</figcaption>
-  </figure>
-);
+/**
+ * Vídeo de prova: pôster com o botão do sistema; os controles do navegador
+ * só aparecem depois que a pessoa escolhe assistir.
+ */
+const ProofVideo = ({ video, caption, className }: { video: MediaVideo; caption: string; className: string }) => {
+  const element = useRef<HTMLVideoElement>(null);
+  const [started, setStarted] = useState(false);
+
+  const start = () => {
+    setStarted(true);
+    const player = element.current;
+    if (!player) return;
+    void player.play()?.catch(() => {});
+    player.focus();
+  };
+
+  return (
+    <figure className={className}>
+      <div className="proof__media">
+        <video
+          ref={element}
+          controls={started}
+          preload="none"
+          playsInline
+          poster={video.poster}
+          width={video.width}
+          height={video.height}
+          aria-label={video.label}
+        >
+          <source src={video.mp4} type="video/mp4" />
+        </video>
+        {!started && (
+          <button type="button" className="proof__play" onClick={start}>
+            <Play aria-hidden="true" />
+            <span>Assistir</span>
+            <span className="sr-only">: {video.label}</span>
+          </button>
+        )}
+      </div>
+      <figcaption>{caption}</figcaption>
+    </figure>
+  );
+};
 
 /** Prova: as pessoas da Hexamedical e de quem trabalha com ela, em vídeo publicado no site oficial. */
 const ProofVideos = ({ ceo, testimonials, mode }: { ceo: MediaVideo; testimonials: MediaVideo; mode: StageMode }) => {

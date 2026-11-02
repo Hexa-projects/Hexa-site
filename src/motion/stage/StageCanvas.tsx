@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { FPS_FLOOR, forcedStageMode, type StageMode } from "@/motion/capability";
+import { forcedStageMode, shouldDowngrade, type StageMode } from "@/motion/capability";
 import { createStage } from "./gl";
 import { stageState } from "./stageState";
 
 const MAX_DPR = 1.5;
-const FPS_WINDOW_MS = 2000;
-const WARMUP_MS = 600;
+const WINDOW_MS = 1000;
+/** Espera depois do evento load antes de medir: vídeo, fontes e ScrollTrigger já assentaram. */
+const SETTLE_MS = 800;
+/** Abertura acima disso: o vídeo do hero cobre a tela inteira e o palco não aparece. */
+const COVERED_APERTURE = 2.05;
 
 /** Anéis do túnel em SVG estático: a reserva leve, sem custo de GPU. */
 export const StageFallback = () => {
@@ -16,7 +19,7 @@ export const StageFallback = () => {
         {rings.map((r, k) => (
           <circle key={r} r={r} fill="none" stroke="currentColor" strokeWidth={0.12} opacity={0.5 - k * 0.04} />
         ))}
-        <circle className="stage-fallback__rim" r={18} fill="none" strokeWidth={0.3} />
+        <circle className="stage-fallback__rim" r={13} fill="none" strokeWidth={0.3} />
       </svg>
     </div>
   );
@@ -28,6 +31,11 @@ interface StageCanvasProps {
   onDowngrade?: () => void;
 }
 
+const afterLoad = (callback: () => void) => {
+  if (document.readyState === "complete") callback();
+  else window.addEventListener("load", callback, { once: true });
+};
+
 /** Palco contínuo da home (peças B1, B2 e B6). */
 const StageCanvas = ({ mode, onDowngrade }: StageCanvasProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -38,9 +46,13 @@ const StageCanvas = ({ mode, onDowngrade }: StageCanvasProps) => {
     if (!immersive) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const fail = () => {
+      setFailed(true);
+      onDowngrade?.();
+    };
     const stage = createStage(canvas);
     if (!stage) {
-      setFailed(true);
+      fail();
       return;
     }
 
@@ -56,27 +68,40 @@ const StageCanvas = ({ mode, onDowngrade }: StageCanvasProps) => {
     let frame = 0;
     let running = true;
     const start = performance.now();
-    let frames = 0;
-    let measureStart = start;
-    // Com o modo fixado pela URL, não há rebaixamento automático.
+    // Medição: janelas de 1 s depois do load; com o modo fixado pela URL, não mede.
+    let measuring = false;
     let measured = forcedStageMode() !== null;
+    let windowStart = 0;
+    let windowFrames = 0;
+    const windows: number[] = [];
+    let settleTimer = 0;
+    if (!measured) {
+      afterLoad(() => {
+        settleTimer = window.setTimeout(() => {
+          measuring = true;
+          windowStart = performance.now();
+        }, SETTLE_MS);
+      });
+    }
 
     const loop = (now: number) => {
       if (!running) return;
-      stage.render(stageState.params, (now - start) / 1000, dpr);
-      // A medição ignora o aquecimento (compilação do shader, montagem da página).
-      if (!measured && now - start > WARMUP_MS) {
-        if (frames === 0) measureStart = now;
-        frames += 1;
-        const elapsed = now - measureStart;
-        if (elapsed >= FPS_WINDOW_MS) {
-          measured = true;
-          if ((frames * 1000) / elapsed < FPS_FLOOR) {
+      const { params } = stageState;
+      if (params.visible && params.aperture < COVERED_APERTURE) {
+        stage.render(params, (now - start) / 1000, dpr);
+      }
+      if (measuring && !measured) {
+        windowFrames += 1;
+        if (now - windowStart >= WINDOW_MS) {
+          windows.push((windowFrames * 1000) / (now - windowStart));
+          windowFrames = 0;
+          windowStart = now;
+          if (shouldDowngrade(windows)) {
             running = false;
-            onDowngrade?.();
-            setFailed(true);
+            fail();
             return;
           }
+          if (windows.length >= 3) measured = true;
         }
       }
       frame = requestAnimationFrame(loop);
@@ -85,27 +110,36 @@ const StageCanvas = ({ mode, onDowngrade }: StageCanvasProps) => {
     const onVisibility = () => {
       if (document.hidden) {
         running = false;
-        // Uma aba oculta não mede nada: medir com ela escondida rebaixaria à toa.
-        measured = true;
+        // Uma aba oculta não mede nada: a janela atual é descartada.
+        windowFrames = 0;
         cancelAnimationFrame(frame);
       } else if (!running) {
         running = true;
-        measured = true;
+        windowStart = performance.now();
         frame = requestAnimationFrame(loop);
       }
+    };
+
+    const onContextLost = (event: Event) => {
+      event.preventDefault();
+      running = false;
+      fail();
     };
 
     window.addEventListener("resize", resize);
     window.addEventListener("pointermove", onPointer, { passive: true });
     document.addEventListener("visibilitychange", onVisibility);
+    canvas.addEventListener("webglcontextlost", onContextLost);
     frame = requestAnimationFrame(loop);
 
     return () => {
       running = false;
       cancelAnimationFrame(frame);
+      window.clearTimeout(settleTimer);
       window.removeEventListener("resize", resize);
       window.removeEventListener("pointermove", onPointer);
       document.removeEventListener("visibilitychange", onVisibility);
+      canvas.removeEventListener("webglcontextlost", onContextLost);
       stage.dispose();
     };
   }, [immersive, onDowngrade]);

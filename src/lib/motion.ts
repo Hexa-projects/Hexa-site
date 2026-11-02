@@ -15,14 +15,9 @@ export const MEDIA = {
   reduced: "(prefers-reduced-motion: reduce)",
 } as const;
 
-let registered = false;
-
-/** Registra os plugins num único lugar. Pode ser chamado várias vezes. */
-export function registerMotion(): void {
-  if (registered) return;
-  gsap.registerPlugin(useGSAP, ScrollTrigger, DrawSVGPlugin);
-  registered = true;
-}
+// Registro no carregamento do módulo, antes de qualquer useGSAP: registrar dentro do primeiro
+// callback deixava os ScrollTriggers desse primeiro mount fora do contexto (e vivos após desmontar).
+gsap.registerPlugin(useGSAP, ScrollTrigger, DrawSVGPlugin);
 
 /** O Flip só desce quando o visitante usa o filtro do portfólio. */
 export async function loadFlip() {

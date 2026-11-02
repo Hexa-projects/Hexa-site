@@ -17,6 +17,7 @@ const Showroom = ({ items, mode }: { items: ShowroomItem[]; mode: StageMode }) =
   const flipState = useRef<ReturnType<typeof FlipPlugin.getState> | null>(null);
   const flip = useRef<typeof FlipPlugin | null>(null);
   const [filter, setFilter] = useState<ShowroomFilter>("todos");
+  const visibleCount = items.filter((item) => filter === "todos" || item.filters.includes(filter as Exclude<ShowroomFilter, "todos">)).length;
 
   const preloadFlip = () => {
     if (!flip.current && !reducedMotion()) void loadFlip().then((plugin) => (flip.current = plugin));
@@ -69,6 +70,10 @@ const Showroom = ({ items, mode }: { items: ShowroomItem[]; mode: StageMode }) =
         ))}
       </div>
 
+      <p className="sr-only" role="status">
+        {visibleCount === 1 ? "1 equipamento" : `${visibleCount} equipamentos`}
+      </p>
+
       <ul ref={grid} className="showroom__grid">
         {items.map((item) => {
           const hidden = filter !== "todos" && !item.filters.includes(filter as Exclude<ShowroomFilter, "todos">);
@@ -86,7 +91,7 @@ const Showroom = ({ items, mode }: { items: ShowroomItem[]; mode: StageMode }) =
             </>
           );
           return (
-            <li key={item.id} className="showroom__item" data-flip-id={item.id} hidden={hidden}>
+            <li key={item.id} className={item.fill ? "showroom__item showroom__item--fill" : "showroom__item"} data-flip-id={item.id} hidden={hidden}>
               {item.external ? (
                 <a href={item.href} className="showroom__link">{body}</a>
               ) : (

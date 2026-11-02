@@ -66,9 +66,9 @@ export const homeMedia: {
     },
     operacao: {
       src: `${base}/etapa-operacao.webp`,
-      width: 1280,
-      height: 720,
-      alt: "Comparação de cortes de coluna em varredura padrão, acelerada e acelerada com o HexAI",
+      width: 470,
+      height: 470,
+      alt: "Corte axial de coluna lombar em varredura acelerada com SwiftMR, apresentado pelo HexAI",
     },
     manutencao: {
       src: `${base}/etapa-manutencao.webp`,

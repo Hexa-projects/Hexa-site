@@ -1,4 +1,7 @@
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "@/lib/motion";
+import { stageState } from "@/motion/stage/stageState";
 import { Helmet } from "react-helmet-async";
 import Layout from "@/components/layout/Layout";
 import HomeHero from "@/components/home/HomeHero";
@@ -16,6 +19,21 @@ import "@/styles/home.css";
 const Index = () => {
   const [mode, setMode] = useState<StageMode>(detectStageMode);
   const downgrade = useCallback(() => setMode("light"), []);
+  const home = useRef<HTMLDivElement>(null);
+
+  // O palco só desenha enquanto a home está na tela (no rodapé, nada dele aparece).
+  useGSAP(
+    () => {
+      stageState.set({ visible: true });
+      ScrollTrigger.create({
+        trigger: home.current,
+        start: "top bottom",
+        end: "bottom top",
+        onToggle: (self) => stageState.set({ visible: self.isActive }),
+      });
+    },
+    { scope: home },
+  );
 
   return (
     <Layout>
@@ -27,7 +45,7 @@ const Index = () => {
         />
       </Helmet>
 
-      <div className="home" data-stage={mode}>
+      <div ref={home} className="home" data-stage={mode}>
         <StageCanvas mode={mode} onDowngrade={downgrade} />
         <SmoothScroll enabled={mode === "immersive"} />
         <HomeHero mode={mode} />

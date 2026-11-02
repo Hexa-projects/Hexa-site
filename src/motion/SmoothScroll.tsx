@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
-import { gsap, ScrollTrigger, registerMotion } from "@/lib/motion";
+import { gsap, ScrollTrigger } from "@/lib/motion";
 
 /**
  * Rolagem suave só no desktop (peça B3). Não muda direção nem velocidade final:
@@ -10,7 +10,6 @@ import { gsap, ScrollTrigger, registerMotion } from "@/lib/motion";
 const SmoothScroll = ({ enabled }: { enabled: boolean }) => {
   useEffect(() => {
     if (!enabled) return;
-    registerMotion();
     const lenis = new Lenis({ lerp: 0.1, syncTouch: false, anchors: true });
     lenis.on("scroll", ScrollTrigger.update);
     const tick = (time: number) => lenis.raf(time * 1000);

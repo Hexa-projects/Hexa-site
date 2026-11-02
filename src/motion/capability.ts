@@ -1,7 +1,17 @@
 export type StageMode = "immersive" | "light";
 
-/** Média de quadros abaixo disso, nos primeiros 2 s do palco, rebaixa para o modo leve. */
+/** Quadros por segundo abaixo disso, em duas janelas seguidas, rebaixam para o modo leve. */
 export const FPS_FLOOR = 45;
+
+/**
+ * Decide o rebaixamento a partir de janelas de 1 s medidas depois do carregamento.
+ * Uma janela lenta isolada (decodificação de vídeo, fontes) não basta: precisa de duas seguidas.
+ */
+export function shouldDowngrade(windows: number[]): boolean {
+  if (windows.length < 2) return false;
+  const [previous, last] = windows.slice(-2);
+  return previous < FPS_FLOOR && last < FPS_FLOOR;
+}
 
 export interface CapabilityInput {
   reducedMotion: boolean;
@@ -22,7 +32,10 @@ export function decideStageMode({ reducedMotion, saveData, webgl, cores, viewpor
 function hasWebGL(): boolean {
   try {
     const canvas = document.createElement("canvas");
-    return Boolean(canvas.getContext("webgl"));
+    const gl = canvas.getContext("webgl");
+    // Libera o contexto de teste na hora: o navegador limita quantos contextos vivem juntos.
+    gl?.getExtension("WEBGL_lose_context")?.loseContext();
+    return Boolean(gl);
   } catch {
     return false;
   }

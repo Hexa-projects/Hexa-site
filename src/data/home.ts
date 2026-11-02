@@ -78,6 +78,8 @@ export type ShowroomItem = {
   image: MediaImage;
   href: string;
   external?: boolean;
+  /** Foto de cena (não recorte): ocupa o ladrilho inteiro em vez de ficar sobre a base branca. */
+  fill?: boolean;
 };
 
 const shot = (id: string, width: number, height: number, alt: string): MediaImage => ({
@@ -93,7 +95,7 @@ export const showroom: ShowroomItem[] = [
     name: "Magnifico Open",
     line: "Ressonância aberta de corpo inteiro",
     filters: ["rm"],
-    image: shot("magnifico-open", 600, 500, "Ressonância magnética Esaote Magnifico Open"),
+    image: shot("magnifico-open", 600, 493, "Ressonância magnética Esaote Magnifico Open"),
     href: "https://www.hexamedical.com.br/rm-esaote-magnifico-open/",
     external: true,
   },
@@ -102,7 +104,7 @@ export const showroom: ShowroomItem[] = [
     name: "S-scan Open",
     line: "Ressonância musculoesquelética",
     filters: ["rm"],
-    image: shot("s-scan-open", 960, 752, "Ressonância magnética Esaote S-scan Open"),
+    image: shot("s-scan-open", 960, 675, "Ressonância magnética Esaote S-scan Open"),
     href: "/solucoes/rm-s-scan",
   },
   {
@@ -110,7 +112,7 @@ export const showroom: ShowroomItem[] = [
     name: "O-scan SMART",
     line: "Ressonância de extremidades",
     filters: ["rm"],
-    image: shot("o-scan-smart", 960, 752, "Ressonância magnética Esaote O-scan SMART"),
+    image: shot("o-scan-smart", 880, 932, "Ressonância magnética Esaote O-scan SMART"),
     href: "/solucoes/rm-o-scan",
   },
   {
@@ -118,7 +120,7 @@ export const showroom: ShowroomItem[] = [
     name: "G-scan Open",
     line: "Ressonância inclinável, com e sem carga",
     filters: ["rm"],
-    image: shot("g-scan-open", 960, 752, "Ressonância magnética Esaote G-scan Open"),
+    image: shot("g-scan-open", 960, 748, "Ressonância magnética Esaote G-scan Open"),
     href: "/solucoes/rm-g-scan",
   },
   {
@@ -128,13 +130,14 @@ export const showroom: ShowroomItem[] = [
     filters: ["rm", "veterinaria"],
     image: shot("vet-mr-grande", 960, 641, "Ressonância veterinária Esaote Vet-MR Grande com um tigre posicionado"),
     href: "/solucoes/vet-mr-grande",
+    fill: true,
   },
   {
     id: "ispace-1-5t-vet",
     name: "i_Space 1.5T-VET",
     line: "Ressonância veterinária supercondutora",
     filters: ["rm", "veterinaria"],
-    image: shot("ispace-1-5t-vet", 960, 689, "Renderização oficial da ressonância veterinária WDM i_Space 1.5T-VET"),
+    image: shot("ispace-1-5t-vet", 960, 842, "Renderização oficial da ressonância veterinária WDM i_Space 1.5T-VET"),
     href: "/solucoes/ispace-1-5t-vet",
   },
   {
@@ -142,7 +145,7 @@ export const showroom: ShowroomItem[] = [
     name: "TurboTom 1S-VET",
     line: "Tomografia veterinária",
     filters: ["tc", "veterinaria"],
-    image: shot("turbotom-1s-vet", 960, 502, "Renderização oficial do tomógrafo veterinário WDM TurboTom 1S-VET"),
+    image: shot("turbotom-1s-vet", 960, 461, "Renderização oficial do tomógrafo veterinário WDM TurboTom 1S-VET"),
     href: "/solucoes/turbotom-1s-vet",
   },
   {
@@ -150,7 +153,7 @@ export const showroom: ShowroomItem[] = [
     name: "TurboTom 1S LITE VET",
     line: "Tomografia veterinária, versão LITE",
     filters: ["tc", "veterinaria"],
-    image: shot("turbotom-1s-lite-vet", 960, 650, "Renderização oficial do tomógrafo veterinário WDM TurboTom 1S LITE VET"),
+    image: shot("turbotom-1s-lite-vet", 960, 635, "Renderização oficial do tomógrafo veterinário WDM TurboTom 1S LITE VET"),
     href: "/solucoes/turbotom-1s-lite-vet",
   },
   {
@@ -158,7 +161,7 @@ export const showroom: ShowroomItem[] = [
     name: "Accutron MR",
     line: "Bomba injetora de contraste para ressonância",
     filters: ["contraste"],
-    image: shot("accutron-mr", 960, 540, "Bomba injetora Accutron MR"),
+    image: shot("accutron-mr", 202, 561, "Bomba injetora Accutron MR"),
     href: "/solucoes/bombas-injetoras",
   },
   {
@@ -166,7 +169,7 @@ export const showroom: ShowroomItem[] = [
     name: "DigiEye 350",
     line: "Radiografia digital fixa Mindray",
     filters: ["rx"],
-    image: shot("digieye-350", 960, 1200, "Sistema de radiografia digital Mindray DigiEye 350"),
+    image: shot("digieye-350", 960, 684, "Sistema de radiografia digital Mindray DigiEye 350"),
     href: "/solucoes/mindray",
   },
   {
@@ -174,8 +177,9 @@ export const showroom: ShowroomItem[] = [
     name: "HexAI",
     line: "Inteligência artificial para o fluxo de imagem",
     filters: ["software"],
-    image: shot("hexai", 960, 540, "HexAI: comparação de cortes de coluna em varredura padrão, acelerada e acelerada com IA"),
+    image: shot("hexai", 470, 470, "HexAI: corte axial de coluna lombar em varredura acelerada com SwiftMR"),
     href: "/solucoes/hexai",
+    fill: true,
   },
 ];
 

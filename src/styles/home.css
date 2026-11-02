@@ -20,7 +20,8 @@
 .home h2 {
   font-size: var(--step-4);
   font-weight: 640;
-  line-height: 1;
+  /* 1,05: acentos e descendentes do português não se tocam entre linhas. */
+  line-height: 1.05;
 }
 
 .home p {
@@ -83,6 +84,7 @@
 .hero__frame {
   --r: 20vmin;
   --cx: 70%;
+  --cy: 50%;
   position: relative;
   display: grid;
   align-items: center;
@@ -96,7 +98,7 @@
   position: absolute;
   inset: 0;
   margin: 0;
-  clip-path: circle(var(--r) at var(--cx) 50%);
+  clip-path: circle(var(--r) at var(--cx) var(--cy));
   background: var(--graphite-800);
 }
 
@@ -112,7 +114,8 @@
 .hero__credit {
   position: absolute;
   left: var(--cx);
-  top: calc(50% + var(--r) + var(--space-4));
+  top: calc(var(--cy) + var(--r) + var(--space-4));
+  z-index: 1;
   transform: translateX(-50%);
   color: var(--on-dark-3);
   font-size: var(--step--1);
@@ -124,6 +127,13 @@
   position: relative;
   z-index: 2;
   max-width: min(36rem, 44vw);
+}
+
+/* Se o foco do teclado voltar aos CTAs depois que o texto sumiu no scroll, ele reaparece. */
+.hero__copy:focus-within,
+.hero__pause:focus-visible {
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .hero__title {
@@ -184,6 +194,14 @@
 @media (min-width: 1024px) {
   .home[data-stage="light"] .stage-fallback svg {
     transform: translateX(20%);
+  }
+}
+
+/* Desktop leve com movimento: os anéis estáticos ficam com o hero fixado, como o palco. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .home[data-stage="light"] .stage-fallback {
+    position: fixed;
+    height: 100vh;
   }
 }
 
@@ -278,12 +296,6 @@
   object-fit: cover;
 }
 
-/* A comparação do HexAI é um gráfico: inteira, sobre o fundo escuro, sem corte. */
-.lifecycle__photo[data-stage="operacao"] {
-  object-fit: contain;
-  background: #000;
-}
-
 .lifecycle__scan {
   position: absolute;
   top: 0;
@@ -335,8 +347,42 @@
   color: var(--on-dark);
 }
 
-.lifecycle__inline-photo {
+/* Emblema da etapa (celular): a foto no anel, com os seis hexágonos e a etapa marcada. */
+.lifecycle__badge {
   display: none;
+}
+
+.lifecycle__badge-ring {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+.lifecycle__badge-progress {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 0.6;
+}
+
+.lifecycle__badge-node {
+  fill: var(--graphite-950);
+  stroke: var(--on-dark-3);
+  stroke-width: 0.45;
+}
+
+.lifecycle__badge-node.is-reached {
+  fill: var(--orange);
+  stroke: var(--orange);
+}
+
+.lifecycle__badge-photo {
+  position: absolute;
+  inset: 10%;
+  width: 80%;
+  height: 80%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--graphite-800);
 }
 
 /* ---------- H3: portfólio ---------- */
@@ -411,6 +457,14 @@
   transition: transform var(--dur-base) var(--ease-out);
 }
 
+/* Fotos de cena (não recortes) ocupam o ladrilho inteiro. */
+.showroom__item--fill .showroom__plinth img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .showroom__link:hover .showroom__plinth {
   box-shadow: 0 22px 36px -22px rgba(0, 0, 0, 0.9);
 }
@@ -460,12 +514,44 @@
   margin: 0;
 }
 
+.proof__media {
+  position: relative;
+}
+
 .proof video {
   display: block;
   width: 100%;
   height: auto;
   border-radius: var(--radius-md);
   background: #000;
+}
+
+/* O mesmo controle em pílula do hero, sobre o pôster. */
+.proof__play {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: 0 var(--space-5);
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.8);
+  transition: background-color var(--dur-quick) var(--ease-out);
+}
+
+.proof__play:hover {
+  background: #ff8a33;
+}
+
+.proof__play svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: currentColor;
 }
 
 .proof figcaption {
@@ -509,11 +595,11 @@
   fill: none;
   stroke: var(--orange);
   stroke-width: 2;
-  transition: d var(--dur-quick) var(--ease-out);
+  transition: d 800ms var(--ease-out);
 }
 
-.triage__row:hover .triage__shape path,
-.triage__row:focus-within .triage__shape path {
+/* O hexágono do logo vira o anel do túnel quando o caminho entra na tela. */
+.triage__row.is-ring .triage__shape path {
   d: path("M24 5 C30.79 5 37.06 8.62 40.45 14.5 C43.85 20.38 43.85 27.62 40.45 33.5 C37.06 39.38 30.79 43 24 43 C17.21 43 10.94 39.38 7.55 33.5 C4.15 27.62 4.15 20.38 7.55 14.5 C10.94 8.62 17.21 5 24 5 Z");
 }
 
@@ -529,19 +615,17 @@
   color: var(--on-dark-2);
 }
 
+/* Botão em cima e link embaixo, alinhados à direita: os três botões ficam na mesma coluna. */
 .triage__actions {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--space-3) var(--space-5);
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
 }
 
 .triage__channels {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2) var(--space-6);
   margin-top: var(--space-6);
+  color: var(--on-dark-2);
 }
 
 .triage__channels a {
@@ -549,13 +633,15 @@
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
-  color: var(--on-dark-2);
-  text-decoration: none;
-  transition: color var(--dur-quick) var(--ease-out);
+  color: var(--orange);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--dur-quick) var(--ease-out);
 }
 
 .triage__channels a:hover {
-  color: var(--on-dark);
+  text-decoration-color: currentColor;
 }
 
 .triage__channels svg {
@@ -634,14 +720,12 @@
     color: var(--on-dark);
   }
 
-  .lifecycle__inline-photo {
+  .lifecycle__badge {
+    position: relative;
     display: block;
-    width: 100%;
-    aspect-ratio: 4 / 3;
+    width: min(72vw, 18rem);
+    aspect-ratio: 1;
     margin-bottom: var(--space-5);
-    border-radius: var(--radius-md);
-    object-fit: cover;
-    background: var(--graphite-800);
   }
 
   .proof__grid {
@@ -665,7 +749,7 @@
 
   .triage__actions {
     grid-column: 1 / -1;
-    justify-content: flex-start;
+    align-items: flex-start;
   }
 }
 
@@ -705,8 +789,14 @@
   .showroom__plinth img,
   .triage__row,
   .triage__shape path,
-  .triage__channels a {
+  .triage__channels a,
+  .proof__play {
     transition: none;
+  }
+
+  /* Sem animação: o anel já aparece pronto. */
+  .triage__shape path {
+    d: path("M24 5 C30.79 5 37.06 8.62 40.45 14.5 C43.85 20.38 43.85 27.62 40.45 33.5 C37.06 39.38 30.79 43 24 43 C17.21 43 10.94 39.38 7.55 33.5 C4.15 27.62 4.15 20.38 7.55 14.5 C10.94 8.62 17.21 5 24 5 Z");
   }
 
   .showroom__link:hover .showroom__plinth img {

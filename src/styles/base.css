@@ -126,5 +126,4 @@ a {
 /* Espaço reservado enquanto o pacote da rota chega: evita salto de layout. */
 .route-loading {
   min-height: 100vh;
-  background: var(--graphite-950);
 }

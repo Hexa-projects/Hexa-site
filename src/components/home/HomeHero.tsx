@@ -1,23 +1,28 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Pause, Play } from "lucide-react";
 import { homeMedia } from "@/data/homeMedia";
-import { duration, ease, gsap, ScrollTrigger } from "@/lib/motion";
+import { duration, ease, gsap } from "@/lib/motion";
 import { useMotionScope } from "@/motion/useMotionScope";
 import { stageState } from "@/motion/stage/stageState";
+import { stageBox, stopStageTweens } from "@/motion/stage/align";
 import type { StageMode } from "@/motion/capability";
+import { heroClip } from "./heroClip";
 
 /** Raio inicial da abertura, em metades da menor dimensão da tela. */
 const APERTURE_START = 0.42;
-/** Raio final: passa da diagonal da tela, então o vídeo ocupa tudo. */
-const APERTURE_END = 2.2;
+/** Raio aberto: passa da diagonal da tela, então o vídeo ocupa tudo. */
+const APERTURE_OPEN = 2.2;
 /** Deslocamento inicial do anel para a direita, deixando a coluna de texto livre. */
 const CENTER_START = 0.2;
 
 const isNarrow = () => typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches;
 const prefersReduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/** H1: entrar no túnel. O anel abre com o scroll até o equipamento real ocupar a tela. */
+/**
+ * H1: entrar no túnel. O anel abre com o scroll até o equipamento real ocupar a tela
+ * e depois se fecha no centro, devolvendo o palco escuro para a seção seguinte.
+ */
 const HomeHero = ({ mode }: { mode: StageMode }) => {
   const root = useRef<HTMLElement>(null);
   const frame = useRef<HTMLDivElement>(null);
@@ -25,6 +30,8 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
   const video = useRef<HTMLVideoElement>(null);
   const copy = useRef<HTMLDivElement>(null);
   const title = useRef<HTMLHeadingElement>(null);
+  const pause = useRef<HTMLButtonElement>(null);
+  const userPaused = useRef(false);
   const [narrow] = useState(isNarrow);
   const [reduced] = useState(prefersReduced);
   const [playing, setPlaying] = useState(!reduced);
@@ -34,67 +41,88 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
     const element = video.current;
     if (!element) return;
     if (element.paused) {
-      void element.play();
-      setPlaying(true);
+      userPaused.current = false;
+      void element.play()?.catch(() => {});
     } else {
+      userPaused.current = true;
       element.pause();
-      setPlaying(false);
     }
   };
 
-  useMotionScope(
-    root,
-    ({ desktop, mobile }) => {
-      // O título sobe por trás de uma máscara, uma vez, no carregamento.
-      if (title.current && (desktop || mobile)) {
-        gsap.from(title.current, { clipPath: "inset(0 0 100% 0)", yPercent: 18, duration: duration.focal, ease: ease.out, delay: 0.1 });
-      }
+  // O loop só roda com o hero na tela; o rótulo do botão segue o estado real do vídeo.
+  useEffect(() => {
+    const element = video.current;
+    const box = frame.current;
+    if (!element || !box) return;
+    const sync = () => setPlaying(!element.paused);
+    element.addEventListener("play", sync);
+    element.addEventListener("pause", sync);
+    let observer: IntersectionObserver | undefined;
+    if (typeof IntersectionObserver !== "undefined") {
+      observer = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) element.pause();
+        else if (!reduced && !userPaused.current) void element.play()?.catch(() => {});
+      });
+      observer.observe(box);
+    }
+    return () => {
+      element.removeEventListener("play", sync);
+      element.removeEventListener("pause", sync);
+      observer?.disconnect();
+    };
+  }, [reduced]);
 
-      if (desktop && frame.current && figure.current && copy.current) {
-        const box = frame.current;
-        const state = { progress: 0, aperture: APERTURE_START, cx: CENTER_START };
-        const apply = () => {
-          const unit = 0.5 * Math.min(box.clientWidth, box.clientHeight);
-          // 3 px a menos que o anel, para a borda laranja do palco aparecer em volta do vídeo.
-          box.style.setProperty("--r", `${Math.max(0, state.aperture * unit - 3)}px`);
-          box.style.setProperty("--cx", `${50 + state.cx * 100}%`);
-          stageState.set({ progress: state.progress, aperture: state.aperture, center: [state.cx, 0], glow: 0.7, rings: 20 });
-        };
-        apply();
+  useMotionScope(root, ({ desktop, mobile }) => {
+    // O título sobe por trás de uma máscara, uma vez, no carregamento.
+    if (title.current && (desktop || mobile)) {
+      gsap.from(title.current, { clipPath: "inset(0 0 100% 0)", yPercent: 18, duration: duration.focal, ease: ease.out, delay: 0.1 });
+    }
 
-        const timeline = gsap.timeline({
-          defaults: { ease: "none" },
-          scrollTrigger: {
-            trigger: box,
-            start: "top top",
-            end: "+=130%",
-            pin: true,
-            scrub: 0.6,
-            onRefresh: apply,
-          },
-        });
-        timeline
-          .to(state, { progress: 1, aperture: APERTURE_END, cx: 0, duration: 1, ease: "power1.in", onUpdate: apply }, 0)
-          .to(copy.current, { xPercent: -8, autoAlpha: 0, duration: 0.35 }, 0.12);
+    if (desktop && frame.current && figure.current && copy.current) {
+      const box = frame.current;
+      const state = { progress: 0, aperture: APERTURE_START, cx: CENTER_START };
+      const apply = () => {
+        const viewport = stageBox();
+        const clip = heroClip({ aperture: state.aperture, cx: state.cx, viewportWidth: viewport.width, viewportHeight: viewport.height });
+        box.style.setProperty("--r", `${clip.radius}px`);
+        box.style.setProperty("--cx", `${clip.x}px`);
+        box.style.setProperty("--cy", `${clip.y}px`);
+        // Durante o pin o hero é o dono do palco: nenhuma transição de outra seção disputa.
+        stopStageTweens();
+        stageState.set({ progress: state.progress, aperture: state.aperture, center: [state.cx, 0], glow: 0.7, rings: 20 });
+      };
+      apply();
 
-        // Ao sair da abertura o anel some do centro; as seções seguintes o reposicionam.
-        ScrollTrigger.create({
+      const timeline = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
           trigger: box,
-          start: "bottom top",
-          onEnter: () => stageState.set({ aperture: 0 }),
-        });
-      }
+          start: "top top",
+          end: "+=200%",
+          pin: true,
+          scrub: 0.6,
+          onRefresh: apply,
+        },
+      });
+      timeline
+        // Abre: a câmera atravessa o túnel e o equipamento ocupa a tela.
+        .to(state, { progress: 1, aperture: APERTURE_OPEN, cx: 0, duration: 0.55, ease: "power1.in", onUpdate: apply }, 0)
+        // Opacidade (não visibility): os links continuam no Tab e reaparecem com foco (CSS :focus-within).
+        .to(copy.current, { opacity: 0, xPercent: -8, pointerEvents: "none", duration: 0.2 }, 0.06)
+        // Fecha: o vídeo volta para dentro do anel e o anel some no centro.
+        .to(state, { progress: 1.6, aperture: 0, duration: 0.3, ease: "power2.in", onUpdate: apply }, 0.7)
+        // Sem vídeo na tela, o controle de pausa sai junto.
+        .to(pause.current, { opacity: 0, pointerEvents: "none", duration: 0.12 }, 0.82);
+    }
 
-      if (mobile && figure.current) {
-        gsap.fromTo(
-          figure.current,
-          { "--a": 0.62 },
-          { "--a": 0.94, duration: 0.6, ease: ease.out, scrollTrigger: { trigger: figure.current, start: "top 80%", once: true } },
-        );
-      }
-    },
-    [mode],
-  );
+    if (mobile && figure.current) {
+      gsap.fromTo(
+        figure.current,
+        { "--a": 0.62 },
+        { "--a": 0.94, duration: 0.6, ease: ease.out, scrollTrigger: { trigger: figure.current, start: "top 80%", once: true } },
+      );
+    }
+  });
 
   return (
     <section ref={root} className="hero" aria-labelledby="hero-title" data-mode={mode}>
@@ -116,8 +144,8 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
             {media.webm && <source src={media.webm} type="video/webm" />}
             <source src={media.mp4} type="video/mp4" />
           </video>
-          <figcaption className="hero__credit">Esaote Magnifico Open</figcaption>
         </figure>
+        <p className="hero__credit">Esaote Magnifico Open</p>
 
         <div ref={copy} className="hero__copy">
           <h1 id="hero-title" ref={title} className="hero__title">
@@ -136,7 +164,7 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
           </div>
         </div>
 
-        <button type="button" className="hero__pause" onClick={toggleVideo}>
+        <button ref={pause} type="button" className="hero__pause" onClick={toggleVideo}>
           {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
           <span>{playing ? "Pausar vídeo" : "Tocar vídeo"}</span>
         </button>

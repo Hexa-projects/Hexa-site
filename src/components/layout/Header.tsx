@@ -36,6 +36,8 @@ const Header = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
+    // Ao recarregar no meio da página, o fundo já vem certo, sem esperar a primeira rolagem.
+    setScrolled(window.scrollY > 24);
     return () => {
       window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(frame);

@@ -240,13 +240,12 @@
 
 .site-footer__group ul {
   display: grid;
-  gap: var(--space-1);
 }
 
 .site-footer__group a {
   display: inline-flex;
   align-items: center;
-  min-height: 36px;
+  min-height: 44px;
   color: var(--on-dark-2);
   font-size: 0.9375rem;
   text-decoration: none;
@@ -260,8 +259,7 @@
 .site-footer__meta {
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: var(--space-6) var(--gutter) var(--space-7);
-  border-top: 1px solid var(--rule-dark);
+  padding: 0 var(--gutter) var(--space-7);
 }
 
 .site-footer__details,
@@ -273,8 +271,10 @@
   gap: var(--space-3) var(--space-5);
 }
 
+/* As duas linhas do rodapé têm a mesma largura: a da coluna de conteúdo. */
 .site-footer__details {
-  padding-bottom: var(--space-5);
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--rule-dark);
   color: var(--on-dark-2);
   font-size: 0.875rem;
 }
@@ -386,6 +386,10 @@
   }
 
   .mobile-navigation__heading a {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    min-height: 44px;
     color: inherit;
     text-decoration: none;
   }

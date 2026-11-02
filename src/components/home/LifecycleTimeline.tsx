@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import type { LifecycleStage } from "@/data/home";
 import { duration, ease, gsap, ScrollTrigger } from "@/lib/motion";
 import { useMotionScope } from "@/motion/useMotionScope";
-import { alignStageTo } from "@/motion/stage/align";
+import { stageCircleOf, stopStageTweens } from "@/motion/stage/align";
 import { stageState } from "@/motion/stage/stageState";
 import type { StageMode } from "@/motion/capability";
 
@@ -14,6 +14,48 @@ const vertex = (index: number) => {
   const angle = (-90 + index * 60) * (Math.PI / 180);
   return { x: 50 + RING_R * Math.cos(angle), y: 50 + RING_R * Math.sin(angle) };
 };
+
+/** Pontos de um hexágono pequeno (marcador de etapa) centrado em (x, y). */
+const hexagonPoints = (x: number, y: number, size: number) =>
+  Array.from({ length: 6 }, (_, k) => {
+    const a = (k * 60 - 90) * (Math.PI / 180);
+    return `${(x + size * Math.cos(a)).toFixed(2)},${(y + size * Math.sin(a)).toFixed(2)}`;
+  }).join(" ");
+
+/** Fração de aproximação por quadro do anel do palco até a foto (segue a coluna fixa). */
+const FOLLOW = 0.12;
+
+/** No celular: a foto da etapa dentro do anel, com os seis hexágonos e esta etapa marcada. */
+const StageBadge = ({ item, index, total }: { item: LifecycleStage; index: number; total: number }) => (
+  <div className="lifecycle__badge">
+    <svg className="lifecycle__badge-ring" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <circle className="lifecycle__ring-track" cx="50" cy="50" r={RING_R} />
+      <circle
+        className="lifecycle__badge-progress"
+        cx="50"
+        cy="50"
+        r={RING_R}
+        pathLength={total}
+        strokeDasharray={`${index + 1} ${total}`}
+        transform="rotate(-90 50 50)"
+      />
+      {Array.from({ length: total }, (_, k) => {
+        const { x, y } = vertex(k);
+        return <polygon key={k} className={`lifecycle__badge-node${k <= index ? " is-reached" : ""}`} points={hexagonPoints(x, y, 3)} />;
+      })}
+    </svg>
+    <img
+      className="lifecycle__badge-photo"
+      data-stage={item.id}
+      src={item.image.src}
+      width={item.image.width}
+      height={item.image.height}
+      alt={item.image.alt}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+);
 
 /**
  * H2: a vida inteira do equipamento. O texto rola normalmente (nada é escondido);
@@ -91,10 +133,33 @@ const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: Sta
         );
       }
 
-      // O anel do palco passa a contornar a foto desta seção.
+      // O anel do palco contorna a foto desta seção e a acompanha a cada quadro enquanto a seção
+      // está ativa (a coluna fixa só assenta depois da entrada; medir uma vez deixava o anel deslocado).
       if (desktop && mode === "immersive" && portal.current) {
-        const align = () => alignStageTo(portal.current!, { glow: 0.55, rings: 16 });
-        ScrollTrigger.create({ trigger: scope, start: "top 55%", end: "bottom 45%", onEnter: align, onEnterBack: align, onRefresh: (self) => self.isActive && align() });
+        const target = portal.current;
+        const follow = () => {
+          const goal = stageCircleOf(target);
+          const params = stageState.params;
+          params.center[0] += (goal.center[0] - params.center[0]) * FOLLOW;
+          params.center[1] += (goal.center[1] - params.center[1]) * FOLLOW;
+          params.aperture += (goal.aperture - params.aperture) * FOLLOW;
+          params.glow += (0.55 - params.glow) * FOLLOW;
+          params.rings += (16 - params.rings) * FOLLOW;
+        };
+        ScrollTrigger.create({
+          trigger: scope,
+          start: "top 55%",
+          end: "bottom 45%",
+          onToggle: (self) => {
+            if (self.isActive) {
+              stopStageTweens();
+              gsap.ticker.add(follow);
+            } else {
+              gsap.ticker.remove(follow);
+            }
+          },
+        });
+        return () => gsap.ticker.remove(follow);
       }
     },
     [mode],
@@ -117,10 +182,7 @@ const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: Sta
               <circle ref={progressRing} className="lifecycle__ring-progress" cx="50" cy="50" r={RING_R} transform="rotate(-90 50 50)" />
               {items.map((item, index) => {
                 const { x, y } = vertex(index);
-                const points = Array.from({ length: 6 }, (_, k) => {
-                  const a = (k * 60 - 90) * (Math.PI / 180);
-                  return `${(x + 2.2 * Math.cos(a)).toFixed(2)},${(y + 2.2 * Math.sin(a)).toFixed(2)}`;
-                }).join(" ");
+                const points = hexagonPoints(x, y, 2.2);
                 return <polygon key={item.id} className="lifecycle__marker" points={points} />;
               })}
             </svg>
@@ -144,18 +206,10 @@ const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: Sta
         </div>
 
         <ol ref={list} className="lifecycle__list">
-          {items.map((item) => (
+          {items.map((item, index) => (
             <li key={item.id}>
               <article className="lifecycle__stage" aria-labelledby={`etapa-${item.id}`}>
-                <img
-                  className="lifecycle__inline-photo"
-                  src={item.image.src}
-                  width={item.image.width}
-                  height={item.image.height}
-                  alt={item.image.alt}
-                  loading="lazy"
-                  decoding="async"
-                />
+                <StageBadge item={item} index={index} total={items.length} />
                 <h3 id={`etapa-${item.id}`}>{item.title}</h3>
                 <p>{item.body}</p>
                 <Link to={item.href} className="text-link">

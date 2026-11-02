@@ -13,6 +13,8 @@ export type StageParams = {
   pointer: [number, number];
   /** Deslocamento do centro do anel, em fração da tela. */
   center: [number, number];
+  /** Falso quando nada do palco aparece (home fora de vista ou vídeo cobrindo tudo): não desenha. */
+  visible: boolean;
 };
 
 const ORANGE: [number, number, number] = [0.973, 0.459, 0.09];
@@ -30,8 +32,15 @@ export const stageState = {
     tint: ORANGE,
     pointer: [-9999, -9999],
     center: [0, 0],
+    visible: true,
   } as StageParams,
   set(partial: Partial<StageParams>) {
-    Object.assign(this.params, partial);
+    const { center, ...rest } = partial;
+    Object.assign(this.params, rest);
+    // O array do centro é o mesmo objeto sempre: os tweens por índice continuam valendo.
+    if (center) {
+      this.params.center[0] = center[0];
+      this.params.center[1] = center[1];
+    }
   },
 };
