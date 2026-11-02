@@ -1,145 +1,163 @@
 import { Helmet } from "react-helmet-async";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import HeroSection from "@/components/sections/HeroSection";
-import SolutionCard from "@/components/sections/SolutionCard";
-import ServiceCard from "@/components/sections/ServiceCard";
-import DifferentialsGrid from "@/components/sections/DifferentialsGrid";
-import SegmentsGrid from "@/components/sections/SegmentsGrid";
-import TrustBlock from "@/components/sections/TrustBlock";
-import HexAIHighlight from "@/components/sections/HexAIHighlight";
-import BlogHighlight from "@/components/sections/BlogHighlight";
-import TestimonialsBlock from "@/components/sections/TestimonialsBlock";
-import ProductsCatalogSection from "@/components/sections/ProductsCatalogSection";
-import MetricsStrip from "@/components/sections/MetricsStrip";
-import CTABanner from "@/components/sections/CTABanner";
-import ContactForm from "@/components/sections/ContactForm";
-import { solutionCategories } from "@/data/solutions";
-import { services } from "@/data/services";
-import { hexaMedia } from "@/data/media";
+import { serviceStories } from "@/data/editorial";
+
+const featuredSolutions = [
+  {
+    title: "Ressonância magnética",
+    description: "Sistemas Esaote para diferentes perfis clínicos, estruturas e rotinas de exame.",
+    image: "/assets/esaote/g-scan-open.webp",
+    href: "/solucoes/ressonancia-magnetica",
+  },
+  {
+    title: "Inteligência para o diagnóstico",
+    description: "Soluções digitais que ampliam a leitura, a produtividade e a integração do serviço.",
+    image: "/assets/hexa/varredura-hexai-1024x576.webp",
+    href: "/solucoes/hexai",
+  },
+];
+
+const featuredLines = [
+  { label: "Bombas injetoras", href: "/solucoes/bombas-injetoras" },
+  { label: "Radiografia Mindray", href: "/solucoes/mindray" },
+  { label: "Área veterinária", href: "/solucoes/veterinario" },
+  { label: "Serviços técnicos", href: "/servicos" },
+];
 
 const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Hexamedical — Especialistas em Ressonância Magnética</title>
+        <title>Hexamedical — Tecnologia médica em operação</title>
         <meta
           name="description"
-          content="Soluções completas em Ressonância Magnética Esaote, serviços técnicos especializados e suporte com 16 anos de experiência. Cobertura nacional para clínicas, hospitais e centros de imagem."
+          content="Equipamentos, implementação e suporte especializado para serviços de diagnóstico por imagem. Da escolha da tecnologia à operação."
         />
       </Helmet>
 
-      <HeroSection
-        headline="A plataforma consultiva para sua operação de Ressonância Magnética"
-        subtitle="Projetos completos em RM Esaote, serviços técnicos especializados, HexAI e suporte nacional. Clareza técnica, previsibilidade operacional e ROI real para clínicas e hospitais."
-        ctaPrimaryLabel="Falar com Especialista"
-        ctaPrimaryHref="/contato"
-        ctaSecondaryLabel="Explorar soluções"
-        ctaSecondaryHref="/solucoes"
-        backgroundImage={hexaMedia.homeHero}
-      />
-
-      <MetricsStrip />
-
-      <section className="py-16 md:py-24">
-        <div className="container">
-          <div className="mb-12 text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-accent">NOSSOS PRODUTOS POR CATEGORIA</p>
-            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-              Soluções certas para cada realidade
-            </h2>
-            <p className="mx-auto max-w-2xl text-muted-foreground">
-              Do equipamento certo ao suporte técnico completo — estruturamos a solução ideal para sua operação.
-            </p>
+      <section className="home-hero" aria-labelledby="home-hero-title">
+        <div className="home-hero__content">
+          <p className="home-hero__eyebrow">Rede em operação</p>
+          <h1 id="home-hero-title" className="home-hero__title">
+            Tecnologia médica.<br />
+            Em operação.
+          </h1>
+          <p className="home-hero__copy">
+            Equipamentos, implementação e suporte especializado para serviços de diagnóstico que não podem parar.
+          </p>
+          <div className="home-hero__actions">
+            <Link to="/solucoes" className="home-hero__primary-action">
+              Encontrar a solução certa <ArrowRight aria-hidden="true" />
+            </Link>
+            <Link to="/empresa" className="home-hero__secondary-action">
+              Conhecer a Hexamedical <ArrowRight aria-hidden="true" />
+            </Link>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {solutionCategories.map((sol) => (
-              <SolutionCard
-                key={sol.slug}
-                title={sol.title}
-                description={sol.description}
-                href={`/solucoes/${sol.slug}`}
-                icon={sol.icon}
-                image={hexaMedia.solutions[sol.slug as keyof typeof hexaMedia.solutions]}
-              />
-            ))}
-          </div>
+        </div>
+        <div className="home-hero__media">
+          <img
+            src="/assets/plates/hero-clinical-photo.png"
+            alt="Equipe clínica operando o sistema de ressonância magnética Magnifico Open"
+            className="home-hero__image"
+          />
         </div>
       </section>
 
-      <section className="border-t border-border bg-muted/30 py-16 md:py-24">
-        <div className="container">
-          <div className="mb-12 text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-accent">SERVIÇOS CRÍTICOS</p>
-            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-              Tecnologia e expertise reunidas em um só lugar
-            </h2>
-            <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-              Manutenção, contratos e instalação com equipe certificada e laboratório próprio para máxima disponibilidade.
-            </p>
-          </div>
-          <div className="grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((svc) => (
-              <ServiceCard
-                key={svc.slug}
-                title={svc.title}
-                description={svc.description}
-                href={`/servicos/${svc.slug}`}
-                icon={svc.icon}
-                image={hexaMedia.services[svc.slug as keyof typeof hexaMedia.services]}
-              />
-            ))}
-          </div>
+      <nav className="home-evidence" aria-label="Áreas de atuação">
+        <Link to="/solucoes">Diagnóstico por imagem</Link>
+        <Link to="/solucoes/mindray">Radiografia digital</Link>
+        <Link to="/servicos">Suporte especializado</Link>
+      </nav>
+
+      <section className="home-journey" aria-labelledby="home-journey-title">
+        <div className="home-journey__heading">
+          <span aria-hidden="true" />
+          <h2 id="home-journey-title">Da escolha à operação.</h2>
+        </div>
+        <div className="home-journey__steps">
+          <article>
+            <h3>Escolha</h3>
+            <p>Orientação técnica para definir a solução adequada à realidade do serviço.</p>
+          </article>
+          <article>
+            <h3>Implemente</h3>
+            <p>Planejamento, instalação e preparação da operação com uma equipe especializada.</p>
+          </article>
+          <article>
+            <h3>Opere</h3>
+            <p>Suporte técnico e evolução contínua para manter a tecnologia disponível.</p>
+          </article>
         </div>
       </section>
 
-      <HexAIHighlight />
-      <ProductsCatalogSection />
-      <DifferentialsGrid />
-
-      <section className="border-t border-border bg-muted/30 py-16 md:py-24">
-        <div className="container">
-          <div className="mb-12 text-center">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.3em] text-accent">SEGMENTOS</p>
-            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-              Segmentos que atendemos
-            </h2>
-            <p className="mx-auto max-w-2xl text-muted-foreground">
-              Soluções dimensionadas para a realidade de cada tipo de instituição de saúde.
-            </p>
-          </div>
-          <SegmentsGrid />
+      <section className="home-solutions" aria-labelledby="home-solutions-title">
+        <div className="home-section-heading">
+          <h2 id="home-solutions-title">Soluções pensadas para a realidade da operação.</h2>
+          <p>Equipamentos e tecnologia digital conectados a uma leitura técnica do espaço, da rotina clínica e dos objetivos do serviço.</p>
         </div>
-      </section>
-
-      <TrustBlock />
-      <TestimonialsBlock />
-      <BlogHighlight />
-
-      <section className="bg-muted/50 py-16 md:py-24">
-        <div className="container">
-          <div className="grid items-start gap-12 lg:grid-cols-2">
-            <div>
-              <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-                Vamos conversar sobre sua operação?
-              </h2>
-              <p className="mb-6 text-lg text-muted-foreground">
-                Preencha o formulário e receba uma avaliação personalizada de um especialista Hexamedical. Sem compromisso.
-              </p>
-              <div className="space-y-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2"><div className="h-2 w-2 rounded-full bg-accent" />Resposta em até 24 horas úteis</div>
-                <div className="flex items-center gap-2"><div className="h-2 w-2 rounded-full bg-accent" />Avaliação técnica gratuita</div>
-                <div className="flex items-center gap-2"><div className="h-2 w-2 rounded-full bg-accent" />16 anos de experiência em equipamentos médicos</div>
-                <div className="flex items-center gap-2"><div className="h-2 w-2 rounded-full bg-accent" />Cobertura em todo o território nacional</div>
+        <div className="home-solutions__grid">
+          {featuredSolutions.map((solution) => (
+            <Link key={solution.title} to={solution.href} className="home-solution-feature">
+              <div className="home-solution-feature__media">
+                <img src={solution.image} alt="" loading="lazy" decoding="async" />
               </div>
-            </div>
-            <div className="rounded-xl border border-border bg-card p-6 shadow-sm md:p-8">
-              <ContactForm variant="compact" />
-            </div>
+              <div className="home-solution-feature__body">
+                <div>
+                  <h3>{solution.title}</h3>
+                  <p>{solution.description}</p>
+                </div>
+                <ArrowUpRight aria-hidden="true" />
+              </div>
+            </Link>
+          ))}
+        </div>
+        <Link to="/solucoes" className="home-text-link">Explorar todas as soluções <ArrowRight aria-hidden="true" /></Link>
+      </section>
+
+      <section className="home-operations" aria-labelledby="home-operations-title">
+        <div className="home-operations__media">
+          <img src="/assets/hexa/Reparo-de-Pecas-e-Eletronicas-foto.webp" alt="Reparo técnico de componente eletrônico em laboratório" loading="lazy" decoding="async" />
+        </div>
+        <div className="home-operations__content">
+          <h2 id="home-operations-title">A tecnologia entra em operação. Nosso trabalho continua.</h2>
+          <p className="home-operations__lead">Instalação, manutenção, contratos e laboratório técnico para acompanhar o equipamento ao longo de sua vida útil.</p>
+          <div className="home-service-list">
+            {Object.entries(serviceStories).map(([slug, service]) => (
+              <Link key={slug} to={`/servicos/${slug}`}>
+                <span>{service.title}</span>
+                <ArrowUpRight aria-hidden="true" />
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      <CTABanner />
+      <section className="home-segments" aria-labelledby="home-segments-title">
+        <div>
+          <h2 id="home-segments-title">Outras frentes da operação.</h2>
+          <p>Além da RM e da inteligência de imagem, explore as linhas e os serviços que completam o portfólio.</p>
+        </div>
+        <div className="home-segments__links">
+          {featuredLines.map((segment) => (
+            <Link key={segment.href} to={segment.href}>
+              {segment.label}<ArrowRight aria-hidden="true" />
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="home-contact" aria-labelledby="home-contact-title">
+        <div className="home-contact__intro">
+          <h2 id="home-contact-title">Vamos entender a sua operação?</h2>
+          <p>Compartilhe o contexto da sua instituição com a equipe comercial pelos canais oficiais.</p>
+          <Link to="/contato" className="home-contact__direct">Ver canais de contato <ArrowUpRight aria-hidden="true" /></Link>
+        </div>
+        <div className="home-contact__form">
+          <a className="ed-button" href="mailto:comercial@hexamedical.com.br">Enviar mensagem <ArrowUpRight aria-hidden="true" /></a>
+        </div>
+      </section>
     </Layout>
   );
 };

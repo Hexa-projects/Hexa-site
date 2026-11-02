@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin } from "lucide-react";
-import logoIcon from "@/assets/logo-icon.png";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 
 const footerLinks = [
   {
@@ -8,6 +7,7 @@ const footerLinks = [
     links: [
       { label: "Ressonância Magnética", href: "/solucoes/ressonancia-magnetica" },
       { label: "Bombas Injetoras", href: "/solucoes/bombas-injetoras" },
+      { label: "Radiografia Mindray", href: "/solucoes/mindray" },
       { label: "HexAI", href: "/solucoes/hexai" },
       { label: "Área Veterinária", href: "/solucoes/veterinario" },
     ],
@@ -19,7 +19,6 @@ const footerLinks = [
       { label: "Contratos", href: "/servicos/contratos" },
       { label: "Instalação", href: "/servicos/instalacao" },
       { label: "Reparo de Peças", href: "/servicos/reparo" },
-      { label: "Visita Técnica", href: "/servicos/visita-tecnica" },
     ],
   },
   {
@@ -35,50 +34,23 @@ const footerLinks = [
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border bg-dark-surface text-dark-surface-foreground">
-      <div className="container py-12 md:py-16">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
-          {/* Brand */}
-          <div className="lg:col-span-2">
-            <div className="mb-4 flex items-center gap-2">
-              <img src={logoIcon} alt="Hexamedical" className="h-10 w-10" />
-              <div className="flex flex-col leading-none">
-                <span className="text-base font-bold tracking-tight">HEXA<span className="text-primary-foreground/60">MEDICAL</span></span>
-                <span className="text-[9px] font-medium uppercase tracking-widest text-primary-foreground/50">Taking Care Your Equipment</span>
-              </div>
-            </div>
-            <p className="mb-6 max-w-sm text-sm text-dark-surface-foreground/70">
-              Especialistas em soluções de Ressonância Magnética, serviços técnicos e suporte de alta performance para instituições de saúde.
-            </p>
-            <div className="space-y-2 text-sm text-dark-surface-foreground/70">
-              <a href="tel:+551140028922" className="flex items-center gap-2 hover:text-primary">
-                <Phone className="h-4 w-4" /> (11) 4002-8922
-              </a>
-              <a href="mailto:contato@hexamedical.com.br" className="flex items-center gap-2 hover:text-primary">
-                <Mail className="h-4 w-4" /> contato@hexamedical.com.br
-              </a>
-              <div className="flex items-start gap-2">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
-                <span>São Paulo, SP — Cobertura Nacional</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Links */}
+    <footer className="site-footer">
+      <div className="site-footer__top">
+        <div className="site-footer__brand">
+          <img src="/assets/hexa/Logo-Hexamedical.png" alt="Hexamedical" />
+          <p>Tecnologia médica, implementação e suporte para serviços de diagnóstico que não podem parar.</p>
+          <Link to="/contato" className="site-footer__contact-link">
+            Falar com um especialista <ArrowUpRight aria-hidden="true" />
+          </Link>
+        </div>
+        <div className="site-footer__nav">
           {footerLinks.map((group) => (
-            <div key={group.title}>
-              <h4 className="mb-4 text-sm font-semibold uppercase tracking-wider text-primary">
-                {group.title}
-              </h4>
-              <ul className="space-y-2.5">
+            <div key={group.title} className="site-footer__group">
+              <h2>{group.title}</h2>
+              <ul>
                 {group.links.map((link) => (
                   <li key={link.href}>
-                    <Link
-                      to={link.href}
-                      className="text-sm text-dark-surface-foreground/70 transition-colors hover:text-primary"
-                    >
-                      {link.label}
-                    </Link>
+                    <Link to={link.href}>{link.label}</Link>
                   </li>
                 ))}
               </ul>
@@ -86,14 +58,17 @@ const Footer = () => {
           ))}
         </div>
       </div>
-
-      {/* Bottom bar */}
-      <div className="border-t border-dark-surface-foreground/10">
-        <div className="container flex flex-col items-center justify-between gap-4 py-6 text-xs text-dark-surface-foreground/50 sm:flex-row">
+      <div className="site-footer__meta">
+        <div className="site-footer__details">
+          <a href="tel:+5511973140914"><Phone aria-hidden="true" /> +55 11 97314-0914</a>
+          <a href="mailto:comercial@hexamedical.com.br"><Mail aria-hidden="true" /> comercial@hexamedical.com.br</a>
+          <a href="https://www.hexamedical.com.br/ouvidoria/" target="_blank" rel="noreferrer"><MapPin aria-hidden="true" /> Ouvidoria</a>
+        </div>
+        <div className="site-footer__legal">
           <p>© {new Date().getFullYear()} Hexamedical. Todos os direitos reservados.</p>
           <div className="flex gap-4">
-            <Link to="/politica-de-privacidade" className="hover:text-primary">Política de Privacidade</Link>
-            <Link to="/termos" className="hover:text-primary">Termos de Uso</Link>
+            <Link to="/politica-de-privacidade">Política de Privacidade</Link>
+            <Link to="/termos">Termos de Uso</Link>
           </div>
         </div>
       </div>

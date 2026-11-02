@@ -1,25 +1,6 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import PageBreadcrumb from "@/components/layout/PageBreadcrumb";
-import BlogHighlight from "@/components/sections/BlogHighlight";
-import CTABanner from "@/components/sections/CTABanner";
 
-const ConteudoHub = () => (
-  <Layout>
-    <Helmet>
-      <title>Conteúdo — Hexamedical</title>
-      <meta name="description" content="Blog, materiais de apoio e cases para apoiar decisões técnicas e comerciais." />
-    </Helmet>
-    <PageBreadcrumb items={[{ label: "Conteúdo" }]} />
-    <section className="py-16 md:py-24">
-      <div className="container">
-        <h1 className="mb-4 text-3xl font-bold md:text-4xl">Conteúdo técnico e comercial</h1>
-        <p className="mb-10 max-w-3xl text-muted-foreground">Acesse conteúdos para orientar implantação, operação e decisão de investimento em diagnóstico por imagem.</p>
-      </div>
-      <BlogHighlight />
-    </section>
-    <CTABanner />
-  </Layout>
-);
-
-export default ConteudoHub;
+export default function ConteudoHub() { return <Layout><Helmet><title>Conteúdo — Hexamedical</title></Helmet><section className="ed-intro"><div className="ed-shell"><span className="ed-eyebrow">Conteúdo</span><h1>Informação para escolher e operar melhor.</h1><p>Artigos e materiais técnicos ajudam a aprofundar o contexto de cada solução. O acervo completo está em processo de migração.</p></div></section><section className="ed-shell ed-commercial"><div className="ed-detail-grid"><article><span>01</span><h3>Blog</h3><p>Leia os artigos no site atual enquanto preservamos o conteúdo original e as URLs.</p><Link to="/blog" className="ed-text-link">Explorar <ArrowUpRight size={17} /></Link></article><article><span>02</span><h3>Materiais de apoio</h3><p>Solicite a ficha ou documento pertinente à solução de interesse.</p><Link to="/materiais" className="ed-text-link">Solicitar <ArrowUpRight size={17} /></Link></article></div></section></Layout>; }

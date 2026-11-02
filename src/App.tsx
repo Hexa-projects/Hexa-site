@@ -7,7 +7,8 @@ import { HelmetProvider } from "react-helmet-async";
 import Index from "./pages/Index";
 import SolucoesHub from "./pages/SolucoesHub";
 import ServicosHub from "./pages/ServicosHub";
-import SolutionPage from "./pages/SolutionPage";
+import ProductEditorialPage from "./pages/ProductEditorialPage";
+import WdmVetPage from "./pages/WdmVetPage";
 import ServicePage from "./pages/ServicePage";
 import Contato from "./pages/Contato";
 import SegmentPage from "./pages/SegmentPage";
@@ -37,8 +38,11 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/solucoes" element={<SolucoesHub />} />
+            <Route path="/solucoes/turbotom-1s-vet" element={<WdmVetPage slug="turbotom-1s-vet" />} />
+            <Route path="/solucoes/turbotom-1s-lite-vet" element={<WdmVetPage slug="turbotom-1s-lite-vet" />} />
+            <Route path="/solucoes/ispace-1-5t-vet" element={<WdmVetPage slug="ispace-1-5t-vet" />} />
             <Route path="/servicos" element={<ServicosHub />} />
-            <Route path="/solucoes/:slug" element={<SolutionPage />} />
+            <Route path="/solucoes/:slug" element={<ProductEditorialPage />} />
             <Route path="/servicos/:slug" element={<ServicePage />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/segmentos" element={<SegmentosHub />} />

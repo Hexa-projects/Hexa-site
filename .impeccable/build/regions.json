@@ -1,0 +1,16 @@
+{
+  "regions": [
+    { "id": "masthead", "kind": "chrome", "grid": "A0:J0", "note": "white navigation bar with brand, five links and one graphite CTA" },
+    { "id": "hero-eyebrow", "kind": "text", "grid": "A1:C1", "note": "small uppercase tracking label REDE EM OPERAÇÃO" },
+    { "id": "hero-headline", "kind": "text", "grid": "A2:E3", "note": "two-line bold editorial headline Tecnologia médica. Em operação." },
+    { "id": "hero-body", "kind": "text", "grid": "A4:D5", "note": "three-line supporting paragraph in muted graphite" },
+    { "id": "hero-primary-action", "kind": "control", "grid": "A5:C6", "note": "solid orange primary button" },
+    { "id": "hero-secondary-action", "kind": "control", "grid": "C5:E6", "note": "underlined text action" },
+    { "id": "hero-clinical-photo", "kind": "image", "grid": "F1:J6", "bleed": true, "note": "single large real clinical equipment photograph intentionally cropped flush at the bottom edge; implementation must use an existing source asset, not the generated comp plate" },
+    { "id": "evidence-diagnostic", "kind": "text", "grid": "A7:C7", "note": "Diagnóstico por imagem" },
+    { "id": "evidence-cardiology", "kind": "text", "grid": "D7:G7", "note": "Cardiologia digital" },
+    { "id": "evidence-support", "kind": "text", "grid": "H7:J7", "note": "Suporte especializado" },
+    { "id": "next-section-marker", "kind": "chrome", "grid": "A8:A8", "note": "short orange rule" },
+    { "id": "next-section-title", "kind": "text", "grid": "A9:E9", "note": "Da escolha à operação." }
+  ]
+}

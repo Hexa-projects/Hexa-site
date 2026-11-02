@@ -1,5 +1,9 @@
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import "./editorial.css";
+import "./editorial-models.css";
+import "./editorial-scenes.css";
+import "./wdm.css";
 
 createRoot(document.getElementById("root")!).render(<App />);
