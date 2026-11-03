@@ -5,9 +5,9 @@ import { homeMedia } from "@/data/homeMedia";
 import { duration, ease, gsap } from "@/lib/motion";
 import { useMotionScope } from "@/motion/useMotionScope";
 import { stageState } from "@/motion/stage/stageState";
-import { stageBox, stopStageTweens } from "@/motion/stage/align";
+import { circleToStage, stageBox, stopStageTweens } from "@/motion/stage/align";
 import type { StageMode } from "@/motion/capability";
-import { heroClip } from "./heroClip";
+import { bannerClip, heroClip } from "./heroClip";
 
 /** Raio inicial da abertura, em metades da menor dimensão da tela. */
 const APERTURE_START = 0.42;
@@ -115,15 +115,45 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
         .to(pause.current, { opacity: 0, pointerEvents: "none", duration: 0.12 }, 0.82);
     }
 
-    // No celular e no tablet o banner se abre uma vez a partir de uma moldura menor.
-    if (mobile && figure.current) {
+    // Celular e tablet, modo imersivo: a abertura fica presa um trecho curto; o vídeo começa num
+    // círculo e se abre até o banner, com o anel do palco abrindo junto, centrado no vídeo.
+    if (mobile && mode === "immersive" && frame.current && figure.current) {
+      const box = figure.current;
+      const state = { open: 0, progress: 0 };
+      const apply = () => {
+        const rect = box.getBoundingClientRect();
+        const clip = bannerClip({ width: rect.width, height: rect.height, open: state.open });
+        // gsap.set (não style direto): ao trocar de contexto (girar a tela, rebaixar), o GSAP desfaz o recorte.
+        gsap.set(box, { clipPath: clip.css });
+        stopStageTweens();
+        const { center, aperture } = circleToStage(rect.left + rect.width / 2, rect.top + rect.height / 2, clip.ring);
+        stageState.set({ progress: state.progress, aperture, center, glow: 0.7, rings: 20 });
+      };
+      apply();
+      gsap
+        .timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            trigger: frame.current,
+            start: "clamp(bottom bottom)",
+            end: "+=80%",
+            pin: true,
+            scrub: 0.6,
+            onRefresh: apply,
+            onUpdate: apply,
+          },
+        })
+        .to(state, { open: 1, progress: 1, duration: 0.75, ease: "power1.inOut", onUpdate: apply })
+        .to(state, { progress: 1.3, duration: 0.25, onUpdate: apply });
+    } else if (mobile && figure.current) {
+      // Modo leve: o banner se abre uma vez a partir de uma moldura menor.
       gsap.fromTo(
         figure.current,
         { clipPath: "inset(7% 7% round 14px)" },
         { clipPath: "inset(0% 0% round 14px)", duration: 0.6, ease: ease.out, scrollTrigger: { trigger: figure.current, start: "top 85%", once: true } },
       );
     }
-  });
+  }, [mode]);
 
   return (
     <section ref={root} className="hero" aria-labelledby="hero-title" data-mode={mode} data-header-theme="dark">

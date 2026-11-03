@@ -864,6 +864,29 @@
     display: none;
   }
 
+  /* Celular imersivo: o anel com a foto da etapa fica numa faixa fixa no topo, com o fundo da página,
+     e as etapas rolam por baixo dela. No modo leve continuam os emblemas por etapa. */
+  .home[data-stage="immersive"] .lifecycle__visual {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    margin-inline: calc(-1 * var(--gutter));
+    padding: var(--space-4) var(--gutter);
+    background: var(--mineral-50);
+    box-shadow: 0 1px 0 var(--rule-light);
+  }
+
+  .home[data-stage="immersive"] .lifecycle__sticky {
+    position: relative;
+    top: auto;
+    width: 11rem;
+  }
+
+  .home[data-stage="immersive"] .lifecycle__badge {
+    display: none;
+  }
+
   .lifecycle__stage {
     min-height: 0;
     padding-block: var(--space-6);

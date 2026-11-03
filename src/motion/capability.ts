@@ -21,11 +21,14 @@ export interface CapabilityInput {
   viewportWidth: number;
 }
 
-/** Spec 7.1: qualquer sinal de aparelho fraco ou preferência do visitante leva ao modo leve. */
-export function decideStageMode({ reducedMotion, saveData, webgl, cores, viewportWidth }: CapabilityInput): StageMode {
+/**
+ * Spec 7.1: qualquer sinal de aparelho fraco ou preferência do visitante leva ao modo leve.
+ * A largura da tela não conta: o celular tem a versão adaptada do modo imersivo
+ * (docs/superpowers/specs/2026-11-03-animacoes-mobile-design.md); a queda de quadros ainda rebaixa.
+ */
+export function decideStageMode({ reducedMotion, saveData, webgl, cores }: CapabilityInput): StageMode {
   if (reducedMotion || saveData || !webgl) return "light";
   if (cores !== undefined && cores < 4) return "light";
-  if (viewportWidth < 1024) return "light";
   return "immersive";
 }
 

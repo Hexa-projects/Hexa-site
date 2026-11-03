@@ -19,6 +19,7 @@ import "@/styles/home.css";
 
 const Index = () => {
   const [mode, setMode] = useState<StageMode>(detectStageMode);
+  const [wide] = useState(() => typeof window !== "undefined" && window.matchMedia("(min-width: 1024px)").matches);
   const downgrade = useCallback(() => setMode("light"), []);
   const home = useRef<HTMLDivElement>(null);
 
@@ -48,11 +49,12 @@ const Index = () => {
 
       <div ref={home} className="home" data-stage={mode}>
         <StageCanvas mode={mode} onDowngrade={downgrade} />
-        <SmoothScroll enabled={mode === "immersive"} />
+        {/* No toque a rolagem fica a nativa: o Lenis só entra no desktop imersivo. */}
+        <SmoothScroll enabled={mode === "immersive" && wide} />
         <HomeHero mode={mode} />
         <div className="home__light">
           <CompanyFacts items={companyFacts} />
-          <LifecycleTimeline items={lifecycle} />
+          <LifecycleTimeline items={lifecycle} mode={mode} />
           <Showroom items={showroom} />
           <ProofVideos ceo={homeMedia.ceo} testimonials={homeMedia.testimonials} />
           <ContactTriage items={triage} />

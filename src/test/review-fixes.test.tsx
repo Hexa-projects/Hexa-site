@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { tweenStage } from "@/motion/stage/align";
 import { stageState } from "@/motion/stage/stageState";
 import { shouldDowngrade } from "@/motion/capability";
-import { heroClip } from "@/components/home/heroClip";
+import { bannerClip, heroClip } from "@/components/home/heroClip";
 import RouteErrorBoundary from "@/components/RouteErrorBoundary";
 import Index from "@/pages/Index";
 
@@ -49,6 +49,32 @@ describe("abertura: círculo do vídeo no mesmo referencial do anel", () => {
     expect(clip.radius).toBeCloseTo(0.42 * 0.5 * 585 - 3, 5);
     expect(clip.x).toBeCloseTo(1280 * 0.7, 5);
     expect(clip.y).toBeCloseTo(585 / 2, 5);
+  });
+});
+
+describe("abertura no celular: o círculo vira banner", () => {
+  it("começa como um círculo centrado no banner, com 90% da altura", () => {
+    const clip = bannerClip({ width: 343, height: 193, open: 0 });
+    expect(clip.top).toBeCloseTo((193 - 0.9 * 193) / 2, 5);
+    expect(clip.side).toBeCloseTo((343 - 0.9 * 193) / 2, 5);
+    expect(clip.radius).toBeCloseTo((0.9 * 193) / 2, 5);
+    expect(clip.ring).toBeCloseTo((0.9 * 193) / 2, 5);
+  });
+
+  it("termina como o banner inteiro, com cantos de 14 px, e o anel passa da diagonal", () => {
+    const clip = bannerClip({ width: 343, height: 193, open: 1 });
+    expect([clip.top, clip.side, clip.radius]).toEqual([0, 0, 14]);
+    expect(clip.ring).toBeGreaterThan(Math.hypot(343, 193) / 2);
+    expect(clip.css).toBe("inset(0px 0px round 14px)");
+  });
+
+  it("no meio do caminho, interpola recorte, cantos e anel", () => {
+    const start = bannerClip({ width: 343, height: 193, open: 0 });
+    const end = bannerClip({ width: 343, height: 193, open: 1 });
+    const middle = bannerClip({ width: 343, height: 193, open: 0.5 });
+    expect(middle.side).toBeCloseTo(start.side / 2, 5);
+    expect(middle.radius).toBeCloseTo((start.radius + end.radius) / 2, 5);
+    expect(middle.ring).toBeCloseTo((start.ring + end.ring) / 2, 5);
   });
 });
 

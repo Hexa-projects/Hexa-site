@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import type { LifecycleStage } from "@/data/home";
 import { duration, ease, gsap, ScrollTrigger } from "@/lib/motion";
 import { useMotionScope } from "@/motion/useMotionScope";
+import type { StageMode } from "@/motion/capability";
 
 /** Vértices de um hexágono sobre o anel: uma etapa em cada vértice, a partir do topo. */
 const RING_R = 46;
@@ -55,15 +56,17 @@ const StageBadge = ({ item, index, total }: { item: LifecycleStage; index: numbe
  * H2: a vida inteira do equipamento. O texto rola normalmente (nada é escondido);
  * ao lado, um anel fixo com a foto de cada etapa revelada pela varredura.
  */
-const LifecycleTimeline = ({ items }: { items: LifecycleStage[] }) => {
+const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: StageMode }) => {
   const root = useRef<HTMLElement>(null);
   const list = useRef<HTMLOListElement>(null);
   const progressRing = useRef<SVGCircleElement>(null);
 
   useMotionScope(
     root,
-    ({ desktop, reduced }) => {
+    ({ desktop, mobile, reduced }) => {
       const scope = root.current!;
+      // No celular imersivo o anel fixo aparece no topo da seção (CSS) e segue a mesma cena do desktop.
+      const ringScene = desktop || (mobile && mode === "immersive");
       const photos = gsap.utils.toArray<HTMLElement>(".lifecycle__photo", scope);
       const markers = gsap.utils.toArray<SVGElement>(".lifecycle__marker", scope);
       const articles = gsap.utils.toArray<HTMLElement>(".lifecycle__stage", scope);
@@ -95,7 +98,7 @@ const LifecycleTimeline = ({ items }: { items: LifecycleStage[] }) => {
         }
       };
 
-      if (desktop || reduced) {
+      if (ringScene || reduced) {
         articles.forEach((article, index) => {
           ScrollTrigger.create({
             trigger: article,
@@ -108,7 +111,7 @@ const LifecycleTimeline = ({ items }: { items: LifecycleStage[] }) => {
         activate(0);
       }
 
-      if (desktop && progressRing.current && list.current) {
+      if (ringScene && progressRing.current && list.current) {
         gsap.fromTo(
           progressRing.current,
           { drawSVG: "0%" },
@@ -125,6 +128,7 @@ const LifecycleTimeline = ({ items }: { items: LifecycleStage[] }) => {
         );
       }
     },
+    [mode],
   );
 
   return (
