@@ -31,10 +31,10 @@ describe("layout", () => {
 });
 
 describe("cabeçalho e rodapé", () => {
-  it("na home, o cabeçalho fica sobre o palco com o logo claro", () => {
+  // O tema escuro do cabeçalho segue a abertura (src/test/home-light.test.tsx); aqui, só a posição.
+  it("na home, o cabeçalho flutua sobre a página", () => {
     const { container } = renderAt(<Layout><p>home</p></Layout>, "/");
-    expect(container.querySelector(".site-header")).toHaveClass("site-header--stage");
-    expect(screen.getAllByAltText("Hexamedical")[0]).toHaveAttribute("src", "/assets/brand/hexamedical-logo-light.webp");
+    expect(container.querySelector(".site-header")).toHaveClass("site-header--overlay");
   });
 
   it("nas páginas internas, o cabeçalho é o claro, com o logo original", () => {

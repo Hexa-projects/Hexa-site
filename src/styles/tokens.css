@@ -16,6 +16,8 @@
 
   --ink: #16191c;
   --ink-2: #4b535a;
+  /* Só para texto grande e traços (4,3:1 sobre mineral). */
+  --ink-3: #6b737a;
   --on-dark: #eef0ee;
   --on-dark-2: #a7afb5;
   --on-dark-3: #8a939a;

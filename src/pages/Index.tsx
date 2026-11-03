@@ -9,8 +9,9 @@ import LifecycleTimeline from "@/components/home/LifecycleTimeline";
 import Showroom from "@/components/home/Showroom";
 import ProofVideos from "@/components/home/ProofVideos";
 import ContactTriage from "@/components/home/ContactTriage";
+import CompanyFacts from "@/components/home/CompanyFacts";
 import { homeMedia } from "@/data/homeMedia";
-import { lifecycle, showroom, triage } from "@/data/home";
+import { companyFacts, lifecycle, showroom, triage } from "@/data/home";
 import { detectStageMode, type StageMode } from "@/motion/capability";
 import StageCanvas from "@/motion/stage/StageCanvas";
 import SmoothScroll from "@/motion/SmoothScroll";
@@ -21,23 +22,15 @@ const Index = () => {
   const downgrade = useCallback(() => setMode("light"), []);
   const home = useRef<HTMLDivElement>(null);
 
-  // O palco só desenha enquanto a home está na tela (no rodapé, nada dele aparece).
+  // O palco escuro existe só na abertura; as seções claras o cobrem, então ele para de desenhar.
   useGSAP(
     () => {
       stageState.set({ visible: true });
       ScrollTrigger.create({
-        trigger: home.current,
+        trigger: home.current?.querySelector(".hero"),
         start: "top bottom",
         end: "bottom top",
         onToggle: (self) => stageState.set({ visible: self.isActive }),
-      });
-      // O palco esmaece antes do rodapé: nenhum anel cortado pela borda dele.
-      ScrollTrigger.create({
-        trigger: home.current,
-        start: "bottom bottom",
-        end: "bottom 55%",
-        scrub: true,
-        onUpdate: (self) => home.current?.style.setProperty("--stage-fade", String(1 - self.progress)),
       });
     },
     { scope: home },
@@ -46,10 +39,10 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Hexamedical — do projeto da sala à última manutenção</title>
+        <title>Hexamedical — ressonância magnética, instalação e manutenção</title>
         <meta
           name="description"
-          content="Equipamentos de diagnóstico por imagem, instalação, manutenção e laboratório técnico em uma só operação, durante toda a vida do equipamento."
+          content="Ressonância magnética Esaote, projeto da sala, instalação, manutenção em todo o Brasil e laboratório próprio de eletrônica. Um parceiro técnico durante toda a vida do equipamento."
         />
       </Helmet>
 
@@ -57,10 +50,13 @@ const Index = () => {
         <StageCanvas mode={mode} onDowngrade={downgrade} />
         <SmoothScroll enabled={mode === "immersive"} />
         <HomeHero mode={mode} />
-        <LifecycleTimeline items={lifecycle} mode={mode} />
-        <Showroom items={showroom} mode={mode} />
-        <ProofVideos ceo={homeMedia.ceo} testimonials={homeMedia.testimonials} mode={mode} />
-        <ContactTriage items={triage} mode={mode} />
+        <div className="home__light">
+          <CompanyFacts items={companyFacts} />
+          <LifecycleTimeline items={lifecycle} />
+          <Showroom items={showroom} />
+          <ProofVideos ceo={homeMedia.ceo} testimonials={homeMedia.testimonials} />
+          <ContactTriage items={triage} />
+        </div>
       </div>
     </Layout>
   );

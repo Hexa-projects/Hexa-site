@@ -11,8 +11,10 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const header = useRef<HTMLElement>(null);
   const location = useLocation();
-  // Na home o cabeçalho fica sobre o palco grafite.
-  const onStage = location.pathname === "/";
+  // Na home o cabeçalho flutua sobre a página e só fica escuro enquanto a abertura grafite está por baixo dele.
+  const overlay = location.pathname === "/";
+  const [overDark, setOverDark] = useState(overlay);
+  const onStage = overlay && overDark;
 
   useEffect(() => {
     setMobileOpen(false);
@@ -23,11 +25,16 @@ const Header = () => {
   useEffect(() => {
     let last = window.scrollY;
     let frame = 0;
+    const darkUnderneath = () => {
+      const dark = document.querySelector<HTMLElement>('[data-header-theme="dark"]');
+      return dark ? dark.getBoundingClientRect().bottom > (header.current?.offsetHeight ?? 0) : false;
+    };
     const update = () => {
       frame = 0;
       const y = window.scrollY;
       const focusInside = header.current?.contains(document.activeElement) ?? false;
       setScrolled(y > 24);
+      setOverDark(darkUnderneath());
       if (Math.abs(y - last) < 6) return;
       setHidden(y > last && y > 160 && !mobileOpen && !focusInside);
       last = y;
@@ -38,6 +45,7 @@ const Header = () => {
     window.addEventListener("scroll", onScroll, { passive: true });
     // Ao recarregar no meio da página, o fundo já vem certo, sem esperar a primeira rolagem.
     setScrolled(window.scrollY > 24);
+    setOverDark(darkUnderneath());
     return () => {
       window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(frame);
@@ -47,7 +55,7 @@ const Header = () => {
   return (
     <header
       ref={header}
-      className={cn("site-header", onStage && "site-header--stage", scrolled && "is-scrolled", hidden && "is-hidden")}
+      className={cn("site-header", overlay && "site-header--overlay", onStage && "site-header--stage", scrolled && "is-scrolled", hidden && "is-hidden")}
       onFocusCapture={() => setHidden(false)}
     >
       <div className="site-header__inner">

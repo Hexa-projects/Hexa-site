@@ -3,16 +3,12 @@ import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { showroomFilters, type ShowroomFilter, type ShowroomItem } from "@/data/home";
 import type { Flip as FlipPlugin } from "gsap/Flip";
-import { duration, ease, gsap, loadFlip, ScrollTrigger } from "@/lib/motion";
-import { useMotionScope } from "@/motion/useMotionScope";
-import { tweenStage } from "@/motion/stage/align";
-import type { StageMode } from "@/motion/capability";
+import { duration, ease, gsap, loadFlip } from "@/lib/motion";
 
 const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-/** H3: o portfólio inteiro no palco, com filtro por modalidade. */
-const Showroom = ({ items, mode }: { items: ShowroomItem[]; mode: StageMode }) => {
-  const root = useRef<HTMLElement>(null);
+/** H3: o portfólio inteiro, com filtro por modalidade. */
+const Showroom = ({ items }: { items: ShowroomItem[] }) => {
   const grid = useRef<HTMLUListElement>(null);
   const flipState = useRef<ReturnType<typeof FlipPlugin.getState> | null>(null);
   const flip = useRef<typeof FlipPlugin | null>(null);
@@ -44,22 +40,14 @@ const Showroom = ({ items, mode }: { items: ShowroomItem[]; mode: StageMode }) =
     });
   }, [filter]);
 
-  useMotionScope(
-    root,
-    ({ desktop }) => {
-      if (desktop && mode === "immersive") {
-        const toBackdrop = () => tweenStage({ center: [0.36, 0.3], aperture: 0, glow: 0.25, rings: 12 });
-        ScrollTrigger.create({ trigger: root.current, start: "top 55%", end: "bottom 45%", onEnter: toBackdrop, onEnterBack: toBackdrop });
-      }
-    },
-    [mode],
-  );
-
   return (
-    <section ref={root} className="showroom" aria-labelledby="showroom-title">
+    <section className="showroom" aria-labelledby="showroom-title">
       <div className="showroom__head">
         <h2 id="showroom-title">Portfólio</h2>
-        <p>Ressonância, tomografia veterinária, radiografia digital, bombas injetoras e software. Cada linha tem página própria, com dados do fabricante.</p>
+        <p>
+          No centro, a ressonância aberta Esaote: sistemas de baixo consumo que cabem em salas compactas. Ao redor, as linhas veterinária, de
+          radiografia digital, de contraste e de software. Cada equipamento tem página própria, com os dados do fabricante.
+        </p>
       </div>
 
       <div className="showroom__filters" role="group" aria-label="Filtrar por modalidade" onPointerEnter={preloadFlip} onFocus={preloadFlip}>
@@ -84,6 +72,7 @@ const Showroom = ({ items, mode }: { items: ShowroomItem[]; mode: StageMode }) =
               </span>
               <span className="showroom__name">{item.name}</span>
               <span className="showroom__line">{item.line}</span>
+              {item.spec && <span className="showroom__spec">{item.spec}</span>}
               <span className="showroom__go">
                 {item.external ? "Página do equipamento" : "Ver equipamento"}
                 {item.external ? <ArrowUpRight aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}

@@ -4,9 +4,6 @@ import { ArrowRight } from "lucide-react";
 import type { LifecycleStage } from "@/data/home";
 import { duration, ease, gsap, ScrollTrigger } from "@/lib/motion";
 import { useMotionScope } from "@/motion/useMotionScope";
-import { stageCircleOf, stopStageTweens } from "@/motion/stage/align";
-import { stageState } from "@/motion/stage/stageState";
-import type { StageMode } from "@/motion/capability";
 
 /** Vértices de um hexágono sobre o anel: uma etapa em cada vértice, a partir do topo. */
 const RING_R = 46;
@@ -21,9 +18,6 @@ const hexagonPoints = (x: number, y: number, size: number) =>
     const a = (k * 60 - 90) * (Math.PI / 180);
     return `${(x + size * Math.cos(a)).toFixed(2)},${(y + size * Math.sin(a)).toFixed(2)}`;
   }).join(" ");
-
-/** Fração de aproximação por quadro do anel do palco até a foto (segue a coluna fixa). */
-const FOLLOW = 0.12;
 
 /** No celular: a foto da etapa dentro do anel, com os seis hexágonos e esta etapa marcada. */
 const StageBadge = ({ item, index, total }: { item: LifecycleStage; index: number; total: number }) => (
@@ -61,10 +55,9 @@ const StageBadge = ({ item, index, total }: { item: LifecycleStage; index: numbe
  * H2: a vida inteira do equipamento. O texto rola normalmente (nada é escondido);
  * ao lado, um anel fixo com a foto de cada etapa revelada pela varredura.
  */
-const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: StageMode }) => {
+const LifecycleTimeline = ({ items }: { items: LifecycleStage[] }) => {
   const root = useRef<HTMLElement>(null);
   const list = useRef<HTMLOListElement>(null);
-  const portal = useRef<HTMLDivElement>(null);
   const progressRing = useRef<SVGCircleElement>(null);
 
   useMotionScope(
@@ -127,42 +120,11 @@ const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: Sta
               start: "top 60%",
               end: "bottom 60%",
               scrub: true,
-              onUpdate: (self) => (stageState.params.progress = 1 + self.progress * 0.8),
             },
           },
         );
       }
-
-      // O anel do palco contorna a foto desta seção e a acompanha a cada quadro enquanto a seção
-      // está ativa (a coluna fixa só assenta depois da entrada; medir uma vez deixava o anel deslocado).
-      if (desktop && mode === "immersive" && portal.current) {
-        const target = portal.current;
-        const follow = () => {
-          const goal = stageCircleOf(target);
-          const params = stageState.params;
-          params.center[0] += (goal.center[0] - params.center[0]) * FOLLOW;
-          params.center[1] += (goal.center[1] - params.center[1]) * FOLLOW;
-          params.aperture += (goal.aperture - params.aperture) * FOLLOW;
-          params.glow += (0.55 - params.glow) * FOLLOW;
-          params.rings += (16 - params.rings) * FOLLOW;
-        };
-        ScrollTrigger.create({
-          trigger: scope,
-          start: "top 55%",
-          end: "bottom 45%",
-          onToggle: (self) => {
-            if (self.isActive) {
-              stopStageTweens();
-              gsap.ticker.add(follow);
-            } else {
-              gsap.ticker.remove(follow);
-            }
-          },
-        });
-        return () => gsap.ticker.remove(follow);
-      }
     },
-    [mode],
   );
 
   return (
@@ -170,7 +132,8 @@ const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: Sta
       <div className="lifecycle__intro">
         <h2 id="lifecycle-title">A vida inteira do equipamento</h2>
         <p>
-          Da escolha do sistema ao reparo de uma placa, a mesma empresa acompanha o equipamento em seis etapas.
+          Comprar, instalar e manter um equipamento de imagem costuma envolver vários fornecedores, e cada troca de mãos é um risco para a
+          agenda de exames. Aqui, a mesma equipe acompanha as seis etapas e conhece o que a anterior decidiu.
         </p>
       </div>
 
@@ -186,7 +149,7 @@ const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: Sta
                 return <polygon key={item.id} className="lifecycle__marker" points={points} />;
               })}
             </svg>
-            <div ref={portal} className="lifecycle__portal">
+            <div className="lifecycle__portal">
               {items.map((item) => (
                 <img
                   key={item.id}
@@ -212,6 +175,11 @@ const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: Sta
                 <StageBadge item={item} index={index} total={items.length} />
                 <h3 id={`etapa-${item.id}`}>{item.title}</h3>
                 <p>{item.body}</p>
+                <ul className="lifecycle__points">
+                  {item.points.map((point) => (
+                    <li key={point}>{point}</li>
+                  ))}
+                </ul>
                 <Link to={item.href} className="text-link">
                   {item.linkLabel} <ArrowRight aria-hidden="true" />
                 </Link>

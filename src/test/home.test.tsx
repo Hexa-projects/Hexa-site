@@ -29,6 +29,7 @@ describe("home", () => {
       .getAllByRole("heading", { level: 2 })
       .map((heading) => heading.textContent);
     expect(sectionTitles).toEqual([
+      "Uma operação técnica, não só um catálogo",
       "A vida inteira do equipamento",
       "Portfólio",
       "Quem responde pela Hexamedical",

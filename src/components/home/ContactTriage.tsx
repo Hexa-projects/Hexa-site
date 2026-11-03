@@ -2,10 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { lifecycle, whatsappHref, type TriagePath } from "@/data/home";
-import { ScrollTrigger } from "@/lib/motion";
-import { useMotionScope } from "@/motion/useMotionScope";
-import { tweenStage } from "@/motion/stage/align";
-import type { StageMode } from "@/motion/capability";
 
 /**
  * O hexágono do logo vira o anel do túnel quando cada caminho entra na tela (transição CSS de `d`).
@@ -27,7 +23,7 @@ const stageNode = (stage: TriagePath["stage"]) => {
 };
 
 /** H4: contato como triagem. Cada caminho já abre a conversa com o assunto certo. */
-const ContactTriage = ({ items, mode }: { items: TriagePath[]; mode: StageMode }) => {
+const ContactTriage = ({ items }: { items: TriagePath[] }) => {
   const root = useRef<HTMLElement>(null);
   const [ringed, setRinged] = useState<ReadonlySet<string>>(new Set());
 
@@ -52,23 +48,14 @@ const ContactTriage = ({ items, mode }: { items: TriagePath[]; mode: StageMode }
     return () => observer.disconnect();
   }, []);
 
-  useMotionScope(
-    root,
-    ({ desktop }) => {
-      if (desktop && mode === "immersive") {
-        // O anel volta a abrir atrás do título: o fim da história é a conversa.
-        const close = () => tweenStage({ center: [0.3, 0.22], aperture: 0.32, glow: 0.5, rings: 14, progress: 2.6 });
-        ScrollTrigger.create({ trigger: root.current, start: "top 60%", onEnter: close, onEnterBack: close });
-      }
-    },
-    [mode],
-  );
-
   return (
     <section ref={root} className="triage" aria-labelledby="triage-title">
       <div className="triage__head">
         <h2 id="triage-title">Como podemos ajudar?</h2>
-        <p>Escolha o caminho e a conversa já começa com o assunto certo, direto com a equipe comercial e técnica.</p>
+        <p>
+          Escolha o caminho e a conversa no WhatsApp já começa com o assunto certo, direto com a equipe comercial e técnica. Sem formulário
+          e sem fila de atendimento genérico.
+        </p>
       </div>
 
       <ul className="triage__list">

@@ -18,9 +18,13 @@
   transform: translateY(-100%);
 }
 
-.site-header--stage {
+/* Na home o cabeçalho flutua sobre a página o tempo todo: trocar de fixo para sticky depois da abertura empurraria o conteúdo. */
+.site-header--overlay {
   position: fixed;
   inset: 0 0 auto;
+}
+
+.site-header--stage {
   border-bottom-color: transparent;
   background: transparent;
   color: var(--on-dark);

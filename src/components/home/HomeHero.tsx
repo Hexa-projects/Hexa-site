@@ -21,7 +21,7 @@ const prefersReduced = () => typeof window !== "undefined" && window.matchMedia(
 
 /**
  * H1: entrar no túnel. O anel abre com o scroll até o equipamento real ocupar a tela
- * e depois se fecha no centro, devolvendo o palco escuro para a seção seguinte.
+ * e depois se fecha no centro; a home clara começa logo depois.
  */
 const HomeHero = ({ mode }: { mode: StageMode }) => {
   const root = useRef<HTMLElement>(null);
@@ -125,7 +125,7 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
   });
 
   return (
-    <section ref={root} className="hero" aria-labelledby="hero-title" data-mode={mode}>
+    <section ref={root} className="hero" aria-labelledby="hero-title" data-mode={mode} data-header-theme="dark">
       <div ref={frame} className="hero__frame">
         <figure ref={figure} className="hero__aperture">
           <video
@@ -152,7 +152,8 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
             Do projeto da sala à última manutenção.
           </h1>
           <p className="hero__lead">
-            Equipamentos de diagnóstico por imagem, instalação e suporte técnico especializado em uma só operação, durante toda a vida do equipamento.
+            Ressonância magnética Esaote, de tecnologia italiana, com projeto da sala, instalação, manutenção e laboratório próprio. Um só
+            parceiro técnico para clínicas, hospitais, universidades e centros veterinários em todo o Brasil.
           </p>
           <div className="hero__actions">
             <Link to="/solucoes" className="button button--primary">

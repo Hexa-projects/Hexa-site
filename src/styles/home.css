@@ -1,4 +1,5 @@
-/* Home: o palco grafite. O anel do túnel (canvas fixo) atravessa as seções por trás do conteúdo. */
+/* Home: a abertura acontece no palco grafite (canvas fixo por trás); todo o resto fica na superfície clara,
+   que cobre o palco ao subir sobre ele. */
 
 .home {
   position: relative;
@@ -7,6 +8,18 @@
   color: var(--on-dark);
   font-family: var(--font-body);
   overflow-x: clip;
+}
+
+.home__light {
+  position: relative;
+  background: var(--mineral-50);
+  color: var(--ink);
+}
+
+/* Sobre o claro, o laranja de sinal não tem contraste para o foco: usa a variante escura, sem o halo grafite. */
+.home__light :focus-visible {
+  outline-color: var(--orange-ink);
+  box-shadow: none;
 }
 
 .home h2,
@@ -64,7 +77,7 @@
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
-  color: var(--orange);
+  color: var(--orange-ink);
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: transparent;
@@ -219,8 +232,75 @@
   }
 }
 
+/* ---------- Quem é a Hexamedical ---------- */
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: end;
+}
+
+/* A linha do tempo já abre com o próprio respiro: sem somar dois espaços de seção. */
+.home__light > .about {
+  padding-bottom: var(--space-6);
+}
+
+.about__head p {
+  max-width: 52ch;
+  margin-top: var(--space-5);
+  color: var(--ink-2);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.about__head p + p {
+  margin-top: var(--space-4);
+}
+
+.about__head .text-link {
+  margin-top: var(--space-4);
+}
+
+.about__facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6) var(--space-5);
+  margin: 0;
+}
+
+.about__fact {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule-light);
+}
+
+/* O primeiro número leva o laranja: um só destaque, como no resto do sistema. */
+.about__fact:first-child {
+  border-top: 2px solid var(--orange);
+}
+
+.about__fact dt {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  /* Menor que --step-3: "5 unidades" cabe numa linha mesmo na coluna de 390 px. */
+  font-size: clamp(1.5rem, 1rem + 2.2vw, 2.5rem);
+  white-space: nowrap;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.about__fact dd {
+  max-width: 28ch;
+  margin: var(--space-2) 0 0;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
 /* ---------- H2: a vida inteira do equipamento ---------- */
 
+.about,
 .lifecycle,
 .showroom,
 .proof,
@@ -244,7 +324,7 @@
 .triage__head p {
   max-width: 52ch;
   margin-top: var(--space-5);
-  color: var(--on-dark-2);
+  color: var(--ink-2);
   font-size: var(--step-1);
   line-height: 1.45;
 }
@@ -272,7 +352,7 @@
 
 .lifecycle__ring-track {
   fill: none;
-  stroke: var(--rule-dark);
+  stroke: var(--rule-light);
   stroke-width: 0.25;
 }
 
@@ -283,8 +363,8 @@
 }
 
 .lifecycle__marker {
-  fill: var(--graphite-950);
-  stroke: var(--on-dark-3);
+  fill: var(--mineral-50);
+  stroke: var(--ink-3);
   stroke-width: 0.3;
   transition: fill var(--dur-base) var(--ease-out), stroke var(--dur-base) var(--ease-out);
 }
@@ -299,7 +379,7 @@
   inset: 9%;
   border-radius: 50%;
   overflow: hidden;
-  background: var(--graphite-800);
+  background: var(--mineral-100);
 }
 
 .lifecycle__photo {
@@ -338,7 +418,7 @@
 }
 
 .lifecycle__stage h3 {
-  color: var(--on-dark-3);
+  color: var(--ink-3);
   font-size: var(--step-3);
   font-weight: 620;
   line-height: 1.05;
@@ -348,9 +428,36 @@
 .lifecycle__stage p {
   max-width: 36ch;
   margin-top: var(--space-4);
-  color: var(--on-dark-2);
+  color: var(--ink-2);
   font-size: var(--step-1);
   line-height: 1.45;
+}
+
+.lifecycle__points {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 40ch;
+  margin: var(--space-5) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Marcador em hexágono, a forma do logo. */
+.lifecycle__points li {
+  position: relative;
+  padding-left: var(--space-5);
+  line-height: 1.4;
+}
+
+.lifecycle__points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.38em;
+  width: 0.62em;
+  height: 0.7em;
+  background: var(--orange);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 }
 
 .lifecycle__stage .text-link {
@@ -358,7 +465,7 @@
 }
 
 .lifecycle__stage.is-active h3 {
-  color: var(--on-dark);
+  color: var(--ink);
 }
 
 /* Emblema da etapa (celular): a foto no anel, com os seis hexágonos e a etapa marcada. */
@@ -379,8 +486,8 @@
 }
 
 .lifecycle__badge-node {
-  fill: var(--graphite-950);
-  stroke: var(--on-dark-3);
+  fill: var(--mineral-50);
+  stroke: var(--ink-3);
   stroke-width: 0.45;
 }
 
@@ -396,7 +503,7 @@
   height: 80%;
   border-radius: 50%;
   object-fit: cover;
-  background: var(--graphite-800);
+  background: var(--mineral-100);
 }
 
 /* ---------- H3: portfólio ---------- */
@@ -411,23 +518,23 @@
 .chip {
   min-height: 44px;
   padding: 0 var(--space-4);
-  border: 1px solid var(--rule-dark);
+  border: 1px solid var(--rule-light);
   border-radius: 999px;
-  color: var(--on-dark-2);
+  color: var(--ink-2);
   font: 600 0.9375rem / 1 var(--font-body);
   background: transparent;
   transition: color var(--dur-quick) var(--ease-out), background-color var(--dur-quick) var(--ease-out), border-color var(--dur-quick) var(--ease-out);
 }
 
 .chip:hover {
-  color: var(--on-dark);
-  border-color: var(--on-dark-3);
+  color: var(--ink);
+  border-color: var(--ink-3);
 }
 
 .chip[aria-pressed="true"] {
-  color: var(--ink);
-  background: var(--on-dark);
-  border-color: var(--on-dark);
+  color: var(--white);
+  background: var(--ink);
+  border-color: var(--ink);
 }
 
 .showroom__grid {
@@ -458,6 +565,8 @@
   overflow: hidden;
   border-radius: var(--radius-md);
   background: var(--white);
+  outline: 1px solid var(--rule-light);
+  outline-offset: -1px;
   transition: box-shadow var(--dur-base) var(--ease-out);
 }
 
@@ -480,7 +589,7 @@
 }
 
 .showroom__link:hover .showroom__plinth {
-  box-shadow: 0 22px 36px -22px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 22px 36px -22px rgba(22, 25, 28, 0.3);
 }
 
 .showroom__link:hover .showroom__plinth img {
@@ -497,14 +606,21 @@
 }
 
 .showroom__line {
-  color: var(--on-dark-2);
+  color: var(--ink-2);
+}
+
+.showroom__spec {
+  color: var(--ink);
+  font-size: var(--step--1);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 .showroom__go {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  color: var(--orange);
+  color: var(--orange-ink);
   font-size: var(--step--1);
   font-weight: 600;
 }
@@ -554,7 +670,7 @@
   background: var(--orange);
   color: var(--ink);
   font-weight: 600;
-  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 10px 24px -14px rgba(22, 25, 28, 0.45);
   transition: background-color var(--dur-quick) var(--ease-out);
 }
 
@@ -571,7 +687,7 @@
 .proof figcaption {
   max-width: 52ch;
   margin-top: var(--space-3);
-  color: var(--on-dark-2);
+  color: var(--ink-2);
 }
 
 /* ---------- H4: triagem ---------- */
@@ -590,14 +706,15 @@
   gap: var(--space-6);
   align-items: center;
   padding: var(--space-6);
+  border: 1px solid var(--rule-light);
   border-radius: var(--radius-md);
-  background: var(--graphite-900);
+  background: var(--white);
   transition: background-color var(--dur-base) var(--ease-out);
 }
 
 .triage__row:hover,
 .triage__row:focus-within {
-  background: var(--graphite-800);
+  background: var(--mineral-100);
 }
 
 .triage__shape {
@@ -625,7 +742,7 @@
 
 .triage__stage {
   margin-top: var(--space-2);
-  color: var(--on-dark-3);
+  color: var(--ink-3);
   font-size: var(--step--1);
 }
 
@@ -643,7 +760,7 @@
 .triage__copy p {
   max-width: 52ch;
   margin-top: var(--space-2);
-  color: var(--on-dark-2);
+  color: var(--ink-2);
 }
 
 /* Botão em cima e link embaixo, alinhados à direita: os três botões ficam na mesma coluna. */
@@ -656,7 +773,7 @@
 
 .triage__channels {
   margin-top: var(--space-6);
-  color: var(--on-dark-2);
+  color: var(--ink-2);
 }
 
 .triage__channels a {
@@ -664,7 +781,7 @@
   align-items: center;
   gap: var(--space-2);
   min-height: 44px;
-  color: var(--orange);
+  color: var(--orange-ink);
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: transparent;
@@ -725,11 +842,17 @@
     justify-self: center;
   }
 
+  .about,
   .lifecycle,
   .showroom,
   .proof,
   .triage {
     padding-block: var(--space-8);
+  }
+
+  .about {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-7);
   }
 
   .lifecycle__body {
@@ -748,7 +871,7 @@
   }
 
   .lifecycle__stage h3 {
-    color: var(--on-dark);
+    color: var(--ink);
   }
 
   .lifecycle__badge {
