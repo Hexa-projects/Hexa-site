@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Pause, Play } from "lucide-react";
 import { homeMedia } from "@/data/homeMedia";
-import { duration, ease, gsap } from "@/lib/motion";
+import { duration, ease, gsap, ScrollTrigger } from "@/lib/motion";
 import { useMotionScope } from "@/motion/useMotionScope";
 import { stageState } from "@/motion/stage/stageState";
 import { circleToStage, stageBox, stopStageTweens } from "@/motion/stage/align";
@@ -120,16 +120,30 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
     if (mobile && mode === "immersive" && frame.current && figure.current) {
       const box = figure.current;
       const state = { open: 0, progress: 0 };
-      const apply = () => {
-        const rect = box.getBoundingClientRect();
-        const clip = bannerClip({ width: rect.width, height: rect.height, open: state.open });
+      const clipFor = (rect: DOMRect) => bannerClip({ width: rect.width, height: rect.height, open: state.open });
+      // O recorte acompanha o elemento sozinho; basta atualizá-lo quando a abertura muda.
+      const applyClip = () => {
         // gsap.set (não style direto): ao trocar de contexto (girar a tela, rebaixar), o GSAP desfaz o recorte.
-        gsap.set(box, { clipPath: clip.css });
+        gsap.set(box, { clipPath: clipFor(box.getBoundingClientRect()).css });
+      };
+      // O anel do palco é fixo na tela e o vídeo rola antes e depois da trava: ele segue o vídeo a cada
+      // quadro enquanto a abertura está na tela (medir só durante a trava deixava o anel para trás).
+      const alignRing = () => {
+        const rect = box.getBoundingClientRect();
         stopStageTweens();
-        const { center, aperture } = circleToStage(rect.left + rect.width / 2, rect.top + rect.height / 2, clip.ring);
+        const { center, aperture } = circleToStage(rect.left + rect.width / 2, rect.top + rect.height / 2, clipFor(rect).ring);
         stageState.set({ progress: state.progress, aperture, center, glow: 0.7, rings: 20 });
       };
-      apply();
+      applyClip();
+      alignRing();
+      let following = false;
+      const follow = (on: boolean) => {
+        if (on === following) return;
+        following = on;
+        if (on) gsap.ticker.add(alignRing);
+        else gsap.ticker.remove(alignRing);
+      };
+      follow(true);
       gsap
         .timeline({
           defaults: { ease: "none" },
@@ -139,12 +153,15 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
             end: "+=80%",
             pin: true,
             scrub: 0.6,
-            onRefresh: apply,
-            onUpdate: apply,
+            onRefresh: applyClip,
           },
         })
-        .to(state, { open: 1, progress: 1, duration: 0.75, ease: "power1.inOut", onUpdate: apply })
-        .to(state, { progress: 1.3, duration: 0.25, onUpdate: apply });
+        .to(state, { open: 1, progress: 1, duration: 0.75, ease: "power1.inOut", onUpdate: applyClip })
+        .to(state, { progress: 1.3, duration: 0.25 });
+      // Criado depois da trava: no refresh, a seção já mede com o espaço que a trava acrescenta
+      // (criado antes, ele terminava cedo e o anel parava de seguir o vídeo depois da trava).
+      ScrollTrigger.create({ trigger: root.current, start: "top bottom", end: "bottom top", onToggle: (self) => follow(self.isActive) });
+      return () => gsap.ticker.remove(alignRing);
     } else if (mobile && figure.current) {
       // Modo leve: o banner se abre uma vez a partir de uma moldura menor.
       gsap.fromTo(
