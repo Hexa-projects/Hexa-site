@@ -115,11 +115,12 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
         .to(pause.current, { opacity: 0, pointerEvents: "none", duration: 0.12 }, 0.82);
     }
 
+    // No celular e no tablet o banner se abre uma vez a partir de uma moldura menor.
     if (mobile && figure.current) {
       gsap.fromTo(
         figure.current,
-        { "--a": 0.62 },
-        { "--a": 0.94, duration: 0.6, ease: ease.out, scrollTrigger: { trigger: figure.current, start: "top 80%", once: true } },
+        { clipPath: "inset(7% 7% round 14px)" },
+        { clipPath: "inset(0% 0% round 14px)", duration: 0.6, ease: ease.out, scrollTrigger: { trigger: figure.current, start: "top 85%", once: true } },
       );
     }
   });

@@ -4,7 +4,7 @@ Gerada por `scripts/build-home-media.sh` em 2026-11-02. Os arquivos de origem fo
 
 | Arquivo | Origem | Tratamento |
 |---|---|---|
-| `tunel-1280.mp4`, `tunel-1280.webm`, `tunel-720x900.mp4`, `tunel-poster*.webp` | `wp-content/uploads/2026/05/10213-web.mp4`: vídeo de fabricante do Esaote Magnifico Open, usado no hero do site oficial | Só trechos sem texto queimado (7,8–9,95 s e 16,8–19,6 s), com fusão de 0,4 s e sem áudio |
+| `tunel-1920.mp4`, `tunel-1920.webm`, `tunel-1280.mp4`, `tunel-1280.webm`, `tunel-poster*.webp` | `wp-content/uploads/2026/05/10213-web.mp4`: vídeo de fabricante do Esaote Magnifico Open, usado no hero do site oficial (1920 × 1080, 2,1 Mbps) | Só trechos sem texto queimado (7,8–9,95 s e 16,8–19,6 s), com fusão de 0,4 s e sem áudio; 1920 × 1080 no desktop e 1280 × 720 abaixo de 1024 px, sempre 16:9 |
 | `ceo-1280.mp4` | `wp-content/uploads/2026/04/V3-1920-x-1080-Horizontal-1.mp4`: entrevista do CEO publicada no site oficial | 1280×720; as legendas são as do original |
 | `ceo-poster.webp` | `wp-content/uploads/2026/04/capa-video-fabio-1.png`: capa oficial do vídeo | WebP |
 | `depoimentos-540x960.mp4`, `depoimentos-poster.webp` | `wp-content/uploads/2026/04/Hexamedical-Video-site-2.mp4`: depoimentos publicados no site oficial | Recorte da coluna vertical central; as legendas são as do original |

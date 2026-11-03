@@ -152,7 +152,7 @@ A home entra pelo anel da ressonância e depois acende a luz. A abertura acontec
 - **Rolagem suave**: Lenis (`lerp: 0.1`, `syncTouch: false`, âncoras ativas) só no modo imersivo. Não muda direção nem velocidade final.
 - **Tokens de movimento**: `--dur-instant` 120 ms (feedback), `--dur-quick` 240 ms (hover, troca de estado), `--dur-base` 450 ms (painéis, Flip, troca de cor de etapa), `duration.focal` 0,8 s (a cena autoral: título, varredura, transições do anel; existe só no JS). Curvas: `--ease-out` = `cubic-bezier(0.16, 1, 0.3, 1)` / `expo.out`; `--ease-in-out` = `cubic-bezier(0.45, 0, 0.55, 1)` / `power2.inOut`; scrub sempre linear.
 - **Três contextos fixos de `gsap.matchMedia`** (`MEDIA` em `src/lib/motion.ts`, aplicados por `useMotionScope`): `desktop` = min-width 1024 px sem redução; `mobile` = max-width 1023 px sem redução; `reduced` = `prefers-reduced-motion: reduce`. Cada cena declara as três versões; trocar de modo reverte a cena anterior (`revertOnUpdate`).
-- **Por cena**: hero fixado por 200% da altura com `scrub: 0.6` (desktop); no celular a abertura cresce uma vez de 0,62 para 0,94 do quadro. Título sobe por trás de máscara (`clip-path`), uma vez, em 0,8 s. Linha do tempo: texto rola livre, coluna do anel em `sticky`, anel de progresso desenhado com DrawSVG em scrub. Portfólio: Flip carregado sob demanda ao primeiro hover ou foco nos filtros. Com movimento reduzido, nada é fixado, o vídeo do hero não toca sozinho e a foto da etapa troca por opacidade em 0,2 s.
+- **Por cena**: hero fixado por 200% da altura com `scrub: 0.6` (desktop); no celular e no tablet o banner se abre uma vez de uma moldura 7% menor (`clip-path: inset()`) até o quadro inteiro. Título sobe por trás de máscara (`clip-path`), uma vez, em 0,8 s. Linha do tempo: texto rola livre, coluna do anel em `sticky`, anel de progresso desenhado com DrawSVG em scrub. Portfólio: Flip carregado sob demanda ao primeiro hover ou foco nos filtros. Com movimento reduzido, nada é fixado, o vídeo do hero não toca sozinho e a foto da etapa troca por opacidade em 0,2 s.
 
 ## Colors
 
@@ -197,7 +197,7 @@ Grafite só na abertura e no rodapé, mineral para toda a leitura (inclusive na 
 
 Coluna de conteúdo com `--content-max` 88rem e `--gutter` `clamp(1rem, 4vw, 3.5rem)`. Seções com `--space-9` (7rem) em cima e embaixo no desktop e `--space-8` abaixo de 1024 px. Cabeça de seção até 46rem; parágrafos até 52ch. Cabeçalho com 80 px (68 px abaixo de 1024 px).
 
-Pontos de quebra: 1024 px separa desktop de celular/tablet (mesmo corte do matchMedia e da decisão de modo); 640 px ajusta o celular pequeno. Abaixo de 1024 px nada é fixado e o conteúdo vem antes da imagem: o hero empilha texto, abertura circular (até 30rem), crédito e pausa; a coluna do anel some e cada etapa ganha seu emblema.
+Pontos de quebra: 1024 px separa desktop de celular/tablet (mesmo corte do matchMedia e da decisão de modo); 640 px ajusta o celular pequeno. Abaixo de 1024 px nada é fixado e o conteúdo vem antes da imagem: o hero empilha texto, o vídeo em banner 16:9 na largura do conteúdo (raio `md`), crédito e pausa; a coluna do anel some e cada etapa ganha seu emblema.
 
 Grades: linha do tempo `1.05fr / 1fr` com o anel `min(38vw, 36rem)`; portfólio `auto-fill` a partir de 16,5rem (duas colunas abaixo de 640 px); prova `1fr / 0.316fr`, a proporção que alinha o vídeo vertical ao horizontal; triagem `3.5rem | 1fr | auto`.
 

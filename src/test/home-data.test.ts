@@ -40,6 +40,16 @@ describe("mídia da home", () => {
     }
   });
 
+  it("a abertura usa o vídeo em banner 16:9 em qualquer tela, sem recorte vertical", () => {
+    for (const video of [homeMedia.tunnel.desktop, homeMedia.tunnel.mobile]) {
+      expect(video.width / video.height, video.mp4).toBeCloseTo(16 / 9, 3);
+    }
+  });
+
+  it("no desktop o vídeo da abertura tem a resolução da fonte (1920 × 1080)", () => {
+    expect([homeMedia.tunnel.desktop.width, homeMedia.tunnel.desktop.height]).toEqual([1920, 1080]);
+  });
+
   it("o vídeo do túnel cabe no orçamento de peso", () => {
     expect(fs.statSync(publicPath(homeMedia.tunnel.desktop.mp4)).size).toBeLessThanOrEqual(2_500_000);
     expect(fs.statSync(publicPath(homeMedia.tunnel.mobile.mp4)).size).toBeLessThanOrEqual(1_500_000);

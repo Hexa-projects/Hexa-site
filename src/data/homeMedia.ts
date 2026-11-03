@@ -15,19 +15,22 @@ export const homeMedia: {
   stages: Record<StageId, MediaImage>;
 } = {
   tunnel: {
+    // No desktop o vídeo chega a ocupar a tela inteira: vai na resolução da fonte.
     desktop: {
+      mp4: `${base}/tunel-1920.mp4`,
+      webm: `${base}/tunel-1920.webm`,
+      poster: `${base}/tunel-poster-1920.webp`,
+      width: 1920,
+      height: 1080,
+      label: "Sistema de ressonância magnética Esaote Magnifico Open em sala de exame",
+    },
+    // Abaixo de 1024 px o vídeo é um banner 16:9 na largura do conteúdo.
+    mobile: {
       mp4: `${base}/tunel-1280.mp4`,
       webm: `${base}/tunel-1280.webm`,
       poster: `${base}/tunel-poster.webp`,
       width: 1280,
       height: 720,
-      label: "Sistema de ressonância magnética Esaote Magnifico Open em sala de exame",
-    },
-    mobile: {
-      mp4: `${base}/tunel-720x900.mp4`,
-      poster: `${base}/tunel-poster-720x900.webp`,
-      width: 720,
-      height: 900,
       label: "Sistema de ressonância magnética Esaote Magnifico Open em sala de exame",
     },
   },

@@ -15,14 +15,18 @@ FF="ffmpeg -v error -y"
 TUNNEL_SRC="$SRC/10213-web.mp4"
 TUNNEL_FILTER="[0:v]trim=16.8:19.6,setpts=PTS-STARTPTS[a];[0:v]trim=7.8:9.95,setpts=PTS-STARTPTS[b];[a][b]xfade=transition=fade:duration=0.4:offset=2.4,format=yuv420p"
 
-$FF -i "$TUNNEL_SRC" -filter_complex "$TUNNEL_FILTER,scale=1280:720" -an \
-  -c:v libx264 -preset slow -crf 22 -profile:v high -movflags +faststart "$OUT/tunel-1280.mp4"
-$FF -i "$TUNNEL_SRC" -filter_complex "$TUNNEL_FILTER,scale=1280:720" -an \
-  -c:v libvpx-vp9 -b:v 0 -crf 31 -row-mt 1 "$OUT/tunel-1280.webm"
-$FF -i "$TUNNEL_SRC" -filter_complex "$TUNNEL_FILTER,crop=864:1080:528:0,scale=720:900" -an \
-  -c:v libx264 -preset slow -crf 24 -profile:v high -movflags +faststart "$OUT/tunel-720x900.mp4"
-$FF -ss 18 -i "$TUNNEL_SRC" -frames:v 1 -vf scale=1280:720 "$OUT/tunel-poster.png"
-$FF -ss 18 -i "$TUNNEL_SRC" -frames:v 1 -vf "crop=864:1080:528:0,scale=720:900" "$OUT/tunel-poster-720x900.png"
+# Sempre 16:9 (banner). No desktop o vídeo ocupa a tela inteira, então sai na resolução da fonte (1920 × 1080)
+# com taxa alta; abaixo de 1024 px, 1280 × 720. A fonte tem 2,1 Mbps: este é o teto de nitidez possível.
+$FF -i "$TUNNEL_SRC" -filter_complex "$TUNNEL_FILTER" -an \
+  -c:v libx264 -preset slower -crf 17 -tune film -profile:v high -movflags +faststart "$OUT/tunel-1920.mp4"
+$FF -i "$TUNNEL_SRC" -filter_complex "$TUNNEL_FILTER" -an \
+  -c:v libvpx-vp9 -b:v 0 -crf 24 -row-mt 1 "$OUT/tunel-1920.webm"
+$FF -i "$TUNNEL_SRC" -filter_complex "$TUNNEL_FILTER,scale=1280:720:flags=lanczos" -an \
+  -c:v libx264 -preset slower -crf 19 -tune film -profile:v high -movflags +faststart "$OUT/tunel-1280.mp4"
+$FF -i "$TUNNEL_SRC" -filter_complex "$TUNNEL_FILTER,scale=1280:720:flags=lanczos" -an \
+  -c:v libvpx-vp9 -b:v 0 -crf 27 -row-mt 1 "$OUT/tunel-1280.webm"
+$FF -ss 18 -i "$TUNNEL_SRC" -frames:v 1 "$OUT/tunel-poster-1920.png"
+$FF -ss 18 -i "$TUNNEL_SRC" -frames:v 1 -vf scale=1280:720:flags=lanczos "$OUT/tunel-poster.png"
 
 # CEO: vídeo institucional completo, com legendas já queimadas no original.
 $FF -i "$SRC/V3-1920-x-1080-Horizontal-1.mp4" -vf scale=1280:720 \
@@ -40,8 +44,8 @@ from PIL import Image
 
 out = Path("public/media/home")
 jobs = {
+    "tunel-poster-1920.webp": out / "tunel-poster-1920.png",
     "tunel-poster.webp": out / "tunel-poster.png",
-    "tunel-poster-720x900.webp": out / "tunel-poster-720x900.png",
     "depoimentos-poster.webp": out / "depoimentos-poster.png",
     "ceo-poster.webp": Path("media-src/oficial/capa-video-fabio-1.png"),
     "etapa-escolha.webp": Path("public/assets/hexa/Foto-Solucao-ideal-com-baixo-risco.png"),
@@ -52,8 +56,10 @@ jobs = {
 }
 for name, src in jobs.items():
     im = Image.open(src).convert("RGB")
-    if im.width > 1280:
-        im = im.resize((1280, round(im.height * 1280 / im.width)), Image.LANCZOS)
+    # O pôster do desktop acompanha o vídeo em tela cheia; o resto fica em até 1280 px.
+    cap = 1920 if name == "tunel-poster-1920.webp" else 1280
+    if im.width > cap:
+        im = im.resize((cap, round(im.height * cap / im.width)), Image.LANCZOS)
     im.save(out / name, "WEBP", quality=82, method=6)
     print(f"{name} {im.width}x{im.height} {(out / name).stat().st_size // 1024}k")
 # Showroom: fotos oficiais de produto achatadas sobre branco, no máximo 960 px.

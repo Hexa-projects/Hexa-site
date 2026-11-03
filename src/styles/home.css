@@ -812,17 +812,16 @@
     max-width: 40rem;
   }
 
+  /* Abaixo de 1024 px o vídeo é um banner 16:9 na largura do conteúdo; o anel que se abre fica no desktop. */
   .hero__aperture {
-    --a: 0.94;
     position: relative;
     inset: auto;
     order: 2;
     width: 100%;
-    max-width: 30rem;
-    aspect-ratio: 1;
-    margin-inline: auto;
-    container-type: inline-size;
-    clip-path: circle(calc(var(--a) * 50cqw) at 50% 50%);
+    aspect-ratio: 16 / 9;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    clip-path: none;
   }
 
   .hero__video {
@@ -832,14 +831,14 @@
   .hero__credit {
     position: static;
     order: 3;
+    margin-top: calc(-1 * var(--space-3));
     transform: none;
-    text-align: center;
   }
 
   .hero__pause {
     position: static;
     order: 4;
-    justify-self: center;
+    justify-self: start;
   }
 
   .about,
