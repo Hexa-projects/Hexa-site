@@ -41,7 +41,7 @@ const CTABanner = ({
             </Link>
           </Button>
           {secondaryLabel && secondaryHref && (
-            <Button asChild size="lg" variant="outline" className="border-dark-surface-foreground/30 text-dark-surface-foreground hover:bg-dark-surface-foreground/10">
+            <Button asChild size="lg" variant="inverseOutline">
               <Link to={secondaryHref}>
                 {secondaryLabel}
                 <ArrowRight className="ml-2 h-4 w-4" />

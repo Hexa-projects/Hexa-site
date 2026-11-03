@@ -1,116 +1,12 @@
-import { useParams, Navigate } from "react-router-dom";
+import { Navigate, Link, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import PageBreadcrumb from "@/components/layout/PageBreadcrumb";
-import HeroSection from "@/components/sections/HeroSection";
-import FAQSection from "@/components/sections/FAQSection";
-import CTABanner from "@/components/sections/CTABanner";
-import TrustBlock from "@/components/sections/TrustBlock";
-import { services } from "@/data/services";
-import { hexaMedia } from "@/data/media";
-import { CheckCircle2, MapPin, Users } from "lucide-react";
+import { serviceStories } from "@/data/editorial";
 
-const ServicePage = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const service = services.find((s) => s.slug === slug);
-
-  if (!service) return <Navigate to="/servicos" replace />;
-
-  return (
-    <Layout>
-      <Helmet>
-        <title>{service.title} — Hexamedical</title>
-        <meta name="description" content={service.description} />
-      </Helmet>
-
-      <PageBreadcrumb
-        items={[
-          { label: "Serviços", href: "/servicos" },
-          { label: service.title },
-        ]}
-      />
-
-      <HeroSection
-        headline={service.heroHeadline}
-        subtitle={service.heroSubtitle}
-        ctaPrimaryLabel="Solicitar Orçamento"
-        ctaSecondaryLabel="Falar com Especialista"
-        ctaSecondaryHref="/contato"
-        backgroundImage={hexaMedia.services[service.slug as keyof typeof hexaMedia.services]}
-      />
-
-      {/* Escopo do serviço */}
-      <section className="py-16 md:py-24">
-        <div className="container">
-          <h2 className="mb-10 text-center text-3xl font-bold text-foreground md:text-4xl">
-            O que inclui
-          </h2>
-          <div className="mx-auto max-w-2xl space-y-4">
-            {service.scope.map((item) => (
-              <div key={item} className="flex items-center gap-3 rounded-xl border border-border bg-card p-5">
-                <CheckCircle2 className="h-5 w-5 shrink-0 text-accent" />
-                <span className="text-foreground">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Cobertura Nacional */}
-      <section className="border-t border-border bg-muted/30 py-16 md:py-24">
-        <div className="container">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div>
-              <div className="mb-4 flex items-center gap-2">
-                <MapPin className="h-6 w-6 text-accent" />
-                <h2 className="text-3xl font-bold text-foreground md:text-4xl">
-                  Cobertura Nacional
-                </h2>
-              </div>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {service.coverage}
-              </p>
-            </div>
-            <div>
-              <div className="mb-4 flex items-center gap-2">
-                <Users className="h-6 w-6 text-accent" />
-                <h3 className="text-xl font-bold text-foreground">
-                  Equipe Certificada Internacionalmente
-                </h3>
-              </div>
-              <div className="mb-5 flex h-48 items-center justify-center rounded-xl border border-border bg-white p-4">
-                <img
-                  src={serviceHeroMedia[service.slug]}
-                  alt={service.title}
-                  className="max-h-full max-w-full object-contain"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <ul className="space-y-3">
-                {service.teamHighlights.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-foreground">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                    <span className="text-sm">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <TrustBlock />
-
-      <FAQSection items={service.faq} />
-
-      <CTABanner
-        headline={`Precisa de ${service.title.toLowerCase()}?`}
-        subtitle="Solicite um orçamento personalizado para sua instituição."
-        ctaLabel="Solicitar Orçamento"
-      />
-    </Layout>
-  );
-};
-
-export default ServicePage;
+export default function ServicePage() {
+  const { slug = "" } = useParams();
+  if (!(slug in serviceStories)) return <Navigate to="/servicos" replace />;
+  const item = serviceStories[slug as keyof typeof serviceStories];
+  return <Layout><Helmet><title>{item.title} — Hexamedical</title><meta name="description" content={item.intro} /></Helmet><section className="ed-product-hero"><div className="ed-shell ed-product-hero__inner"><div className="ed-product-hero__copy"><Link className="ed-back" to="/servicos">← Serviços</Link><span className="ed-eyebrow">Suporte técnico Hexamedical</span><h1>{item.title}</h1><p className="ed-lede">{item.headline}</p><p>{item.intro}</p><div className="ed-actions"><Link className="ed-button" to="/contato">Conversar sobre o serviço <ArrowUpRight size={19} /></Link><a className="ed-text-link" href={item.source} target="_blank" rel="noreferrer">Apresentação atual <ArrowUpRight size={18} /></a></div></div><div className="ed-product-hero__visual"><img src={item.image} alt={item.title} /></div></div></section><section className="ed-shell ed-commercial"><span className="ed-eyebrow">Escopo</span><h2>Começamos pela necessidade do equipamento.</h2><div className="ed-detail-grid">{item.work.map((step, index) => <article key={step}><span>0{index + 1}</span><h3>{step}</h3><p>O escopo, as condições e o cronograma são definidos conforme a avaliação técnica e a proposta para a sua operação.</p></article>)}</div></section><section className="ed-cta"><div className="ed-shell"><span className="ed-eyebrow">Próximo passo</span><h2>Conte o que sua operação precisa.</h2><p>Informe o equipamento e o contexto do atendimento para que a equipe avalie a solicitação.</p><Link className="ed-button" to="/contato">Falar com a equipe <ArrowUpRight size={19} /></Link></div></section></Layout>;
+}

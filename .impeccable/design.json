@@ -1,0 +1,621 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-02T00:00:00-03:00",
+  "title": "Design System: Hexamedical",
+  "extensions": {
+    "source": "src/styles/tokens.css, src/styles/chrome.css (--header-h), src/lib/motion.ts",
+    "cssTokens": {
+      "--graphite-950": "#0c0e10",
+      "--graphite-900": "#121518",
+      "--graphite-800": "#1b1f23",
+      "--graphite-700": "#2a2f34",
+      "--graphite-600": "#3d444a",
+      "--mineral-50": "#f2f3f1",
+      "--mineral-100": "#e6e8e5",
+      "--white": "#ffffff",
+      "--ink": "#16191c",
+      "--ink-2": "#4b535a",
+      "--on-dark": "#eef0ee",
+      "--on-dark-2": "#a7afb5",
+      "--on-dark-3": "#8a939a",
+      "--rule-dark": "rgba(238, 240, 238, 0.14)",
+      "--rule-light": "rgba(22, 25, 28, 0.14)",
+      "--orange": "#f87517",
+      "--orange-ink": "#a34800",
+      "--scan": "#e9f6ff",
+      "--font-display": "\"Archivo\", \"Source Sans 3\", system-ui, sans-serif",
+      "--font-body": "\"Source Sans 3\", system-ui, sans-serif",
+      "--display-stretch": "112%",
+      "--step--1": "0.875rem",
+      "--step-0": "1.0625rem",
+      "--step-1": "1.3125rem",
+      "--step-2": "clamp(1.5rem, 1.2rem + 1.1vw, 2rem)",
+      "--step-3": "clamp(2rem, 1.4rem + 2.4vw, 3.25rem)",
+      "--step-4": "clamp(2.5rem, 1.5rem + 4.4vw, 5rem)",
+      "--step-5": "clamp(2.75rem, 1.4rem + 6vw, 6rem)",
+      "--space-1": "0.25rem",
+      "--space-2": "0.5rem",
+      "--space-3": "0.75rem",
+      "--space-4": "1rem",
+      "--space-5": "1.5rem",
+      "--space-6": "2rem",
+      "--space-7": "3rem",
+      "--space-8": "4.5rem",
+      "--space-9": "7rem",
+      "--gutter": "clamp(1rem, 4vw, 3.5rem)",
+      "--content-max": "88rem",
+      "--radius-sm": "6px",
+      "--radius-md": "14px",
+      "--dur-instant": "120ms",
+      "--dur-quick": "240ms",
+      "--dur-base": "450ms",
+      "--ease-out": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "--ease-in-out": "cubic-bezier(0.45, 0, 0.55, 1)",
+      "--header-h": "80px (68px abaixo de 1024px; definido em chrome.css)",
+      "--stage-veil": "rgba(12, 14, 16, 0.92)",
+      "--orange-hover": "#ff8a33",
+      "--dur-focal": "800ms"
+    },
+    "contrast": [
+      {
+        "pair": "orange sobre graphite-950",
+        "ratio": "6.9:1",
+        "source": "tokens.css"
+      },
+      {
+        "pair": "graphite sobre orange",
+        "ratio": "6.3:1",
+        "source": "tokens.css"
+      },
+      {
+        "pair": "orange-ink sobre mineral-50",
+        "ratio": "5.4:1",
+        "source": "tokens.css"
+      },
+      {
+        "pair": "on-dark-2 sobre graphite-950",
+        "ratio": "8.7:1",
+        "source": "tokens.css"
+      },
+      {
+        "pair": "on-dark-3 sobre graphite-950",
+        "ratio": "6.2:1",
+        "source": "calculado na documentação"
+      }
+    ],
+    "colorMeta": {
+      "orange": {
+        "role": "primary",
+        "displayName": "Laranja de sinal",
+        "canonical": "#f87517",
+        "tonalRamp": [
+          "oklch(25% 0.07 47)",
+          "oklch(35% 0.10 47)",
+          "oklch(47% 0.13 47)",
+          "oklch(58% 0.17 47)",
+          "oklch(70.5% 0.19 47)",
+          "oklch(78% 0.15 52)",
+          "oklch(87% 0.09 55)",
+          "oklch(95% 0.03 60)"
+        ]
+      },
+      "orange-ink": {
+        "role": "primary",
+        "displayName": "Laranja tinta",
+        "canonical": "#a34800",
+        "tonalRamp": [
+          "oklch(25% 0.07 47)",
+          "oklch(35% 0.10 47)",
+          "oklch(47% 0.13 47)",
+          "oklch(58% 0.17 47)",
+          "oklch(70.5% 0.19 47)",
+          "oklch(78% 0.15 52)",
+          "oklch(87% 0.09 55)",
+          "oklch(95% 0.03 60)"
+        ]
+      },
+      "scan": {
+        "role": "tertiary",
+        "displayName": "Luz de varredura",
+        "canonical": "#e9f6ff",
+        "tonalRamp": [
+          "oklch(20% 0.02 235)",
+          "oklch(32% 0.03 235)",
+          "oklch(45% 0.035 235)",
+          "oklch(58% 0.035 235)",
+          "oklch(70% 0.03 235)",
+          "oklch(82% 0.025 235)",
+          "oklch(91% 0.02 235)",
+          "oklch(97% 0.015 235)"
+        ]
+      },
+      "graphite-950": {
+        "role": "neutral",
+        "displayName": "Grafite profundo (palco)",
+        "canonical": "#0c0e10",
+        "tonalRamp": [
+          "#0c0e10",
+          "#121518",
+          "#1b1f23",
+          "#2a2f34",
+          "#3d444a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#f2f3f1"
+        ]
+      },
+      "graphite-900": {
+        "role": "neutral",
+        "displayName": "Grafite 900 (rodapé, triagem)",
+        "canonical": "#121518",
+        "tonalRamp": [
+          "#0c0e10",
+          "#121518",
+          "#1b1f23",
+          "#2a2f34",
+          "#3d444a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#f2f3f1"
+        ]
+      },
+      "graphite-800": {
+        "role": "neutral",
+        "displayName": "Grafite 800 (mídia, hover)",
+        "canonical": "#1b1f23",
+        "tonalRamp": [
+          "#0c0e10",
+          "#121518",
+          "#1b1f23",
+          "#2a2f34",
+          "#3d444a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#f2f3f1"
+        ]
+      },
+      "graphite-700": {
+        "role": "neutral",
+        "displayName": "Grafite 700",
+        "canonical": "#2a2f34",
+        "tonalRamp": [
+          "#0c0e10",
+          "#121518",
+          "#1b1f23",
+          "#2a2f34",
+          "#3d444a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#f2f3f1"
+        ]
+      },
+      "graphite-600": {
+        "role": "neutral",
+        "displayName": "Grafite 600",
+        "canonical": "#3d444a",
+        "tonalRamp": [
+          "#0c0e10",
+          "#121518",
+          "#1b1f23",
+          "#2a2f34",
+          "#3d444a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#f2f3f1"
+        ]
+      },
+      "mineral-50": {
+        "role": "neutral",
+        "displayName": "Mineral (páginas claras)",
+        "canonical": "#f2f3f1",
+        "tonalRamp": [
+          "#0c0e10",
+          "#121518",
+          "#1b1f23",
+          "#2a2f34",
+          "#3d444a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#f2f3f1"
+        ]
+      },
+      "mineral-100": {
+        "role": "neutral",
+        "displayName": "Mineral 100",
+        "canonical": "#e6e8e5",
+        "tonalRamp": [
+          "#0c0e10",
+          "#121518",
+          "#1b1f23",
+          "#2a2f34",
+          "#3d444a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#f2f3f1"
+        ]
+      },
+      "white": {
+        "role": "neutral",
+        "displayName": "Base branca do equipamento",
+        "canonical": "#ffffff",
+        "tonalRamp": [
+          "#0c0e10",
+          "#121518",
+          "#1b1f23",
+          "#2a2f34",
+          "#3d444a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#ffffff"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "canonical": "#16191c",
+        "tonalRamp": [
+          "#0c0e10",
+          "#16191c",
+          "#2a2f34",
+          "#3d444a",
+          "#4b535a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#f2f3f1"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Tinta secundária",
+        "canonical": "#4b535a",
+        "tonalRamp": [
+          "#0c0e10",
+          "#16191c",
+          "#2a2f34",
+          "#3d444a",
+          "#4b535a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#f2f3f1"
+        ]
+      },
+      "on-dark": {
+        "role": "neutral",
+        "displayName": "Texto no escuro",
+        "canonical": "#eef0ee",
+        "tonalRamp": [
+          "#0c0e10",
+          "#1b1f23",
+          "#3d444a",
+          "#8a939a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#eef0ee",
+          "#f2f3f1"
+        ]
+      },
+      "on-dark-2": {
+        "role": "neutral",
+        "displayName": "Texto no escuro 2",
+        "canonical": "#a7afb5",
+        "tonalRamp": [
+          "#0c0e10",
+          "#1b1f23",
+          "#3d444a",
+          "#8a939a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#eef0ee",
+          "#f2f3f1"
+        ]
+      },
+      "on-dark-3": {
+        "role": "neutral",
+        "displayName": "Texto no escuro 3",
+        "canonical": "#8a939a",
+        "tonalRamp": [
+          "#0c0e10",
+          "#1b1f23",
+          "#3d444a",
+          "#8a939a",
+          "#a7afb5",
+          "#e6e8e5",
+          "#eef0ee",
+          "#f2f3f1"
+        ]
+      },
+      "rule-dark": {
+        "role": "neutral",
+        "displayName": "Fio no escuro",
+        "canonical": "rgba(238, 240, 238, 0.14)"
+      },
+      "rule-light": {
+        "role": "neutral",
+        "displayName": "Fio no claro",
+        "canonical": "rgba(22, 25, 28, 0.14)"
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Só o título do hero. Archivo 650 com font-stretch 112%, entrelinha 0.98."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "h2 de cada seção da home (--step-4), entrelinha 1.05."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Nome da etapa na linha do tempo (--step-3)."
+      },
+      "title-sm": {
+        "displayName": "Title pequeno",
+        "purpose": "Caminhos da triagem (--step-2)."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Texto de apoio do hero e das cabeças de seção (--step-1)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Corpo de texto (--step-0)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Botões: Source Sans 3 600, entrelinha 1."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Créditos, rótulo de etapa e chamada do ladrilho (--step--1)."
+      }
+    },
+    "shadows": [
+      {
+        "name": "equipment-floor",
+        "value": "0 22px 36px -22px rgba(0, 0, 0, 0.9)",
+        "purpose": "Piso sob a base branca do portfólio, só no hover."
+      },
+      {
+        "name": "pill-over-poster",
+        "value": "0 10px 24px -12px rgba(0, 0, 0, 0.8)",
+        "purpose": "Pílula Assistir sobre o pôster do vídeo."
+      },
+      {
+        "name": "nav-panel-light",
+        "value": "0 18px 40px rgba(17, 20, 22, 0.16)",
+        "purpose": "Painel da navegação nas páginas claras."
+      },
+      {
+        "name": "nav-panel-stage",
+        "value": "0 18px 40px rgba(0, 0, 0, 0.5)",
+        "purpose": "Painel da navegação no palco."
+      },
+      {
+        "name": "scan-glow",
+        "value": "0 0 14px 2px rgba(233, 246, 255, 0.55)",
+        "purpose": "Brilho da linha de varredura."
+      },
+      {
+        "name": "focus-ring",
+        "value": "outline: 2px solid var(--orange); outline-offset: 3px; box-shadow: 0 0 0 5px var(--graphite-950)",
+        "purpose": "Anel de foco global (:focus-visible)."
+      }
+    ],
+    "motion": [
+      {
+        "name": "dur-instant",
+        "value": "120ms",
+        "js": "duration.instant = 0.12",
+        "purpose": "Feedback de clique e foco."
+      },
+      {
+        "name": "dur-quick",
+        "value": "240ms",
+        "js": "duration.quick = 0.24",
+        "purpose": "Hover e troca de estado; esconder o cabeçalho."
+      },
+      {
+        "name": "dur-base",
+        "value": "450ms",
+        "js": "duration.base = 0.45",
+        "purpose": "Painéis, Flip do portfólio, cor das etapas e da triagem."
+      },
+      {
+        "name": "dur-focal",
+        "value": "800ms",
+        "js": "duration.focal = 0.8",
+        "purpose": "A cena autoral: título, varredura, transições do anel. Sem variável CSS correspondente."
+      },
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "js": "ease.out = expo.out",
+        "purpose": "Chegadas."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.45, 0, 0.55, 1)",
+        "js": "ease.inOut = power2.inOut",
+        "purpose": "Câmera, máscara e varredura."
+      },
+      {
+        "name": "ease-scan",
+        "value": "linear",
+        "js": "ease.scan = none",
+        "purpose": "Scrub de scroll (declarado; os scrubs usam 'none' direto)."
+      },
+      {
+        "name": "ease-exit",
+        "value": "power2.in",
+        "js": "ease.exit = power2.in",
+        "purpose": "Saídas (declarado, sem uso hoje)."
+      },
+      {
+        "name": "stagger",
+        "value": "list 0.06s, max 0.4s",
+        "js": "stagger",
+        "purpose": "Listas (declarado, sem uso hoje)."
+      },
+      {
+        "name": "media-desktop",
+        "value": "(min-width: 1024px) and (prefers-reduced-motion: no-preference)",
+        "purpose": "Contexto matchMedia desktop."
+      },
+      {
+        "name": "media-mobile",
+        "value": "(max-width: 1023px) and (prefers-reduced-motion: no-preference)",
+        "purpose": "Contexto matchMedia celular/tablet."
+      },
+      {
+        "name": "media-reduced",
+        "value": "(prefers-reduced-motion: reduce)",
+        "purpose": "Contexto matchMedia movimento reduzido."
+      },
+      {
+        "name": "hero-pin",
+        "value": "pin, end +=200%, scrub 0.6; abertura 0.42 → 2.2 → 0",
+        "purpose": "Entrar no túnel (desktop)."
+      },
+      {
+        "name": "stage-mode",
+        "value": "light se reduced-motion, Save-Data, sem WebGL, < 4 núcleos, viewport < 1024px, ou 2 janelas de 1s < 45 fps",
+        "purpose": "Imersivo vs leve (src/motion/capability.ts)."
+      },
+      {
+        "name": "stage-gpu",
+        "value": "DPR máx. 1.5; não desenha com aba oculta, home fora de vista ou abertura > 2.05",
+        "purpose": "Orçamento do palco WebGL."
+      },
+      {
+        "name": "lenis",
+        "value": "lerp 0.1, syncTouch false, anchors true; só no modo imersivo",
+        "purpose": "Rolagem suave sem sequestro."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile-max",
+        "value": "1023px"
+      },
+      {
+        "name": "desktop",
+        "value": "1024px"
+      },
+      {
+        "name": "small-max",
+        "value": "639px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botão primário",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação principal: laranja com texto tinta, 48px.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Encontrar a solução certa <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2, 0.5rem); min-height: 48px; padding: 0 var(--space-5, 1.5rem); border-radius: var(--radius-sm, 6px); background: var(--orange, #f87517); color: var(--ink, #16191c); font: 600 1.0625rem/1 'Source Sans 3', system-ui, sans-serif; text-decoration: none; transition: background-color 240ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary svg { width: 1.1em; height: 1.1em; transition: transform 240ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-primary:hover { background: #ff8a33; } .ds-btn-primary:hover svg { transform: translateX(3px); } .ds-btn-primary:focus-visible { outline: 2px solid #f87517; outline-offset: 3px; box-shadow: 0 0 0 5px #0c0e10; }"
+    },
+    {
+      "name": "Botão discreto",
+      "kind": "button",
+      "refersTo": "button-quiet",
+      "description": "Ação secundária no palco: contorno em currentColor.",
+      "html": "<div style=\"background:#0c0e10;padding:24px\"><a class=\"ds-btn-quiet\" href=\"#\">Falar com especialista</a></div>",
+      "css": ".ds-btn-quiet { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 1.5rem; border: 1px solid currentColor; border-radius: 6px; color: #eef0ee; font: 600 1.0625rem/1 'Source Sans 3', system-ui, sans-serif; text-decoration: none; transition: background-color 240ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-btn-quiet:hover { background: rgba(238, 240, 238, 0.08); } .ds-btn-quiet:focus-visible { outline: 2px solid #f87517; outline-offset: 3px; box-shadow: 0 0 0 5px #0c0e10; }"
+    },
+    {
+      "name": "Chip de filtro",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Filtro do portfólio em pílula; aria-pressed marca o ativo.",
+      "html": "<div style=\"background:#0c0e10;padding:24px;display:flex;gap:8px\"><button class=\"ds-chip\" aria-pressed=\"true\">Todos</button><button class=\"ds-chip\" aria-pressed=\"false\">Ressonância</button></div>",
+      "css": ".ds-chip { min-height: 44px; padding: 0 1rem; border: 1px solid rgba(238, 240, 238, 0.14); border-radius: 999px; background: transparent; color: #a7afb5; font: 600 0.9375rem/1 'Source Sans 3', system-ui, sans-serif; cursor: pointer; transition: color 240ms cubic-bezier(0.16, 1, 0.3, 1), background-color 240ms cubic-bezier(0.16, 1, 0.3, 1), border-color 240ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-chip:hover { color: #eef0ee; border-color: #8a939a; } .ds-chip[aria-pressed=\"true\"] { color: #16191c; background: #eef0ee; border-color: #eef0ee; } .ds-chip:focus-visible { outline: 2px solid #f87517; outline-offset: 3px; box-shadow: 0 0 0 5px #0c0e10; }"
+    },
+    {
+      "name": "Ladrilho do portfólio",
+      "kind": "card",
+      "refersTo": "showroom-plinth",
+      "description": "Equipamento inteiro sobre base branca 4:3; a variante fill cobre o ladrilho com foto de cena.",
+      "html": "<div style=\"background:#0c0e10;padding:24px;max-width:320px\"><a class=\"ds-tile\" href=\"#\"><span class=\"ds-tile__plinth\"><span class=\"ds-tile__img\"></span></span><span class=\"ds-tile__name\">S-scan Open</span><span class=\"ds-tile__line\">Ressonância musculoesquelética</span><span class=\"ds-tile__go\">Ver equipamento →</span></a></div>",
+      "css": ".ds-tile { display: grid; gap: 0.5rem; color: #eef0ee; text-decoration: none; border-radius: 14px; } .ds-tile__plinth { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px; background: #ffffff; transition: box-shadow 450ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-tile__img { position: absolute; inset: 1.5rem; background: linear-gradient(#d9dcdf, #b9bec2); border-radius: 40% 40% 6px 6px; transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-tile:hover .ds-tile__plinth { box-shadow: 0 22px 36px -22px rgba(0, 0, 0, 0.9); } .ds-tile:hover .ds-tile__img { transform: scale(1.035); } .ds-tile__name { margin-top: 0.75rem; font: 620 1.3125rem/1.2 'Archivo', 'Source Sans 3', sans-serif; font-stretch: 112%; letter-spacing: -0.02em; } .ds-tile__line { color: #a7afb5; font-family: 'Source Sans 3', sans-serif; } .ds-tile__go { color: #f87517; font: 600 0.875rem 'Source Sans 3', sans-serif; } .ds-tile:focus-visible { outline: 2px solid #f87517; outline-offset: 3px; box-shadow: 0 0 0 5px #0c0e10; }"
+    },
+    {
+      "name": "Linha da triagem",
+      "kind": "custom",
+      "refersTo": "triage-row",
+      "description": "Caminho de contato: hexágono que vira anel (no build, uma vez ao entrar na tela; nesta amostra, no hover), texto e WhatsApp com o assunto certo.",
+      "html": "<div class=\"ds-triage\"><svg class=\"ds-triage__shape\" viewBox=\"0 0 48 48\" aria-hidden=\"true\"><path d=\"M24 5 C29.48 8.17 34.97 11.33 40.45 14.5 C40.45 20.83 40.45 27.17 40.45 33.5 C34.97 36.67 29.48 39.83 24 43 C18.52 39.83 13.03 36.67 7.55 33.5 C7.55 27.17 7.55 20.83 7.55 14.5 C13.03 11.33 18.52 8.17 24 5 Z\"/></svg><div><h3 class=\"ds-triage__title\">Manter</h3><p class=\"ds-triage__body\">Contrato e manutenção preventiva.</p></div><a class=\"ds-triage__cta\" href=\"#\">Conversar pelo WhatsApp</a></div>",
+      "css": ".ds-triage { display: grid; grid-template-columns: 3.5rem minmax(0, 1fr) auto; gap: 2rem; align-items: center; padding: 2rem; border-radius: 14px; background: #121518; color: #eef0ee; transition: background-color 450ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-triage:hover, .ds-triage:focus-within { background: #1b1f23; } .ds-triage__shape { width: 3.5rem; height: 3.5rem; } .ds-triage__shape path { fill: none; stroke: #f87517; stroke-width: 2; transition: d 800ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-triage:hover .ds-triage__shape path { d: path('M24 5 C30.79 5 37.06 8.62 40.45 14.5 C43.85 20.38 43.85 27.62 40.45 33.5 C37.06 39.38 30.79 43 24 43 C17.21 43 10.94 39.38 7.55 33.5 C4.15 27.62 4.15 20.38 7.55 14.5 C10.94 8.62 17.21 5 24 5 Z'); } .ds-triage__title { margin: 0; font: 620 clamp(1.5rem, 1.2rem + 1.1vw, 2rem)/1.1 'Archivo', sans-serif; font-stretch: 112%; letter-spacing: -0.025em; } .ds-triage__body { margin: 0.5rem 0 0; color: #a7afb5; font-family: 'Source Sans 3', sans-serif; } .ds-triage__cta { display: inline-flex; align-items: center; min-height: 48px; padding: 0 1.5rem; border-radius: 6px; background: #f87517; color: #16191c; font: 600 1.0625rem/1 'Source Sans 3', sans-serif; text-decoration: none; } .ds-triage__cta:hover { background: #ff8a33; } .ds-triage__cta:focus-visible { outline: 2px solid #f87517; outline-offset: 3px; box-shadow: 0 0 0 5px #0c0e10; }"
+    },
+    {
+      "name": "Pílula Assistir",
+      "kind": "button",
+      "refersTo": "proof-play",
+      "description": "Inicia o vídeo de prova sobre o pôster; os controles nativos só aparecem depois.",
+      "html": "<div style=\"position:relative;background:#1b1f23;border-radius:14px;aspect-ratio:16/9;max-width:480px\"><button class=\"ds-play\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M6 3l14 9-14 9V3z\"/></svg><span>Assistir</span></button></div>",
+      "css": ".ds-play { position: absolute; left: 1rem; bottom: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; min-height: 48px; padding: 0 1.5rem; border: 0; border-radius: 999px; background: #f87517; color: #16191c; font: 600 1.0625rem/1 'Source Sans 3', sans-serif; box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.8); cursor: pointer; transition: background-color 240ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-play svg { width: 1.1rem; height: 1.1rem; fill: currentColor; } .ds-play:hover { background: #ff8a33; } .ds-play:focus-visible { outline: 2px solid #f87517; outline-offset: 3px; box-shadow: 0 0 0 5px #0c0e10; }"
+    },
+    {
+      "name": "Cabeçalho palco",
+      "kind": "nav",
+      "refersTo": "site-header--stage",
+      "description": "Cabeçalho da home: transparente sobre o palco, fundo grafite 92% depois de 24px de rolagem.",
+      "html": "<header class=\"ds-header\"><span class=\"ds-header__brand\">Hexamedical</span><nav class=\"ds-header__nav\"><a href=\"#\" class=\"is-active\">Soluções</a><a href=\"#\">Serviços</a><a href=\"#\">Conteúdo</a></nav><a class=\"ds-header__cta\" href=\"#\">Falar com especialista</a></header>",
+      "css": ".ds-header { display: grid; grid-template-columns: minmax(140px, 1fr) auto minmax(180px, 1fr); align-items: center; min-height: 80px; padding-inline: clamp(1rem, 4vw, 3.5rem); background: rgba(12, 14, 16, 0.92); border-bottom: 1px solid rgba(238, 240, 238, 0.14); color: #eef0ee; font-family: 'Source Sans 3', sans-serif; } .ds-header__brand { font: 650 1.25rem 'Archivo', sans-serif; font-stretch: 112%; } .ds-header__nav { display: flex; gap: clamp(1rem, 2vw, 2.1rem); } .ds-header__nav a { color: inherit; font-size: 0.9375rem; font-weight: 500; text-decoration: none; transition: color 240ms cubic-bezier(0.16, 1, 0.3, 1); } .ds-header__nav a:hover, .ds-header__nav a.is-active { color: #f87517; } .ds-header__cta { justify-self: end; display: inline-flex; align-items: center; min-height: 46px; padding-inline: 1.5rem; border-radius: 6px; background: #f87517; color: #16191c; font-size: 0.875rem; font-weight: 600; text-decoration: none; } .ds-header__cta:hover { background: #ff8a33; } .ds-header a:focus-visible { outline: 2px solid #f87517; outline-offset: 3px; box-shadow: 0 0 0 5px #0c0e10; }"
+    },
+    {
+      "name": "Emblema de etapa (celular)",
+      "kind": "custom",
+      "refersTo": "lifecycle__badge",
+      "description": "Foto da etapa dentro do anel, seis hexágonos nos vértices e o arco laranja até a etapa atual.",
+      "html": "<div style=\"background:#0c0e10;padding:24px\"><div class=\"ds-badge\"><svg viewBox=\"0 0 100 100\" aria-hidden=\"true\"><circle class=\"ds-badge__track\" cx=\"50\" cy=\"50\" r=\"46\"/><circle class=\"ds-badge__progress\" cx=\"50\" cy=\"50\" r=\"46\" pathLength=\"6\" stroke-dasharray=\"3 6\" transform=\"rotate(-90 50 50)\"/><polygon class=\"ds-badge__node is-reached\" points=\"50,1 52.6,2.5 52.6,5.5 50,7 47.4,5.5 47.4,2.5\"/><polygon class=\"ds-badge__node is-reached\" points=\"89.84,24 92.44,25.5 92.44,28.5 89.84,30 87.24,28.5 87.24,25.5\"/><polygon class=\"ds-badge__node is-reached\" points=\"89.84,70 92.44,71.5 92.44,74.5 89.84,76 87.24,74.5 87.24,71.5\"/><polygon class=\"ds-badge__node\" points=\"50,93 52.6,94.5 52.6,97.5 50,99 47.4,97.5 47.4,94.5\"/><polygon class=\"ds-badge__node\" points=\"10.16,70 12.76,71.5 12.76,74.5 10.16,76 7.56,74.5 7.56,71.5\"/><polygon class=\"ds-badge__node\" points=\"10.16,24 12.76,25.5 12.76,28.5 10.16,30 7.56,28.5 7.56,25.5\"/></svg><span class=\"ds-badge__photo\"></span></div></div>",
+      "css": ".ds-badge { position: relative; width: min(72vw, 18rem); aspect-ratio: 1; } .ds-badge svg { position: absolute; inset: 0; overflow: visible; } .ds-badge__track { fill: none; stroke: rgba(238, 240, 238, 0.14); stroke-width: 0.25; } .ds-badge__progress { fill: none; stroke: #f87517; stroke-width: 0.6; } .ds-badge__node { fill: #0c0e10; stroke: #8a939a; stroke-width: 0.45; } .ds-badge__node.is-reached { fill: #f87517; stroke: #f87517; } .ds-badge__photo { position: absolute; inset: 10%; border-radius: 50%; background: #1b1f23; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Dentro do túnel",
+    "overview": "A home é um percurso contínuo pelo anel da ressonância: um palco grafite (graphite-950) atravessado por um único objeto, o anel do túnel desenhado em WebGL, que muda de papel em cada seção. No topo ele é a abertura que mostra o vídeo real do Magnifico Open e se abre com o scroll até o equipamento ocupar a tela; na linha do tempo ele contorna a foto de cada etapa; no portfólio e na prova ele recua para fundo; na triagem volta a abrir atrás do título. Todo o conteúdo é HTML por cima do palco e existe sem JavaScript. O equipamento real aparece inteiro, sobre base branca; a única cor de sinal é o laranja Hexamedical.",
+    "keyCharacteristics": [
+      "Palco escuro contínuo, sem cortes entre seções; profundidade por tons de grafite, não por sombras.",
+      "Um laranja só (orange), usado em ação, progresso e na borda do anel.",
+      "Archivo expandida (largura 112%) nos títulos, Source Sans 3 no texto.",
+      "Três dispositivos de assinatura: o anel/abertura, o hexágono que vira anel e a varredura de 1 px.",
+      "Mídia exclusivamente real, do site oficial, com proveniência em public/media/home/SOURCES.md."
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "O laranja é o único acento. Nada de segunda cor de destaque, e nenhum laranja diferente de #f87517 (o hover #ff8a33 é o único derivado).",
+        "section": "colors"
+      },
+      {
+        "name": "The Accent Clearance Rule",
+        "body": "Entrelinha de h2 é 1,05 e de display fica entre 0,98 e 1: acentos e descendentes do português não podem se tocar entre linhas. Títulos usam text-wrap: balance; parágrafos, pretty.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Stage Rule",
+        "body": "Cartões e linhas ficam planos em repouso; o hover muda o tom, não levanta o elemento.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do manter o conteúdo visível sem JavaScript; a animação parte do estado final.",
+      "Do declarar cada cena nos três contextos (desktop, mobile, reduced) e prever o modo leve.",
+      "Do dar pausa a todo vídeo que toca sozinho; o vídeo do hero pausa fora da tela.",
+      "Do manter alvos de toque de 44 px (48 px nos botões), o skip link \"Pular para o conteúdo\" e o anel de foco (2 px laranja, afastado 3 px, halo grafite de 5 px).",
+      "Do trazer de volta o texto do hero quando o foco do teclado voltar a ele (:focus-within).",
+      "Do registrar a origem de toda mídia em SOURCES.md antes de publicar."
+    ],
+    "donts": [
+      "Don't usar eyebrows (rótulo pequeno acima do título) nem numeração decorativa (01, 02).",
+      "Don't usar bounce, elastic, fade-up em toda seção, parallax sem significado ou cursor customizado.",
+      "Don't sequestrar a rolagem: nada de mudar direção ou velocidade final, nem rolagem suave no toque.",
+      "Don't usar texto em gradiente.",
+      "Don't cortar ou deformar equipamento real; corte só na variante fill, para foto de cena.",
+      "Don't inventar clientes, números, depoimentos, certificações ou prazos. Só material do site oficial.",
+      "Don't aplicar este sistema à página Magnifico Open nem à LP Careverse."
+    ]
+  }
+}

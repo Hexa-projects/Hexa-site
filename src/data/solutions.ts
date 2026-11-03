@@ -34,7 +34,7 @@ export const solutionCategories = [
   {
     slug: "ressonancia-magnetica",
     title: "Ressonância Magnética",
-    description: "Equipamentos Esaote de alta performance: Magnifico Open, S-Scan, O-Scan e G-Scan Brio com suporte técnico completo.",
+    description: "Equipamentos Esaote de alta performance: Magnifico Open, S-Scan Open, O-scan SMART e G-scan Open com suporte técnico completo.",
     icon: Magnet,
     products: ["rm-magnifico-open", "rm-s-scan", "rm-o-scan", "rm-g-scan"],
   },
@@ -54,7 +54,7 @@ export const solutions: Record<string, Solution> = {
     description: "Portfólio completo de sistemas de RM Esaote para diferentes perfis operacionais.",
     icon: Magnet,
     heroHeadline: "Linha de Ressonância Magnética Esaote",
-    heroSubtitle: "Soluções de RM para clínicas, hospitais e centros de imagem: Magnifico Open, S-Scan, O-Scan e G-Scan Brio.",
+    heroSubtitle: "Soluções de RM para clínicas, hospitais e centros de imagem: Magnifico Open, S-scan Open, O-scan SMART e G-scan Open.",
     audience: [
       "Clínicas de imagem em expansão",
       "Hospitais com demanda de alta disponibilidade",
@@ -80,7 +80,7 @@ export const solutions: Record<string, Solution> = {
       "Abordagem consultiva orientada a resultado"
     ],
     specs: [
-      { label: "Modelos", value: "Magnifico Open, S-Scan, O-Scan, G-Scan Brio" },
+      { label: "Modelos", value: "Magnifico Open, S-scan Open, O-scan SMART, G-scan Open" },
       { label: "Aplicações", value: "MSK, coluna, extremidades e rotinas específicas" },
       { label: "Implantação", value: "Projeto técnico e instalação assistida" },
       { label: "Suporte", value: "Nacional com contratos flexíveis" }
@@ -355,11 +355,11 @@ export const solutions: Record<string, Solution> = {
 
   "rm-g-scan": {
     slug: "rm-g-scan",
-    title: "RM Esaote G-Scan Brio",
-    shortTitle: "G-Scan Brio",
+    title: "RM Esaote G-scan Open",
+    shortTitle: "G-scan Open",
     description: "Sistema revolucionário de RM com suporte de peso para aplicações MSK. Design aberto e inclinável para diagnósticos na posição com carga.",
     icon: Magnet,
-    heroHeadline: "G-Scan Brio: RM com Suporte de Peso para MSK",
+    heroHeadline: "G-scan Open: RM aberta com suporte de peso para MSK",
     heroSubtitle: "Abordagem revolucionária de RM para todas as aplicações musculoesqueléticas. O design aberto e inclinável possibilita exames na posição com carga, aumentando a precisão diagnóstica e a confiança clínica.",
     highlights: [
       { value: "12x", label: "Bobinas Dedicadas", description: "Projetadas para coluna vertebral e articulações." },
@@ -371,7 +371,7 @@ export const solutions: Record<string, Solution> = {
       {
         title: "Adicione carga ao seu diagnóstico",
         subtitle: "Peso não é problema",
-        description: "Muitos sintomas surgem na posição com carga. A RM convencional pode não mostrar a patologia, enquanto o G-scan Brio oferece diagnósticos na posição natural em pé, revelando detalhes que não são observados na posição deitada. As forças da gravidade causam alterações biomecânicas que o G-Scan captura com precisão.",
+        description: "Muitos sintomas surgem na posição com carga. A RM convencional pode não mostrar a patologia, enquanto o G-scan Open permite avaliar o paciente em posição natural, revelando detalhes que podem não ser observados na posição deitada. As forças da gravidade provocam alterações biomecânicas que o sistema ajuda a visualizar com precisão.",
       },
     ],
     bobinas: [
@@ -430,15 +430,15 @@ export const solutions: Record<string, Solution> = {
     faq: [
       {
         question: "O que significa 'RM com suporte de peso'?",
-        answer: "O G-Scan Brio permite realizar exames na posição inclinada ou em pé, simulando a carga natural sobre as articulações e coluna. Isso revela patologias que não aparecem na posição convencional deitada.",
+        answer: "O G-scan Open permite realizar exames na posição inclinada ou em pé, reproduzindo a carga natural sobre as articulações e a coluna. Isso pode revelar patologias que não aparecem na posição convencional deitada.",
       },
       {
-        question: "Para quais diagnósticos o G-Scan Brio é mais indicado?",
+        question: "Para quais diagnósticos o G-scan Open é mais indicado?",
         answer: "Especialmente para patologias de coluna vertebral (hérnias, estenose, instabilidades) e articulações que se manifestam com carga, como impacto femoroacetabular e instabilidades ligamentares.",
       },
       {
-        question: "90% dos sintomas desaparecem ao deitar. O G-Scan resolve isso?",
-        answer: "Sim. O G-Scan Brio captura imagens na posição com carga natural, revelando exatamente o que causa os sintomas do paciente no dia a dia.",
+        question: "Por que avaliar o paciente com carga pode ser importante?",
+        answer: "O G-scan Open captura imagens sob carga natural e pode evidenciar alterações relacionadas aos sintomas que não aparecem durante o exame convencional em posição deitada.",
       },
     ],
   },

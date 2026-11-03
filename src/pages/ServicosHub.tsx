@@ -1,59 +1,11 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import PageBreadcrumb from "@/components/layout/PageBreadcrumb";
-import HeroSection from "@/components/sections/HeroSection";
-import ServiceCard from "@/components/sections/ServiceCard";
-import CTABanner from "@/components/sections/CTABanner";
-import { services } from "@/data/services";
-import { hexaMedia } from "@/data/media";
+import { serviceStories } from "@/data/editorial";
 
-const ServicosHub = () => {
-  return (
-    <Layout>
-      <Helmet>
-        <title>Serviços Técnicos Especializados — Hexamedical</title>
-        <meta name="description" content="Manutenção, contratos, instalação, reparo e visita técnica para equipamentos de Ressonância Magnética." />
-      </Helmet>
+const order = ["manutencao", "contratos", "instalacao", "reparo"] as const;
 
-      <PageBreadcrumb items={[{ label: "Serviços" }]} />
-
-      <HeroSection
-        headline="Serviços técnicos que garantem sua operação"
-        subtitle="Manutenção preventiva e corretiva, contratos flexíveis, instalação profissional e suporte especializado com cobertura nacional."
-        ctaSecondaryLabel="Ver soluções"
-        ctaSecondaryHref="/solucoes"
-        variant="light"
-        backgroundImage={hexaMedia.servicesHubHero}
-      />
-
-      <section className="py-16 md:py-24">
-        <div className="container">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold text-foreground md:text-4xl">
-              Nossos serviços
-            </h2>
-            <p className="mx-auto max-w-2xl text-muted-foreground">
-              Soluções completas de suporte para manter seus equipamentos em máxima performance.
-            </p>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((svc) => (
-              <ServiceCard
-                key={svc.slug}
-                title={svc.title}
-                description={svc.description}
-                href={`/servicos/${svc.slug}`}
-                icon={svc.icon}
-                image={hexaMedia.services[svc.slug as keyof typeof hexaMedia.services]}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CTABanner />
-    </Layout>
-  );
-};
-
-export default ServicosHub;
+export default function ServicosHub() {
+  return <Layout><Helmet><title>Serviços técnicos — Hexamedical</title><meta name="description" content="Manutenção de equipamentos, contratos, instalação e reparo de peças e periféricos com a Hexamedical." /></Helmet><section className="ed-intro"><div className="ed-shell"><span className="ed-eyebrow">Serviços técnicos</span><h1>O equipamento é só o começo.</h1><p>A operação depende de manutenção, planejamento e resposta técnica. Conheça os serviços da Hexamedical para cada etapa.</p></div></section><section className="ed-shell ed-lineup" aria-label="Serviços Hexamedical">{order.map((slug, index) => { const item = serviceStories[slug]; return <article className="ed-lineup-item" key={slug}><span className="ed-lineup-item__number">0{index + 1}</span><div className="ed-lineup-item__media"><img src={item.image} alt={item.title} loading="lazy" /></div><div className="ed-lineup-item__copy"><span className="ed-eyebrow">Serviço / 0{index + 1}</span><h2>{item.title}</h2><p>{item.intro}</p><Link className="ed-text-link" to={`/servicos/${slug}`}>Conhecer serviço <ArrowUpRight size={19} /></Link></div></article>; })}</section></Layout>;
+}

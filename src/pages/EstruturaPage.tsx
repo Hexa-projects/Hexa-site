@@ -1,40 +1,13 @@
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import PageBreadcrumb from "@/components/layout/PageBreadcrumb";
-import CTABanner from "@/components/sections/CTABanner";
 
-const estrutura = [
-  "Laboratório próprio para reparo de bobinas, placas e periféricos",
-  "Cobertura nacional com unidades em pontos estratégicos",
-  "Equipe técnica certificada e experiente",
-  "Fluxo de manutenção preventiva e corretiva com SLA",
+const areas = [
+  { title: "Salas de testes", body: "O site atual apresenta três salas de testes para avaliação e acompanhamento técnico de equipamentos e componentes." },
+  { title: "Laboratórios", body: "Áreas dedicadas à eletrônica e à criogenia, além do trabalho com peças e periféricos." },
+  { title: "Treinamento", body: "Espaços voltados à capacitação e ao desenvolvimento da equipe técnica." },
+  { title: "Showroom", body: "Ambiente com infraestrutura para demonstração de ressonância magnética, incluindo gaiola de blindagem." },
 ];
 
-const EstruturaPage = () => (
-  <Layout>
-    <Helmet>
-      <title>Estrutura — Hexamedical</title>
-      <meta name="description" content="Conheça a estrutura técnica da Hexamedical para atendimento nacional." />
-    </Helmet>
-    <PageBreadcrumb items={[{ label: "Estrutura" }]} />
-    <section className="py-16 md:py-24">
-      <div className="container grid gap-10 lg:grid-cols-2 lg:items-center">
-        <div>
-          <h1 className="mb-5 text-3xl font-bold md:text-4xl">Nossa Estrutura</h1>
-          <p className="mb-6 text-muted-foreground">Estrutura robusta para atender implantação, manutenção e suporte de equipamentos de diagnóstico por imagem em todo o Brasil.</p>
-          <ul className="space-y-3">
-            {estrutura.map((i) => (
-              <li key={i} className="rounded-lg border bg-card p-4 text-sm">{i}</li>
-            ))}
-          </ul>
-        </div>
-        <div className="overflow-hidden rounded-xl border border-border">
-          <img src="/assets/hexa/Hexamedical-Website-6-1024x576.webp" alt="Estrutura Hexamedical" className="h-80 w-full object-cover" loading="lazy" />
-        </div>
-      </div>
-    </section>
-    <CTABanner />
-  </Layout>
-);
-
-export default EstruturaPage;
+export default function EstruturaPage() { return <Layout><Helmet><title>Estrutura técnica — Hexamedical</title><meta name="description" content="Conheça as áreas de testes, laboratórios, treinamento e showroom apresentados pela Hexamedical." /></Helmet><section className="ed-intro"><div className="ed-shell"><span className="ed-eyebrow">A Hexamedical / Estrutura</span><h1>Infraestrutura a serviço da operação.</h1><p>Uma base técnica para testar, reparar, treinar e apoiar serviços de diagnóstico por imagem.</p></div></section><section className="ed-shell ed-commercial"><span className="ed-eyebrow">Áreas apresentadas</span><h2>Da bancada ao equipamento em campo.</h2><div className="ed-detail-grid">{areas.map((area, index) => <article key={area.title}><span>0{index + 1}</span><h3>{area.title}</h3><p>{area.body}</p></article>)}</div><p className="ed-footnote">A descrição reflete a estrutura divulgada no site público atual. Fotos de cada ambiente e atualização da capacidade estão pendentes de validação interna.</p><Link to="/servicos" className="ed-text-link">Conhecer serviços técnicos <ArrowUpRight size={18} /></Link></section></Layout>; }

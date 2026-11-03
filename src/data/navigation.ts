@@ -10,7 +10,10 @@ export const navigation: NavItem[] = [
     href: "/solucoes",
     children: [
       { label: "Ressonância Magnética", href: "/solucoes/ressonancia-magnetica" },
+      { label: "Bombas Injetoras", href: "/solucoes/bombas-injetoras" },
+      { label: "Radiografia Mindray", href: "/solucoes/mindray" },
       { label: "HexAI", href: "/solucoes/hexai" },
+      { label: "Área Veterinária", href: "/solucoes/veterinario" },
     ],
   },
   {
@@ -21,17 +24,6 @@ export const navigation: NavItem[] = [
       { label: "Contratos de Manutenção", href: "/servicos/contratos" },
       { label: "Instalação e Desinstalação", href: "/servicos/instalacao" },
       { label: "Reparo de Peças e Periféricos", href: "/servicos/reparo" },
-      { label: "Visita Técnica", href: "/servicos/visita-tecnica" },
-    ],
-  },
-  {
-    label: "Segmentos",
-    href: "/segmentos",
-    children: [
-      { label: "Clínicas", href: "/segmentos/clinicas" },
-      { label: "Hospitais", href: "/segmentos/hospitais" },
-      { label: "Centros de Imagem", href: "/segmentos/centros-de-imagem" },
-      { label: "Universidades", href: "/segmentos/universidades" },
     ],
   },
   {
@@ -40,7 +32,6 @@ export const navigation: NavItem[] = [
     children: [
       { label: "Blog", href: "/blog" },
       { label: "Materiais de Apoio", href: "/materiais" },
-      { label: "Cases", href: "/cases" },
     ],
   },
   {
