@@ -90,8 +90,26 @@ describe("home", () => {
     expect(stage).toHaveAttribute("aria-hidden", "true");
   });
 
-  it("oferece pausa para o vídeo em loop da abertura", () => {
-    renderHome();
+  it("oferece pausa para o vídeo em loop da abertura, com o rótulo seguindo o estado real do vídeo", () => {
+    const { container } = renderHome();
+    const video = container.querySelector<HTMLVideoElement>(".hero__video")!;
+    // Antes de tocar (ou se o aparelho bloquear), o botão oferece tocar; ao tocar, oferece pausar.
+    expect(screen.getByRole("button", { name: /Tocar vídeo/ })).toBeInTheDocument();
+    fireEvent.play(video);
     expect(screen.getByRole("button", { name: /Pausar vídeo/ })).toBeInTheDocument();
+  });
+
+  it("o vídeo da abertura sai mudo e inline no HTML, como o iPhone exige para tocar sozinho", () => {
+    const { container } = renderHome();
+    const video = container.querySelector<HTMLVideoElement>(".hero__video")!;
+    expect(video).toHaveAttribute("muted");
+    expect(video).toHaveAttribute("playsinline");
+    expect(video.muted).toBe(true);
+  });
+
+  it("o WebM declara o codec, para o iPhone cair no MP4 quando não decodifica", () => {
+    const { container } = renderHome();
+    const webm = container.querySelector(".hero__video source[src$='.webm']");
+    expect(webm).toHaveAttribute("type", 'video/webm; codecs="vp9"');
   });
 });

@@ -949,6 +949,26 @@
     font-size: var(--step--1);
   }
 
+  /* Contato no celular: o anel fica em cima, e texto e botão usam a largura toda do cartão
+     (com o anel numa coluna própria, o texto ficava espremido em ~230 px). */
+  .triage__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .triage__actions {
+    align-items: stretch;
+  }
+
+  .triage__actions .text-link {
+    align-self: flex-start;
+  }
+
+  /* Depoimento vertical: sem limite ele passava de 600 px de altura na tela do celular. */
+  .proof__side {
+    max-width: 16rem;
+  }
+
   /* No celular o anel laranja da reserva passaria atrás dos botões. */
   .stage-fallback__rim {
     display: none;

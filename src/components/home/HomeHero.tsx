@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Pause, Play } from "lucide-react";
 import { homeMedia } from "@/data/homeMedia";
@@ -27,15 +27,26 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
   const root = useRef<HTMLElement>(null);
   const frame = useRef<HTMLDivElement>(null);
   const figure = useRef<HTMLElement>(null);
-  const video = useRef<HTMLVideoElement>(null);
+  const video = useRef<HTMLVideoElement | null>(null);
   const copy = useRef<HTMLDivElement>(null);
   const title = useRef<HTMLHeadingElement>(null);
   const pause = useRef<HTMLButtonElement>(null);
   const userPaused = useRef(false);
   const [narrow] = useState(isNarrow);
   const [reduced] = useState(prefersReduced);
-  const [playing, setPlaying] = useState(!reduced);
+  // Começa como parado: o rótulo só diz "Pausar" depois que o vídeo de fato tocar.
+  const [playing, setPlaying] = useState(false);
   const media = narrow ? homeMedia.tunnel.mobile : homeMedia.tunnel.desktop;
+
+  // O iPhone só toca sozinho um vídeo mudo e inline, e o React não escreve o atributo `muted`
+  // no HTML (só a propriedade). Sem o atributo, o Safari do iOS bloqueia o autoplay.
+  const attachVideo = useCallback((element: HTMLVideoElement | null) => {
+    video.current = element;
+    if (!element) return;
+    element.muted = true;
+    element.defaultMuted = true;
+    element.setAttribute("muted", "");
+  }, []);
 
   const toggleVideo = () => {
     const element = video.current;
@@ -54,20 +65,32 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
     const element = video.current;
     const box = frame.current;
     if (!element || !box) return;
-    const sync = () => setPlaying(!element.paused);
+    const sync = (event: Event) => setPlaying(event.type !== "pause");
     element.addEventListener("play", sync);
+    element.addEventListener("playing", sync);
     element.addEventListener("pause", sync);
+    let inView = true;
+    const tryPlay = () => {
+      if (!reduced && inView && !userPaused.current) void element.play()?.catch(() => {});
+    };
     let observer: IntersectionObserver | undefined;
     if (typeof IntersectionObserver !== "undefined") {
       observer = new IntersectionObserver(([entry]) => {
-        if (!entry.isIntersecting) element.pause();
-        else if (!reduced && !userPaused.current) void element.play()?.catch(() => {});
+        inView = entry.isIntersecting;
+        if (!inView) element.pause();
+        else tryPlay();
       });
       observer.observe(box);
     }
+    // No modo de economia de bateria o iPhone bloqueia até o vídeo mudo; o primeiro toque na página
+    // conta como gesto e libera a reprodução.
+    const retry = () => element.paused && tryPlay();
+    document.addEventListener("touchend", retry, { once: true, passive: true });
     return () => {
       element.removeEventListener("play", sync);
+      element.removeEventListener("playing", sync);
       element.removeEventListener("pause", sync);
+      document.removeEventListener("touchend", retry);
       observer?.disconnect();
     };
   }, [reduced]);
@@ -177,7 +200,7 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
       <div ref={frame} className="hero__frame">
         <figure ref={figure} className="hero__aperture">
           <video
-            ref={video}
+            ref={attachVideo}
             className="hero__video"
             autoPlay={!reduced}
             muted
@@ -189,7 +212,8 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
             height={media.height}
             aria-label={media.label}
           >
-            {media.webm && <source src={media.webm} type="video/webm" />}
+            {/* Com o codec declarado, o navegador que não decodifica VP9 pula direto para o MP4. */}
+            {media.webm && <source src={media.webm} type='video/webm; codecs="vp9"' />}
             <source src={media.mp4} type="video/mp4" />
           </video>
         </figure>
