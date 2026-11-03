@@ -160,7 +160,7 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
             <Link to="/solucoes" className="button button--primary">
               Encontrar a solução certa <ArrowRight aria-hidden="true" />
             </Link>
-            <Link to="/contato" className="button button--quiet">
+            <Link to="/#contato" className="button button--quiet">
               Falar com especialista
             </Link>
           </div>

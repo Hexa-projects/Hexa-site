@@ -1,5 +1,6 @@
 import { Toaster } from "@/components/ui/toaster";
 import RouteErrorBoundary from "@/components/RouteErrorBoundary";
+import RouteScroll from "@/components/RouteScroll";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -36,6 +37,7 @@ const App = () => (
         <Toaster />
         {/* v7_startTransition: a página atual fica na tela enquanto o pacote da próxima carrega. */}
         <BrowserRouter future={{ v7_startTransition: true }}>
+          <RouteScroll />
           {/* Cada rota é um pacote próprio: o GSAP e o palco só descem na home. */}
           <RouteErrorBoundary>
           <Suspense fallback={<div className="route-loading" aria-hidden="true" />}>

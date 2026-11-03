@@ -15,6 +15,8 @@ const Header = () => {
   const overlay = location.pathname === "/";
   const [overDark, setOverDark] = useState(overlay);
   const onStage = overlay && overDark;
+  // A home já tem a seção de contato: o CTA desliza até ela em vez de trocar de página.
+  const contactHref = overlay ? "/#contato" : "/contato";
 
   useEffect(() => {
     setMobileOpen(false);
@@ -117,7 +119,7 @@ const Header = () => {
           ))}
         </nav>
 
-        <Link to="/contato" className="site-header__cta">
+        <Link to={contactHref} className="site-header__cta">
           <span>Falar com especialista</span>
           <ArrowUpRight aria-hidden="true" />
         </Link>
@@ -162,7 +164,7 @@ const Header = () => {
               )}
             </div>
           ))}
-          <Link to="/contato" className="mobile-navigation__cta">
+          <Link to={contactHref} className="mobile-navigation__cta">
             Falar com especialista <ArrowUpRight aria-hidden="true" />
           </Link>
         </nav>

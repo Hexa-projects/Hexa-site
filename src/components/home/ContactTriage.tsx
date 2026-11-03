@@ -49,7 +49,7 @@ const ContactTriage = ({ items }: { items: TriagePath[] }) => {
   }, []);
 
   return (
-    <section ref={root} className="triage" aria-labelledby="triage-title">
+    <section ref={root} id="contato" className="triage" aria-labelledby="triage-title">
       <div className="triage__head">
         <h2 id="triage-title">Como podemos ajudar?</h2>
         <p>
