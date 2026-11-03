@@ -134,10 +134,10 @@ const LifecycleTimeline = ({ items, mode }: { items: LifecycleStage[]; mode: Sta
   return (
     <section ref={root} className="lifecycle" aria-labelledby="lifecycle-title">
       <div className="lifecycle__intro">
-        <h2 id="lifecycle-title">A vida inteira do equipamento</h2>
+        <h2 id="lifecycle-title">Uma equipe só, da compra ao reparo</h2>
         <p>
-          Comprar, instalar e manter um equipamento de imagem costuma envolver vários fornecedores, e cada troca de mãos é um risco para a
-          agenda de exames. Aqui, a mesma equipe acompanha as seis etapas e conhece o que a anterior decidiu.
+          Comprar, instalar e manter uma ressonância costuma passar por vários fornecedores, e cada troca de mãos pode parar a agenda de
+          exames. Na Hexamedical, a mesma equipe cuida das seis etapas e sabe o que foi decidido em cada uma.
         </p>
       </div>
 

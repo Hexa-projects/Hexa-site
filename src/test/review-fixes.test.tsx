@@ -99,7 +99,7 @@ describe("rotas: falha de carregamento", () => {
 describe("home: ajustes da revisão", () => {
   it("os vídeos de prova mostram um botão próprio e só ganham controles ao tocar", () => {
     renderHome();
-    const region = screen.getByRole("region", { name: "Quem responde pela Hexamedical" });
+    const region = screen.getByRole("region", { name: "Quem já trabalhou com a gente" });
     const buttons = within(region).getAllByRole("button", { name: /^Assistir/ });
     expect(buttons).toHaveLength(2);
     const videos = region.querySelectorAll("video");
@@ -110,20 +110,20 @@ describe("home: ajustes da revisão", () => {
 
   it("o filtro do portfólio anuncia quantos equipamentos ficaram", () => {
     renderHome();
-    const region = screen.getByRole("region", { name: "Portfólio" });
+    const region = screen.getByRole("region", { name: "Equipamentos" });
     fireEvent.click(within(region).getByRole("button", { name: "Software" }));
     expect(within(region).getByRole("status")).toHaveTextContent("1 equipamento");
   });
 
   it("a triagem mostra o anel sem depender de hover", () => {
     renderHome();
-    const region = screen.getByRole("region", { name: "Como podemos ajudar?" });
+    const region = screen.getByRole("region", { name: "Fale com a equipe certa" });
     for (const row of region.querySelectorAll(".triage__row")) expect(row).toHaveClass("is-ring");
   });
 
   it("cada anel da triagem marca a etapa da vida do equipamento que responde", () => {
     renderHome();
-    const region = screen.getByRole("region", { name: "Como podemos ajudar?" });
+    const region = screen.getByRole("region", { name: "Fale com a equipe certa" });
     const marks = Array.from(region.querySelectorAll(".triage__node")).map((node) => node.getAttribute("data-stage"));
     expect(marks).toEqual(["escolha", "manutencao", "laboratorio"]);
     expect(within(region).getByText("Etapa: Escolha", { exact: false })).toBeInTheDocument();
@@ -131,7 +131,7 @@ describe("home: ajustes da revisão", () => {
 
   it("cada etapa no celular tem a foto no anel com os seis hexágonos", () => {
     renderHome();
-    const region = screen.getByRole("region", { name: "A vida inteira do equipamento" });
+    const region = screen.getByRole("region", { name: "Uma equipe só, da compra ao reparo" });
     const badges = region.querySelectorAll(".lifecycle__badge");
     expect(badges).toHaveLength(6);
     badges.forEach((badge, index) => {

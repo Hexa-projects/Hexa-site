@@ -51,11 +51,8 @@ const ContactTriage = ({ items }: { items: TriagePath[] }) => {
   return (
     <section ref={root} id="contato" className="triage" aria-labelledby="triage-title">
       <div className="triage__head">
-        <h2 id="triage-title">Como podemos ajudar?</h2>
-        <p>
-          Escolha o caminho e a conversa no WhatsApp já começa com o assunto certo, direto com a equipe comercial e técnica. Sem formulário
-          e sem fila de atendimento genérico.
-        </p>
+        <h2 id="triage-title">Fale com a equipe certa</h2>
+        <p>Escolha o assunto. A conversa abre no WhatsApp com a mensagem pronta e chega direto à equipe comercial ou técnica.</p>
       </div>
 
       <ul className="triage__list">

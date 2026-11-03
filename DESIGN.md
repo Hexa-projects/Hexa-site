@@ -1,6 +1,6 @@
 ---
 name: Hexamedical
-description: A vida inteira do equipamento de imagem vista de dentro do túnel da ressonância.
+description: Uma equipe só, da compra ao reparo, vista de dentro do túnel da ressonância.
 colors:
   graphite-950: "#0c0e10"
   graphite-900: "#121518"

@@ -19,8 +19,8 @@ describe("home", () => {
     renderHome();
     const titles = screen.getAllByRole("heading", { level: 1 });
     expect(titles).toHaveLength(1);
-    expect(titles[0]).toHaveTextContent("Do projeto da sala à última manutenção.");
-    expect(screen.getByRole("link", { name: /Encontrar a solução certa/ })).toHaveAttribute("href", "/solucoes");
+    expect(titles[0]).toHaveTextContent("Ressonância magnética que cabe na sua clínica.");
+    expect(screen.getByRole("link", { name: /Ver as ressonâncias/ })).toHaveAttribute("href", "/solucoes/ressonancia-magnetica");
   });
 
   it("organiza as seções na ordem da história", () => {
@@ -29,17 +29,17 @@ describe("home", () => {
       .getAllByRole("heading", { level: 2 })
       .map((heading) => heading.textContent);
     expect(sectionTitles).toEqual([
-      "Uma operação técnica, não só um catálogo",
-      "A vida inteira do equipamento",
-      "Portfólio",
-      "Quem responde pela Hexamedical",
-      "Como podemos ajudar?",
+      "Quem vende também instala e conserta",
+      "Uma equipe só, da compra ao reparo",
+      "Equipamentos",
+      "Quem já trabalhou com a gente",
+      "Fale com a equipe certa",
     ]);
   });
 
   it("deixa as seis etapas legíveis sem depender de animação", () => {
     renderHome();
-    const region = screen.getByRole("region", { name: "A vida inteira do equipamento" });
+    const region = screen.getByRole("region", { name: "Uma equipe só, da compra ao reparo" });
     const stages = within(region).getAllByRole("heading", { level: 3 });
     expect(stages.map((stage) => stage.textContent)).toEqual(["Escolha", "Projeto da sala", "Instalação", "Operação", "Manutenção", "Laboratório"]);
     for (const stage of stages) {
@@ -50,7 +50,7 @@ describe("home", () => {
 
   it("filtra o portfólio por modalidade", () => {
     renderHome();
-    const region = screen.getByRole("region", { name: "Portfólio" });
+    const region = screen.getByRole("region", { name: "Equipamentos" });
     expect(within(region).getAllByRole("listitem")).toHaveLength(showroom.length);
     const filter = within(region).getByRole("button", { name: "Ressonância" });
     expect(filter).toHaveAttribute("aria-pressed", "false");
@@ -65,7 +65,7 @@ describe("home", () => {
 
   it("leva cada caminho de contato ao WhatsApp com a mensagem certa", () => {
     renderHome();
-    const region = screen.getByRole("region", { name: "Como podemos ajudar?" });
+    const region = screen.getByRole("region", { name: "Fale com a equipe certa" });
     for (const path of triage) {
       const link = within(region).getByRole("link", { name: new RegExp(`${path.title}.*WhatsApp`, "i") });
       expect(link).toHaveAttribute("href", whatsappHref(path.whatsappText));
@@ -75,7 +75,7 @@ describe("home", () => {
 
   it("carrega os vídeos de prova só quando pedidos, com pôster", () => {
     renderHome();
-    const region = screen.getByRole("region", { name: "Quem responde pela Hexamedical" });
+    const region = screen.getByRole("region", { name: "Quem já trabalhou com a gente" });
     const videos = region.querySelectorAll("video");
     expect(videos).toHaveLength(2);
     for (const video of videos) {

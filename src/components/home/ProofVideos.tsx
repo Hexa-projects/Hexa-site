@@ -50,11 +50,8 @@ const ProofVideo = ({ video, caption, className }: { video: MediaVideo; caption:
 const ProofVideos = ({ ceo, testimonials }: { ceo: MediaVideo; testimonials: MediaVideo }) => (
   <section className="proof" aria-labelledby="proof-title">
     <div className="proof__head">
-      <h2 id="proof-title">Quem responde pela Hexamedical</h2>
-      <p>
-        Clientes que recomendam e o CEO, Fábio, explicando como a empresa trabalha. Antes de qualquer proposta, vale ouvir quem conduz a
-        Hexamedical e quem já esteve com ela em campo.
-      </p>
+      <h2 id="proof-title">Quem já trabalhou com a gente</h2>
+      <p>Clientes contam como foi a experiência com a Hexamedical, e o CEO, Fábio, explica como a empresa trabalha.</p>
     </div>
     <div className="proof__grid">
       <ProofVideo

@@ -43,10 +43,11 @@ const Showroom = ({ items }: { items: ShowroomItem[] }) => {
   return (
     <section className="showroom" aria-labelledby="showroom-title">
       <div className="showroom__head">
-        <h2 id="showroom-title">Portfólio</h2>
+        <h2 id="showroom-title">Equipamentos</h2>
         <p>
-          No centro, a ressonância aberta Esaote: sistemas de baixo consumo que cabem em salas compactas. Ao redor, as linhas veterinária, de
-          radiografia digital, de contraste e de software. Cada equipamento tem página própria, com os dados do fabricante.
+          A linha principal é a ressonância aberta Esaote, de ímã permanente: consome até 3 kW e não usa hélio líquido. Também trabalhamos
+          com ressonância e tomografia veterinárias, radiografia digital Mindray, bombas injetoras de contraste e o software HexAI. Cada
+          equipamento tem uma página com os dados do fabricante.
         </p>
       </div>
 

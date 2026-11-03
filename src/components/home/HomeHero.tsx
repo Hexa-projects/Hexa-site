@@ -221,15 +221,15 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
 
         <div ref={copy} className="hero__copy">
           <h1 id="hero-title" ref={title} className="hero__title">
-            Do projeto da sala à última manutenção.
+            Ressonância magnética que cabe na sua clínica.
           </h1>
           <p className="hero__lead">
-            Ressonância magnética Esaote, de tecnologia italiana, com projeto da sala, instalação, manutenção e laboratório próprio. Um só
-            parceiro técnico para clínicas, hospitais, universidades e centros veterinários em todo o Brasil.
+            Sistemas abertos Esaote com instalação a partir de 9 m² e consumo de até 3 kW. A Hexamedical projeta a sala, instala e faz a
+            manutenção, com laboratório próprio para reparo de peças.
           </p>
           <div className="hero__actions">
-            <Link to="/solucoes" className="button button--primary">
-              Encontrar a solução certa <ArrowRight aria-hidden="true" />
+            <Link to="/solucoes/ressonancia-magnetica" className="button button--primary">
+              Ver as ressonâncias <ArrowRight aria-hidden="true" />
             </Link>
             <Link to="/#contato" className="button button--quiet">
               Falar com especialista

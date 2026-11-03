@@ -30,7 +30,7 @@ export const lifecycle: LifecycleStage[] = [
   {
     id: "escolha",
     title: "Escolha",
-    body: "A consultoria parte do perfil de exames, do volume esperado e da estrutura do serviço para indicar o sistema certo, e não o maior.",
+    body: "Indicamos o sistema a partir dos exames que você quer fazer, do volume esperado e do espaço disponível.",
     points: [
       "Ressonância aberta Esaote, das extremidades ao corpo inteiro",
       "Linha veterinária de ressonância e tomografia",
@@ -43,7 +43,7 @@ export const lifecycle: LifecycleStage[] = [
   {
     id: "projeto",
     title: "Projeto da sala",
-    body: "Antes da compra vem a sala: área, rede elétrica e requisitos de instalação de cada sistema, conforme o fabricante. Ressonâncias abertas cabem em espaços que um sistema convencional não aceitaria.",
+    body: "Planejamos a sala antes da compra: área, rede elétrica e requisitos de instalação de cada sistema, conforme a Esaote. Uma ressonância aberta pode ser instalada em salas onde um sistema convencional não caberia.",
     points: ["O-scan SMART: instalação em 9 m²", "S-scan Open: a partir de 20 m²", "G-scan Open: 23 m²"],
     href: "/solucoes/ressonancia-magnetica",
     linkLabel: "Comparar a linha de RM",
@@ -52,7 +52,7 @@ export const lifecycle: LifecycleStage[] = [
   {
     id: "instalacao",
     title: "Instalação",
-    body: "Cada mudança de equipamento pede um plano técnico. A equipe avalia a necessidade, desinstala, transporta e instala, inclusive em trocas de endereço.",
+    body: "Nossa equipe avalia o local, desinstala, transporta e instala o equipamento, também quando a clínica muda de endereço.",
     points: ["Avaliação técnica da necessidade", "Desinstalação e instalação", "Atendimentos avulsos ligados à operação"],
     href: "/servicos/instalacao",
     linkLabel: "Conhecer a instalação",
@@ -61,8 +61,8 @@ export const lifecycle: LifecycleStage[] = [
   {
     id: "operacao",
     title: "Operação",
-    body: "Equipamento instalado é equipamento em uso. A equipe é treinada para a rotina, e o HexAI usa inteligência artificial para acelerar a varredura de ressonância.",
-    points: ["Treinamento da equipe de operação", "Varredura acelerada com SwiftMR", "Apoio ao fluxo de imagem diagnóstica"],
+    body: "Treinamos a equipe da clínica para a rotina de exames. O HexAI usa o SwiftMR, de inteligência artificial, para encurtar o tempo de varredura na ressonância.",
+    points: ["Treinamento da equipe de operação", "Varredura acelerada com SwiftMR"],
     href: "/solucoes/hexai",
     linkLabel: "Conhecer o HexAI",
     image: homeMedia.stages.operacao,
@@ -70,7 +70,7 @@ export const lifecycle: LifecycleStage[] = [
   {
     id: "manutencao",
     title: "Manutenção",
-    body: "Preventiva e corretiva em todo o território nacional, avulsa ou em contrato de mão de obra, com ou sem peças.",
+    body: "Manutenção preventiva e corretiva em todo o país, avulsa ou por contrato, com ou sem peças.",
     points: ["Ressonância, tomografia e hemodinâmica", "Equipamentos de diversos fabricantes", "Contratos sob medida para cada equipamento"],
     href: "/servicos/manutencao",
     linkLabel: "Ver manutenção",
@@ -79,7 +79,7 @@ export const lifecycle: LifecycleStage[] = [
   {
     id: "laboratorio",
     title: "Laboratório",
-    body: "Antes de substituir, investigar. O laboratório próprio analisa, recupera e testa o componente antes de ele voltar para a sala de exame.",
+    body: "Quando uma bobina, placa ou fonte falha, o laboratório próprio analisa e tenta recuperar a peça. Ela só volta para a sala de exame depois de testada, e a troca fica para quando o reparo não resolve.",
     points: ["Bobinas de ressonância", "Placas eletrônicas, módulos e fontes", "Periféricos, testados após o reparo"],
     href: "/servicos/reparo",
     linkLabel: "Ver reparo de peças",
@@ -240,7 +240,7 @@ export const triage: TriagePath[] = [
     id: "comprar",
     stage: "escolha",
     title: "Quero um equipamento",
-    body: "Ressonância, tomografia veterinária, radiografia digital, bombas injetoras ou software. Conte o perfil de exames e o espaço disponível: a conversa já começa pelo projeto da sala.",
+    body: "Conte quais exames você quer fazer e quanto espaço tem. A conversa começa pelo projeto da sala.",
     whatsappText: "Olá! Quero conversar sobre a compra de um equipamento de diagnóstico por imagem.",
     href: "/solucoes",
     linkLabel: "Ver soluções",
@@ -249,7 +249,7 @@ export const triage: TriagePath[] = [
     id: "manter",
     stage: "manutencao",
     title: "Preciso de manutenção",
-    body: "Preventiva, corretiva ou contrato, com ou sem peças, para RM, TC e hemodinâmica de diversos fabricantes, em todo o país.",
+    body: "Preventiva, corretiva ou contrato, para ressonância, tomografia e hemodinâmica de diversos fabricantes, em todo o país.",
     whatsappText: "Olá! Preciso de manutenção para um equipamento de diagnóstico por imagem.",
     href: "/servicos/manutencao",
     linkLabel: "Ver manutenção",
@@ -258,7 +258,7 @@ export const triage: TriagePath[] = [
     id: "reparar",
     stage: "laboratorio",
     title: "Tenho uma peça para reparo",
-    body: "Bobinas, placas, fontes e periféricos avaliados no laboratório próprio antes de qualquer substituição.",
+    body: "Mande a bobina, placa, fonte ou periférico para o nosso laboratório. Avaliamos e tentamos o reparo antes de falar em troca.",
     whatsappText: "Olá! Tenho uma peça ou placa para avaliação e reparo.",
     href: "/servicos/reparo",
     linkLabel: "Ver reparo de peças",

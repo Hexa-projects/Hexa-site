@@ -6,15 +6,14 @@ import type { CompanyFact } from "@/data/home";
 const CompanyFacts = ({ items }: { items: CompanyFact[] }) => (
   <section className="about" aria-labelledby="about-title">
     <div className="about__head">
-      <h2 id="about-title">Uma operação técnica, não só um catálogo</h2>
+      <h2 id="about-title">Quem vende também instala e conserta</h2>
       <p>
-        A Hexamedical vende, instala e mantém equipamentos de diagnóstico por imagem, com foco em ressonância magnética. Representamos
-        a tecnologia italiana da Esaote: sistemas abertos, eficientes em energia e em espaço, para clínicas, hospitais, universidades e
-        centros veterinários.
+        A Hexamedical representa a Esaote em ressonância magnética e vende também tomografia veterinária, radiografia digital, bombas
+        injetoras e software. Atendemos clínicas, hospitais, universidades e centros veterinários.
       </p>
       <p>
-        Depois da entrega, a mesma empresa continua responsável: equipe de campo em todo o país e um laboratório próprio que recupera o
-        que muitas vezes seria trocado.
+        Depois da instalação, o contato continua o mesmo. Nossa equipe de campo faz a manutenção em todo o país, e o laboratório próprio
+        tenta recuperar a peça com defeito antes de propor uma troca.
       </p>
       <Link to="/empresa" className="text-link">
         Conhecer a Hexamedical <ArrowRight aria-hidden="true" />

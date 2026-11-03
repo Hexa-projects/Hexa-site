@@ -1,0 +1,305 @@
+<title>Copy v2 da home Hexamedical</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: coluna de leitura; cada bloco da home é uma faixa com o texto atual à esquerda e a proposta à direita. */
+:root {
+  --bg: #f3f4f2;
+  --surface: #ffffff;
+  --fg: #1d2326;
+  --muted: #5f686d;
+  --line: #d9ddd9;
+  --accent: #c4501a;
+  --accent-soft: #fbe9df;
+  --before: #8a9196;
+  --pending: #8a5a00;
+  --pending-soft: #fff3d6;
+  --display: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14181a; --surface: #1c2124; --fg: #e8ebe9; --muted: #a2aaae; --line: #2e3538;
+    --accent: #f08a52; --accent-soft: #3a2418; --before: #808a8f; --pending: #f0c060; --pending-soft: #33290f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #14181a; --surface: #1c2124; --fg: #e8ebe9; --muted: #a2aaae; --line: #2e3538;
+  --accent: #f08a52; --accent-soft: #3a2418; --before: #808a8f; --pending: #f0c060; --pending-soft: #33290f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font: 400 16px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 48px 80px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: grid; gap: 40px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2rem, 4vw, 2.75rem); line-height: 1.1; font-weight: 700; }
+h2 { font-size: 1.5rem; line-height: 1.2; font-weight: 600; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+.intro { display: grid; gap: 14px; max-width: 68ch; }
+.intro p { color: var(--muted); }
+.label { font: 500 0.72rem/1 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px 22px; color: var(--muted); font-size: 0.9rem; }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.dot { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.pending-box { background: var(--pending-soft); border-radius: 10px; padding: 20px 22px; display: grid; gap: 10px; }
+.pending-box .label { color: var(--pending); }
+.pending-box ul { margin: 0; padding-left: 1.1rem; display: grid; gap: 6px; }
+section.block { display: grid; gap: 18px; padding-top: 28px; border-top: 1px solid var(--line); }
+.block-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; }
+.block-head .label { color: var(--accent); }
+.why { color: var(--muted); max-width: 72ch; font-size: 0.95rem; }
+.row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+.cell { min-width: 0; border-radius: 10px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.cell .label { color: var(--muted); }
+.before { background: transparent; border: 1px dashed var(--line); color: var(--before); }
+.after { background: var(--surface); border: 1px solid var(--line); }
+.after .label { color: var(--accent); }
+.field { font-size: 0.78rem; color: var(--muted); font-family: var(--mono); }
+.after .big { font-family: var(--display); font-weight: 600; font-size: 1.25rem; line-height: 1.25; color: var(--fg); }
+.before .big { font-family: var(--display); font-weight: 600; font-size: 1.1rem; line-height: 1.25; }
+mark { background: var(--pending-soft); color: var(--pending); padding: 0 4px; border-radius: 3px; font-size: 0.85em; }
+ul.points { margin: 0; padding-left: 1.1rem; display: grid; gap: 2px; }
+.sub { display: grid; gap: 10px; }
+.sub > h3 { color: var(--muted); font-size: 0.95rem; }
+footer { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); padding-top: 20px; }
+@media (max-width: 720px) { .row { grid-template-columns: minmax(0, 1fr); } }
+</style>
+
+<div class="wrap">
+  <header class="intro">
+    <span class="label" style="color:var(--accent)">Site Hexamedical · home · proposta de texto</span>
+    <h1>Copy v2 da home</h1>
+    <p>Este documento traz todos os textos da página inicial, na ordem em que aparecem. Em cada bloco, o texto que está no ar na prévia aparece à esquerda e a proposta nova à direita. Nada foi alterado no site ainda: a ideia é validar aqui primeiro.</p>
+    <p>O que mudou no geral: menos frases de efeito, mais benefício concreto para quem compra (espaço, energia, agenda de exames sem parar) e títulos que dizem do que a seção trata.</p>
+    <div class="legend">
+      <span><i class="dot" style="border:1px dashed var(--before)"></i> Texto atual</span>
+      <span><i class="dot" style="background:var(--accent)"></i> Proposta</span>
+      <span><i class="dot" style="background:var(--pending-soft);border:1px solid var(--pending)"></i> Precisa de confirmação</span>
+    </div>
+  </header>
+
+  <aside class="pending-box">
+    <span class="label">Antes de publicar, confirmar</span>
+    <ul>
+      <li>Os números da empresa: +16 anos, +500 equipamentos atendidos, 5 unidades e 3 salas de teste. Vieram da home antiga deste projeto e não aparecem no site oficial.</li>
+      <li>Se toda a linha Esaote dispensa hélio líquido. O repositório confirma isso só para o Magnifico Open.</li>
+    </ul>
+  </aside>
+
+  <!-- 1. Abertura -->
+  <section class="block">
+    <div class="block-head"><span class="label">1 · Abertura</span><h2>O primeiro texto sobre o vídeo</h2></div>
+    <p class="why">O título atual é bonito, mas não diz o que a empresa vende. A proposta abre pelo produto e pelo ganho mais fácil de entender: a ressonância cabe numa sala pequena.</p>
+    <div class="row">
+      <div class="cell before">
+        <span class="label">Atual</span>
+        <span class="field">Título</span>
+        <p class="big">Do projeto da sala à última manutenção.</p>
+        <span class="field">Texto de apoio</span>
+        <p>Ressonância magnética Esaote, de tecnologia italiana, com projeto da sala, instalação, manutenção e laboratório próprio. Um só parceiro técnico para clínicas, hospitais, universidades e centros veterinários em todo o Brasil.</p>
+        <span class="field">Botões</span>
+        <p>Encontrar a solução certa · Falar com especialista</p>
+      </div>
+      <div class="cell after">
+        <span class="label">Proposta</span>
+        <span class="field">Título</span>
+        <p class="big">Ressonância magnética que cabe na sua clínica.</p>
+        <span class="field">Texto de apoio</span>
+        <p>Sistemas abertos Esaote com instalação a partir de 9 m² e consumo de até 3 kW. A Hexamedical projeta a sala, instala e faz a manutenção, com laboratório próprio para reparo de peças.</p>
+        <span class="field">Botões</span>
+        <p>Ver as ressonâncias · Falar com especialista</p>
+        <span class="field">Título alternativo, se preferirem manter a ideia de ciclo</span>
+        <p>Sua ressonância, do projeto da sala à manutenção.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Quem somos -->
+  <section class="block">
+    <div class="block-head"><span class="label">2 · Quem somos</span><h2>Apresentação da empresa e números</h2></div>
+    <p class="why">"Uma operação técnica, não só um catálogo" se defende de uma acusação que ninguém fez. A proposta diz direto o que a empresa faz por quem compra.</p>
+    <div class="row">
+      <div class="cell before">
+        <span class="label">Atual</span>
+        <span class="field">Título</span>
+        <p class="big">Uma operação técnica, não só um catálogo</p>
+        <span class="field">Texto</span>
+        <p>A Hexamedical vende, instala e mantém equipamentos de diagnóstico por imagem, com foco em ressonância magnética. Representamos a tecnologia italiana da Esaote: sistemas abertos, eficientes em energia e em espaço, para clínicas, hospitais, universidades e centros veterinários.</p>
+        <p>Depois da entrega, a mesma empresa continua responsável: equipe de campo em todo o país e um laboratório próprio que recupera o que muitas vezes seria trocado.</p>
+      </div>
+      <div class="cell after">
+        <span class="label">Proposta</span>
+        <span class="field">Título</span>
+        <p class="big">Quem vende também instala e conserta</p>
+        <span class="field">Texto</span>
+        <p>A Hexamedical representa a Esaote em ressonância magnética e vende também tomografia veterinária, radiografia digital, bombas injetoras e software. Atendemos clínicas, hospitais, universidades e centros veterinários.</p>
+        <p>Depois da instalação, o contato continua o mesmo. Nossa equipe de campo faz a manutenção em todo o país, e o laboratório próprio tenta recuperar a peça com defeito antes de propor uma troca.</p>
+        <span class="field">Números</span>
+        <p>Mantidos como estão <mark>confirmar</mark></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Seis etapas -->
+  <section class="block">
+    <div class="block-head"><span class="label">3 · Seis etapas</span><h2>A trilha com o anel animado</h2></div>
+    <p class="why">A estrutura de seis etapas fica. O que muda são as frases de efeito ("e não o maior", "Equipamento instalado é equipamento em uso", "Antes de substituir, investigar"), trocadas por frases que explicam o serviço.</p>
+    <div class="row">
+      <div class="cell before">
+        <span class="label">Atual</span>
+        <span class="field">Título</span>
+        <p class="big">A vida inteira do equipamento</p>
+        <span class="field">Texto</span>
+        <p>Comprar, instalar e manter um equipamento de imagem costuma envolver vários fornecedores, e cada troca de mãos é um risco para a agenda de exames. Aqui, a mesma equipe acompanha as seis etapas e conhece o que a anterior decidiu.</p>
+      </div>
+      <div class="cell after">
+        <span class="label">Proposta</span>
+        <span class="field">Título</span>
+        <p class="big">Uma equipe só, da compra ao reparo</p>
+        <span class="field">Texto</span>
+        <p>Comprar, instalar e manter uma ressonância costuma passar por vários fornecedores, e cada troca de mãos pode parar a agenda de exames. Na Hexamedical, a mesma equipe cuida das seis etapas e sabe o que foi decidido em cada uma.</p>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3>Escolha</h3>
+      <div class="row">
+        <div class="cell before"><span class="label">Atual</span><p>A consultoria parte do perfil de exames, do volume esperado e da estrutura do serviço para indicar o sistema certo, e não o maior.</p></div>
+        <div class="cell after"><span class="label">Proposta</span><p>Indicamos o sistema a partir dos exames que você quer fazer, do volume esperado e do espaço disponível.</p></div>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>Projeto da sala</h3>
+      <div class="row">
+        <div class="cell before"><span class="label">Atual</span><p>Antes da compra vem a sala: área, rede elétrica e requisitos de instalação de cada sistema, conforme o fabricante. Ressonâncias abertas cabem em espaços que um sistema convencional não aceitaria.</p></div>
+        <div class="cell after"><span class="label">Proposta</span><p>Planejamos a sala antes da compra: área, rede elétrica e requisitos de instalação de cada sistema, conforme a Esaote. Uma ressonância aberta pode ser instalada em salas onde um sistema convencional não caberia.</p><ul class="points"><li>O-scan SMART: 9 m²</li><li>S-scan Open: a partir de 20 m²</li><li>G-scan Open: 23 m²</li></ul></div>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>Instalação</h3>
+      <div class="row">
+        <div class="cell before"><span class="label">Atual</span><p>Cada mudança de equipamento pede um plano técnico. A equipe avalia a necessidade, desinstala, transporta e instala, inclusive em trocas de endereço.</p></div>
+        <div class="cell after"><span class="label">Proposta</span><p>Nossa equipe avalia o local, desinstala, transporta e instala o equipamento, também quando a clínica muda de endereço.</p></div>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>Operação</h3>
+      <div class="row">
+        <div class="cell before"><span class="label">Atual</span><p>Equipamento instalado é equipamento em uso. A equipe é treinada para a rotina, e o HexAI usa inteligência artificial para acelerar a varredura de ressonância.</p><ul class="points"><li>Apoio ao fluxo de imagem diagnóstica</li></ul></div>
+        <div class="cell after"><span class="label">Proposta</span><p>Treinamos a equipe da clínica para a rotina de exames. O HexAI usa o SwiftMR, de inteligência artificial, para encurtar o tempo de varredura na ressonância.</p><p class="field">O item "Apoio ao fluxo de imagem diagnóstica" sai: é vago.</p></div>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>Manutenção</h3>
+      <div class="row">
+        <div class="cell before"><span class="label">Atual</span><p>Preventiva e corretiva em todo o território nacional, avulsa ou em contrato de mão de obra, com ou sem peças.</p></div>
+        <div class="cell after"><span class="label">Proposta</span><p>Manutenção preventiva e corretiva em todo o país, avulsa ou por contrato, com ou sem peças. Os itens da etapa já listam ressonância, tomografia e hemodinâmica de diversos fabricantes.</p></div>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>Laboratório</h3>
+      <div class="row">
+        <div class="cell before"><span class="label">Atual</span><p>Antes de substituir, investigar. O laboratório próprio analisa, recupera e testa o componente antes de ele voltar para a sala de exame.</p></div>
+        <div class="cell after"><span class="label">Proposta</span><p>Quando uma bobina, placa ou fonte falha, o laboratório próprio analisa e tenta recuperar a peça. Ela só volta para a sala de exame depois de testada, e a troca fica para quando o reparo não resolve.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Equipamentos -->
+  <section class="block">
+    <div class="block-head"><span class="label">4 · Equipamentos</span><h2>A vitrine com filtros</h2></div>
+    <p class="why">A seção que o gestor elogiou. O visual fica; o título passa a dizer o que tem ali e a introdução ganha o argumento de custo de operação.</p>
+    <div class="row">
+      <div class="cell before">
+        <span class="label">Atual</span>
+        <span class="field">Título</span>
+        <p class="big">Portfólio</p>
+        <span class="field">Texto</span>
+        <p>No centro, a ressonância aberta Esaote: sistemas de baixo consumo que cabem em salas compactas. Ao redor, as linhas veterinária, de radiografia digital, de contraste e de software. Cada equipamento tem página própria, com os dados do fabricante.</p>
+      </div>
+      <div class="cell after">
+        <span class="label">Proposta</span>
+        <span class="field">Título</span>
+        <p class="big">Equipamentos</p>
+        <span class="field">Texto</span>
+        <p>A linha principal é a ressonância aberta Esaote, de ímã permanente: consome até 3 kW e não usa hélio líquido <mark>confirmar para toda a linha</mark>. Também trabalhamos com ressonância e tomografia veterinárias, radiografia digital Mindray, bombas injetoras de contraste e o software HexAI. Cada equipamento tem uma página com os dados do fabricante.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Depoimentos -->
+  <section class="block">
+    <div class="block-head"><span class="label">5 · Depoimentos</span><h2>Os dois vídeos</h2></div>
+    <p class="why">O título atual soa formal. A proposta põe o cliente em primeiro lugar.</p>
+    <div class="row">
+      <div class="cell before">
+        <span class="label">Atual</span>
+        <span class="field">Título</span>
+        <p class="big">Quem responde pela Hexamedical</p>
+        <span class="field">Texto</span>
+        <p>Clientes que recomendam e o CEO, Fábio, explicando como a empresa trabalha. Antes de qualquer proposta, vale ouvir quem conduz a Hexamedical e quem já esteve com ela em campo.</p>
+      </div>
+      <div class="cell after">
+        <span class="label">Proposta</span>
+        <span class="field">Título</span>
+        <p class="big">Quem já trabalhou com a gente</p>
+        <span class="field">Texto</span>
+        <p>Clientes contam como foi a experiência com a Hexamedical, e o CEO, Fábio, explica como a empresa trabalha.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Contato -->
+  <section class="block">
+    <div class="block-head"><span class="label">6 · Contato</span><h2>Os três caminhos para o WhatsApp</h2></div>
+    <p class="why">Sai o "Sem formulário e sem fila de atendimento genérico", que promete demais. Os cartões ficam mais curtos e diretos.</p>
+    <div class="row">
+      <div class="cell before">
+        <span class="label">Atual</span>
+        <span class="field">Título</span>
+        <p class="big">Como podemos ajudar?</p>
+        <span class="field">Texto</span>
+        <p>Escolha o caminho e a conversa no WhatsApp já começa com o assunto certo, direto com a equipe comercial e técnica. Sem formulário e sem fila de atendimento genérico.</p>
+      </div>
+      <div class="cell after">
+        <span class="label">Proposta</span>
+        <span class="field">Título</span>
+        <p class="big">Fale com a equipe certa</p>
+        <span class="field">Texto</span>
+        <p>Escolha o assunto. A conversa abre no WhatsApp com a mensagem pronta e chega direto à equipe comercial ou técnica.</p>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>Quero um equipamento</h3>
+      <div class="row">
+        <div class="cell before"><span class="label">Atual</span><p>Ressonância, tomografia veterinária, radiografia digital, bombas injetoras ou software. Conte o perfil de exames e o espaço disponível: a conversa já começa pelo projeto da sala.</p></div>
+        <div class="cell after"><span class="label">Proposta</span><p>Conte quais exames você quer fazer e quanto espaço tem. A conversa começa pelo projeto da sala.</p></div>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>Preciso de manutenção</h3>
+      <div class="row">
+        <div class="cell before"><span class="label">Atual</span><p>Preventiva, corretiva ou contrato, com ou sem peças, para RM, TC e hemodinâmica de diversos fabricantes, em todo o país.</p></div>
+        <div class="cell after"><span class="label">Proposta</span><p>Preventiva, corretiva ou contrato, para ressonância, tomografia e hemodinâmica de diversos fabricantes, em todo o país.</p></div>
+      </div>
+    </div>
+    <div class="sub">
+      <h3>Tenho uma peça para reparo</h3>
+      <div class="row">
+        <div class="cell before"><span class="label">Atual</span><p>Bobinas, placas, fontes e periféricos avaliados no laboratório próprio antes de qualquer substituição.</p></div>
+        <div class="cell after"><span class="label">Proposta</span><p>Mande a bobina, placa, fonte ou periférico para o nosso laboratório. Avaliamos e tentamos o reparo antes de falar em troca.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Os textos usam apenas dados que já estão no site atual ou informados pela Esaote. Depois da validação, a versão aprovada entra na prévia do site.</footer>
+</div>

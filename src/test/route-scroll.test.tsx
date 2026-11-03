@@ -76,14 +76,14 @@ describe("chamadas de contato na home", () => {
 
   it("a seção de contato da home tem uma âncora", () => {
     renderHome();
-    expect(screen.getByRole("region", { name: "Como podemos ajudar?" })).toHaveAttribute("id", "contato");
+    expect(screen.getByRole("region", { name: "Fale com a equipe certa" })).toHaveAttribute("id", "contato");
   });
 
   it("na home, falar com especialista leva à seção de contato da própria página", () => {
     renderHome();
     const header = screen.getByRole("banner");
     expect(within(header).getByRole("link", { name: /Falar com especialista/ })).toHaveAttribute("href", "/#contato");
-    const hero = screen.getByRole("region", { name: /Do projeto da sala/ });
+    const hero = screen.getByRole("region", { name: /Ressonância magnética que cabe/ });
     expect(within(hero).getByRole("link", { name: /Falar com especialista/ })).toHaveAttribute("href", "/#contato");
   });
 
