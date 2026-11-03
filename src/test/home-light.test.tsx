@@ -93,6 +93,15 @@ describe("copy da home", () => {
     expect(card("O-scan SMART")).toHaveTextContent("9 m² · menos de 1 kW");
     expect(card("S-scan Open")).toHaveTextContent("20 m² · 2 kW em aquisição");
     expect(card("G-scan Open")).toHaveTextContent("23 m² · menos de 3 kW");
+    expect(card("Magnifico Open")).toHaveTextContent("20 m² · menos de 3 kW");
+  });
+
+  it("o card do Magnifico Open segue o mesmo padrão dos outros, mesmo levando à página oficial", () => {
+    renderHome();
+    const region = screen.getByRole("region", { name: "Equipamentos" });
+    const card = (name: string) => within(region).getByText(name).closest("li")!;
+    expect(card("Magnifico Open")).toHaveTextContent("Ver equipamento");
+    expect(within(card("Magnifico Open")).getByRole("link")).toHaveAttribute("href", "https://www.hexamedical.com.br/rm-esaote-magnifico-open/");
   });
 
   it("diz na abertura o que a Hexamedical faz e quanto espaço a ressonância pede", () => {

@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { showroomFilters, type ShowroomFilter, type ShowroomItem } from "@/data/home";
 import type { Flip as FlipPlugin } from "gsap/Flip";
 import { duration, ease, gsap, loadFlip } from "@/lib/motion";
@@ -74,9 +74,9 @@ const Showroom = ({ items }: { items: ShowroomItem[] }) => {
               <span className="showroom__name">{item.name}</span>
               <span className="showroom__line">{item.line}</span>
               {item.spec && <span className="showroom__spec">{item.spec}</span>}
+              {/* Mesmo rótulo em todos os cards: a página oficial do Magnifico Open é do próprio site. */}
               <span className="showroom__go">
-                {item.external ? "Página do equipamento" : "Ver equipamento"}
-                {item.external ? <ArrowUpRight aria-hidden="true" /> : <ArrowRight aria-hidden="true" />}
+                Ver equipamento <ArrowRight aria-hidden="true" />
               </span>
             </>
           );

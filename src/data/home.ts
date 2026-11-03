@@ -105,7 +105,7 @@ export type ShowroomItem = {
   line: string;
   filters: Exclude<ShowroomFilter, "todos">[];
   image: MediaImage;
-  /** Área e consumo informados pela Esaote (src/data/editorial.ts). */
+  /** Área e consumo informados pela Esaote (src/data/editorial.ts; Magnifico Open em src/data/solutions.ts). */
   spec?: string;
   href: string;
   external?: boolean;
@@ -125,6 +125,7 @@ export const showroom: ShowroomItem[] = [
     id: "magnifico-open",
     name: "Magnifico Open",
     line: "Ressonância aberta de corpo inteiro",
+    spec: "20 m² · menos de 3 kW",
     filters: ["rm"],
     image: shot("magnifico-open", 600, 493, "Ressonância magnética Esaote Magnifico Open"),
     href: "https://www.hexamedical.com.br/rm-esaote-magnifico-open/",
