@@ -31,7 +31,7 @@ const Faq = ({ items }: { items: { q: string; a: string }[] }) => {
                 <Plus aria-hidden="true" />
               </button>
             </h3>
-            <div id={panelId} role="region" aria-labelledby={buttonId} className="page-faq__answer" hidden={!expanded}>
+            <div id={panelId} aria-labelledby={buttonId} className="page-faq__answer" hidden={!expanded}>
               <p>{item.a}</p>
             </div>
           </div>

@@ -125,3 +125,15 @@ describe("a home não remonta ao mudar só o hash", () => {
     expect(document.body.contains(before)).toBe(true);
   }, 15000);
 });
+
+describe("FAQ", () => {
+  it("a resposta não é uma região (evita uma landmark por pergunta) e continua ligada à pergunta", async () => {
+    const { container } = renderAt("/servicos/manutencao");
+    await screen.findByRole("heading", { level: 1, name: /manuten/i }, { timeout: 5000 });
+    const panel = container.querySelector<HTMLElement>(".page-faq__answer")!;
+    expect(panel).not.toHaveAttribute("role");
+    const button = container.querySelector<HTMLButtonElement>(".page-faq button")!;
+    expect(panel).toHaveAttribute("aria-labelledby", button.id);
+    expect(button).toHaveAttribute("aria-controls", panel.id);
+  });
+});

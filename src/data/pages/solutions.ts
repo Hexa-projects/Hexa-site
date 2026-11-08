@@ -15,6 +15,11 @@ import type { PageCard } from "@/components/page/CardGrid";
  * Raio-X Digital DRGEM, Placas DR, Densitometria, IA VUNO HexAI e Linha Veterinária; src/data/wdm.ts (folders da WDM);
  * texto do site atual (/bombas-injetoras/, /mindray/, /hexai/, /area-veterinaria-hexamedical/).
  * Na veterinária, hélio só aparece no O-scan Vet, o único modelo veterinário cuja nota confirma "sem líquidos criogênicos/hélio".
+ *
+ * Páginas de produto Esaote usadas como fonte dos modelos de RM humana:
+ * - S-scan Open: https://www.esaote.com/en-US/magnetic-resonance/magnetic-resonance-system/s-scan-open/
+ * - O-scan SMART: https://www.esaote.com/en-US/magnetic-resonance/magnetic-resonance-system/o-scan-smart/
+ * - G-scan Open: https://www.esaote.com/en-US/magnetic-resonance/magnetic-resonance-system/g-scan-open/
  */
 
 const RM_ROUTE = "/solucoes/ressonancia-magnetica";
@@ -745,7 +750,7 @@ export const lines: Record<string, LineContent> = {
         intro: "Injetoras de cabeça simples ou dupla para a sala de tomografia.",
         cards: [
           injector("Accutron CT-D Vision", "Tela sensível ao toque, rastreabilidade e integração com RIS e PACS."),
-          injector("Accutron CT", "Um canal, com cabeça simples e controle sem fio."),
+          injector("Accutron CT", "Um canal e controle sem fio."),
           injector("Accutron CT-D", "Dois canais independentes, com cabeça dupla para contraste e soro e controle sem fio."),
           injector("CT 871", "Alta precisão de fluxo, com controle eletrônico."),
         ],
@@ -792,7 +797,7 @@ export const lines: Record<string, LineContent> = {
         title: "Sistemas DRGEM",
         intro: "A linha principal de radiografia digital da Hexamedical: sistemas DR com detector de painel plano, fixos e móveis.",
         cards: [
-          { title: "XVISION-525", meta: "Sala fixa", body: "Sistema fixo de radiografia digital direta para a sala de raio-X." },
+          { title: "XVISION-525", body: "Sistema DRGEM de radiografia digital direta, com detector de painel plano." },
           { title: "TOPAZ", meta: "Móvel e motorizado", body: "Opção móvel e motorizada para exames à beira do leito e na UTI." },
           { title: "RAYMO", meta: "Móvel e motorizado", body: "Outra opção móvel e motorizada da DRGEM para o leito e a UTI." },
         ],

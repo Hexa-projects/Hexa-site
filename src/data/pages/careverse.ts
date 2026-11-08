@@ -196,7 +196,7 @@ export const careverse = {
   closing: {
     title: "Demonstração do Careverse",
     intro: [
-      "A inteligência artificial da Careverse encontra a solidez da Hexamedical em diagnóstico por imagem. Veja como o Careverse Digital Heart™ pode apoiar o seu serviço.",
+      "A inteligência artificial da Careverse tem implantação e suporte da Hexamedical. Veja como o Careverse Digital Heart™ pode apoiar o seu serviço.",
       "Uma conversa direcionada à sua rotina, sobre módulos, fluxo e integração.",
     ],
   },

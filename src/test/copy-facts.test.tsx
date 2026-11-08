@@ -9,7 +9,9 @@ import RmLinePage from "@/pages/solucoes/RmLinePage";
 import { hub, lines, products } from "@/data/pages/solutions";
 import { magnifico } from "@/data/pages/magnifico";
 import { services } from "@/data/pages/services";
-import { contactPage, legalPages } from "@/data/pages/company";
+import { contactPage, legalPages, materialsPage } from "@/data/pages/company";
+import { careverse } from "@/data/pages/careverse";
+import { showroom } from "@/data/home";
 import { homeMedia } from "@/data/homeMedia";
 
 /** Revisão de fatos e de texto das páginas internas: cada frase diz só o que a fonte diz. */
@@ -101,5 +103,40 @@ describe("hub de serviços", () => {
   it("a foto de banco dos contratos está na lista de direitos a confirmar", () => {
     const photo = "Contrato-de-manutencoes-foto-1024x683.webp";
     expect(fs.readFileSync(path.join(process.cwd(), "DESIGN.md"), "utf8")).toContain(photo);
+  });
+});
+
+describe("revisão final: fatos com fonte", () => {
+  const all = (value: unknown) => JSON.stringify(value);
+
+  it("radiografia: DRGEM é a linha principal, com placas Rayence; Mindray só como 'também'", () => {
+    const radiografia = materialsPage.byLine.find((item) => item.title === "Radiografia digital");
+    expect(radiografia?.body).toBe("Sistemas DRGEM e placas DR Rayence. Também a linha Mindray.");
+    const showroomSource = fs.readFileSync(path.join(process.cwd(), "src/components/home/Showroom.tsx"), "utf8");
+    expect(showroomSource).toContain("radiografia digital DRGEM");
+    expect(showroomSource).not.toContain("radiografia digital Mindray");
+    expect(showroom.find((item) => item.id === "digieye-350")?.line).toBe("Radiografia digital Mindray, além da linha DRGEM");
+  });
+
+  it("o fechamento do Careverse é uma frase simples, sem slogan", () => {
+    expect(all(careverse.closing)).not.toMatch(/solidez/);
+    expect(careverse.closing.intro[0]).toBe(
+      "A inteligência artificial da Careverse tem implantação e suporte da Hexamedical. Veja como o Careverse Digital Heart™ pode apoiar o seu serviço.",
+    );
+  });
+
+  it("Accutron CT com a palavra do site atual (um canal) e XVISION-525 sem qualificador inferido", () => {
+    const cards = lines["bombas-injetoras"].sections.flatMap((section) => section.cards);
+    expect(cards.find((card) => card.title === "Accutron CT")?.body).toBe("Um canal e controle sem fio.");
+    const xvision = lines["radiografia-digital"].sections.flatMap((section) => section.cards).find((card) => card.title === "XVISION-525");
+    expect(xvision?.meta).toBeUndefined();
+    expect(all(xvision)).not.toMatch(/fix/i);
+  });
+
+  it("o cabeçalho de solutions.ts guarda as páginas de produto Esaote de onde vieram os dados", () => {
+    const source = fs.readFileSync(path.join(process.cwd(), "src/data/pages/solutions.ts"), "utf8");
+    for (const model of ["s-scan-open", "o-scan-smart", "g-scan-open"]) {
+      expect(source).toContain(`https://www.esaote.com/en-US/magnetic-resonance/magnetic-resonance-system/${model}/`);
+    }
   });
 });

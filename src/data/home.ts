@@ -200,7 +200,7 @@ export const showroom: ShowroomItem[] = [
   {
     id: "digieye-350",
     name: "DigiEye 350",
-    line: "Radiografia digital fixa Mindray",
+    line: "Radiografia digital Mindray, além da linha DRGEM",
     filters: ["rx"],
     image: shot("digieye-350", 960, 684, "Sistema de radiografia digital Mindray DigiEye 350"),
     href: "/solucoes/radiografia-digital",

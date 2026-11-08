@@ -129,7 +129,7 @@ export const materialsPage = {
   byLine: [
     { title: "Ressonância magnética Esaote", body: "O-scan SMART, S-scan Open, G-scan Open e Magnifico Open.", href: ask("ressonância magnética Esaote") },
     { title: "Linha veterinária", body: "Ressonância e tomografia para medicina veterinária.", href: ask("a linha veterinária") },
-    { title: "Radiografia digital", body: "Sistemas de radiografia digital Mindray.", href: ask("radiografia digital") },
+    { title: "Radiografia digital", body: "Sistemas DRGEM e placas DR Rayence. Também a linha Mindray.", href: ask("radiografia digital") },
     { title: "Bombas injetoras", body: "Injetoras de contraste Medtron Accutron.", href: ask("bombas injetoras") },
     { title: "HexAI", body: "Varredura acelerada com SwiftMR na ressonância.", href: ask("o HexAI") },
   ] satisfies PageCard[],
