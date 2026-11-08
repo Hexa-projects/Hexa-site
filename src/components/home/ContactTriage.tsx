@@ -2,6 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { lifecycle, whatsappHref, type TriagePath } from "@/data/home";
+import "@/styles/triage.css";
+
+const DEFAULT_TITLE = "Fale com a equipe certa";
+const DEFAULT_INTRO =
+  "Escolha o assunto. A conversa abre no WhatsApp com a mensagem pronta e chega direto à equipe comercial ou técnica.";
 
 /**
  * O hexágono do logo vira o anel do túnel quando cada caminho entra na tela (transição CSS de `d`).
@@ -22,8 +27,11 @@ const stageNode = (stage: TriagePath["stage"]) => {
   return { points, title: lifecycle[index]?.title ?? "" };
 };
 
-/** H4: contato como triagem. Cada caminho já abre a conversa com o assunto certo. */
-const ContactTriage = ({ items }: { items: TriagePath[] }) => {
+/**
+ * H4: contato como triagem. Cada caminho já abre a conversa com o assunto certo.
+ * As páginas internas reaproveitam a mesma triagem (PageContact) com título e introdução próprios.
+ */
+const ContactTriage = ({ items, title = DEFAULT_TITLE, intro = DEFAULT_INTRO }: { items: TriagePath[]; title?: string; intro?: string }) => {
   const root = useRef<HTMLElement>(null);
   const [ringed, setRinged] = useState<ReadonlySet<string>>(new Set());
 
@@ -51,8 +59,10 @@ const ContactTriage = ({ items }: { items: TriagePath[] }) => {
   return (
     <section ref={root} id="contato" className="triage" aria-labelledby="triage-title">
       <div className="triage__head">
-        <h2 id="triage-title">Fale com a equipe certa</h2>
-        <p>Escolha o assunto. A conversa abre no WhatsApp com a mensagem pronta e chega direto à equipe comercial ou técnica.</p>
+        <h2 id="triage-title" data-reveal="title">
+          {title}
+        </h2>
+        <p>{intro}</p>
       </div>
 
       <ul className="triage__list">

@@ -89,6 +89,28 @@ a {
   background: rgba(238, 240, 238, 0.08);
 }
 
+/* Link de texto do sistema (fica no claro): laranja tinta, sublinhado que aparece no hover, alvo de 44 px. */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  color: var(--orange-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--dur-quick) var(--ease-out);
+}
+
+.text-link:hover {
+  text-decoration-color: currentColor;
+}
+
+.text-link svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
 .not-found {
   max-width: var(--content-max);
   margin: 0 auto;
@@ -123,7 +145,8 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .skip-link,
   .button,
-  .button svg {
+  .button svg,
+  .text-link {
     transition: none;
   }
 }

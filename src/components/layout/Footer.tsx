@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import { navigation } from "@/data/navigation";
 
 const footerLinks = navigation.map((item) => ({
@@ -37,7 +37,6 @@ const Footer = () => {
         <div className="site-footer__details">
           <a href="tel:+5511973140914"><Phone aria-hidden="true" /> +55 11 97314-0914</a>
           <a href="mailto:comercial@hexamedical.com.br"><Mail aria-hidden="true" /> comercial@hexamedical.com.br</a>
-          <Link to="/ouvidoria"><MapPin aria-hidden="true" /> Ouvidoria</Link>
         </div>
         <div className="site-footer__legal">
           <p>© {new Date().getFullYear()} Hexamedical. Todos os direitos reservados.</p>

@@ -243,7 +243,7 @@ Filtros do portfólio em pílula, 44 px, contorno `rule-light`, texto `ink-2`. P
 - **Cabeçalho normal** (páginas internas): `position: sticky` no topo, fundo `mineral-50`, fio `rule-light`, logo escuro, CTA "Falar com especialista" em `ink` que fica laranja no hover.
 - **Cabeçalho da home**: `position: fixed` o tempo todo (`site-header--overlay`). Enquanto a abertura (`data-header-theme="dark"`) está por baixo dele, fica no modo palco: transparente, logo claro, CTA laranja e, depois de 24 px de rolagem, fundo `--stage-veil` (grafite a 92%) com fio `rule-dark`. Depois da abertura vira o cabeçalho claro, sem mudar de posição.
 - Os dois somem ao rolar para baixo (após 160 px) e voltam ao subir, nunca com menu aberto ou foco dentro. Painéis abrem por hover e foco; Esc fecha e devolve o foco. Abaixo de 1024 px, botão de menu de 44 px.
-- **Rodapé**: `graphite-900`, logo claro, contato em laranja, três grupos com títulos em Archivo 620 e links de 44 px; telefone, e-mail e ouvidoria acima da linha legal.
+- **Rodapé**: `graphite-900`, logo claro, contato em laranja, três grupos com títulos em Archivo 620 e links de 44 px (a Ouvidoria fica no grupo Empresa); telefone e e-mail acima da linha legal.
 
 ### Linha do tempo e emblema
 Anel SVG com trilho `rule-light`, progresso laranja e seis hexágonos (contorno `ink-3`, laranja quando alcançados); portal circular com a foto da etapa. No celular, cada etapa traz um emblema: a foto dentro do anel, os seis hexágonos e o arco até a etapa atual.
@@ -267,14 +267,43 @@ Anel SVG com trilho `rule-light`, progresso laranja e seis hexágonos (contorno 
 - **Don't** inventar clientes, números, depoimentos, certificações ou prazos. Só material do site oficial.
 - **Don't** aplicar este sistema à página Magnifico Open nem à LP Careverse.
 
+## Páginas internas
+
+Kit único em `src/components/page/`, CSS em `src/styles/page.css`, movimento em `src/motion/usePageReveal.ts`. Toda interna é montada com ele e só com dados; nada de CSS próprio por página. A 404 do sistema (`src/pages/NotFound.tsx`) já usa o kit.
+
+### Componentes
+- **PageShell** `({ title, description, children })`: `Layout` com o cabeçalho normal (sticky, claro), `<title>{title} | Hexamedical</title>`, meta description, importa `page.css` e roda o `usePageReveal` uma vez para a página toda. As páginas não chamam o hook de novo; só marcam `data-reveal`.
+- **PageHero** `({ tone, eyebrow?, title, lead, crumbs, media?, actions? })`: migalha (`nav` "Você está em", separador em hexágono, último item com `aria-current="page"`), `h1` em Archivo 650 `--step-4` (o display de 5,25 rem continua só na home), lead `--step-1` até 44ch, ações (`primary` laranja, `quiet` contorno). Rota interna vira `Link`; endereço externo (WhatsApp) abre em nova aba. O `eyebrow` não vira eyebrow: aparece como placa técnica embaixo das ações (fio + `--step--1`), por exemplo "Esaote · Ressonância magnética aberta".
+- **PageSection** `({ id?, title, intro?, tone?, media?, children })`: `section` rotulada pelo próprio `h2` (Archivo 620 `--step-3`), intro em lead até 52ch. Duas seções claras seguidas ganham um fio `rule-light` na coluna em vez de somar dois respiros. Com `media` (foto), vira texto com mídia: foto 4:3 ao lado no desktop, depois do texto no celular. Filhos do corpo ficam a `--space-7` um do outro. `.page-prose` dá a coluna de leitura de 62ch para texto corrido.
+- **PointList** `({ items })`: lista com o marcador em hexágono laranja da linha do tempo, um fio por item, em colunas a partir de 22 rem.
+- **SpecTable** `({ caption, source, rows })`: ficha técnica em painel branco com fio, `caption` em Archivo, rótulo `ink-2` e valor `ink` 600 com números tabulares; "Fonte: …" sempre embaixo. Só dados do fabricante.
+- **CardGrid** `({ items: { title, body?, href?, image?, meta?, fill? }[] })`: com imagem, o ladrilho da vitrine (base branca 4:3, equipamento inteiro em `contain`; `fill` só para foto de cena); sem imagem, painel branco com fio que muda de tom no hover. Grade só de equipamentos fica em duas colunas abaixo de 640 px, como a vitrine.
+- **FactStrip** `({ items: CompanyFact[] })`: números como os da empresa na home; o primeiro com o fio laranja de 2 px.
+- **Faq** `({ items: { q, a }[] })`: accordion com botão nativo dentro de `h3`, `aria-expanded` e `aria-controls`, resposta `role="region"`; cada pergunta abre sozinha; o "+" laranja gira 45°.
+- **PageVideo** `({ video, caption })`: pôster com a pílula laranja "Assistir", `preload="none"`, controles só depois do clique; vídeo vertical limitado a 22 rem (16 rem no celular).
+- **PageContact** `({ title?, intro?, paths })`: a triagem da home (`ContactTriage`, com CSS próprio em `src/styles/triage.css`) com a mensagem pronta da página. Sem título, usa "Fale com a equipe certa".
+
+### Hero escuro ou claro
+- **Escuro** (`graphite-900`): páginas de produto. O equipamento aparece inteiro sobre a base branca da vitrine e, no desktop, os anéis do túnel em `rule-dark` ficam atrás dele (sem laranja). Vídeo no hero é mudo, em loop, só toca na tela e sempre tem "Pausar vídeo"; com movimento reduzido fica no pôster. O cabeçalho continua o claro (o modo palco é só da home).
+- **Claro** (`mineral-50` com fio embaixo): serviços, institucional, contato, blog e 404. Mídia é foto de cena em quadro 4:3 de raio `md`, cobrindo o quadro.
+- Fora o hero, no máximo uma faixa escura (`tone="dark"`) por página, para equipamento ou vídeo. O resto é mineral.
+
+### Movimento (`usePageReveal`)
+Três movimentos, uma vez cada, quando o elemento chega a 85% da altura da tela (`ScrollTrigger`, `start: "top 85%"`, `once: true`):
+- `data-reveal="title"`: o título sobe por trás da máscara (`clip-path: inset(0 0 100% 0)` + `yPercent: 18`), 0,8 s, `expo.out`; o recorte é removido no fim para não cortar acentos.
+- `data-reveal="media"`: a mídia abre de `inset(7% 7% round 14px)` até o quadro inteiro, 0,6 s.
+- `data-reveal="item"`: os itens de um mesmo pai entram em sequência (opacidade e 16 px), `stagger` 0,06 limitado a 0,4 s no total.
+
+No celular o ritmo é o mesmo, com durações ×0,8. Com movimento reduzido, ou sem `IntersectionObserver`, nada é animado. O HTML nasce no estado final e o contexto do GSAP desfaz tudo ao trocar de rota. Sem Lenis e sem palco WebGL nas internas.
+
 ## Desempenho
 
 Medido no build de 2026-11-02: pacote principal ≈ 97,6 kB gzip; chunk da home ≈ 64 kB gzip, incluindo GSAP, ScrollTrigger, DrawSVG e Lenis; Flip ≈ 9,6 kB, carregado só quando o visitante usa o filtro. Vídeo do túnel: 0,41 MB (MP4 1280), 0,27 MB (WebM) e 0,26 MB (MP4 720×900 do celular). Os vídeos de prova usam `preload="none"`.
 
 ## Estado de transição e pendências
 
-- **Páginas internas ainda não migradas.** Seguem claras e usam o CSS editorial antigo (`src/editorial*.css`, `src/wdm*.css`, minificados), que ainda traz eyebrows e numeração 01/02. Isso é dívida a remover, não parte do sistema.
+- **Páginas internas em migração para o kit** (seção "Páginas internas"). Até a troca, as antigas seguem claras e usam o CSS editorial antigo (`src/editorial*.css`, `src/wdm*.css`, minificados), que ainda traz eyebrows e numeração 01/02. Isso é dívida a remover, não parte do sistema.
 - **Tokens legados**: `src/index.css` mantém as variáveis HSL do shadcn (`--primary` 28 100% 50%, um laranja diferente de `#f87517`) e força Source Sans 3 em `h1`–`h6`. As páginas novas devem usar os tokens de `tokens.css`.
-- **Drift a resolver**: `ease.exit`, `ease.scan` e `stagger` estão declarados em `motion.ts` e ainda não são usados (reservados para as cenas das páginas internas).
+- **Drift a resolver**: `ease.exit` e `ease.scan` estão declarados em `motion.ts` e ainda não são usados; `stagger` passou a ser usado pelo `usePageReveal`.
 - **Mídia**: confirmar o direito de uso do vídeo da Esaote fora do site atual e se as fotos de manutenção e laboratório são próprias ou de banco.
 - **Teste de 60 fps**: falta definir o notebook de referência.

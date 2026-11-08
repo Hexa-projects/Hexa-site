@@ -1,24 +1,25 @@
 import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
-import Layout from "@/components/layout/Layout";
+import PageShell from "@/components/page/PageShell";
+import PageHero from "@/components/page/PageHero";
 
-const NotFound = () => {
-  return (
-    <Layout>
-      <Helmet>
-        <title>Página não encontrada — Hexamedical</title>
-        <meta name="robots" content="noindex" />
-      </Helmet>
-      <section className="not-found" aria-labelledby="not-found-title">
-        <h1 id="not-found-title">Página não encontrada.</h1>
-        <p>O endereço pode ter mudado com o novo site. Comece pela página inicial ou veja as soluções.</p>
-        <div className="not-found__actions">
-          <Link to="/" className="button button--primary">Ir para a página inicial</Link>
-          <Link to="/solucoes" className="button button--quiet">Ver soluções</Link>
-        </div>
-      </section>
-    </Layout>
-  );
-};
+/** 404 do sistema: qualquer endereço sem rota (inclusive slug inexistente) cai aqui, no hero claro do kit. */
+const NotFound = () => (
+  <PageShell title="Página não encontrada" description="O endereço procurado não existe no site da Hexamedical.">
+    <Helmet>
+      <meta name="robots" content="noindex" />
+    </Helmet>
+    <PageHero
+      tone="light"
+      title="Página não encontrada"
+      lead="O endereço pode ter mudado com o novo site. Comece pela página inicial, veja as soluções ou fale com a equipe."
+      crumbs={[{ label: "Início", href: "/" }, { label: "Página não encontrada" }]}
+      actions={[
+        { label: "Ir para a página inicial", href: "/", kind: "primary" },
+        { label: "Ver soluções", href: "/solucoes", kind: "quiet" },
+        { label: "Falar com a equipe", href: "/contato", kind: "quiet" },
+      ]}
+    />
+  </PageShell>
+);
 
 export default NotFound;
