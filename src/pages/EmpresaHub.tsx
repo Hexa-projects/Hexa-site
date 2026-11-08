@@ -1,6 +1,0 @@
-import { Helmet } from "react-helmet-async";
-import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
-import Layout from "@/components/layout/Layout";
-
-export default function EmpresaHub() { return <Layout><Helmet><title>A Hexamedical</title></Helmet><section className="ed-intro"><div className="ed-shell"><span className="ed-eyebrow">A Hexamedical</span><h1>Conheça a base por trás da tecnologia.</h1><p>Equipamentos, implantação e serviços técnicos conectados à rotina de diagnóstico por imagem.</p></div></section><section className="ed-shell ed-commercial"><div className="ed-detail-grid"><article><span>01</span><h3>Sobre</h3><p>Entenda a atuação da Hexamedical.</p><Link className="ed-text-link" to="/sobre">Conhecer <ArrowUpRight size={17} /></Link></article><article><span>02</span><h3>Estrutura</h3><p>Salas de testes, laboratórios, treinamento e showroom.</p><Link className="ed-text-link" to="/estrutura">Conhecer <ArrowUpRight size={17} /></Link></article><article><span>03</span><h3>Contato</h3><p>Converse com a equipe sobre seu projeto ou equipamento.</p><Link className="ed-text-link" to="/contato">Conversar <ArrowUpRight size={17} /></Link></article></div></section></Layout>; }

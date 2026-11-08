@@ -15,14 +15,13 @@ const LinePage = lazy(() => import("./pages/solucoes/LinePage"));
 const ServicosHub = lazy(() => import("./pages/servicos/ServicosHub"));
 const ProductEditorialPage = lazy(() => import("./pages/ProductEditorialPage"));
 const ServicePage = lazy(() => import("./pages/servicos/ServicePage"));
-const Ouvidoria = lazy(() => import("./pages/OuvidoriaTemp"));
-const Contato = lazy(() => import("./pages/Contato"));
+const EmpresaPage = lazy(() => import("./pages/empresa/EmpresaPage"));
+const ContatoPage = lazy(() => import("./pages/empresa/ContatoPage"));
+const OuvidoriaPage = lazy(() => import("./pages/empresa/OuvidoriaPage"));
+const MateriaisPage = lazy(() => import("./pages/empresa/MateriaisPage"));
+const LegalPage = lazy(() => import("./pages/empresa/LegalPage"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
 const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
-const EmpresaHub = lazy(() => import("./pages/EmpresaHub"));
-const MateriaisPage = lazy(() => import("./pages/MateriaisPage"));
-const PrivacyPage = lazy(() => import("./pages/PrivacyPage"));
-const TermsPage = lazy(() => import("./pages/TermsPage"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Redirecionamentos internos: o dev server e os links dentro do app se comportam como a produção.
@@ -65,14 +64,15 @@ const App = () => (
             <Route path="/solucoes/:slug" element={<ProductPage />} />
             {/* Serviços (manutenção, contratos, instalação, reparo); slug desconhecido mostra a 404 do sistema. */}
             <Route path="/servicos/:slug" element={<ServicePage />} />
-            <Route path="/contato" element={<Contato />} />
-            <Route path="/ouvidoria" element={<Ouvidoria />} />
-            <Route path="/empresa" element={<EmpresaHub />} />
+            {/* Institucional (empresa, contato, ouvidoria, materiais e páginas legais), montado com o kit. */}
+            <Route path="/empresa" element={<EmpresaPage />} />
+            <Route path="/contato" element={<ContatoPage />} />
+            <Route path="/ouvidoria" element={<OuvidoriaPage />} />
+            <Route path="/materiais" element={<MateriaisPage />} />
+            <Route path="/politica-de-privacidade" element={<LegalPage kind="privacidade" />} />
+            <Route path="/termos" element={<LegalPage kind="termos" />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
-            <Route path="/materiais" element={<MateriaisPage />} />
-            <Route path="/politica-de-privacidade" element={<PrivacyPage />} />
-            <Route path="/termos" element={<TermsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           </Suspense>

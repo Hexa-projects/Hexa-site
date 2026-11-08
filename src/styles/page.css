@@ -854,6 +854,299 @@ a.page-card__link:hover .page-card__title svg {
   color: var(--on-dark-2);
 }
 
+/* ---------- Canais de atendimento (contato) ---------- */
+
+.page-channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.page-channels__item {
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--rule-light);
+}
+
+.page-channels dt {
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.page-channels dd {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-2);
+  margin: var(--space-2) 0 0;
+}
+
+/* O dado fica como texto: dá para selecionar e copiar sem abrir nada. */
+.page-channels__value {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-1);
+  font-weight: 620;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+/* ---------- Formulário (Ouvidoria) ---------- */
+
+.page-form-wrap {
+  max-width: 52rem;
+}
+
+.page-form {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.page-form__step {
+  display: grid;
+  gap: var(--space-5);
+  margin: 0;
+  padding: var(--space-6);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--rule-light);
+}
+
+.page-form__step > legend {
+  float: left;
+  width: 100%;
+  padding: 0;
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-2);
+  font-weight: 620;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.page-form__step > legend + * {
+  clear: both;
+}
+
+.page-form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-5);
+}
+
+.page-form__field {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+
+.page-form label,
+.page-form__choices > legend {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.page-form__required {
+  color: var(--ink-2);
+  font-weight: 400;
+}
+
+.page-form input:not([type="radio"]):not([type="checkbox"]):not([type="file"]),
+.page-form select,
+.page-form textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--ink-3);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.4;
+}
+
+.page-form textarea {
+  resize: vertical;
+}
+
+.page-form input[type="file"] {
+  font: inherit;
+  max-width: 100%;
+}
+
+.page-form ::placeholder {
+  color: var(--ink-3);
+}
+
+.page-form [aria-invalid="true"] {
+  border-color: var(--orange-ink);
+  box-shadow: inset 0 0 0 1px var(--orange-ink);
+}
+
+.page .page-form__hint {
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  line-height: 1.45;
+}
+
+.page .page-form__error {
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--orange-ink);
+  color: var(--orange-ink);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.page-form__choices {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.page-form__choices > legend {
+  margin-bottom: var(--space-3);
+  padding: 0;
+}
+
+.page-form__choice,
+.page-form__consent {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: var(--space-1) var(--space-3);
+  align-items: start;
+}
+
+.page-form__choice .page-form__hint {
+  grid-column: 2;
+}
+
+.page-form__consent .page-form__error {
+  grid-column: 1 / -1;
+}
+
+.page-form input[type="radio"],
+.page-form input[type="checkbox"] {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  accent-color: var(--orange-ink);
+}
+
+.page-form__inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.page-form__inline input {
+  max-width: 8rem;
+}
+
+.page-form .button--quiet:hover,
+.page-form-wrap .button--quiet:hover {
+  background: var(--mineral-100);
+}
+
+.page-form__files {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+
+/* Armadilha para robôs: fora da tela, sem foco. */
+.page-form__trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.page .page-form__note {
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.page-form__failure:not(:empty) {
+  padding: var(--space-4);
+  border-left: 2px solid var(--orange-ink);
+  background: var(--mineral-50);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.page-form__step > .button--primary {
+  justify-self: start;
+}
+
+.page-form__summary {
+  padding: var(--space-5);
+  border-left: 3px solid var(--orange-ink);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--rule-light);
+}
+
+.page .page-form__summary h3,
+.page .page-form__receipt h3 {
+  font-size: var(--step-1);
+  line-height: 1.2;
+}
+
+.page-form__summary ul {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding-left: var(--space-5);
+}
+
+.page-form__summary a {
+  color: var(--orange-ink);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.page-form__receipt {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border-top: 2px solid var(--orange);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--rule-light);
+}
+
+.page-form__protocol strong {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-3);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+.page-form__receipt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
 /* ---------- Fechamento: a triagem da home ---------- */
 
 .page > .page-section--light + .triage::before {
@@ -984,6 +1277,17 @@ a.page-card__link:hover .page-card__title svg {
 
   .page-video--vertical .page-video__media {
     max-width: 16rem;
+  }
+
+  .page-form__step,
+  .page-form__receipt {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .page-form__step > .button--primary,
+  .page-form__receipt-actions .button {
+    justify-self: stretch;
+    flex: 1 1 100%;
   }
 }
 

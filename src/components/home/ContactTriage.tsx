@@ -31,7 +31,18 @@ const stageNode = (stage: TriagePath["stage"]) => {
  * H4: contato como triagem. Cada caminho já abre a conversa com o assunto certo.
  * As páginas internas reaproveitam a mesma triagem (PageContact) com título e introdução próprios.
  */
-const ContactTriage = ({ items, title = DEFAULT_TITLE, intro = DEFAULT_INTRO }: { items: TriagePath[]; title?: string; intro?: string }) => {
+const ContactTriage = ({
+  items,
+  title = DEFAULT_TITLE,
+  intro = DEFAULT_INTRO,
+  channelsLink = true,
+}: {
+  items: TriagePath[];
+  title?: string;
+  intro?: string;
+  /** Link "Ver todos os canais" (para /contato). Desligado na própria página de contato. */
+  channelsLink?: boolean;
+}) => {
   const root = useRef<HTMLElement>(null);
   const [ringed, setRinged] = useState<ReadonlySet<string>>(new Set());
 
@@ -89,12 +100,14 @@ const ContactTriage = ({ items, title = DEFAULT_TITLE, intro = DEFAULT_INTRO }: 
         ))}
       </ul>
 
-      <p className="triage__channels">
-        Prefere e-mail ou telefone?{" "}
-        <Link to="/contato">
-          Ver todos os canais <ArrowRight aria-hidden="true" />
-        </Link>
-      </p>
+      {channelsLink && (
+        <p className="triage__channels">
+          Prefere e-mail ou telefone?{" "}
+          <Link to="/contato">
+            Ver todos os canais <ArrowRight aria-hidden="true" />
+          </Link>
+        </p>
+      )}
     </section>
   );
 };
