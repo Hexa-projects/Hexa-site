@@ -83,7 +83,9 @@ describe("soluções: linha de ressonância magnética", () => {
     // Área do S-scan: número oficial da Esaote (src/data/editorial.ts), acima da base comercial.
     expect(data["S-scan Open"]["Área de instalação"]).toBe("a partir de 20 m²");
     expect(data["Magnifico Open"]["Campo magnético"]).toBe("0,4 T");
-    expect(data["Magnifico Open"]["Área de instalação"]).toBe("até 20 m²");
+    // Magnifico Open: descrição de produto da Esaote (p5, "about 20 sqmt", 3.000 VA) e brochura (p10, "maximum 3 Kw").
+    expect(data["Magnifico Open"]["Área de instalação"]).toBe("cerca de 20 m²");
+    expect(data["Magnifico Open"]["Consumo de energia"]).toBe("até 3 kW");
     // G-scan: dados de src/data/editorial.ts (instalação mínima de 23 m², menos de 3 kW).
     expect(data["G-scan Open"]["Área de instalação"]).toBe("a partir de 23 m²");
     expect(data["G-scan Open"]["Consumo de energia"]).toBe("menos de 3 kW");
@@ -121,7 +123,7 @@ describe("soluções: páginas de produto", () => {
     const { container } = renderAt("/solucoes/s-scan-open");
     expect(screen.getByRole("heading", { level: 1, name: "S-scan Open" })).toBeInTheDocument();
     expect(page(container).textContent).toMatch(/não usa hélio/i);
-    // Área oficial da Esaote; "até 20 m²" só pode aparecer no card relacionado do Magnifico Open.
+    // Área oficial da Esaote; a do Magnifico Open ("cerca de 20 m²") só aparece no card relacionado.
     const ownText = Array.from(page(container).querySelectorAll("section"))
       .filter((section) => section.id !== "outras-ressonancias")
       .map((section) => section.textContent)

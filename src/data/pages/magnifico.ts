@@ -9,9 +9,8 @@ import { rmCards, type CompareTableData } from "@/data/pages/solutions";
  * - Esaote, "Magnifico Open: System description and configuration", rev. 2, outubro de 2022 (PD, página do PDF entre parênteses);
  * - Esaote, brochura "Magnifico Open" (160000334MA ver. 02) (BR, página do PDF entre parênteses);
  * - base comercial da Hexamedical (nota Magnifico Open do segundo cérebro): monofásica 220 V e a cobertura clínica em porcentagem.
- * Área: a brochura diz que ímã e blindagem cabem em 20 m² (BR p10); a PD fala em "cerca de 20 m²" como área mínima (PD p5).
- * Mantido o "até 20 m²" da base comercial e do comparativo da linha, sempre com o projeto da sala confirmando antes da compra.
- * Consumo: "máximo de 3 kW" (BR p10; PD p5: 3.000 VA sem monitor e PC).
+ * Área: "cerca de 20 m²" (PD p5, "about 20 sqmt"; BR p10, ímã e blindagem em 20 m²). O "até 20 m²" da base comercial não é usado.
+ * Consumo: "até 3 kW" (BR p10, "maximum 3 Kw"; PD p5, 3.000 VA sem monitor e PC). Mesmos valores na linha de RM e na home.
  */
 
 const RM_ROUTE = "/solucoes/ressonancia-magnetica";
@@ -27,10 +26,10 @@ export const magnificoMedia = {
 export const magnifico = {
   title: "Magnifico Open, ressonância magnética aberta Esaote",
   description:
-    "Magnifico Open, ressonância aberta de corpo inteiro da Esaote: 0,4 T com ímã permanente, não usa hélio, instalação em até 20 m² e alimentação monofásica 220 V.",
+    "Magnifico Open, ressonância aberta de corpo inteiro da Esaote: 0,4 T com ímã permanente, não usa hélio, instalação em cerca de 20 m², até 3 kW e alimentação monofásica 220 V.",
   name: "Magnifico Open",
   line: "Esaote · Ressonância magnética aberta de corpo inteiro",
-  lead: "Ressonância aberta de corpo inteiro, com ímã permanente de 0,4 T. Não usa hélio, cabe numa sala de até 20 m² e funciona em rede monofásica 220 V.",
+  lead: "Ressonância aberta de corpo inteiro, com ímã permanente de 0,4 T. Não usa hélio, é instalada em cerca de 20 m² e funciona em rede monofásica 220 V, com consumo de até 3 kW.",
   whatsappText: "Olá! Quero saber mais sobre o Magnifico Open.",
   compare: { label: "Comparar com a linha", href: `${RM_ROUTE}#comparativo` },
 
@@ -42,7 +41,7 @@ export const magnifico = {
     facts: [
       { value: "0,4 T", label: "campo vertical de ímã permanente de neodímio" },
       { value: "Sem hélio", label: "sem criogênicos e sem refrigeração a água" },
-      { value: "até 20 m²", label: "para o ímã e a blindagem de radiofrequência" },
+      { value: "cerca de 20 m²", label: "para o ímã e a blindagem de radiofrequência" },
     ] satisfies CompanyFact[],
   },
 
@@ -96,10 +95,10 @@ export const magnifico = {
   installation: {
     title: "Instalação e consumo",
     intro:
-      "Com ímã permanente, o Magnifico Open não usa hélio e consome no máximo 3 kW. A Hexamedical confirma obra, blindagem, carga de piso e layout final no projeto da sala, antes da compra.",
+      "Com ímã permanente, o Magnifico Open não usa hélio e consome até 3 kW. A Hexamedical confirma obra, blindagem, carga de piso e layout final no projeto da sala, antes da compra.",
     points: [
-      "Ímã e blindagem de radiofrequência em uma sala de até 20 m²; no exemplo de instalação da Esaote, 4,40 m por 4,50 m",
-      "Alimentação monofásica 220 V e consumo máximo de 3 kW",
+      "Ímã e blindagem de radiofrequência em cerca de 20 m²; no exemplo de instalação da Esaote, 4,40 m por 4,50 m",
+      "Alimentação monofásica 220 V e consumo de até 3 kW",
       "Não usa hélio: sem criogênicos e sem refrigeração a água",
       "Gaiola de blindagem de 90 dB ou mais, projetada para cada sala",
       "Módulo de compensação magnética de série, que pode permitir a instalação perto de elevadores, trens e outras fontes de variação do campo externo",
@@ -117,13 +116,13 @@ export const magnifico = {
     ["Matriz", "até 512 x 512"],
     ["Mesa", "pacientes de até 200 kg e 200 cm"],
     ["Bobinas de série", "8, com reconhecimento automático"],
-    ["Área de instalação", "até 20 m²"],
+    ["Área de instalação", "cerca de 20 m²"],
     ["Alimentação", "monofásica 220 V"],
-    ["Consumo", "máximo de 3 kW"],
+    ["Consumo", "até 3 kW"],
     ["Recursos", "True-Motion, Speed-Up 2D e 3D, MAR, redução de TR"],
   ] as [string, string][],
   specSource:
-    "Esaote, descrição de produto Magnifico Open rev. 2 (outubro de 2022) e brochura Magnifico Open; alimentação monofásica e área de até 20 m² da base comercial da Hexamedical",
+    "Esaote, descrição de produto Magnifico Open rev. 2 (outubro de 2022) e brochura Magnifico Open; alimentação monofásica da base comercial da Hexamedical",
 
   faq: [
     {
@@ -132,7 +131,7 @@ export const magnifico = {
     },
     {
       q: "Quanto espaço ele precisa?",
-      a: "O ímã e a blindagem cabem em uma sala de até 20 m². Obra, blindagem, carga de piso e layout final são confirmados no projeto da sala, antes da compra.",
+      a: "Cerca de 20 m² para o ímã e a blindagem, segundo a Esaote. Obra, blindagem, carga de piso e layout final são confirmados no projeto da sala, antes da compra.",
     },
     {
       q: "Ele faz exames de cabeça?",

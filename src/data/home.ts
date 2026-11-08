@@ -125,7 +125,7 @@ export const showroom: ShowroomItem[] = [
     id: "magnifico-open",
     name: "Magnifico Open",
     line: "Ressonância aberta de corpo inteiro",
-    spec: "20 m² · menos de 3 kW",
+    spec: "cerca de 20 m² · até 3 kW",
     filters: ["rm"],
     image: shot("magnifico-open", 600, 493, "Ressonância magnética Esaote Magnifico Open"),
     href: "/solucoes/magnifico-open",

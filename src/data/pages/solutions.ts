@@ -9,6 +9,7 @@ import type { PageCard } from "@/components/page/CardGrid";
  * Regra de escolha de RM humana, Densitometria); texto do site atual.
  * Hélio: só Magnifico Open e S-scan Open têm "não usa hélio" confirmado. O O-scan humano e o G-scan não falam de hélio.
  * Área do S-scan Open: "a partir de 20 m²", número oficial da Esaote (src/data/editorial.ts), acima do "até 20 m²" da base comercial.
+ * Magnifico Open: "cerca de 20 m²" e "até 3 kW", da descrição de produto (p5) e da brochura (p10) da Esaote (ver src/data/pages/magnifico.ts).
  *
  * Demais linhas (injetoras, radiografia, densitometria, HexAI, veterinária) e modelos WDM: notas Injetoras Medtron Accutron,
  * Raio-X Digital DRGEM, Placas DR, Densitometria, IA VUNO HexAI e Linha Veterinária; src/data/wdm.ts (folders da WDM);
@@ -139,7 +140,7 @@ export const rmCards: Record<string, PageCard> = {
   },
   "magnifico-open": {
     title: "Magnifico Open",
-    meta: "até 20 m² · menos de 3 kW",
+    meta: "cerca de 20 m² · até 3 kW",
     body: "Ressonância aberta de corpo inteiro, com campo de 0,4 T.",
     href: "/solucoes/magnifico-open",
     image: cutouts.magnifico,
@@ -213,8 +214,8 @@ export const rmLine = {
         ],
       },
       { label: "Campo magnético", values: ["0,31 T", "0,25 T", "0,4 T", "sob consulta"] },
-      { label: "Área de instalação", values: ["a partir de 9 m²", "a partir de 20 m²", "até 20 m²", "a partir de 23 m²"] },
-      { label: "Consumo de energia", values: ["menos de 1 kW", "2 kW em aquisição", "menos de 3 kW", "menos de 3 kW"] },
+      { label: "Área de instalação", values: ["a partir de 9 m²", "a partir de 20 m²", "cerca de 20 m²", "a partir de 23 m²"] },
+      { label: "Consumo de energia", values: ["menos de 1 kW", "2 kW em aquisição", "até 3 kW", "menos de 3 kW"] },
       { label: "Alimentação", values: ["110/220 V", "monofásica", "monofásica 220 V", "sob consulta"] },
     ],
   } satisfies CompareTableData,
@@ -223,7 +224,7 @@ export const rmLine = {
   faq: [
     {
       q: "Qual ressonância precisa de menos espaço?",
-      a: "O O-scan SMART, instalado a partir de 9 m². O Magnifico Open cabe em até 20 m², o S-scan Open pede a partir de 20 m² e o G-scan Open, a partir de 23 m². Obra, blindagem, carga de piso e layout final são confirmados no projeto da sala.",
+      a: "O O-scan SMART, instalado a partir de 9 m². O Magnifico Open pede cerca de 20 m², o S-scan Open, a partir de 20 m² e o G-scan Open, a partir de 23 m². Obra, blindagem, carga de piso e layout final são confirmados no projeto da sala.",
     },
     {
       q: "Quais modelos não usam hélio?",

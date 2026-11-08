@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
 import { MemoryRouter } from "react-router-dom";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import App from "@/App";
 import MagnificoPage from "@/pages/solucoes/MagnificoPage";
 import { magnifico } from "@/data/pages/magnifico";
@@ -56,9 +56,16 @@ describe("Magnifico Open: conteúdo", () => {
     const { container } = renderPage();
     const text = page(container).textContent ?? "";
     expect(screen.getByRole("heading", { level: 1, name: "Magnifico Open" })).toBeInTheDocument();
-    for (const fact of ["0,4 T", "ímã permanente", "Não usa hélio", "até 20 m²", "monofásica 220 V", "True-Motion", "Speed-Up 2D e 3D", "MAR"]) {
+    for (const fact of ["0,4 T", "ímã permanente", "Não usa hélio", "cerca de 20 m²", "até 3 kW", "monofásica 220 V", "True-Motion", "Speed-Up 2D e 3D", "MAR"]) {
       expect(text.includes(fact), fact).toBe(true);
     }
+    // Área e consumo oficiais: PD p5 ("about 20 sqmt", 3.000 VA) e brochura p10 ("maximum 3 Kw").
+    // Fora os relacionados: o card do G-scan Open diz "menos de 3 kW", que é dele.
+    const own = Array.from(page(container).querySelectorAll("section"))
+      .filter((section) => section.id !== "outras-ressonancias")
+      .map((section) => section.textContent)
+      .join(" ");
+    for (const old of ["até 20 m²", "menos de 3 kW", "máximo de 3 kW"]) expect(own.includes(old), old).toBe(false);
   });
 
   it("traz a tabela de cobertura clínica com a fonte declarada", () => {
@@ -105,7 +112,7 @@ describe("Magnifico Open: cena do vídeo", () => {
     const sources = Array.from(video.querySelectorAll("source")).map((source) => source.getAttribute("src"));
     expect(sources).toContain(homeMedia.tunnel.desktop.mp4);
     const facts = within(region).getAllByRole("term").map((term) => term.textContent?.trim());
-    expect(facts).toEqual(["0,4 T", "Sem hélio", "até 20 m²"]);
+    expect(facts).toEqual(["0,4 T", "Sem hélio", "cerca de 20 m²"]);
     expect(within(region).getByRole("button", { name: /vídeo/i })).toBeInTheDocument();
   });
 
@@ -175,5 +182,66 @@ describe("Magnifico Open: rota e vitrine da home", () => {
     const card = showroom.find((item) => item.id === "magnifico-open")!;
     expect(card.href).toBe(ROUTE);
     expect(card.external).toBeUndefined();
+  });
+});
+
+describe("Magnifico Open: cena sem vazamento e economia de dados", () => {
+  afterEach(() => {
+    delete (navigator as Navigator & { connection?: unknown }).connection;
+  });
+
+  it("rolar a cena para frente e para trás não acumula animações no contexto", () => {
+    setScreen({ wide: true, reduced: false });
+    window.history.pushState({}, "", `${ROUTE}?palco=imersivo`);
+    const { unmount } = renderPage();
+    const timeline = pins()[0].animation as gsap.core.Timeline & { _ctx: { data: unknown[] } };
+    const context = timeline._ctx;
+    timeline.progress(0.05);
+    const before = context.data.length;
+    for (let round = 0; round < 5; round++) {
+      for (let step = 1; step <= 20; step++) timeline.progress(step / 20);
+      for (let step = 19; step >= 0; step--) timeline.progress(step / 20);
+    }
+    expect(context.data.length).toBe(before);
+    // O revert do contexto devolve recorte, anel e véu ao repouso, mesmo com as escritas diretas por quadro.
+    const aperture = scene().querySelector(".mag-scene__aperture") as HTMLElement;
+    const ring = scene().querySelector(".mag-scene__ring") as HTMLElement;
+    const overlay = scene().querySelector(".mag-scene__overlay") as HTMLElement;
+    expect(aperture.style.clipPath).toMatch(/^inset\(/);
+    (context as unknown as { revert: () => void }).revert();
+    expect(aperture.style.clipPath).toBe("");
+    expect(ring.style.width).toBe("");
+    expect(ring.style.opacity).toBe("");
+    expect(overlay.style.getPropertyValue("--mag-veil")).toBe("");
+    unmount();
+  });
+
+  const sceneTrigger = () => ScrollTrigger.getAll().find((trigger) => trigger.trigger === scene())!;
+
+  it("no modo leve o vídeo toca sozinho quando a cena entra na tela", () => {
+    setScreen({ wide: true, reduced: false });
+    window.history.pushState({}, "", `${ROUTE}?palco=leve`);
+    const play = vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(() => Promise.resolve());
+    const { unmount } = renderPage();
+    sceneTrigger().vars.onToggle?.({ isActive: true } as ScrollTrigger);
+    expect(play).toHaveBeenCalled();
+    play.mockRestore();
+    unmount();
+  });
+
+  it("com economia de dados o vídeo não toca sozinho: fica no pôster, com o botão de tocar", () => {
+    Object.defineProperty(navigator, "connection", { value: { saveData: true }, configurable: true });
+    setScreen({ wide: true, reduced: false });
+    window.history.pushState({}, "", `${ROUTE}?palco=leve`);
+    const play = vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(() => Promise.resolve());
+    const { unmount } = renderPage();
+    sceneTrigger().vars.onToggle?.({ isActive: true } as ScrollTrigger);
+    expect(play).not.toHaveBeenCalled();
+    const video = scene().querySelector("video") as HTMLVideoElement;
+    expect(video).toHaveAttribute("preload", "none");
+    expect(video).toHaveAttribute("poster", homeMedia.tunnel.desktop.poster);
+    expect(within(scene()).getByRole("button", { name: "Tocar vídeo" })).toBeInTheDocument();
+    play.mockRestore();
+    unmount();
   });
 });

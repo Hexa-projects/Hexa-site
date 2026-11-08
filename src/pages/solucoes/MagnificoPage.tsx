@@ -26,12 +26,15 @@ const RINGS = Array.from({ length: 10 }, (_, k) => Math.round(60 * 1.3 ** k));
 
 const isNarrow = () => typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches;
 const prefersReduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+/** Economia de dados ligada no navegador: o vídeo não toca sozinho, fica no pôster até o botão. */
+const savesData = () =>
+  typeof navigator !== "undefined" && Boolean((navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData);
 
 /**
  * A cena da página: o vídeo oficial do Magnifico Open (o mesmo do túnel da home) abre de um círculo até o
  * quadro inteiro enquanto a seção fica presa, e os três dados entram em sequência.
  * Só no modo imersivo (desktop e celular). Modo leve ou movimento reduzido: sem pin, tudo visível,
- * e com movimento reduzido o vídeo fica no pôster. Sem palco WebGL e sem Lenis: o anel é um elemento da página.
+ * e com movimento reduzido ou economia de dados o vídeo fica no pôster. Sem palco WebGL e sem Lenis: o anel é um elemento da página.
  */
 const MagnificoScene = () => {
   const { scene } = magnifico;
@@ -48,6 +51,7 @@ const MagnificoScene = () => {
   const [mode] = useState<StageMode>(detectStageMode);
   const [narrow] = useState(isNarrow);
   const [reduced] = useState(prefersReduced);
+  const [dataSaver] = useState(savesData);
   // Começa como parado: o rótulo só diz "Pausar" depois que o vídeo de fato tocar.
   const [playing, setPlaying] = useState(false);
   const media = narrow ? homeMedia.tunnel.mobile : homeMedia.tunnel.desktop;
@@ -63,8 +67,8 @@ const MagnificoScene = () => {
 
   const tryPlay = useCallback(() => {
     const element = video.current;
-    if (element && !reduced && inView.current && !userPaused.current) void element.play()?.catch(() => {});
-  }, [reduced]);
+    if (element && !reduced && !dataSaver && inView.current && !userPaused.current) void element.play()?.catch(() => {});
+  }, [reduced, dataSaver]);
 
   const setInView = useCallback(
     (active: boolean) => {
@@ -119,14 +123,26 @@ const MagnificoScene = () => {
         const state = { open: 0 };
         // offsetWidth/Height: a caixa do layout, sem o recorte. O recorte e o anel são simétricos à caixa,
         // então o círculo fica no centro do vídeo antes, durante e depois da trava.
+        const veil = overlay.current;
+        const clipFor = () => bannerClip({ width: box.offsetWidth, height: box.offsetHeight, open: state.open });
+        // Um gsap.set só, na montagem: ele guarda os valores originais, e o revert do contexto (troca de rota,
+        // girar a tela, rebaixar) devolve recorte, anel e véu ao estado de repouso.
+        const first = clipFor();
+        const firstSize = 2 * (first.ring + RIM_GAP);
+        gsap.set(box, { clipPath: first.css });
+        gsap.set(rim, { width: firstSize, height: firstSize, opacity: 1 });
+        if (veil) gsap.set(veil, { "--mag-veil": 0 });
+        // A cada quadro, escrita direta no estilo: um gsap.set aqui criaria um tween novo por quadro dentro do
+        // contexto (o onUpdate roda com o contexto ativo) e a lista cresceria sem limite enquanto se rola.
         const apply = () => {
-          const clip = bannerClip({ width: box.offsetWidth, height: box.offsetHeight, open: state.open });
-          const size = 2 * (clip.ring + RIM_GAP);
-          // gsap.set (não style direto): ao trocar de contexto (girar a tela), o GSAP desfaz o recorte.
-          gsap.set(box, { clipPath: clip.css });
-          gsap.set(rim, { width: size, height: size, opacity: 1 - state.open });
+          const clip = clipFor();
+          const size = `${2 * (clip.ring + RIM_GAP)}px`;
+          box.style.clipPath = clip.css;
+          rim.style.width = size;
+          rim.style.height = size;
+          rim.style.opacity = String(1 - state.open);
           // O véu dos dados só escurece a base quando o vídeo já é quadro.
-          if (overlay.current) gsap.set(overlay.current, { "--mag-veil": state.open });
+          veil?.style.setProperty("--mag-veil", String(state.open));
         };
         apply();
 
@@ -192,7 +208,7 @@ const MagnificoScene = () => {
               muted
               loop
               playsInline
-              preload={reduced ? "none" : "metadata"}
+              preload={reduced || dataSaver ? "none" : "metadata"}
               poster={media.poster}
               width={media.width}
               height={media.height}
