@@ -8,7 +8,7 @@ import type { PageCard } from "@/components/page/CardGrid";
  * base comercial do segundo cérebro (notas O-Scan, S-Scan, Magnifico Open, Comparativo de RM Esaote,
  * Regra de escolha de RM humana, Densitometria); texto do site atual.
  * Hélio: só Magnifico Open e S-scan Open têm "não usa hélio" confirmado. O O-scan humano e o G-scan não falam de hélio.
- * Área do S-scan Open: "até 20 m²", como na base comercial (src/data/editorial.ts diz "a partir de 20 m²").
+ * Área do S-scan Open: "a partir de 20 m²", número oficial da Esaote (src/data/editorial.ts), acima do "até 20 m²" da base comercial.
  */
 
 const RM_ROUTE = "/solucoes/ressonancia-magnetica";
@@ -121,7 +121,7 @@ export const rmCards: Record<string, PageCard> = {
   },
   "s-scan-open": {
     title: "S-scan Open",
-    meta: "até 20 m² · 2 kW em aquisição",
+    meta: "a partir de 20 m² · 2 kW em aquisição",
     body: "Ressonância musculoesquelética, das extremidades à coluna.",
     href: "/solucoes/s-scan-open",
     image: cutouts.sScan,
@@ -202,7 +202,7 @@ export const rmLine = {
         ],
       },
       { label: "Campo magnético", values: ["0,31 T", "0,25 T", "0,4 T", "sob consulta"] },
-      { label: "Área de instalação", values: ["a partir de 9 m²", "até 20 m²", "até 20 m²", "a partir de 23 m²"] },
+      { label: "Área de instalação", values: ["a partir de 9 m²", "a partir de 20 m²", "até 20 m²", "a partir de 23 m²"] },
       { label: "Consumo de energia", values: ["menos de 1 kW", "2 kW em aquisição", "menos de 3 kW", "menos de 3 kW"] },
       { label: "Alimentação", values: ["110/220 V", "monofásica", "monofásica 220 V", "sob consulta"] },
     ],
@@ -212,7 +212,7 @@ export const rmLine = {
   faq: [
     {
       q: "Qual ressonância precisa de menos espaço?",
-      a: "O O-scan SMART, instalado a partir de 9 m². O S-scan Open e o Magnifico Open cabem em até 20 m², e o G-scan Open pede a partir de 23 m². Obra, blindagem, carga de piso e layout final são confirmados no projeto da sala.",
+      a: "O O-scan SMART, instalado a partir de 9 m². O Magnifico Open cabe em até 20 m², o S-scan Open pede a partir de 20 m² e o G-scan Open, a partir de 23 m². Obra, blindagem, carga de piso e layout final são confirmados no projeto da sala.",
     },
     {
       q: "Quais modelos não usam hélio?",
@@ -315,12 +315,12 @@ export const products: Record<string, ProductContent> = {
     name: "S-scan Open",
     line: "Esaote · Ressonância musculoesquelética",
     description:
-      "S-scan Open, ressonância aberta Esaote para joelho, ombro, quadril e coluna: 0,25 T, não usa hélio, instalação em até 20 m² e 2 kW em aquisição.",
+      "S-scan Open, ressonância aberta Esaote para joelho, ombro, quadril e coluna: 0,25 T, não usa hélio, instalação a partir de 20 m² e 2 kW em aquisição.",
     hero: cutouts.sScan,
     lead: "Ressonância aberta para joelho, ombro, quadril, coluna e as demais articulações. Não usa hélio e consome 2 kW em média durante a aquisição.",
     facts: [
       { value: "0,25 T", label: "campo aberto" },
-      { value: "até 20 m²", label: "área de instalação" },
+      { value: "20 m²", label: "área mínima de instalação" },
       { value: "2 kW", label: "consumo médio em aquisição" },
       { value: "Sem hélio", label: "e sem risco de quench" },
     ],
@@ -347,7 +347,7 @@ export const products: Record<string, ProductContent> = {
       ["Fabricante", "Esaote"],
       ["Campo magnético", "0,25 T, aberto"],
       ["Hélio", "não usa"],
-      ["Área de instalação", "até 20 m²"],
+      ["Área de instalação", "a partir de 20 m²"],
       ["Alimentação", "monofásica"],
       ["Consumo médio em aquisição", "2 kW"],
       ["Bobinas", "joelho, punho e mão, tornozelo e pé, ombro, coluna e ATM"],
@@ -361,7 +361,7 @@ export const products: Record<string, ProductContent> = {
       },
       {
         q: "Quanto espaço ele precisa?",
-        a: "A instalação cabe em até 20 m², com alimentação monofásica. Layout, rede elétrica e piso são confirmados no projeto da sala, antes da compra.",
+        a: "A instalação parte de 20 m², com alimentação monofásica. Layout, rede elétrica e piso são confirmados no projeto da sala, antes da compra.",
       },
       {
         q: "Quanto ele consome?",

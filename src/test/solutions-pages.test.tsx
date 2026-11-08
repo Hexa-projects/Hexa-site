@@ -80,7 +80,8 @@ describe("soluções: linha de ressonância magnética", () => {
     expect(data["O-scan SMART"]["Campo magnético"]).toBe("0,31 T");
     expect(data["O-scan SMART"]["Área de instalação"]).toBe("a partir de 9 m²");
     expect(data["S-scan Open"]["Campo magnético"]).toBe("0,25 T");
-    expect(data["S-scan Open"]["Área de instalação"]).toBe("até 20 m²");
+    // Área do S-scan: número oficial da Esaote (src/data/editorial.ts), acima da base comercial.
+    expect(data["S-scan Open"]["Área de instalação"]).toBe("a partir de 20 m²");
     expect(data["Magnifico Open"]["Campo magnético"]).toBe("0,4 T");
     expect(data["Magnifico Open"]["Área de instalação"]).toBe("até 20 m²");
     // G-scan: dados de src/data/editorial.ts (instalação mínima de 23 m², menos de 3 kW).
@@ -120,6 +121,15 @@ describe("soluções: páginas de produto", () => {
     const { container } = renderAt("/solucoes/s-scan-open");
     expect(screen.getByRole("heading", { level: 1, name: "S-scan Open" })).toBeInTheDocument();
     expect(page(container).textContent).toMatch(/não usa hélio/i);
+    // Área oficial da Esaote; "até 20 m²" só pode aparecer no card relacionado do Magnifico Open.
+    const ownText = Array.from(page(container).querySelectorAll("section"))
+      .filter((section) => section.id !== "outras-ressonancias")
+      .map((section) => section.textContent)
+      .join(" ");
+    expect(ownText).toMatch(/a partir de 20 m²/);
+    expect(ownText).not.toMatch(/até 20 m²/);
+    const spec = screen.getByRole("table", { name: /ficha técnica/i });
+    expect(within(spec).getByRole("rowheader", { name: "Área de instalação" }).nextElementSibling).toHaveTextContent("a partir de 20 m²");
     expect(screen.getByRole("table", { name: /ficha técnica/i })).toBeInTheDocument();
   });
 
