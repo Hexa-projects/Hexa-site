@@ -1319,6 +1319,6 @@ a.page-card__link:hover .page-card__title svg {
 }
 
 .page .blog-article__meta {
-  color: var(--ink-3, var(--ink-2));
+  color: var(--ink-2);
   font-size: 0.875rem;
 }

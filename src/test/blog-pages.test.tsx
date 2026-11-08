@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { render, screen, within } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
@@ -66,5 +68,15 @@ describe("blog: post", () => {
   it("slug inexistente mostra a 404 do sistema", () => {
     renderAt("/blog/nao-existe");
     expect(screen.getByRole("heading", { level: 1, name: "Página não encontrada" })).toBeInTheDocument();
+  });
+});
+
+describe("blog: estilo", () => {
+  it("a linha de data usa --ink-2 (ink-3 só vale para texto grande)", () => {
+    const css = fs.readFileSync(path.join(process.cwd(), "src/styles/page.css"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    const block = css.slice(css.indexOf(".blog-article p"));
+    expect(block).toContain(".blog-article__meta");
+    expect(block).not.toMatch(/--ink-3/);
+    expect(block).toMatch(/\.blog-article__meta\s*\{[^}]*color:\s*var\(--ink-2\)/);
   });
 });
