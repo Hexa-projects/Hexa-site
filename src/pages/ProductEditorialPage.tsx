@@ -2,20 +2,15 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-import { commercialLines, rmStories } from "@/data/editorial";
+import { commercialLines } from "@/data/editorial";
 import { wdmProducts } from "@/data/wdm";
 
-const magnificoUrl = "https://www.hexamedical.com.br/rm-esaote-magnifico-open/";
 const contact = "/contato";
 // Rotas novas da fase 2 -> chaves internas dos dados atuais (as páginas novas substituem isto nas próximas tarefas).
 const slugAlias: Record<string, string> = {
-  "s-scan-open": "rm-s-scan",
-  "o-scan-smart": "rm-o-scan",
-  "g-scan": "rm-g-scan",
   "radiografia-digital": "mindray",
   veterinaria: "veterinario",
 };
-const rmRoute: Record<string, string> = { "rm-s-scan": "s-scan-open", "rm-o-scan": "o-scan-smart", "rm-g-scan": "g-scan" };
 const lineModels = {
   "bombas-injetoras": [
     { name: "Accutron MR Compact", image: "/assets/esaote/bombas-accutron-mr-compact.png", note: "Ressonância magnética" },
@@ -36,30 +31,6 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 
 function Cta({ label = "Conversar sobre a solução" }: { label?: string }) {
   return <Link className="ed-button" to={contact}>{label}<ArrowUpRight size={19} /></Link>;
-}
-
-function RmLineup() {
-  const items = [
-    { name: "Magnifico Open", category: "RM aberta whole-body", image: "/assets/hexa/magnifico-open.jpg", href: magnificoUrl, external: true },
-    ...Object.values(rmStories).map((item) => ({ name: item.name, category: item.category, image: item.hero, href: `/solucoes/${rmRoute[item.slug] ?? item.slug}`, external: false })),
-  ];
-  return <Layout><Helmet><title>Ressonância magnética Esaote — Hexamedical</title><meta name="description" content="Conheça a linha de ressonância magnética Esaote apresentada pela Hexamedical: Magnifico Open, S-scan Open, O-scan SMART e G-scan Open." /></Helmet>
-    <section className="ed-intro"><div className="ed-shell"><Eyebrow>Soluções / Ressonância magnética</Eyebrow><h1>Uma linha. Diferentes rotinas de diagnóstico.</h1><p>Da RM aberta de corpo inteiro aos sistemas dedicados e à imagem com carga, encontre a configuração alinhada ao perfil clínico e à estrutura do seu serviço.</p></div></section>
-    <section className="ed-shell ed-lineup" aria-label="Linha de ressonância magnética">{items.map((item, index) => <article className="ed-lineup-item" key={item.name}><div className="ed-lineup-item__number">0{index + 1}</div><div className="ed-lineup-item__media"><img src={item.image} alt={`Equipamento Esaote ${item.name}`} loading={index ? "lazy" : "eager"} /></div><div className="ed-lineup-item__copy"><Eyebrow>{item.category}</Eyebrow><h2>{item.name}</h2><p>{index === 0 ? "Sistema aberto para exames de corpo inteiro, com uma experiência mais próxima para paciente e equipe." : index === 1 ? "RM aberta dedicada à rotina musculoesquelética." : index === 2 ? "RM compacta dedicada a extremidades." : "Sistema aberto e inclinável para avaliação musculoesquelética com carga."}</p>{item.external ? <a href={item.href} className="ed-text-link">Conhecer apresentação <ArrowUpRight size={19} /></a> : <Link to={item.href} className="ed-text-link">Explorar equipamento <ArrowRight size={19} /></Link>}</div></article>)}</section>
-    <section className="ed-cta"><div className="ed-shell"><Eyebrow>Escolha técnica</Eyebrow><h2>Qual sistema cabe na sua operação?</h2><p>Converse com a Hexamedical sobre especialidades atendidas, espaço disponível e rotina de exames.</p><Cta /></div></section>
-  </Layout>;
-}
-
-function RmProduct({ slug }: { slug: string }) {
-  const item = rmStories[slug];
-  return <Layout><Helmet><title>{item.name} — Ressonância magnética Esaote | Hexamedical</title><meta name="description" content={item.introduction} /></Helmet>
-    <section className="ed-product-hero"><div className="ed-shell ed-product-hero__inner"><div className="ed-product-hero__copy"><Link to="/solucoes/ressonancia-magnetica" className="ed-back">← Ressonância magnética</Link><Eyebrow>{item.category}</Eyebrow><h1>{item.name}</h1><p className="ed-lede">{item.headline}</p><p>{item.introduction}</p><div className="ed-actions"><Cta label="Conversar sobre este equipamento" /><a href={item.sourceUrl} target="_blank" rel="noreferrer" className="ed-text-link">Ficha da fabricante <ArrowUpRight size={18} /></a></div></div><div className="ed-product-hero__visual"><img src={item.hero} alt={item.heroAlt} /></div></div></section>
-    <section className="ed-facts"><div className="ed-shell ed-facts__grid">{item.facts.map((fact) => <div key={fact.label}><strong>{fact.value}</strong><span>{fact.label}</span></div>)}</div><p className="ed-footnote ed-shell">Dados informados pela Esaote; configuração e projeto devem ser confirmados para cada instalação.</p></section>
-    <section className="ed-shell ed-story"><div><Eyebrow>Na prática</Eyebrow><h2>{item.thesis}</h2></div><p>{item.explanation}</p></section>
-    {item.image !== item.hero && <figure className="ed-shell ed-product-scene"><img src={item.image} alt={item.imageAlt} loading="lazy" /><figcaption>Imagem de apresentação da Esaote. A configuração de uso depende do exame e do equipamento.</figcaption></figure>}
-    <section className="ed-feature-section"><div className="ed-shell"><Eyebrow>Onde faz sentido</Eyebrow><div className="ed-feature-section__grid"><h2>Aplicações e decisões de projeto</h2><div className="ed-tags">{item.applications.map((application) => <span key={application}>{application}</span>)}</div></div><div className="ed-detail-grid">{item.details.map((detail, index) => <article key={detail.title}><span>0{index + 1}</span><h3>{detail.title}</h3><p>{detail.body}</p></article>)}</div></div></section>
-    <section className="ed-cta"><div className="ed-shell"><Eyebrow>{item.name} / Hexamedical</Eyebrow><h2>Planeje a solução com quem vai acompanhar a operação.</h2><p>Compartilhe o contexto clínico e a infraestrutura existente. A equipe Hexamedical orienta os próximos passos.</p><Cta /></div></section>
-  </Layout>;
 }
 
 function CommercialLine({ slug }: { slug: string }) {
@@ -92,11 +63,10 @@ function TemporaryPage({ title, text }: { title: string; text: string }) {
   return <Layout><Helmet><title>{title} — Hexamedical</title></Helmet><section className="ed-intro"><div className="ed-shell"><Eyebrow>Soluções</Eyebrow><h1>{title}</h1><p>{text}</p><Cta label="Falar com a Hexamedical" /></div></section></Layout>;
 }
 
-export default function ProductEditorialPage() {
-  const { slug: routeSlug = "" } = useParams();
+export default function ProductEditorialPage({ slug: forcedSlug }: { slug?: string }) {
+  const { slug: paramSlug = "" } = useParams();
+  const routeSlug = forcedSlug ?? paramSlug;
   const slug = slugAlias[routeSlug] ?? routeSlug;
-  if (slug === "ressonancia-magnetica") return <RmLineup />;
-  if (rmStories[slug]) return <RmProduct slug={slug} />;
   if (routeSlug === "magnifico-open") return <TemporaryPage title="Magnifico Open" text="Ressonância magnética aberta de corpo inteiro. A página completa do equipamento está em preparação." />;
   if (routeSlug === "densitometria") return <TemporaryPage title="Densitometria" text="Linha de densitometria óssea da Hexamedical. A página completa está em preparação." />;
   if (routeSlug === "careverse") return <TemporaryPage title="Careverse" text="Inteligência artificial cardiovascular e neurológica. A página completa está em preparação." />;

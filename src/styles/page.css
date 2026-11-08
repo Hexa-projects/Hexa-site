@@ -471,6 +471,70 @@
   letter-spacing: 0.02em;
 }
 
+/* ---------- Comparativo (um modelo por coluna) ---------- */
+
+.page-compare {
+  max-width: none;
+}
+
+.page-compare__title {
+  padding-bottom: var(--space-4);
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-1);
+  font-weight: 620;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* No celular a tabela rola dentro do painel; a página nunca rola de lado. */
+.page-compare__scroll {
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+}
+
+.page-compare table {
+  min-width: 46rem;
+}
+
+.page-compare thead th {
+  width: auto;
+  padding-bottom: var(--space-4);
+  border-top: 0;
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-1);
+  font-weight: 620;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.page-compare thead a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-light);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color var(--dur-quick) var(--ease-out);
+}
+
+.page-compare thead a:hover {
+  text-decoration-color: var(--orange-ink);
+}
+
+.page-compare th,
+.page-compare td {
+  padding-right: var(--space-5);
+}
+
+.page-compare tbody th {
+  width: 18%;
+}
+
+.page-compare td {
+  width: 20.5%;
+}
+
 /* ---------- Grade de cards ---------- */
 
 .page-cards {
@@ -876,6 +940,13 @@ a.page-card__link:hover .page-card__title svg {
     height: calc(100% - 2 * var(--space-3));
   }
 
+  /* Foto de cena continua cobrindo o ladrilho inteiro (a regra acima é só para o recorte). */
+  .page-cards--media .page-card--fill .page-card__plinth img {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
   .page-cards--media .page-card__text {
     margin-top: var(--space-3);
   }
@@ -895,6 +966,20 @@ a.page-card__link:hover .page-card__title svg {
   .page-spec th {
     width: 45%;
     padding-right: var(--space-4);
+  }
+
+  /* O rótulo da linha fica fixo enquanto os modelos rolam. */
+  .page-compare table {
+    min-width: 38rem;
+  }
+
+  .page-compare tbody th,
+  .page-compare thead th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    width: 7.5rem;
+    background: var(--white);
   }
 
   .page-video--vertical .page-video__media {

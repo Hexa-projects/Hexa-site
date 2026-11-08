@@ -8,7 +8,9 @@ import { legacyRedirects } from "@/data/routes";
 import { HelmetProvider } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 const Index = lazy(() => import("./pages/Index"));
-const SolucoesHub = lazy(() => import("./pages/SolucoesHub"));
+const SolucoesHub = lazy(() => import("./pages/solucoes/SolucoesHub"));
+const RmLinePage = lazy(() => import("./pages/solucoes/RmLinePage"));
+const ProductPage = lazy(() => import("./pages/solucoes/ProductPage"));
 const ServicosHub = lazy(() => import("./pages/ServicosHub"));
 const ProductEditorialPage = lazy(() => import("./pages/ProductEditorialPage"));
 const WdmVetPage = lazy(() => import("./pages/WdmVetPage"));
@@ -25,6 +27,9 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Redirecionamentos internos: o dev server e os links dentro do app se comportam como a produção.
 const clientRedirects = legacyRedirects.filter(({ source }) => /^\/(solucoes|servicos|sobre|estrutura|conteudo|segmentos|cases)(\/|$)/.test(source));
+
+// Linhas que ainda abrem na página antiga, até as próximas tarefas da fase 2 trocá-las pelo kit.
+const pendingLines = ["magnifico-open", "bombas-injetoras", "radiografia-digital", "densitometria", "hexai", "careverse", "veterinaria", "vet-mr-grande"];
 
 const queryClient = new QueryClient();
 
@@ -49,7 +54,12 @@ const App = () => (
             <Route path="/solucoes/turbotom-1s-lite-vet" element={<WdmVetPage slug="turbotom-1s-lite-vet" />} />
             <Route path="/solucoes/ispace-1-5t-vet" element={<WdmVetPage slug="ispace-1-5t-vet" />} />
             <Route path="/servicos" element={<ServicosHub />} />
-            <Route path="/solucoes/:slug" element={<ProductEditorialPage />} />
+            <Route path="/solucoes/ressonancia-magnetica" element={<RmLinePage />} />
+            {pendingLines.map((slug) => (
+              <Route key={slug} path={`/solucoes/${slug}`} element={<ProductEditorialPage slug={slug} />} />
+            ))}
+            {/* Produtos de RM (O-scan SMART, S-scan Open, G-scan Open); slug desconhecido mostra a 404 do sistema. */}
+            <Route path="/solucoes/:slug" element={<ProductPage />} />
             <Route path="/servicos/:slug" element={<ServicePage />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/ouvidoria" element={<Ouvidoria />} />
