@@ -8,6 +8,5 @@ import "./styles/chrome.css";
 import "./editorial.css";
 import "./editorial-models.css";
 import "./editorial-scenes.css";
-import "./wdm.css";
 
 createRoot(document.getElementById("root")!).render(<App />);

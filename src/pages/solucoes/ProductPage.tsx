@@ -11,21 +11,21 @@ import Faq from "@/components/page/Faq";
 import PageContact from "@/components/page/PageContact";
 import NotFound from "@/pages/NotFound";
 import { whatsappHref } from "@/data/home";
-import { contactPaths, products, rmCards } from "@/data/pages/solutions";
-
-const RM_LINE = "/solucoes/ressonancia-magnetica";
+import { contactPaths, productPages } from "@/data/pages/solutions";
 
 /**
- * Página de produto da linha de RM, montada só com o kit e com `products[slug]`.
+ * Página de produto (RM Esaote e modelos veterinários WDM), montada só com o kit e com `productPages[slug]`.
+ * A linha do produto (`family`) dá a migalha, a ação de comparar, os relacionados e o contato.
  * Slug desconhecido mostra a 404 do sistema no próprio endereço (sem redirecionar).
  */
 const ProductPage = () => {
   const { slug = "" } = useParams();
-  const product = Object.prototype.hasOwnProperty.call(products, slug) ? products[slug] : undefined;
+  const product = Object.prototype.hasOwnProperty.call(productPages, slug) ? productPages[slug] : undefined;
   if (!product) return <NotFound />;
+  const { family } = product;
 
   return (
-    <PageShell title={`${product.name}, ressonância magnética Esaote`} description={product.description}>
+    <PageShell title={`${product.name}, ${product.kind}`} description={product.description}>
       <PageHero
         tone="dark"
         title={product.name}
@@ -33,20 +33,22 @@ const ProductPage = () => {
         crumbs={[
           { label: "Início", href: "/" },
           { label: "Soluções", href: "/solucoes" },
-          { label: "Ressonância magnética", href: RM_LINE },
+          { label: family.label, href: family.href },
           { label: product.name },
         ]}
         media={product.hero}
         actions={[
           { label: "Conversar pelo WhatsApp", href: whatsappHref(product.whatsappText), kind: "primary" },
-          { label: "Comparar com a linha", href: `${RM_LINE}#comparativo`, kind: "quiet" },
+          { label: family.compare.label, href: family.compare.href, kind: "quiet" },
         ]}
         eyebrow={product.line}
       />
 
-      <PageSection id="em-numeros" title={`${product.name} em números`}>
-        <FactStrip items={product.facts} />
-      </PageSection>
+      {product.facts.length > 0 && (
+        <PageSection id="em-numeros" title={`${product.name} em números`}>
+          <FactStrip items={product.facts} />
+        </PageSection>
+      )}
 
       <PageSection id="onde-faz-sentido" title={product.fit.title} intro={product.fit.intro} media={product.fit.media}>
         <PointList items={product.points} />
@@ -61,26 +63,26 @@ const ProductPage = () => {
       </PageSection>
 
       <PageSection
-        id="outras-ressonancias"
-        title="Outras ressonâncias da linha"
+        id={family.relatedId}
+        title={family.relatedTitle}
         intro={
           <>
-            <p>Indicação, campo, área de instalação e consumo dos quatro modelos estão lado a lado no comparativo.</p>
-            <Link className="text-link" to={`${RM_LINE}#comparativo`}>
-              Ver o comparativo da linha <ArrowRight aria-hidden="true" />
+            <p>{family.relatedIntro}</p>
+            <Link className="text-link" to={family.compare.href}>
+              {family.relatedLink} <ArrowRight aria-hidden="true" />
             </Link>
           </>
         }
       >
-        <CardGrid items={product.related.map((slug) => rmCards[slug])} />
+        <CardGrid items={product.related.map((slug) => family.cards[slug])} />
       </PageSection>
 
       <PageContact
         paths={contactPaths({
           title: `Quero conversar sobre o ${product.name}`,
           whatsappText: product.whatsappText,
-          href: `${RM_LINE}#comparativo`,
-          linkLabel: "Comparar a linha de RM",
+          href: family.compare.href,
+          linkLabel: family.contactLink,
         })}
       />
     </PageShell>

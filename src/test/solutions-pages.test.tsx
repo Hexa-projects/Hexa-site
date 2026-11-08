@@ -176,7 +176,7 @@ describe("soluções: rotas", () => {
     expect(await screen.findByRole("heading", { level: 1, name: "O-scan SMART" }, { timeout: 5000 })).toBeInTheDocument();
   });
 
-  it("as linhas ainda não migradas continuam abrindo", async () => {
+  it("a linha de bombas injetoras abre pela rota pública", async () => {
     window.history.pushState({}, "", "/solucoes/bombas-injetoras");
     render(<App />);
     expect(await screen.findByRole("heading", { level: 1, name: /Bombas injetoras/i }, { timeout: 5000 })).toBeInTheDocument();

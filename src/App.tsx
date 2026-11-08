@@ -11,9 +11,9 @@ const Index = lazy(() => import("./pages/Index"));
 const SolucoesHub = lazy(() => import("./pages/solucoes/SolucoesHub"));
 const RmLinePage = lazy(() => import("./pages/solucoes/RmLinePage"));
 const ProductPage = lazy(() => import("./pages/solucoes/ProductPage"));
+const LinePage = lazy(() => import("./pages/solucoes/LinePage"));
 const ServicosHub = lazy(() => import("./pages/ServicosHub"));
 const ProductEditorialPage = lazy(() => import("./pages/ProductEditorialPage"));
-const WdmVetPage = lazy(() => import("./pages/WdmVetPage"));
 const ServicePage = lazy(() => import("./pages/ServicePage"));
 const Ouvidoria = lazy(() => import("./pages/OuvidoriaTemp"));
 const Contato = lazy(() => import("./pages/Contato"));
@@ -28,8 +28,11 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 // Redirecionamentos internos: o dev server e os links dentro do app se comportam como a produção.
 const clientRedirects = legacyRedirects.filter(({ source }) => /^\/(solucoes|servicos|sobre|estrutura|conteudo|segmentos|cases)(\/|$)/.test(source));
 
-// Linhas que ainda abrem na página antiga, até as próximas tarefas da fase 2 trocá-las pelo kit.
-const pendingLines = ["magnifico-open", "bombas-injetoras", "radiografia-digital", "densitometria", "hexai", "careverse", "veterinaria", "vet-mr-grande"];
+// Linhas montadas com o kit (LinePage + lines em src/data/pages/solutions.ts).
+const lineSlugs = ["bombas-injetoras", "radiografia-digital", "densitometria", "hexai", "veterinaria"];
+// Páginas que ainda abrem na página antiga, até as próximas tarefas da fase 2 trocá-las pelo kit
+// (Magnifico Open na Task 8, Careverse na Task 9; Vet-MR Grande sem página nova decidida).
+const pendingLines = ["magnifico-open", "careverse", "vet-mr-grande"];
 
 const queryClient = new QueryClient();
 
@@ -50,15 +53,15 @@ const App = () => (
             {clientRedirects.map(({ source, destination }) => (
               <Route key={source} path={source} element={<Navigate to={destination} replace />} />
             ))}
-            <Route path="/solucoes/turbotom-1s-vet" element={<WdmVetPage slug="turbotom-1s-vet" />} />
-            <Route path="/solucoes/turbotom-1s-lite-vet" element={<WdmVetPage slug="turbotom-1s-lite-vet" />} />
-            <Route path="/solucoes/ispace-1-5t-vet" element={<WdmVetPage slug="ispace-1-5t-vet" />} />
             <Route path="/servicos" element={<ServicosHub />} />
             <Route path="/solucoes/ressonancia-magnetica" element={<RmLinePage />} />
+            {lineSlugs.map((slug) => (
+              <Route key={slug} path={`/solucoes/${slug}`} element={<LinePage slug={slug} />} />
+            ))}
             {pendingLines.map((slug) => (
               <Route key={slug} path={`/solucoes/${slug}`} element={<ProductEditorialPage slug={slug} />} />
             ))}
-            {/* Produtos de RM (O-scan SMART, S-scan Open, G-scan Open); slug desconhecido mostra a 404 do sistema. */}
+            {/* Produtos (O-scan SMART, S-scan Open, G-scan Open e os modelos veterinários WDM); slug desconhecido mostra a 404 do sistema. */}
             <Route path="/solucoes/:slug" element={<ProductPage />} />
             <Route path="/servicos/:slug" element={<ServicePage />} />
             <Route path="/contato" element={<Contato />} />
