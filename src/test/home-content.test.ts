@@ -9,13 +9,21 @@ const productSlugs = new Set([
   "ressonancia-magnetica",
   "hexai",
   "veterinario",
+  "veterinaria",
+  "s-scan-open",
+  "o-scan-smart",
+  "g-scan",
+  "radiografia-digital",
+  "magnifico-open",
+  "densitometria",
+  "careverse",
   "vet-mr-grande",
   ...Object.keys(rmStories),
   ...commercialLines.map((line) => line.slug),
   ...wdmProducts.map((product) => product.slug),
 ]);
 
-const staticRoutes = new Set(["/", "/solucoes", "/servicos", "/contato", "/segmentos", "/conteudo", "/empresa", "/blog", "/materiais", "/cases", "/estrutura", "/sobre"]);
+const staticRoutes = new Set(["/", "/solucoes", "/servicos", "/contato", "/empresa", "/blog", "/materiais", "/ouvidoria"]);
 
 /** Espelha as rotas de src/App.tsx e as páginas que resolvem slugs. */
 function isDeclaredRoute(href: string): boolean {

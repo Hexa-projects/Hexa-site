@@ -1,5 +1,290 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/produtos",
+      "destination": "/solucoes",
+      "permanent": true
+    },
+    {
+      "source": "/produtos/",
+      "destination": "/solucoes",
+      "permanent": true
+    },
+    {
+      "source": "/rm-esaote-magnifico-open",
+      "destination": "/solucoes/magnifico-open",
+      "permanent": true
+    },
+    {
+      "source": "/rm-esaote-magnifico-open/",
+      "destination": "/solucoes/magnifico-open",
+      "permanent": true
+    },
+    {
+      "source": "/rm-esaote-s-scan",
+      "destination": "/solucoes/s-scan-open",
+      "permanent": true
+    },
+    {
+      "source": "/rm-esaote-s-scan/",
+      "destination": "/solucoes/s-scan-open",
+      "permanent": true
+    },
+    {
+      "source": "/rm-esaote-o-scan",
+      "destination": "/solucoes/o-scan-smart",
+      "permanent": true
+    },
+    {
+      "source": "/rm-esaote-o-scan/",
+      "destination": "/solucoes/o-scan-smart",
+      "permanent": true
+    },
+    {
+      "source": "/rm-esaote-g-scan",
+      "destination": "/solucoes/g-scan",
+      "permanent": true
+    },
+    {
+      "source": "/rm-esaote-g-scan/",
+      "destination": "/solucoes/g-scan",
+      "permanent": true
+    },
+    {
+      "source": "/bombas-injetoras",
+      "destination": "/solucoes/bombas-injetoras",
+      "permanent": true
+    },
+    {
+      "source": "/bombas-injetoras/",
+      "destination": "/solucoes/bombas-injetoras",
+      "permanent": true
+    },
+    {
+      "source": "/mindray",
+      "destination": "/solucoes/radiografia-digital",
+      "permanent": true
+    },
+    {
+      "source": "/mindray/",
+      "destination": "/solucoes/radiografia-digital",
+      "permanent": true
+    },
+    {
+      "source": "/hexai",
+      "destination": "/solucoes/hexai",
+      "permanent": true
+    },
+    {
+      "source": "/hexai/",
+      "destination": "/solucoes/hexai",
+      "permanent": true
+    },
+    {
+      "source": "/area-veterinaria",
+      "destination": "/solucoes/veterinaria",
+      "permanent": true
+    },
+    {
+      "source": "/area-veterinaria/",
+      "destination": "/solucoes/veterinaria",
+      "permanent": true
+    },
+    {
+      "source": "/area-veterinaria-hexamedical",
+      "destination": "/solucoes/veterinaria",
+      "permanent": true
+    },
+    {
+      "source": "/area-veterinaria-hexamedical/",
+      "destination": "/solucoes/veterinaria",
+      "permanent": true
+    },
+    {
+      "source": "/lp/careverse",
+      "destination": "/solucoes/careverse",
+      "permanent": true
+    },
+    {
+      "source": "/lp/careverse/",
+      "destination": "/solucoes/careverse",
+      "permanent": true
+    },
+    {
+      "source": "/manutencao-de-equipamentos",
+      "destination": "/servicos/manutencao",
+      "permanent": true
+    },
+    {
+      "source": "/manutencao-de-equipamentos/",
+      "destination": "/servicos/manutencao",
+      "permanent": true
+    },
+    {
+      "source": "/contratos-de-manutencao",
+      "destination": "/servicos/contratos",
+      "permanent": true
+    },
+    {
+      "source": "/contratos-de-manutencao/",
+      "destination": "/servicos/contratos",
+      "permanent": true
+    },
+    {
+      "source": "/desinstalacao-e-instalacao-de-equipamentos",
+      "destination": "/servicos/instalacao",
+      "permanent": true
+    },
+    {
+      "source": "/desinstalacao-e-instalacao-de-equipamentos/",
+      "destination": "/servicos/instalacao",
+      "permanent": true
+    },
+    {
+      "source": "/reparo-de-pecas-e-perifericos",
+      "destination": "/servicos/reparo",
+      "permanent": true
+    },
+    {
+      "source": "/reparo-de-pecas-e-perifericos/",
+      "destination": "/servicos/reparo",
+      "permanent": true
+    },
+    {
+      "source": "/apoio",
+      "destination": "/materiais",
+      "permanent": true
+    },
+    {
+      "source": "/apoio/",
+      "destination": "/materiais",
+      "permanent": true
+    },
+    {
+      "source": "/sobre",
+      "destination": "/empresa",
+      "permanent": true
+    },
+    {
+      "source": "/sobre/",
+      "destination": "/empresa",
+      "permanent": true
+    },
+    {
+      "source": "/estrutura",
+      "destination": "/empresa",
+      "permanent": true
+    },
+    {
+      "source": "/estrutura/",
+      "destination": "/empresa",
+      "permanent": true
+    },
+    {
+      "source": "/conteudo",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/conteudo/",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/segmentos",
+      "destination": "/solucoes",
+      "permanent": true
+    },
+    {
+      "source": "/segmentos/",
+      "destination": "/solucoes",
+      "permanent": true
+    },
+    {
+      "source": "/segmentos/:slug",
+      "destination": "/solucoes",
+      "permanent": true
+    },
+    {
+      "source": "/segmentos/:slug/",
+      "destination": "/solucoes",
+      "permanent": true
+    },
+    {
+      "source": "/cases",
+      "destination": "/solucoes",
+      "permanent": true
+    },
+    {
+      "source": "/cases/",
+      "destination": "/solucoes",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/rm-s-scan",
+      "destination": "/solucoes/s-scan-open",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/rm-s-scan/",
+      "destination": "/solucoes/s-scan-open",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/rm-o-scan",
+      "destination": "/solucoes/o-scan-smart",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/rm-o-scan/",
+      "destination": "/solucoes/o-scan-smart",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/rm-g-scan",
+      "destination": "/solucoes/g-scan",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/rm-g-scan/",
+      "destination": "/solucoes/g-scan",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/rm-magnifico-open",
+      "destination": "/solucoes/magnifico-open",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/rm-magnifico-open/",
+      "destination": "/solucoes/magnifico-open",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/mindray",
+      "destination": "/solucoes/radiografia-digital",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/mindray/",
+      "destination": "/solucoes/radiografia-digital",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/veterinario",
+      "destination": "/solucoes/veterinaria",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/veterinario/",
+      "destination": "/solucoes/veterinaria",
+      "permanent": true
+    }
   ]
 }

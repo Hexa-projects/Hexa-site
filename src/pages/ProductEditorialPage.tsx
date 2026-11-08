@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
@@ -8,6 +7,15 @@ import { wdmProducts } from "@/data/wdm";
 
 const magnificoUrl = "https://www.hexamedical.com.br/rm-esaote-magnifico-open/";
 const contact = "/contato";
+// Rotas novas da fase 2 -> chaves internas dos dados atuais (as páginas novas substituem isto nas próximas tarefas).
+const slugAlias: Record<string, string> = {
+  "s-scan-open": "rm-s-scan",
+  "o-scan-smart": "rm-o-scan",
+  "g-scan": "rm-g-scan",
+  "radiografia-digital": "mindray",
+  veterinaria: "veterinario",
+};
+const rmRoute: Record<string, string> = { "rm-s-scan": "s-scan-open", "rm-o-scan": "o-scan-smart", "rm-g-scan": "g-scan" };
 const lineModels = {
   "bombas-injetoras": [
     { name: "Accutron MR Compact", image: "/assets/esaote/bombas-accutron-mr-compact.png", note: "Ressonância magnética" },
@@ -33,7 +41,7 @@ function Cta({ label = "Conversar sobre a solução" }: { label?: string }) {
 function RmLineup() {
   const items = [
     { name: "Magnifico Open", category: "RM aberta whole-body", image: "/assets/hexa/magnifico-open.jpg", href: magnificoUrl, external: true },
-    ...Object.values(rmStories).map((item) => ({ name: item.name, category: item.category, image: item.hero, href: `/solucoes/${item.slug}`, external: false })),
+    ...Object.values(rmStories).map((item) => ({ name: item.name, category: item.category, image: item.hero, href: `/solucoes/${rmRoute[item.slug] ?? item.slug}`, external: false })),
   ];
   return <Layout><Helmet><title>Ressonância magnética Esaote — Hexamedical</title><meta name="description" content="Conheça a linha de ressonância magnética Esaote apresentada pela Hexamedical: Magnifico Open, S-scan Open, O-scan SMART e G-scan Open." /></Helmet>
     <section className="ed-intro"><div className="ed-shell"><Eyebrow>Soluções / Ressonância magnética</Eyebrow><h1>Uma linha. Diferentes rotinas de diagnóstico.</h1><p>Da RM aberta de corpo inteiro aos sistemas dedicados e à imagem com carga, encontre a configuração alinhada ao perfil clínico e à estrutura do seu serviço.</p></div></section>
@@ -77,19 +85,21 @@ function VetPage() {
 }
 
 function VetMrPage() {
-  return <Layout><Helmet><title>Vet-MR Grande — Hexamedical</title></Helmet><section className="ed-product-hero"><div className="ed-shell ed-product-hero__inner"><div className="ed-product-hero__copy"><Link to="/solucoes/veterinario" className="ed-back">← Área veterinária</Link><Eyebrow>Ressonância veterinária</Eyebrow><h1>Vet-MR Grande</h1><p className="ed-lede">Ressonância dedicada à medicina veterinária.</p><p>Conheça o sistema Esaote e converse com a Hexamedical sobre a configuração adequada à rotina da sua clínica ou hospital veterinário.</p><div className="ed-actions"><Cta label="Consultar a equipe" /><a className="ed-text-link" href="https://www.hexamedical.com.br/rm-esaote-vet-grande/" target="_blank" rel="noreferrer">Ver apresentação atual <ArrowUpRight size={18} /></a></div></div><div className="ed-product-hero__visual"><img src="/assets/hexa/Esaote-Grande-VET-MR.png" alt="Equipamento Esaote Vet-MR Grande" /></div></div></section></Layout>;
+  return <Layout><Helmet><title>Vet-MR Grande — Hexamedical</title></Helmet><section className="ed-product-hero"><div className="ed-shell ed-product-hero__inner"><div className="ed-product-hero__copy"><Link to="/solucoes/veterinaria" className="ed-back">← Área veterinária</Link><Eyebrow>Ressonância veterinária</Eyebrow><h1>Vet-MR Grande</h1><p className="ed-lede">Ressonância dedicada à medicina veterinária.</p><p>Conheça o sistema Esaote e converse com a Hexamedical sobre a configuração adequada à rotina da sua clínica ou hospital veterinário.</p><div className="ed-actions"><Cta label="Consultar a equipe" /><a className="ed-text-link" href="https://www.hexamedical.com.br/rm-esaote-vet-grande/" target="_blank" rel="noreferrer">Ver apresentação atual <ArrowUpRight size={18} /></a></div></div><div className="ed-product-hero__visual"><img src="/assets/hexa/Esaote-Grande-VET-MR.png" alt="Equipamento Esaote Vet-MR Grande" /></div></div></section></Layout>;
 }
 
-function MagnificoRedirect() {
-  useEffect(() => { window.location.replace(magnificoUrl); }, []);
-  return <Layout><section className="ed-intro"><div className="ed-shell"><h1>Magnifico Open</h1><p>Abrindo a experiência dedicada do equipamento.</p><a className="ed-text-link" href={magnificoUrl}>Abrir apresentação <ArrowUpRight size={18} /></a></div></section></Layout>;
+function TemporaryPage({ title, text }: { title: string; text: string }) {
+  return <Layout><Helmet><title>{title} — Hexamedical</title></Helmet><section className="ed-intro"><div className="ed-shell"><Eyebrow>Soluções</Eyebrow><h1>{title}</h1><p>{text}</p><Cta label="Falar com a Hexamedical" /></div></section></Layout>;
 }
 
 export default function ProductEditorialPage() {
-  const { slug = "" } = useParams();
+  const { slug: routeSlug = "" } = useParams();
+  const slug = slugAlias[routeSlug] ?? routeSlug;
   if (slug === "ressonancia-magnetica") return <RmLineup />;
   if (rmStories[slug]) return <RmProduct slug={slug} />;
-  if (slug === "rm-magnifico-open") return <MagnificoRedirect />;
+  if (routeSlug === "magnifico-open") return <TemporaryPage title="Magnifico Open" text="Ressonância magnética aberta de corpo inteiro. A página completa do equipamento está em preparação." />;
+  if (routeSlug === "densitometria") return <TemporaryPage title="Densitometria" text="Linha de densitometria óssea da Hexamedical. A página completa está em preparação." />;
+  if (routeSlug === "careverse") return <TemporaryPage title="Careverse" text="Inteligência artificial cardiovascular e neurológica. A página completa está em preparação." />;
   if (commercialLines.some((line) => line.slug === slug)) return <CommercialLine slug={slug} />;
   if (slug === "hexai") return <HexaiPage />;
   if (slug === "veterinario") return <VetPage />;

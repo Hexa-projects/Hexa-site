@@ -148,7 +148,7 @@ export default function WdmCtPage({ product, standalone = false }: { product: Wd
         <section className="wdm-ct-hero" id="inicio" aria-labelledby="wdm-ct-title">
           <div className="wdm-ct-shell">
             <div className="wdm-ct-topline">
-              <a href={standalone ? "https://www.hexamedical.com.br/area-veterinaria-hexamedical/" : "/solucoes/veterinario"} className="wdm-ct-back">← Voltar às soluções veterinárias</a>
+              <a href={standalone ? "https://www.hexamedical.com.br/area-veterinaria-hexamedical/" : "/solucoes/veterinaria"} className="wdm-ct-back">← Voltar às soluções veterinárias</a>
               <div className="wdm-ct-brands" aria-label="Hexamedical e WDM Animal Care">
                 <img src={assetUrl("/assets/wdm/hexamedical-logo.png")} alt="Hexamedical" />
                 <span aria-hidden="true" />

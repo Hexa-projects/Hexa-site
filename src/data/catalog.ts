@@ -22,7 +22,7 @@ export const productCatalog: CatalogItem[] = [
     category: "Ressonância Magnética",
     description: "RM musculoesquelética compacta, ideal para ortopedia e medicina esportiva.",
     image: "/assets/esaote/s-scan-open.webp",
-    href: "/solucoes/rm-s-scan",
+    href: "/solucoes/s-scan-open",
   },
   {
     slug: "rm-o-scan",
@@ -30,7 +30,7 @@ export const productCatalog: CatalogItem[] = [
     category: "Ressonância Magnética",
     description: "Sistema dedicado a extremidades com instalação compacta e baixo consumo.",
     image: "/assets/esaote/o-scan-smart.webp",
-    href: "/solucoes/rm-o-scan",
+    href: "/solucoes/o-scan-smart",
   },
   {
     slug: "rm-g-scan",
@@ -38,7 +38,7 @@ export const productCatalog: CatalogItem[] = [
     category: "Ressonância Magnética",
     description: "RM aberta inclinável para avaliação musculoesquelética também com carga.",
     image: "/assets/esaote/g-scan-open.webp",
-    href: "/solucoes/rm-g-scan",
+    href: "/solucoes/g-scan",
   },
   {
     slug: "hexai",

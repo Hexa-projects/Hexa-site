@@ -1,36 +1,11 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { navigation } from "@/data/navigation";
 
-const footerLinks = [
-  {
-    title: "Soluções",
-    links: [
-      { label: "Ressonância Magnética", href: "/solucoes/ressonancia-magnetica" },
-      { label: "Bombas Injetoras", href: "/solucoes/bombas-injetoras" },
-      { label: "Radiografia Mindray", href: "/solucoes/mindray" },
-      { label: "HexAI", href: "/solucoes/hexai" },
-      { label: "Área Veterinária", href: "/solucoes/veterinario" },
-    ],
-  },
-  {
-    title: "Serviços",
-    links: [
-      { label: "Manutenção", href: "/servicos/manutencao" },
-      { label: "Contratos", href: "/servicos/contratos" },
-      { label: "Instalação", href: "/servicos/instalacao" },
-      { label: "Reparo de Peças", href: "/servicos/reparo" },
-    ],
-  },
-  {
-    title: "Empresa",
-    links: [
-      { label: "Sobre", href: "/sobre" },
-      { label: "Estrutura", href: "/estrutura" },
-      { label: "Blog", href: "/blog" },
-      { label: "Contato", href: "/contato" },
-    ],
-  },
-];
+const footerLinks = navigation.map((item) => ({
+  title: item.label,
+  links: item.children ?? [],
+}));
 
 const Footer = () => {
   return (
@@ -62,7 +37,7 @@ const Footer = () => {
         <div className="site-footer__details">
           <a href="tel:+5511973140914"><Phone aria-hidden="true" /> +55 11 97314-0914</a>
           <a href="mailto:comercial@hexamedical.com.br"><Mail aria-hidden="true" /> comercial@hexamedical.com.br</a>
-          <a href="https://www.hexamedical.com.br/ouvidoria/" target="_blank" rel="noreferrer"><MapPin aria-hidden="true" /> Ouvidoria</a>
+          <Link to="/ouvidoria"><MapPin aria-hidden="true" /> Ouvidoria</Link>
         </div>
         <div className="site-footer__legal">
           <p>© {new Date().getFullYear()} Hexamedical. Todos os direitos reservados.</p>

@@ -38,7 +38,7 @@ export default function WdmVetPage({ slug }: Props) {
       <div className={`wdm-lp ${isMr ? "wdm-lp--mr" : "wdm-lp--ct"}`}>
         <section className="wdm-hero">
           <div className="wdm-shell">
-            <Link className="wdm-back" to="/solucoes/veterinario">← Medicina veterinária</Link>
+            <Link className="wdm-back" to="/solucoes/veterinaria">← Medicina veterinária</Link>
             <div className="wdm-partners" aria-label="WDM Animal Care e Hexamedical">
               <img src="/assets/wdm/hexamedical-logo.png" alt="Hexamedical" />
               <span aria-hidden="true" />

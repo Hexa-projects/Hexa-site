@@ -14,4 +14,11 @@ describe("rotas", () => {
     render(<App />);
     expect(await screen.findByRole("heading", { level: 1, name: /página não encontrada/i }, { timeout: 5000 })).toBeInTheDocument();
   });
+
+  it("honra o slug interno antigo e redireciona para a rota nova", async () => {
+    window.history.pushState({}, "", "/solucoes/rm-s-scan");
+    render(<App />);
+    expect(await screen.findByRole("heading", { level: 1, name: /S-scan/i }, { timeout: 5000 })).toBeInTheDocument();
+    expect(window.location.pathname).toBe("/solucoes/s-scan-open");
+  });
 });

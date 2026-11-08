@@ -138,7 +138,7 @@ export const showroom: ShowroomItem[] = [
     spec: "20 m² · 2 kW em aquisição",
     filters: ["rm"],
     image: shot("s-scan-open", 960, 675, "Ressonância magnética Esaote S-scan Open"),
-    href: "/solucoes/rm-s-scan",
+    href: "/solucoes/s-scan-open",
   },
   {
     id: "o-scan-smart",
@@ -147,7 +147,7 @@ export const showroom: ShowroomItem[] = [
     spec: "9 m² · menos de 1 kW",
     filters: ["rm"],
     image: shot("o-scan-smart", 880, 932, "Ressonância magnética Esaote O-scan SMART"),
-    href: "/solucoes/rm-o-scan",
+    href: "/solucoes/o-scan-smart",
   },
   {
     id: "g-scan-open",
@@ -156,7 +156,7 @@ export const showroom: ShowroomItem[] = [
     spec: "23 m² · menos de 3 kW",
     filters: ["rm"],
     image: shot("g-scan-open", 960, 748, "Ressonância magnética Esaote G-scan Open"),
-    href: "/solucoes/rm-g-scan",
+    href: "/solucoes/g-scan",
   },
   {
     id: "vet-mr-grande",
@@ -205,7 +205,7 @@ export const showroom: ShowroomItem[] = [
     line: "Radiografia digital fixa Mindray",
     filters: ["rx"],
     image: shot("digieye-350", 960, 684, "Sistema de radiografia digital Mindray DigiEye 350"),
-    href: "/solucoes/mindray",
+    href: "/solucoes/radiografia-digital",
   },
   {
     id: "hexai",
