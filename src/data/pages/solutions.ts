@@ -76,7 +76,7 @@ export const hub = {
     {
       title: "Radiografia digital",
       meta: "DRGEM e Mindray",
-      body: "Sistemas fixos e móveis e detectores digitais sem fio para a sala de raio-X e o leito.",
+      body: "Sistemas fixos e móveis e detectores digitais sem fio.",
       href: "/solucoes/radiografia-digital",
       image: cutouts.digieye,
     },
@@ -369,7 +369,7 @@ export const products: Record<string, ProductContent> = {
       { value: "0,25 T", label: "campo aberto" },
       { value: "20 m²", label: "área mínima de instalação" },
       { value: "2 kW", label: "consumo médio em aquisição" },
-      { value: "Sem hélio", label: "e sem risco de quench" },
+      { value: "Sem hélio", label: "e sem risco de quench, nos materiais comerciais analisados" },
     ],
     fit: {
       title: "Onde o S-scan Open faz sentido",
@@ -404,7 +404,7 @@ export const products: Record<string, ProductContent> = {
     faq: [
       {
         q: "O S-scan Open usa hélio?",
-        a: "Não. O S-scan Open não usa hélio e, pelos materiais da Esaote, não tem risco de quench.",
+        a: "Não. O S-scan Open não usa hélio e, nos materiais comerciais analisados, não tem risco de quench.",
       },
       {
         q: "Quanto espaço ele precisa?",
@@ -768,7 +768,7 @@ export const lines: Record<string, LineContent> = {
       },
       {
         q: "Como eu recebo a ficha técnica de um modelo?",
-        a: "Toque no modelo para abrir a conversa no WhatsApp com o nome dele, ou fale com a equipe por e-mail ou telefone.",
+        a: "Clique ou toque no modelo para abrir a conversa no WhatsApp com o nome dele, ou fale com a equipe por e-mail ou telefone.",
       },
     ],
     whatsappText: "Olá! Quero ajuda para escolher uma bomba injetora de contraste.",
@@ -903,7 +903,7 @@ export const lines: Record<string, LineContent> = {
       {
         id: "swiftmr",
         title: "SwiftMR na ressonância magnética",
-        intro: "O SwiftMR acelera a aquisição dos exames de ressonância e trata a imagem com ajustes de nitidez e redução de ruído.",
+        intro: "O SwiftMR acelera a aquisição dos exames de ressonância. Os ajustes de imagem entram na configuração, durante a implantação.",
         points: [
           "Acelera a aquisição dos exames de ressonância magnética",
           "Compatível com todas as marcas e modelos de ressonância magnética",
@@ -919,7 +919,7 @@ export const lines: Record<string, LineContent> = {
           { title: "Vistoria de pré-instalação", meta: "Etapa 1", body: "Levantamento das necessidades do serviço, IP fixo e PACS." },
           { title: "Instalação e conexão", meta: "Etapa 2", body: "Gateway (PC) instalado e ligado em rede à ressonância e ao PACS." },
           { title: "Configuração do protocolo", meta: "Etapa 3", body: "Ajuste do protocolo de ressonância magnética." },
-          { title: "Otimização e personalização", meta: "Etapa 4", body: "Ajustes de nitidez e de redução de ruído." },
+          { title: "Otimização e personalização", meta: "Etapa 4", body: "Otimização de nitidez e redução de ruído na configuração." },
           { title: "Monitoramento", meta: "Etapa 5", body: "Acompanhamento do uso e da satisfação da equipe." },
         ],
       },
@@ -1014,12 +1014,12 @@ export const lines: Record<string, LineContent> = {
     ],
     faq: [
       {
-        q: "Qual ressonância veterinária funciona sem hélio?",
-        a: "O O-scan Vet, de ímã permanente de 0,31 T, funciona sem líquidos criogênicos nem hélio, com alimentação monofásica 220 V e cerca de 1 kVA.",
+        q: "O O-scan Vet usa hélio?",
+        a: "Não. O O-scan Vet, de ímã permanente de 0,31 T, funciona sem líquidos criogênicos nem hélio, com alimentação monofásica 220 V e cerca de 1 kVA.",
       },
       {
         q: "Quanto espaço o Magnifico Vet precisa?",
-        a: "A instalação fica em cerca de 20 m². Layout, rede elétrica e piso são confirmados no projeto da sala.",
+        a: "A instalação fica em cerca de 20 m². Layout e rede elétrica são confirmados no projeto da sala.",
       },
       {
         q: "Com quem eu falo sobre os sistemas WDM?",

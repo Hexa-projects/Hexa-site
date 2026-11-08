@@ -161,7 +161,7 @@ export const services: Record<ServiceSlug, ServiceContent> = {
     ],
     processTitle: "Como o contrato é montado",
     process: [
-      { title: "Escopo por equipamento", body: "O contrato parte do equipamento, do fabricante e do uso que a clínica faz dele." },
+      { title: "Escopo por equipamento", body: "O contrato parte do equipamento e do fabricante." },
       { title: "Preventiva e corretiva", body: "O contrato contempla a preventiva e a corretiva, com atendimento técnico e suporte durante toda a vigência." },
       { title: "Com ou sem peças", body: "A proposta define se as peças entram no contrato." },
     ],
@@ -211,7 +211,7 @@ export const services: Record<ServiceSlug, ServiceContent> = {
       "Transporte do equipamento, também na mudança de endereço da clínica",
       "Visitas técnicas avulsas, preventivas e corretivas fora de contrato",
       "Gerenciamento de projetos em imagem e consultoria",
-      "Projeto da sala antes da compra: área, rede elétrica e requisitos de instalação de cada sistema",
+      "Projeto da sala antes da compra: área, rede elétrica e requisitos de instalação de cada sistema, conforme o fabricante",
       "Contrato de manutenção, com ou sem peças, depois da instalação",
     ],
     processTitle: "Como funciona",
@@ -232,7 +232,7 @@ export const services: Record<ServiceSlug, ServiceContent> = {
       },
       {
         q: "Vocês ajudam a planejar a sala?",
-        a: "Sim. Planejamos a sala antes da compra: área, rede elétrica e requisitos de instalação de cada sistema. Também fazemos gerenciamento de projetos em imagem e consultoria.",
+        a: "Sim. Planejamos a sala antes da compra: área, rede elétrica e requisitos de instalação de cada sistema, conforme o fabricante. Também fazemos gerenciamento de projetos em imagem e consultoria.",
       },
       {
         q: "Atendem em todo o Brasil?",
@@ -349,5 +349,5 @@ export const serviceHub = {
   cards: serviceOrder.map((slug) => serviceCard(slug, true)),
   structureIntro:
     "Unidades em cinco capitais e um centro próprio para testar e reparar equipamentos e peças.",
-  structureMedia: media.estrutura,
+  heroMedia: media.estrutura,
 };

@@ -41,7 +41,7 @@ const RmLinePage = () => (
     <PageSection
       id="comparativo"
       title="Os quatro modelos lado a lado"
-      intro="Área e consumo informados pela Esaote. Obra, blindagem, carga de piso e layout final são confirmados no projeto da sala, antes da compra."
+      intro="Área e consumo informados pela Esaote e pela base comercial da Hexamedical. Obra, blindagem, carga de piso e layout final são confirmados no projeto da sala, antes da compra."
     >
       <CompareTable {...rmLine.compare} />
     </PageSection>

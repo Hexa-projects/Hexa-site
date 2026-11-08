@@ -12,5 +12,5 @@ jurídica e regulatória (registro na Anvisa) antes de ser tratado como liberado
 | `plaque.webp` | `careverse-site/assets/plaque.webp` (1030 × 705), tela de análise de placa, material oficial Shukun/Careverse | /solucoes/careverse, seção "Análise de placa" |
 
 As cores do Careverse (azul e cobre) ficam só dentro destas imagens; a página usa o sistema da Hexamedical (DESIGN.md).
-As fontes da landing (`manrope.woff2`, `mono.woff2`), os logos e o folder em PDF não foram copiados. A tela do CT-FFR (`ct-ffr.webp`)
-saiu em 2026-11-08 com o conteúdo de CT-FFR, bloqueado até a validação regulatória (plano de revisão da landing em `careverse-review`).
+As fontes da landing (`manrope.woff2`, `mono.woff2`), os logos e o folder em PDF não foram copiados. Uma terceira tela da landing
+saiu em 2026-11-08 com a seção correspondente, bloqueada até a validação regulatória (plano de revisão da landing em `careverse-review`).

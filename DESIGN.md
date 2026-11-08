@@ -311,5 +311,5 @@ Medido no build de 2026-11-02: pacote principal ≈ 97,6 kB gzip; chunk da home 
 - **Páginas internas migradas para o kit** (2026-11-08): o CSS editorial antigo (`src/editorial*.css`), as seções `src/components/sections/*` e as páginas provisórias saíram do repositório. Fica só `src/wdm-ct.css`/`src/wdm-ct-standalone.css`, importados pela `WdmCtPage` do build avulso `wdm-ct-main.tsx`, fora do site.
 - **Tokens legados**: `src/index.css` mantém as variáveis HSL do shadcn (`--primary` 28 100% 50%, um laranja diferente de `#f87517`) e força Source Sans 3 em `h1`–`h6`. As páginas novas devem usar os tokens de `tokens.css`.
 - **Drift a resolver**: `ease.exit` e `ease.scan` estão declarados em `motion.ts` e ainda não são usados; `stagger` passou a ser usado pelo `usePageReveal`.
-- **Mídia**: confirmar o direito de uso do vídeo da Esaote fora do site atual e se as fotos de manutenção e laboratório são próprias ou de banco.
+- **Mídia**: confirmar o direito de uso do vídeo da Esaote fora do site atual e se as fotos de manutenção e laboratório são próprias ou de banco. A foto de `/servicos/contratos` (`public/assets/hexa/Contrato-de-manutencoes-foto-1024x683.webp`, aperto de mãos sobre a prancheta, do acervo do site oficial) tem cara de banco de imagens: confirmar a licença antes de publicar.
 - **Teste de 60 fps**: falta definir o notebook de referência.

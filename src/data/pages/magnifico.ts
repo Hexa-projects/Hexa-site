@@ -65,7 +65,7 @@ export const magnifico = {
     table: {
       caption: "Cobertura clínica do Magnifico Open",
       source:
-        "porcentagens da base comercial da Hexamedical, a partir dos materiais da Esaote; observações da descrição de produto Magnifico Open, Esaote, rev. 2 (outubro de 2022)",
+        "porcentagens da base comercial da Hexamedical; observações da descrição de produto Magnifico Open, Esaote, rev. 2 (outubro de 2022)",
       columns: [{ label: "Cobertura" }, { label: "Observação" }],
       rows: [
         { label: "Musculoesquelético", values: ["100%", "Extremidades e articulações, com bobinas de ombro, joelho, mão e punho, tornozelo e pé"] },

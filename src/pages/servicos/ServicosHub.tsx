@@ -21,13 +21,14 @@ const ServicosHub = () => (
         { label: "Ver o laboratório", href: "/servicos/reparo", kind: "quiet" },
       ]}
       eyebrow={serviceHub.eyebrow}
+      media={serviceHub.heroMedia}
     />
 
     <PageSection id="servicos" title="Serviços técnicos" intro={serviceHub.servicesIntro}>
       <CardGrid items={serviceHub.cards} />
     </PageSection>
 
-    <PageSection id="estrutura" title="Estrutura e cobertura" intro={serviceHub.structureIntro} media={serviceHub.structureMedia}>
+    <PageSection id="estrutura" title="Estrutura e cobertura" intro={serviceHub.structureIntro}>
       <FactStrip items={serviceFacts} />
       <PointList items={serviceStructure} />
     </PageSection>

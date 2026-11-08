@@ -72,7 +72,7 @@ export const contactPage = {
   lead: "Fale com a Hexamedical pelo WhatsApp, por telefone ou por e-mail, de segunda a sexta.",
   triageTitle: "Escolha o assunto",
   channelsTitle: "Telefone, e-mail e horário",
-  channelsIntro: "Os mesmos canais do WhatsApp, para quem prefere ligar ou escrever.",
+  channelsIntro: "Para quem prefere ligar ou escrever.",
   channels: [
     { label: "Telefone e WhatsApp", value: PHONE_DISPLAY, action: { label: "Ligar", href: PHONE_TEL } },
     { label: "E-mail comercial", value: COMMERCIAL_EMAIL, action: { label: "Escrever e-mail", href: `mailto:${COMMERCIAL_EMAIL}` } },
@@ -198,7 +198,7 @@ export const legalPages: Record<LegalKind, LegalContent> = {
       {
         title: "WhatsApp, telefone e e-mail",
         paragraphs: [
-          "Os botões de WhatsApp abrem o aplicativo ou o site do WhatsApp com uma mensagem pronta. Nada é enviado até você mandar a mensagem por lá, e a conversa segue as regras desse serviço externo.",
+          "Os botões de WhatsApp abrem o aplicativo ou o site do WhatsApp com uma mensagem pronta. Nada chega à Hexamedical até você enviar a mensagem por lá, e a conversa segue as regras desse serviço externo.",
           "Telefone e e-mail aparecem como texto. Os atalhos de ligar e escrever abrem o aplicativo do seu aparelho.",
         ],
       },

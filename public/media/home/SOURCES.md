@@ -20,4 +20,4 @@ Gerada por `scripts/build-home-media.sh` em 2026-11-02. Os arquivos de origem fo
 | `etapa-manutencao.webp` | `wp-content/uploads/2026/04/Imagem-manutencao.png` | WebP |
 | `etapa-laboratorio.webp` | `public/assets/hexa/Reparo-de-Pecas-e-Eletronicas-foto.webp` (acervo do site oficial) | WebP, 1280 px |
 
-**Decisões pendentes do Lucas antes de publicar:** confirmar o direito de uso do vídeo de fabricante da Esaote fora do site atual, e confirmar se as fotos de manutenção e laboratório são próprias ou de banco de imagens.
+**Decisões pendentes do Lucas antes de publicar:** confirmar o direito de uso do vídeo de fabricante da Esaote fora do site atual, e confirmar se as fotos de manutenção e laboratório são próprias ou de banco de imagens. Fora da home, a foto de `/servicos/contratos` (`public/assets/hexa/Contrato-de-manutencoes-foto-1024x683.webp`, acervo do site oficial) parece de banco de imagens: confirmar a licença.
