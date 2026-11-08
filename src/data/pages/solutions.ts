@@ -4,11 +4,11 @@ import type { PageCard } from "@/components/page/CardGrid";
 
 /**
  * Conteúdo das páginas de Soluções (hub, linha de RM e produtos de RM).
- * Fontes, nesta ordem: dados da Esaote em src/data/editorial.ts e src/data/solutions.ts;
+ * Fontes, nesta ordem: dados da Esaote (páginas de produto em esaote.com, descrição de produto e brochura do Magnifico Open);
  * base comercial do segundo cérebro (notas O-Scan, S-Scan, Magnifico Open, Comparativo de RM Esaote,
  * Regra de escolha de RM humana, Densitometria); texto do site atual.
  * Hélio: só Magnifico Open e S-scan Open têm "não usa hélio" confirmado. O O-scan humano e o G-scan não falam de hélio.
- * Área do S-scan Open: "a partir de 20 m²", número oficial da Esaote (src/data/editorial.ts), acima do "até 20 m²" da base comercial.
+ * Área do S-scan Open: "a partir de 20 m²", número oficial da Esaote (página de produto do S-scan Open), acima do "até 20 m²" da base comercial.
  * Magnifico Open: "cerca de 20 m²" e "até 3 kW", da descrição de produto (p5) e da brochura (p10) da Esaote (ver src/data/pages/magnifico.ts).
  *
  * Demais linhas (injetoras, radiografia, densitometria, HexAI, veterinária) e modelos WDM: notas Injetoras Medtron Accutron,
@@ -171,7 +171,7 @@ export const rmLine = {
   hero: cutouts.magnifico,
   whatsappText: "Olá! Quero ajuda para escolher uma ressonância magnética Esaote.",
   question: "Extremidades e ortopedia, musculoesquelético amplo com coluna, ou RM aberta de corpo inteiro?",
-  /** Regra de escolha da base comercial, mais o G-scan para exame com carga (src/data/editorial.ts). */
+  /** Regra de escolha da base comercial, mais o G-scan para exame com carga (página de produto do G-scan Open, Esaote). */
   choice: [
     {
       ...rmCards["o-scan-smart"],

@@ -2,7 +2,7 @@ import { homeMedia, type MediaImage, type StageId } from "./homeMedia";
 
 /**
  * Conteúdo da home. Os textos partem do site oficial (hexamedical.com.br), da home anterior
- * deste repositório e de src/data/editorial.ts (dados técnicos informados pela Esaote).
+ * deste repositório e das páginas de produto da Esaote em esaote.com (dados técnicos do fabricante).
  */
 
 export type CompanyFact = { value: string; label: string };
@@ -105,10 +105,9 @@ export type ShowroomItem = {
   line: string;
   filters: Exclude<ShowroomFilter, "todos">[];
   image: MediaImage;
-  /** Área e consumo informados pela Esaote (src/data/editorial.ts; Magnifico Open em src/data/solutions.ts). */
+  /** Área e consumo informados pela Esaote (páginas de produto; Magnifico Open: descrição de produto e brochura, ver src/data/pages/magnifico.ts). */
   spec?: string;
   href: string;
-  external?: boolean;
   /** Foto de cena (não recorte): ocupa o ladrilho inteiro em vez de ficar sobre a base branca. */
   fill?: boolean;
 };

@@ -181,7 +181,7 @@ describe("Magnifico Open: rota e vitrine da home", () => {
   it("o card da vitrine da home aponta para a página interna", () => {
     const card = showroom.find((item) => item.id === "magnifico-open")!;
     expect(card.href).toBe(ROUTE);
-    expect(card.external).toBeUndefined();
+    expect(card.href.startsWith("/")).toBe(true);
   });
 });
 

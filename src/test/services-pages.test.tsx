@@ -255,8 +255,8 @@ describe("serviços: rotas e limpeza", () => {
     ]) {
       expect(fs.existsSync(path.join(process.cwd(), file)), file).toBe(false);
     }
-    expect(fs.readFileSync(path.join(process.cwd(), "src/data/media.ts"), "utf8")).not.toMatch(/services:|serviceHeroMedia/);
-    expect(fs.readFileSync(path.join(process.cwd(), "src/data/editorial.ts"), "utf8")).not.toMatch(/serviceStories/);
+    // media.ts e editorial.ts (que guardavam serviceHeroMedia e serviceStories) saíram inteiros na limpeza do sistema antigo.
+    for (const file of ["src/data/media.ts", "src/data/editorial.ts"]) expect(fs.existsSync(path.join(process.cwd(), file)), file).toBe(false);
   });
 
   it("a manutenção não promete buscar a peça na clínica", () => {

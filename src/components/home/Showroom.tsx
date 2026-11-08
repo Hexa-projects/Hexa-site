@@ -82,11 +82,7 @@ const Showroom = ({ items }: { items: ShowroomItem[] }) => {
           );
           return (
             <li key={item.id} className={item.fill ? "showroom__item showroom__item--fill" : "showroom__item"} data-flip-id={item.id} hidden={hidden}>
-              {item.external ? (
-                <a href={item.href} className="showroom__link">{body}</a>
-              ) : (
-                <Link to={item.href} className="showroom__link">{body}</Link>
-              )}
+              <Link to={item.href} className="showroom__link">{body}</Link>
             </li>
           );
         })}

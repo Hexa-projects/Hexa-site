@@ -85,3 +85,32 @@ describe("cada página pública", () => {
     180_000,
   );
 });
+
+describe("sistema antigo removido", () => {
+  it("as páginas, seções, dados e estilos antigos saíram do repositório", () => {
+    for (const file of [
+      "src/pages/ProductEditorialPage.tsx",
+      "src/pages/CasesPage.tsx",
+      "src/pages/ConteudoHub.tsx",
+      "src/pages/SegmentPage.tsx",
+      "src/pages/SegmentosHub.tsx",
+      "src/components/sections",
+      "src/components/NavLink.tsx",
+      "src/data/media.ts",
+      "src/data/catalog.ts",
+      "src/data/segments.ts",
+      "src/data/solutions.ts",
+      "src/data/editorial.ts",
+      "src/editorial.css",
+      "src/editorial-models.css",
+      "src/editorial-scenes.css",
+      "src/App.css",
+    ]) {
+      expect(fs.existsSync(path.join(process.cwd(), file)), file).toBe(false);
+    }
+  });
+
+  it("o main.tsx só carrega os estilos do sistema novo", () => {
+    expect(read("src/main.tsx")).not.toMatch(/editorial|wdm|App\.css/);
+  });
+});

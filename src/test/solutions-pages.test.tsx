@@ -80,13 +80,13 @@ describe("soluções: linha de ressonância magnética", () => {
     expect(data["O-scan SMART"]["Campo magnético"]).toBe("0,31 T");
     expect(data["O-scan SMART"]["Área de instalação"]).toBe("a partir de 9 m²");
     expect(data["S-scan Open"]["Campo magnético"]).toBe("0,25 T");
-    // Área do S-scan: número oficial da Esaote (src/data/editorial.ts), acima da base comercial.
+    // Área do S-scan: número oficial da Esaote (página de produto do S-scan Open), acima da base comercial.
     expect(data["S-scan Open"]["Área de instalação"]).toBe("a partir de 20 m²");
     expect(data["Magnifico Open"]["Campo magnético"]).toBe("0,4 T");
     // Magnifico Open: descrição de produto da Esaote (p5, "about 20 sqmt", 3.000 VA) e brochura (p10, "maximum 3 Kw").
     expect(data["Magnifico Open"]["Área de instalação"]).toBe("cerca de 20 m²");
     expect(data["Magnifico Open"]["Consumo de energia"]).toBe("até 3 kW");
-    // G-scan: dados de src/data/editorial.ts (instalação mínima de 23 m², menos de 3 kW).
+    // G-scan: página de produto da Esaote (instalação mínima de 23 m², menos de 3 kW).
     expect(data["G-scan Open"]["Área de instalação"]).toBe("a partir de 23 m²");
     expect(data["G-scan Open"]["Consumo de energia"]).toBe("menos de 3 kW");
 
@@ -135,7 +135,7 @@ describe("soluções: páginas de produto", () => {
     expect(screen.getByRole("table", { name: /ficha técnica/i })).toBeInTheDocument();
   });
 
-  it("G-scan Open: dados de editorial.ts e nenhuma afirmação sobre hélio", () => {
+  it("G-scan Open: dados da Esaote e nenhuma afirmação sobre hélio", () => {
     const { container } = renderAt("/solucoes/g-scan");
     expect(screen.getByRole("heading", { level: 1, name: "G-scan Open" })).toBeInTheDocument();
     const text = page(container).textContent ?? "";
