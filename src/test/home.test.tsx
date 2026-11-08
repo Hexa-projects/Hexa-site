@@ -23,6 +23,18 @@ describe("home", () => {
     expect(screen.getByRole("link", { name: /Ver as ressonâncias/ })).toHaveAttribute("href", "/solucoes/ressonancia-magnetica");
   });
 
+  it("a vitrine só diz que não usa hélio junto do Magnifico Open e do S-scan Open", () => {
+    renderHome();
+    const intro = screen.getByRole("region", { name: "Equipamentos" }).querySelector(".showroom__head p")!.textContent!;
+    const sentences = intro.split(/(?<=[.;:])\s+/).filter((sentence) => /hélio/i.test(sentence));
+    expect(sentences.length).toBeGreaterThan(0);
+    for (const sentence of sentences) {
+      expect(sentence).toMatch(/Magnifico Open/);
+      expect(sentence).toMatch(/S-scan Open/);
+      expect(sentence).not.toMatch(/O-scan|G-scan|ímã permanente/);
+    }
+  });
+
   it("organiza as seções na ordem da história", () => {
     renderHome();
     const sectionTitles = within(screen.getByRole("main"))

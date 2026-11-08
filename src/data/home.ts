@@ -163,7 +163,7 @@ export const showroom: ShowroomItem[] = [
     line: "Ressonância dedicada à medicina veterinária",
     filters: ["rm", "veterinaria"],
     image: shot("vet-mr-grande", 960, 641, "Ressonância veterinária Esaote Vet-MR Grande com um tigre posicionado"),
-    href: "/solucoes/vet-mr-grande",
+    href: "/solucoes/veterinaria",
     fill: true,
   },
   {

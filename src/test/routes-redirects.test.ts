@@ -41,6 +41,7 @@ describe("redirecionamentos 301", () => {
     ["/solucoes/rm-magnifico-open", "/solucoes/magnifico-open"],
     ["/solucoes/mindray", "/solucoes/radiografia-digital"],
     ["/solucoes/veterinario", "/solucoes/veterinaria"],
+    ["/solucoes/vet-mr-grande", "/solucoes/veterinaria"],
   ];
 
   it("cobre cada URL antiga do mapa de rotas e os slugs internos antigos", () => {

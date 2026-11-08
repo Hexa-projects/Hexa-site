@@ -61,7 +61,7 @@ const Header = () => {
       onFocusCapture={() => setHidden(false)}
     >
       <div className="site-header__inner">
-        <Link to="/" className="site-header__brand" aria-label="Hexamedical — página inicial">
+        <Link to="/" className="site-header__brand" aria-label="Hexamedical, página inicial">
           <img
             src={onStage ? "/assets/brand/hexamedical-logo-light.webp" : "/assets/brand/hexamedical-logo.webp"}
             alt="Hexamedical"

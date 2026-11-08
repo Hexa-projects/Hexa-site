@@ -45,7 +45,7 @@ const Showroom = ({ items }: { items: ShowroomItem[] }) => {
       <div className="showroom__head">
         <h2 id="showroom-title">Equipamentos</h2>
         <p>
-          A linha principal é a ressonância aberta Esaote, de ímã permanente: consome até 3 kW e não usa hélio líquido. Também trabalhamos
+          A linha principal é a ressonância aberta Esaote, com consumo de até 3 kW. O Magnifico Open e o S-scan Open não usam hélio líquido. Também trabalhamos
           com ressonância e tomografia veterinárias, radiografia digital Mindray, bombas injetoras de contraste e o software HexAI. Cada
           equipamento tem uma página com os dados do fabricante.
         </p>

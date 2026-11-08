@@ -11,6 +11,7 @@ import ProofVideos from "@/components/home/ProofVideos";
 import ContactTriage from "@/components/home/ContactTriage";
 import CompanyFacts from "@/components/home/CompanyFacts";
 import { homeMedia } from "@/data/homeMedia";
+import { canonicalUrl } from "@/data/routes";
 import { companyFacts, lifecycle, showroom, triage } from "@/data/home";
 import { detectStageMode, type StageMode } from "@/motion/capability";
 import StageCanvas from "@/motion/stage/StageCanvas";
@@ -40,11 +41,12 @@ const Index = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Hexamedical — ressonância magnética, instalação e manutenção</title>
+        <title>Ressonância magnética, instalação e manutenção | Hexamedical</title>
         <meta
           name="description"
           content="Ressonância magnética Esaote, projeto da sala, instalação, manutenção em todo o Brasil e laboratório próprio de eletrônica. Um parceiro técnico durante toda a vida do equipamento."
         />
+        <link rel="canonical" href={canonicalUrl("/")} />
       </Helmet>
 
       <div ref={home} className="home" data-stage={mode}>

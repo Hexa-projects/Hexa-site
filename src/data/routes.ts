@@ -1,5 +1,11 @@
 import { blogPosts } from "@/data/blog";
 
+/** Endereço de produção usado no sitemap e no link canônico de cada página. */
+export const SITE_URL = "https://www.hexamedical.com.br";
+
+/** Link canônico da rota: sem barra final, exceto a home. */
+export const canonicalUrl = (pathname: string) => `${SITE_URL}${pathname === "/" ? "/" : pathname.replace(/\/+$/, "")}`;
+
 export interface LegacyRedirect {
   source: string;
   destination: string;
@@ -8,7 +14,9 @@ export interface LegacyRedirect {
 /**
  * URLs antigas do site em produção e slugs internos antigos do repositório.
  * Fontes sem barra final: o vercel.json repete cada uma com e sem barra.
- * Fonte única: o teste confere o vercel.json contra esta lista.
+ * Fonte única: esta lista. O bloco "redirects" do vercel.json é escrito à mão a partir dela, na mesma ordem:
+ * para cada item, uma entrada com `source`, outra com `${source}/`, ambas com o mesmo destino e `permanent: true`.
+ * src/test/routes-redirects.test.ts falha se o vercel.json sair de sincronia (entrada faltando, destino diferente ou sobra).
  * Os pares que só mudariam a barra final (/servicos/, /contato/, /ouvidoria/, /blog/) ficam de fora:
  * a Vercel ignora a barra final ao casar, então um redirect para o mesmo caminho viraria laço.
  */
@@ -42,9 +50,11 @@ export const legacyRedirects: LegacyRedirect[] = [
   { source: "/solucoes/rm-magnifico-open", destination: "/solucoes/magnifico-open" },
   { source: "/solucoes/mindray", destination: "/solucoes/radiografia-digital" },
   { source: "/solucoes/veterinario", destination: "/solucoes/veterinaria" },
+  // Vet-MR Grande: sem dados de fonte para uma página própria; a família veterinária fica em /solucoes/veterinaria.
+  { source: "/solucoes/vet-mr-grande", destination: "/solucoes/veterinaria" },
 ];
 
-/** Rotas públicas (sem barra final). As tarefas seguintes montam o sitemap a partir daqui. */
+/** Rotas públicas (sem barra final). O public/sitemap.xml lista exatamente estas rotas (src/test/seo.test.ts confere). */
 export const publicRoutes: string[] = [
   "/",
   "/solucoes",
@@ -59,7 +69,6 @@ export const publicRoutes: string[] = [
   "/solucoes/hexai",
   "/solucoes/careverse",
   "/solucoes/veterinaria",
-  "/solucoes/vet-mr-grande",
   "/solucoes/ispace-1-5t-vet",
   "/solucoes/turbotom-1s-vet",
   "/solucoes/turbotom-1s-lite-vet",

@@ -21,4 +21,11 @@ describe("rotas", () => {
     expect(await screen.findByRole("heading", { level: 1, name: /S-scan/i }, { timeout: 5000 })).toBeInTheDocument();
     expect(window.location.pathname).toBe("/solucoes/s-scan-open");
   });
+
+  it("o Vet-MR Grande redireciona para a página da veterinária", async () => {
+    window.history.pushState({}, "", "/solucoes/vet-mr-grande");
+    render(<App />);
+    expect(await screen.findByRole("heading", { level: 1, name: /veterin/i }, { timeout: 5000 })).toBeInTheDocument();
+    expect(window.location.pathname).toBe("/solucoes/veterinaria");
+  });
 });

@@ -55,6 +55,10 @@ describe("conteúdo da home", () => {
     expect(showroom.find((item) => item.id === "magnifico-open")?.href).toBe("/solucoes/magnifico-open");
   });
 
+  it("o Vet-MR Grande leva à página da veterinária (a rota antiga redireciona)", () => {
+    expect(showroom.find((item) => item.id === "vet-mr-grande")?.href).toBe("/solucoes/veterinaria");
+  });
+
   it("toda imagem do showroom existe em public/", () => {
     for (const item of showroom) {
       expect(fs.existsSync(path.join(process.cwd(), "public", item.image.src)), item.image.src).toBe(true);

@@ -285,6 +285,16 @@
       "source": "/solucoes/veterinario/",
       "destination": "/solucoes/veterinaria",
       "permanent": true
+    },
+    {
+      "source": "/solucoes/vet-mr-grande",
+      "destination": "/solucoes/veterinaria",
+      "permanent": true
+    },
+    {
+      "source": "/solucoes/vet-mr-grande/",
+      "destination": "/solucoes/veterinaria",
+      "permanent": true
     }
   ]
 }

@@ -15,7 +15,6 @@ const CareversePage = lazy(() => import("./pages/solucoes/CareversePage"));
 const ProductPage = lazy(() => import("./pages/solucoes/ProductPage"));
 const LinePage = lazy(() => import("./pages/solucoes/LinePage"));
 const ServicosHub = lazy(() => import("./pages/servicos/ServicosHub"));
-const ProductEditorialPage = lazy(() => import("./pages/ProductEditorialPage"));
 const ServicePage = lazy(() => import("./pages/servicos/ServicePage"));
 const EmpresaPage = lazy(() => import("./pages/empresa/EmpresaPage"));
 const ContatoPage = lazy(() => import("./pages/empresa/ContatoPage"));
@@ -31,8 +30,6 @@ const clientRedirects = legacyRedirects.filter(({ source }) => /^\/(solucoes|ser
 
 // Linhas montadas com o kit (LinePage + lines em src/data/pages/solutions.ts).
 const lineSlugs = ["bombas-injetoras", "radiografia-digital", "densitometria", "hexai", "veterinaria"];
-// Páginas que ainda abrem na página antiga (Vet-MR Grande, sem página nova decidida).
-const pendingLines = ["vet-mr-grande"];
 
 const queryClient = new QueryClient();
 
@@ -61,9 +58,6 @@ const App = () => (
             <Route path="/solucoes/careverse" element={<CareversePage />} />
             {lineSlugs.map((slug) => (
               <Route key={slug} path={`/solucoes/${slug}`} element={<LinePage slug={slug} />} />
-            ))}
-            {pendingLines.map((slug) => (
-              <Route key={slug} path={`/solucoes/${slug}`} element={<ProductEditorialPage slug={slug} />} />
             ))}
             {/* Produtos (O-scan SMART, S-scan Open, G-scan Open e os modelos veterinários WDM); slug desconhecido mostra a 404 do sistema. */}
             <Route path="/solucoes/:slug" element={<ProductPage />} />
