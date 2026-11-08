@@ -11,15 +11,7 @@ export const hexaMedia = {
     "rm-o-scan": "/assets/esaote/o-scan-smart.webp",
     "rm-g-scan": "/assets/esaote/g-scan-open.webp",
   },
-  services: {
-    manutencao: "/assets/hexa/Imagem-manutencao.webp",
-    contratos: "/assets/hexa/Contrato-de-manutencoes-foto.webp",
-    instalacao: "/assets/hexa/Desinstalacao-e-Instalacao.webp",
-    reparo: "/assets/hexa/Reparo-de-Pecas-e-Eletronicas-foto.webp",
-    "visita-tecnica": "/assets/hexa/Hexamedical-Website-9-1024x576.webp",
-  },
   blogCover: "/assets/hexa/Hexamedical-Templates-Capa-de-Blog-1024x576.webp",
 };
 
 export const solutionHeroMedia = hexaMedia.solutions;
-export const serviceHeroMedia = hexaMedia.services;

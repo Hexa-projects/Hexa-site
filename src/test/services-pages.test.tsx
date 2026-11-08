@@ -75,7 +75,9 @@ describe("serviços: hub", () => {
     const contact = page(container).querySelector("#contato") as HTMLElement;
     expect(contact).not.toBeNull();
     expect(within(contact).getAllByRole("heading", { level: 3 })).toHaveLength(3);
-    expect(links()).toContain(whatsappHref(serviceHub.whatsappText));
+    // A mensagem do hub precisa estar na própria triagem, além do hero.
+    const contactLinks = within(contact).getAllByRole("link").map((link) => link.getAttribute("href"));
+    expect(contactLinks).toContain(whatsappHref(serviceHub.whatsappText));
   });
 });
 
@@ -244,8 +246,21 @@ describe("serviços: rotas e limpeza", () => {
   });
 
   it("as páginas antigas de serviço saíram do repositório", () => {
-    for (const file of ["src/pages/ServicePage.tsx", "src/pages/ServicosHub.tsx"]) {
+    for (const file of [
+      "src/pages/ServicePage.tsx",
+      "src/pages/ServicosHub.tsx",
+      "src/pages/StaticContentPage.tsx",
+      "src/data/services.ts",
+      "src/components/sections/ServiceCard.tsx",
+    ]) {
       expect(fs.existsSync(path.join(process.cwd(), file)), file).toBe(false);
     }
+    expect(fs.readFileSync(path.join(process.cwd(), "src/data/media.ts"), "utf8")).not.toMatch(/services:|serviceHeroMedia/);
+    expect(fs.readFileSync(path.join(process.cwd(), "src/data/editorial.ts"), "utf8")).not.toMatch(/serviceStories/);
+  });
+
+  it("a manutenção não promete buscar a peça na clínica", () => {
+    const { container } = renderAt("/servicos/manutencao");
+    expect(ownText(container)).not.toMatch(/leva as peças/i);
   });
 });

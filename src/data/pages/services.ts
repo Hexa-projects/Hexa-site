@@ -100,7 +100,7 @@ export const services: Record<ServiceSlug, ServiceContent> = {
     hero: media.manutencao,
     secondary: { label: "Ver contratos de manutenção", href: "/servicos/contratos" },
     scopeTitle: "O que a manutenção cobre",
-    scopeIntro: "A equipe atende o equipamento na clínica ou no hospital e leva as peças com falha para o laboratório próprio.",
+    scopeIntro: "A equipe atende o equipamento na clínica ou no hospital, e as peças com falha vão para o laboratório próprio.",
     scope: [
       "Manutenção preventiva e corretiva de ressonância magnética, tomografia e hemodinâmica",
       "Equipamentos de diversos fabricantes; tomografia multimarcas conforme avaliação do escopo",

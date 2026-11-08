@@ -5,8 +5,8 @@ import CardGrid from "@/components/page/CardGrid";
 import FactStrip from "@/components/page/FactStrip";
 import PointList from "@/components/page/PointList";
 import PageContact from "@/components/page/PageContact";
-import { triage, whatsappHref } from "@/data/home";
-import { serviceFacts, serviceHub, serviceStructure } from "@/data/pages/services";
+import { whatsappHref } from "@/data/home";
+import { serviceContactPaths, serviceFacts, serviceHub, serviceStructure } from "@/data/pages/services";
 
 /** /servicos: os quatro serviços técnicos, cada um com a sua página, e a estrutura que atende todos eles. */
 const ServicosHub = () => (
@@ -32,8 +32,8 @@ const ServicosHub = () => (
       <PointList items={serviceStructure} />
     </PageSection>
 
-    {/* No hub a triagem fica como na home: cada trilha já abre a conversa com o serviço certo. */}
-    <PageContact paths={triage} />
+    {/* As três trilhas da home; a de manutenção abre a conversa com a mensagem do hub. */}
+    <PageContact paths={serviceContactPaths({ contact: { path: "manter" }, whatsappText: serviceHub.whatsappText })} />
   </PageShell>
 );
 

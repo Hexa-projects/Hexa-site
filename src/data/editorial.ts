@@ -130,38 +130,3 @@ export const commercialLines = [
     source: "https://www.hexamedical.com.br/mindray/",
   },
 ];
-
-export const serviceStories = {
-  manutencao: {
-    title: "Manutenção de equipamentos",
-    headline: "A operação continua depois da entrega.",
-    intro: "Manutenção preventiva e corretiva de equipamentos de diagnóstico por imagem, incluindo ressonância magnética, tomografia computadorizada e hemodinâmica de diferentes fabricantes.",
-    image: "/assets/hexa/Desinstalacao-e-Instalacao.webp",
-    work: ["Manutenção preventiva", "Manutenção corretiva", "Diagnóstico técnico"],
-    source: "https://www.hexamedical.com.br/manutencao-de-equipamentos/",
-  },
-  contratos: {
-    title: "Contratos de manutenção",
-    headline: "Um plano de suporte para o equipamento que você opera.",
-    intro: "Contratos personalizados, com ou sem peças, que podem contemplar manutenção preventiva e corretiva e suporte ao longo da vigência contratual.",
-    image: "/assets/hexa/Contrato-de-manutencoes-foto.webp",
-    work: ["Escopo por equipamento", "Preventiva e corretiva", "Opção com ou sem peças"],
-    source: "https://www.hexamedical.com.br/contratos-de-manutencao/",
-  },
-  instalacao: {
-    title: "Desinstalação e instalação",
-    headline: "Cada mudança de equipamento pede um plano técnico.",
-    intro: "A Hexamedical atua em instalação, desinstalação e atendimentos avulsos relacionados à operação de equipamentos médicos.",
-    image: "/assets/hexa/Desinstalacao-e-Instalacao.webp",
-    work: ["Avaliação da necessidade", "Desinstalação", "Instalação"],
-    source: "https://www.hexamedical.com.br/desinstalacao-e-instalacao-de-equipamentos/",
-  },
-  reparo: {
-    title: "Reparo de peças e periféricos",
-    headline: "Antes de substituir, investigar.",
-    intro: "No laboratório especializado, a equipe analisa, recupera e testa bobinas de RM, placas eletrônicas, módulos, fontes de alimentação e outros periféricos.",
-    image: "/assets/hexa/Reparo-de-Pecas-e-Eletronicas-foto.webp",
-    work: ["Análise do componente", "Reparo especializado", "Teste pós-reparo"],
-    source: "https://www.hexamedical.com.br/reparo-de-pecas-e-perifericos/",
-  },
-} as const;

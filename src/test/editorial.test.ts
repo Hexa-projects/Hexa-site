@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { commercialLines, rmStories, serviceStories } from "@/data/editorial";
+import { commercialLines, rmStories } from "@/data/editorial";
 
 describe("catálogo editorial", () => {
   it("usa os modelos atuais e fontes de fabricante para RM", () => {
@@ -11,8 +11,7 @@ describe("catálogo editorial", () => {
     }
   });
 
-  it("cobre todas as linhas e os quatro serviços publicados", () => {
+  it("cobre todas as linhas comerciais", () => {
     expect(commercialLines.map((line) => line.slug)).toEqual(["bombas-injetoras", "mindray"]);
-    expect(Object.keys(serviceStories)).toEqual(["manutencao", "contratos", "instalacao", "reparo"]);
   });
 });
