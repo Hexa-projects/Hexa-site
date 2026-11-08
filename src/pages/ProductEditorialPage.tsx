@@ -4,7 +4,8 @@ import { ArrowUpRight } from "lucide-react";
 import Layout from "@/components/layout/Layout";
 
 /*
- * Páginas temporárias que ainda não migraram para o kit: Magnifico Open (Task 8), Careverse (Task 9) e Vet-MR Grande.
+ * Páginas temporárias que ainda não migraram para o kit: Careverse (Task 9) e Vet-MR Grande.
+ * O Magnifico Open já abre em src/pages/solucoes/MagnificoPage.tsx.
  * As linhas (injetoras, radiografia, densitometria, HexAI, veterinária) já abrem em src/pages/solucoes/LinePage.tsx.
  */
 
@@ -29,7 +30,6 @@ function TemporaryPage({ title, text }: { title: string; text: string }) {
 export default function ProductEditorialPage({ slug: forcedSlug }: { slug?: string }) {
   const { slug: paramSlug = "" } = useParams();
   const slug = forcedSlug ?? paramSlug;
-  if (slug === "magnifico-open") return <TemporaryPage title="Magnifico Open" text="Ressonância magnética aberta de corpo inteiro. A página completa do equipamento está em preparação." />;
   if (slug === "careverse") return <TemporaryPage title="Careverse" text="Inteligência artificial cardiovascular e neurológica. A página completa está em preparação." />;
   if (slug === "vet-mr-grande") return <VetMrPage />;
   return <Navigate to="/solucoes" replace />;

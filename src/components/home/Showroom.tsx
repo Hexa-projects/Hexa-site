@@ -74,7 +74,7 @@ const Showroom = ({ items }: { items: ShowroomItem[] }) => {
               <span className="showroom__name">{item.name}</span>
               <span className="showroom__line">{item.line}</span>
               {item.spec && <span className="showroom__spec">{item.spec}</span>}
-              {/* Mesmo rótulo em todos os cards: a página oficial do Magnifico Open é do próprio site. */}
+              {/* Mesmo rótulo em todos os cards, todos levando à página interna do equipamento. */}
               <span className="showroom__go">
                 Ver equipamento <ArrowRight aria-hidden="true" />
               </span>

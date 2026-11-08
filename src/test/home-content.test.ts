@@ -50,9 +50,9 @@ describe("conteúdo da home", () => {
     for (const href of hrefs) expect(isDeclaredRoute(href), href).toBe(true);
   });
 
-  it("o único link externo do showroom é a página oficial do Magnifico Open", () => {
-    const external = showroom.filter((item) => item.external);
-    expect(external.map((item) => item.href)).toEqual(["https://www.hexamedical.com.br/rm-esaote-magnifico-open/"]);
+  it("o showroom não tem link externo: o Magnifico Open abre a página interna", () => {
+    expect(showroom.filter((item) => item.external)).toEqual([]);
+    expect(showroom.find((item) => item.id === "magnifico-open")?.href).toBe("/solucoes/magnifico-open");
   });
 
   it("toda imagem do showroom existe em public/", () => {

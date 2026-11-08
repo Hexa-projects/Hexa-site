@@ -1,0 +1,324 @@
+/* Página-vitrine do Magnifico Open (/solucoes/magnifico-open): a cena do vídeo, importada só pela página.
+   Só tokens de tokens.css. O resto da página usa o kit (page.css). */
+
+/* ---------- Cena: o vídeo abre do círculo ao quadro ---------- */
+
+.mag-scene {
+  background: var(--graphite-900);
+  color: var(--on-dark);
+}
+
+.mag-scene :focus-visible {
+  outline-color: var(--orange);
+  box-shadow: 0 0 0 5px var(--graphite-950);
+}
+
+.mag-scene__head {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-8) var(--gutter) var(--space-5);
+}
+
+.mag-scene__head p {
+  max-width: 52ch;
+  margin-top: var(--space-4);
+  color: var(--on-dark-2);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+/* O quadro preso ao scroll: ocupa a tela, abaixo do cabeçalho, alinhado à coluna das seções. */
+.mag-scene__frame {
+  --mag-inline: max(var(--gutter), calc((100% - var(--content-max)) / 2 + var(--gutter)));
+  position: relative;
+  height: 100svh;
+  min-height: 640px;
+  padding: calc(var(--header-h, 5rem) + var(--space-4)) var(--mag-inline) var(--space-5);
+  overflow: hidden;
+  background: var(--graphite-900);
+}
+
+.mag-scene__stage {
+  position: relative;
+  height: 100%;
+}
+
+/* Anéis do túnel atrás do vídeo, centrados nele (sem laranja), como o hero escuro do kit. */
+.mag-scene__rings {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 200%;
+  height: 200%;
+  translate: -50% -50%;
+  pointer-events: none;
+}
+
+.mag-scene__rings circle {
+  fill: none;
+  stroke: var(--rule-dark);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+/* A borda laranja do círculo: tamanho e opacidade vêm da cena (bannerClip); parada, não aparece. */
+.mag-scene__ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  translate: -50% -50%;
+  border: 2px solid var(--orange);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.mag-scene__aperture {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--graphite-800);
+}
+
+.mag-scene__video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Os três dados sobre a base do vídeo, com o véu do palco para a leitura. */
+.mag-scene__overlay {
+  position: absolute;
+  left: var(--mag-inline);
+  right: var(--mag-inline);
+  bottom: var(--space-5);
+  z-index: 1;
+  padding: var(--space-9) var(--space-6) var(--space-5);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+/* O véu acompanha a abertura (--mag-veil vem da cena): com o vídeo ainda em círculo, não há faixa escura embaixo. */
+.mag-scene__overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, transparent, var(--stage-veil) 50%);
+  opacity: var(--mag-veil, 1);
+  pointer-events: none;
+}
+
+.mag-scene__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.mag-scene__fact {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule-dark);
+}
+
+.mag-scene__fact:first-child {
+  border-top: 2px solid var(--orange);
+}
+
+.mag-scene__fact dt {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-3);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.mag-scene__fact dd {
+  max-width: 30ch;
+  margin-top: var(--space-3);
+  color: var(--on-dark-2);
+  line-height: 1.4;
+}
+
+.mag-scene__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.mag-scene__credit {
+  color: var(--on-dark-3);
+  font-size: var(--step--1);
+  letter-spacing: 0.02em;
+}
+
+.mag-scene__pause {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--rule-dark);
+  border-radius: 999px;
+  background: var(--stage-veil);
+  color: var(--on-dark-2);
+  font-size: var(--step--1);
+  font-weight: 600;
+  transition: color var(--dur-quick) var(--ease-out), border-color var(--dur-quick) var(--ease-out);
+}
+
+.mag-scene__pause:hover {
+  color: var(--on-dark);
+  border-color: var(--on-dark-3);
+}
+
+.mag-scene__pause svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ---------- Cobertura clínica: painel da ficha com duas colunas de dado ---------- */
+
+.mag-coverage {
+  max-width: none;
+}
+
+.mag-coverage thead th {
+  width: auto;
+  padding-bottom: var(--space-4);
+  border-top: 0;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-0);
+  font-weight: 620;
+  letter-spacing: -0.02em;
+}
+
+.mag-coverage tbody th {
+  width: 26%;
+}
+
+.mag-coverage td:first-of-type {
+  width: 18%;
+  padding-right: var(--space-5);
+  white-space: nowrap;
+}
+
+.mag-coverage td:last-of-type {
+  color: var(--ink-2);
+  font-weight: 400;
+}
+
+/* No celular, cada região vira um bloco: rótulo, cobertura e observação empilhados. */
+@media (max-width: 639px) {
+  .mag-coverage thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .mag-coverage table,
+  .mag-coverage caption,
+  .mag-coverage tbody,
+  .mag-coverage tr,
+  .mag-coverage tbody th,
+  .mag-coverage td {
+    display: block;
+    width: auto;
+  }
+
+  .mag-coverage tbody tr {
+    padding: var(--space-3) 0;
+    border-top: 1px solid var(--rule-light);
+  }
+
+  .mag-coverage tbody th,
+  .mag-coverage td {
+    padding: 0;
+    border-top: 0;
+  }
+
+  .mag-coverage tbody th {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  .mag-coverage td:first-of-type {
+    width: auto;
+    padding: 0;
+    white-space: normal;
+  }
+
+  .mag-coverage td:last-of-type {
+    margin-top: var(--space-1);
+  }
+}
+
+/* ---------- Celular e tablet: banner 16:9 e os dados abaixo dele ---------- */
+
+@media (max-width: 1023px) {
+  .mag-scene__head {
+    padding-bottom: var(--space-4);
+  }
+
+  .mag-scene__frame {
+    --mag-inline: var(--gutter);
+    height: auto;
+    min-height: 0;
+    padding: var(--space-4) var(--gutter) var(--space-8);
+  }
+
+  .mag-scene__stage {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+
+  .mag-scene__rings {
+    width: 100%;
+    height: 100%;
+  }
+
+  .mag-scene__overlay {
+    position: static;
+    margin-top: var(--space-5);
+    padding: 0;
+  }
+
+  .mag-scene__overlay::before {
+    content: none;
+  }
+
+  .mag-scene__facts {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-3);
+  }
+
+  .mag-scene__fact {
+    display: grid;
+    grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--space-4);
+    padding-top: var(--space-3);
+  }
+
+  .mag-scene__fact dt {
+    font-size: var(--step-2);
+  }
+
+  .mag-scene__fact dd {
+    margin-top: 0;
+  }
+}

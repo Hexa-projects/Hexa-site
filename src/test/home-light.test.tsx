@@ -96,12 +96,12 @@ describe("copy da home", () => {
     expect(card("Magnifico Open")).toHaveTextContent("20 m² · menos de 3 kW");
   });
 
-  it("o card do Magnifico Open segue o mesmo padrão dos outros, mesmo levando à página oficial", () => {
+  it("o card do Magnifico Open segue o mesmo padrão dos outros e leva à página interna", () => {
     renderHome();
     const region = screen.getByRole("region", { name: "Equipamentos" });
     const card = (name: string) => within(region).getByText(name).closest("li")!;
     expect(card("Magnifico Open")).toHaveTextContent("Ver equipamento");
-    expect(within(card("Magnifico Open")).getByRole("link")).toHaveAttribute("href", "https://www.hexamedical.com.br/rm-esaote-magnifico-open/");
+    expect(within(card("Magnifico Open")).getByRole("link")).toHaveAttribute("href", "/solucoes/magnifico-open");
   });
 
   it("diz na abertura o que a Hexamedical faz e quanto espaço a ressonância pede", () => {

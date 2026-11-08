@@ -10,6 +10,7 @@ import { lazy, Suspense } from "react";
 const Index = lazy(() => import("./pages/Index"));
 const SolucoesHub = lazy(() => import("./pages/solucoes/SolucoesHub"));
 const RmLinePage = lazy(() => import("./pages/solucoes/RmLinePage"));
+const MagnificoPage = lazy(() => import("./pages/solucoes/MagnificoPage"));
 const ProductPage = lazy(() => import("./pages/solucoes/ProductPage"));
 const LinePage = lazy(() => import("./pages/solucoes/LinePage"));
 const ServicosHub = lazy(() => import("./pages/servicos/ServicosHub"));
@@ -30,8 +31,8 @@ const clientRedirects = legacyRedirects.filter(({ source }) => /^\/(solucoes|ser
 // Linhas montadas com o kit (LinePage + lines em src/data/pages/solutions.ts).
 const lineSlugs = ["bombas-injetoras", "radiografia-digital", "densitometria", "hexai", "veterinaria"];
 // Páginas que ainda abrem na página antiga, até as próximas tarefas da fase 2 trocá-las pelo kit
-// (Magnifico Open na Task 8, Careverse na Task 9; Vet-MR Grande sem página nova decidida).
-const pendingLines = ["magnifico-open", "careverse", "vet-mr-grande"];
+// (Careverse na Task 9; Vet-MR Grande sem página nova decidida).
+const pendingLines = ["careverse", "vet-mr-grande"];
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,8 @@ const App = () => (
             ))}
             <Route path="/servicos" element={<ServicosHub />} />
             <Route path="/solucoes/ressonancia-magnetica" element={<RmLinePage />} />
+            {/* Página-vitrine do Magnifico Open: a única interna com uma cena presa ao scroll. */}
+            <Route path="/solucoes/magnifico-open" element={<MagnificoPage />} />
             {lineSlugs.map((slug) => (
               <Route key={slug} path={`/solucoes/${slug}`} element={<LinePage slug={slug} />} />
             ))}

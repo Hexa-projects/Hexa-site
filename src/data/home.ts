@@ -128,8 +128,7 @@ export const showroom: ShowroomItem[] = [
     spec: "20 m² · menos de 3 kW",
     filters: ["rm"],
     image: shot("magnifico-open", 600, 493, "Ressonância magnética Esaote Magnifico Open"),
-    href: "https://www.hexamedical.com.br/rm-esaote-magnifico-open/",
-    external: true,
+    href: "/solucoes/magnifico-open",
   },
   {
     id: "s-scan-open",
