@@ -1061,6 +1061,13 @@ a.page-card__link:hover .page-card__title svg {
   grid-column: 1 / -1;
 }
 
+/* Link para a Política de Privacidade dentro do rótulo do consentimento: sublinhado, para não depender só da cor. */
+.page-form__consent a {
+  color: var(--orange-ink);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 .page-form input[type="radio"],
 .page-form input[type="checkbox"] {
   width: 1.5rem;

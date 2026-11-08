@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useId, useRef, useState, type FormEvent, type MouseEvent, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { ArrowRight, Copy, RotateCcw } from "lucide-react";
 import {
   OUVIDORIA_FILE_ACCEPT,
@@ -24,14 +25,19 @@ type Errors = Partial<Record<FieldName, string>>;
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const megabytes = (bytes: number) => (bytes / (1024 * 1024)).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+/** Tamanho legível: abaixo de 0,1 MB em KB (um arquivo de texto não aparece como "0,0 MB"). */
+const fileSize = (bytes: number) => {
+  const mb = bytes / (1024 * 1024);
+  if (mb < 0.1) return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+  return `${mb.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} MB`;
+};
 
 const filesProblem = (files: FileList | null) =>
   files && (files.length > OUVIDORIA_MAX_FILES || Array.from(files).some((file) => file.size > OUVIDORIA_MAX_FILE_BYTES))
     ? ouvidoriaText.filesError
     : undefined;
 
-function validate(form: HTMLFormElement): Errors {
+function validate(form: HTMLFormElement, challenge: ChallengeState["status"]): Errors {
   const data = new FormData(form);
   const text = (name: string) => String(data.get(name) ?? "").trim();
   const errors: Errors = {};
@@ -47,7 +53,10 @@ function validate(form: HTMLFormElement): Errors {
   if (description.length < 20 || description.length > 12000) errors.descricao = "Descreva a manifestação com pelo menos 20 caracteres.";
   const files = filesProblem((form.elements.namedItem("files") as HTMLInputElement | null)?.files ?? null);
   if (files) errors.files = files;
-  if (!text("captchaAnswer")) errors.captchaAnswer = "Responda à pergunta de verificação.";
+  // Sem desafio pronto não há captchaToken: o envio seria recusado pelo servidor.
+  if (challenge === "loading") errors.captchaAnswer = ouvidoriaText.challengeLoading;
+  else if (challenge === "error") errors.captchaAnswer = ouvidoriaText.challengeRetry;
+  else if (!text("captchaAnswer")) errors.captchaAnswer = "Responda à pergunta de verificação.";
   if (!data.get("consentimento_lgpd")) errors.consentimento_lgpd = "Marque o consentimento para enviar a manifestação.";
   return errors;
 }
@@ -168,7 +177,7 @@ const OuvidoriaForm = () => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const element = event.currentTarget;
-    const found = validate(element);
+    const found = validate(element, challenge.status);
     setErrors(found);
     setFailure("");
     if (Object.keys(found).length > 0) {
@@ -178,12 +187,15 @@ const OuvidoriaForm = () => {
 
     const data = new FormData(element);
     data.append("action", "submit");
-    data.append("captchaToken", challenge.status === "ready" ? challenge.token : "");
+    if (challenge.status !== "ready") return;
+    data.append("captchaToken", challenge.token);
     const email = String(data.get("email") ?? "").trim();
 
     setSending(true);
     try {
-      const receipt = await ouvidoriaApi<Receipt>(data);
+      const receipt = await ouvidoriaApi<Partial<Receipt>>(data);
+      // 2xx sem protocolo (ou corpo que não é JSON) não é registro: cai no erro com o e-mail.
+      if (typeof receipt.protocol !== "string" || !receipt.protocol.trim()) throw new OuvidoriaError(ouvidoriaText.sendError);
       setDone({ protocol: receipt.protocol, message: receipt.deliveryPending ? ouvidoriaText.pending : ouvidoriaText.sent(email) });
     } catch (error) {
       const message = error instanceof OuvidoriaError ? error.message : ouvidoriaText.sendError;
@@ -417,7 +429,7 @@ const OuvidoriaForm = () => {
               <ul className="page-form__files" aria-label="Arquivos escolhidos">
                 {files.map((file, index) => (
                   <li key={`${file.name}-${index}`}>
-                    {file.name} ({megabytes(file.size)} MB)
+                    {file.name} ({fileSize(file.size)})
                   </li>
                 ))}
               </ul>
@@ -459,7 +471,9 @@ const OuvidoriaForm = () => {
                 </p>
               )}
               <input type="checkbox" {...control("consentimento_lgpd")} value="true" required />
-              <label htmlFor={id("consentimento_lgpd")}>{ouvidoriaText.consent}</label>
+              <label htmlFor={id("consentimento_lgpd")}>
+                {ouvidoriaText.consentLead} <Link to="/politica-de-privacidade">Política de Privacidade</Link>.
+              </label>
             </div>
             <p className="page-form__note">{ouvidoriaText.note}</p>
 

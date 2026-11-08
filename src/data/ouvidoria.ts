@@ -47,7 +47,8 @@ export const typeOptions: Option[] = [
 ];
 
 export const ouvidoriaText = {
-  consent: "Li e concordo com o tratamento dos dados necessários para apurar esta manifestação, conforme a Política de Privacidade.",
+  /** Seguido do link "Política de Privacidade" e de ponto final. */
+  consentLead: "Li e concordo com o tratamento dos dados necessários para apurar esta manifestação, conforme a",
   note: `Em relatos confidenciais, os dados de identificação ficam acessíveis somente à equipe autorizada da Ouvidoria. Eles serão usados para apuração e retorno. Se precisar, escreva para ${OUVIDORIA_EMAIL}.`,
   subjectPlaceholder: "Resuma o tema em poucas palavras",
   descriptionPlaceholder: "Descreva os fatos, o contexto e o resultado esperado. Não inclua dados pessoais desnecessários.",
@@ -55,6 +56,9 @@ export const ouvidoriaText = {
   filesHelp: "Fotos, documentos, áudio ou vídeo. Até 5 arquivos de 15 MB cada.",
   filesError: "Envie no máximo 5 arquivos, com até 15 MB cada.",
   challengeError: "Não foi possível carregar. Tente novamente.",
+  /** Resumo de erros quando a pessoa envia antes de a pergunta chegar. */
+  challengeLoading: "Aguarde a verificação carregar.",
+  challengeRetry: "A verificação não carregou. Peça uma nova pergunta.",
   fallback: `Tente novamente ou escreva para ${OUVIDORIA_EMAIL}.`,
   /** Quando a falha não traz mensagem do servidor (rede, CORS). */
   sendError: "Não foi possível enviar a manifestação.",

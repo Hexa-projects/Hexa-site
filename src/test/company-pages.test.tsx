@@ -320,6 +320,81 @@ describe("ouvidoria", () => {
     await waitFor(() => expect(challengeCalls(fetchMock)).toHaveLength(2));
   });
 
+  it("não envia enquanto a pergunta de verificação não carregou", async () => {
+    // O desafio fica pendurado; o envio não pode sair com captchaToken vazio.
+    const fetchMock = vi.fn((_url: string, init?: RequestInit) =>
+      typeof init?.body === "string" ? new Promise<Reply>(() => {}) : Promise.resolve(reply(200, { protocol: "X" })),
+    );
+    vi.stubGlobal("fetch", fetchMock);
+    const user = userEvent.setup();
+    renderAt("/ouvidoria");
+    expect(await screen.findByText("Carregando a pergunta.")).toBeInTheDocument();
+    await user.type(screen.getByLabelText(/^E-mail/), "pessoa@example.com");
+    await user.selectOptions(screen.getByLabelText(/^Você é/), "cliente");
+    await user.selectOptions(screen.getByLabelText(/^Tipo de manifestação/), "sugestao");
+    await user.type(screen.getByLabelText(/^Assunto/), "Atendimento técnico");
+    await user.type(screen.getByLabelText(/^Descrição/), "Relato com mais de vinte caracteres para o teste.");
+    await user.type(screen.getByLabelText(/^Verificação/), "5");
+    await user.click(screen.getByLabelText(/Li e concordo/));
+    await submit(user);
+    const summary = await screen.findByRole("alert");
+    expect(within(summary).getByRole("link", { name: "Aguarde a verificação carregar." })).toBeInTheDocument();
+    expect(fetchMock.mock.calls.filter(([, init]) => init?.body instanceof FormData)).toHaveLength(0);
+  });
+
+  it("resposta 2xx sem protocolo vira erro, com o e-mail da ouvidoria", async () => {
+    mockFetch(() => reply(200, { ok: true }));
+    const user = userEvent.setup();
+    renderAt("/ouvidoria");
+    await fillValid(user);
+    await submit(user);
+    expect(await screen.findByText(`Não foi possível enviar a manifestação. ${FALLBACK}`)).toBeInTheDocument();
+    expect(screen.queryByText("Manifestação registrada")).toBeNull();
+  });
+
+  it("resposta 2xx que não é JSON também vira erro", async () => {
+    mockFetch(() => ({
+      ok: true,
+      status: 200,
+      json: async () => {
+        throw new SyntaxError("Unexpected token <");
+      },
+    }));
+    const user = userEvent.setup();
+    renderAt("/ouvidoria");
+    await fillValid(user);
+    await submit(user);
+    expect(await screen.findByText(`Não foi possível enviar a manifestação. ${FALLBACK}`)).toBeInTheDocument();
+    expect(screen.queryByText("Manifestação registrada")).toBeNull();
+  });
+
+  it("a armadilha para robôs fica fora do teclado e dos leitores de tela", () => {
+    mockFetch(() => reply(200, {}));
+    const { container } = renderAt("/ouvidoria");
+    const trap = container.querySelector('input[name="website"]') as HTMLInputElement;
+    expect(trap).toHaveAttribute("tabindex", "-1");
+    expect(trap.closest('[aria-hidden="true"]')).not.toBeNull();
+  });
+
+  it("o consentimento leva à Política de Privacidade", () => {
+    mockFetch(() => reply(200, {}));
+    const { container } = renderAt("/ouvidoria");
+    const consent = container.querySelector(".page-form__consent") as HTMLElement;
+    expect(within(consent).getByRole("link", { name: "Política de Privacidade" })).toHaveAttribute("href", "/politica-de-privacidade");
+  });
+
+  it("mostra arquivos pequenos em KB e os maiores em MB", async () => {
+    mockFetch(() => reply(200, {}));
+    const user = userEvent.setup();
+    renderAt("/ouvidoria");
+    const small = new File(["ok"], "relato.pdf", { type: "application/pdf" });
+    const big = new File(["x"], "foto.png", { type: "image/png" });
+    Object.defineProperty(big, "size", { value: 2 * 1024 * 1024 });
+    await user.upload(screen.getByLabelText(/^Anexos/) as HTMLInputElement, [small, big]);
+    expect(screen.getByText("relato.pdf (1 KB)")).toBeInTheDocument();
+    expect(screen.getByText("foto.png (2,0 MB)")).toBeInTheDocument();
+  });
+
   it("se o desafio não carrega, avisa e oferece nova pergunta", async () => {
     vi.stubGlobal(
       "fetch",
