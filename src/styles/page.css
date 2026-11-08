@@ -571,11 +571,11 @@ a.page-card__link:hover .page-card__title svg {
 }
 
 /* Card só de texto: painel branco com fio; o hover muda o tom, nada levanta. */
+/* O fio é sombra interna, não outline: outline aqui venceria o anel de :focus-visible e o foco sumiria. */
 .page-card--text .page-card__link {
   padding: var(--space-5) var(--space-5) var(--space-6);
   background: var(--white);
-  outline: 1px solid var(--rule-light);
-  outline-offset: -1px;
+  box-shadow: inset 0 0 0 1px var(--rule-light);
   color: var(--ink);
   transition: background-color var(--dur-base) var(--ease-out);
 }

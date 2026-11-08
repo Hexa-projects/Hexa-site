@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { HelmetProvider } from "react-helmet-async";
@@ -272,5 +274,23 @@ describe("404 e rodapé no sistema novo", () => {
     renderPage(<NotFound />, "/x");
     const footer = screen.getByRole("contentinfo");
     expect(within(footer).getAllByRole("link", { name: /Ouvidoria/ })).toHaveLength(1);
+  });
+});
+
+describe("foco visível no kit", () => {
+  // O jsdom não calcula a cascata de :focus-visible; então a regra é travada no próprio CSS:
+  // nenhum elemento focável do kit pode declarar `outline` fora de :focus-visible, senão ele vence o
+  // anel de foco global (base.css) e o do kit (`.page :focus-visible`), e o foco some (WCAG 2.4.7).
+  it("links, botões e cards do kit não sobrescrevem o outline do foco", () => {
+    const css = fs.readFileSync(path.join(process.cwd(), "src/styles/page.css"), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    const focusable = /(page-card__link|page-crumbs a|page-faq button|page-video__play|page-hero__pause|\.button\b|(^|[\s,])a(\b|:))/;
+    const offenders: string[] = [];
+    for (const [, selector, body] of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+      if (!/(^|;|\s)outline(-offset)?\s*:/.test(body)) continue;
+      for (const part of selector.split(",").map((item) => item.trim())) {
+        if (focusable.test(part) && !part.includes(":focus-visible")) offenders.push(part);
+      }
+    }
+    expect(offenders).toEqual([]);
   });
 });
