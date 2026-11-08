@@ -20,8 +20,8 @@ const ContatoPage = lazy(() => import("./pages/empresa/ContatoPage"));
 const OuvidoriaPage = lazy(() => import("./pages/empresa/OuvidoriaPage"));
 const MateriaisPage = lazy(() => import("./pages/empresa/MateriaisPage"));
 const LegalPage = lazy(() => import("./pages/empresa/LegalPage"));
-const BlogPage = lazy(() => import("./pages/BlogPage"));
-const BlogPostPage = lazy(() => import("./pages/BlogPostPage"));
+const BlogIndex = lazy(() => import("./pages/blog/BlogIndex"));
+const BlogPost = lazy(() => import("./pages/blog/BlogPost"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Redirecionamentos internos: o dev server e os links dentro do app se comportam como a produção.
@@ -71,8 +71,8 @@ const App = () => (
             <Route path="/materiais" element={<MateriaisPage />} />
             <Route path="/politica-de-privacidade" element={<LegalPage kind="privacidade" />} />
             <Route path="/termos" element={<LegalPage kind="termos" />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="/blog" element={<BlogIndex />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           </Suspense>

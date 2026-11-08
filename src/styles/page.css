@@ -1308,3 +1308,17 @@ a.page-card__link:hover .page-card__title svg {
     transform: none;
   }
 }
+
+/* ---------- Artigo do blog ---------- */
+
+.blog-article p,
+.blog-article li {
+  max-width: 65ch;
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.page .blog-article__meta {
+  color: var(--ink-3, var(--ink-2));
+  font-size: 0.875rem;
+}
