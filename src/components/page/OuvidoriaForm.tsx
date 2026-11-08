@@ -7,6 +7,7 @@ import {
   OUVIDORIA_MAX_FILES,
   OuvidoriaError,
   audienceOptions,
+  canSubmitOuvidoria,
   identificationOptions,
   ouvidoriaApi,
   ouvidoriaText,
@@ -103,8 +104,11 @@ const describedBy = (id: string, hint?: boolean, error?: string) =>
  * Formulário da Ouvidoria, com o contrato do site atual: desafio (`challenge`), envio em FormData
  * (`action=submit` + `captchaToken`), os mesmos nomes de campo, consentimento e limites de anexo.
  * Acessível: rótulos visíveis, grupos com legenda, resumo de erros que recebe o foco e comprovante numa região viva.
+ * Só envia no domínio do site (`canSubmitOuvidoria`); em outro endereço (prévia) fica só para leitura, com o aviso
+ * e o e-mail da ouvidoria, e não pede a pergunta de verificação. `hostname` existe para os testes.
  */
-const OuvidoriaForm = () => {
+const OuvidoriaForm = ({ hostname = window.location.hostname }: { hostname?: string }) => {
+  const enabled = canSubmitOuvidoria(hostname);
   const base = useId().replace(/:/g, "");
   const id = (name: string) => `${base}-${name}`;
 
@@ -139,8 +143,8 @@ const OuvidoriaForm = () => {
   }, []);
 
   useEffect(() => {
-    void loadChallenge();
-  }, [loadChallenge]);
+    if (enabled) void loadChallenge();
+  }, [enabled, loadChallenge]);
 
   // Cada tentativa com erro leva o foco ao resumo, para quem usa teclado ou leitor de tela.
   useEffect(() => {
@@ -176,6 +180,7 @@ const OuvidoriaForm = () => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (!enabled) return;
     const element = event.currentTarget;
     const found = validate(element, challenge.status);
     setErrors(found);
@@ -281,6 +286,8 @@ const OuvidoriaForm = () => {
         )}
       </div>
 
+      {!enabled && <p className="page-form__preview">{ouvidoriaText.previewNotice}</p>}
+
       {!done && (
         <form
           ref={form}
@@ -305,7 +312,7 @@ const OuvidoriaForm = () => {
             </div>
           )}
 
-          <fieldset className="page-form__step">
+          <fieldset className="page-form__step" disabled={!enabled}>
             <legend>Identificação</legend>
 
             <fieldset
@@ -367,7 +374,7 @@ const OuvidoriaForm = () => {
             </div>
           </fieldset>
 
-          <fieldset className="page-form__step">
+          <fieldset className="page-form__step" disabled={!enabled}>
             <legend>Manifestação</legend>
             <div className="page-form__grid">
               <Field id={id("tipo")} label="Tipo de manifestação" required error={errors.tipo}>
@@ -414,7 +421,7 @@ const OuvidoriaForm = () => {
             </Field>
           </fieldset>
 
-          <fieldset className="page-form__step">
+          <fieldset className="page-form__step" disabled={!enabled}>
             <legend>Anexos e envio</legend>
             <Field id={id("files")} label="Anexos" hint={ouvidoriaText.filesHelp} error={errors.files}>
               <input
@@ -441,7 +448,8 @@ const OuvidoriaForm = () => {
                 <span className="page-form__required"> (obrigatório)</span>
               </label>
               <p id={id("captchaAnswer-hint")} className="page-form__hint" aria-live="polite">
-                {challenge.status === "loading" && "Carregando a pergunta."}
+                {!enabled && ouvidoriaText.previewChallenge}
+                {enabled && challenge.status === "loading" && "Carregando a pergunta."}
                 {challenge.status === "error" && ouvidoriaText.challengeError}
                 {challenge.status === "ready" && "Responda com números, para confirmar o envio."}
               </p>
@@ -452,9 +460,11 @@ const OuvidoriaForm = () => {
               )}
               <div className="page-form__inline">
                 <input ref={captcha} type="text" inputMode="numeric" pattern="[0-9]*" {...control("captchaAnswer", true)} maxLength={3} required autoComplete="off" />
-                <button type="button" className="button button--quiet" onClick={() => void loadChallenge()}>
-                  Nova pergunta <RotateCcw aria-hidden="true" />
-                </button>
+                {enabled && (
+                  <button type="button" className="button button--quiet" onClick={() => void loadChallenge()}>
+                    Nova pergunta <RotateCcw aria-hidden="true" />
+                  </button>
+                )}
               </div>
             </div>
 
@@ -481,7 +491,7 @@ const OuvidoriaForm = () => {
               {failure && <p>{failure}</p>}
             </div>
 
-            <button type="submit" className="button button--primary" disabled={sending}>
+            <button type="submit" className="button button--primary" disabled={sending || !enabled}>
               {sending ? "Enviando" : "Enviar manifestação"} <ArrowRight aria-hidden="true" />
             </button>
           </fieldset>

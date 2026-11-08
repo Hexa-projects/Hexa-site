@@ -1118,6 +1118,17 @@ a.page-card__link:hover .page-card__title svg {
   line-height: 1.5;
 }
 
+/* Prévia (fora do domínio do site): o formulário fica só para leitura e o aviso leva ao e-mail. */
+.page-form__preview {
+  margin-bottom: var(--space-5);
+  padding: var(--space-4);
+  border-left: 2px solid var(--orange-ink);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--rule-light);
+  color: var(--ink);
+  font-weight: 600;
+}
+
 .page-form__failure:not(:empty) {
   padding: var(--space-4);
   border-left: 2px solid var(--orange-ink);

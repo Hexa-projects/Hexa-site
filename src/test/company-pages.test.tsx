@@ -1,3 +1,7 @@
+/**
+ * @vitest-environment-options {"url": "https://www.hexamedical.com.br/"}
+ * Os testes da Ouvidoria cobrem o comportamento no domínio do site (envio ativo); a prévia fica em ouvidoria-preview.test.tsx.
+ */
 import fs from "node:fs";
 import path from "node:path";
 import { render, screen, waitFor, within } from "@testing-library/react";

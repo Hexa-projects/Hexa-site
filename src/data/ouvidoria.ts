@@ -2,13 +2,20 @@
  * Ouvidoria: o mesmo contrato do formulário do site atual (plugin WordPress `hexamedical-ouvidoria`).
  * Endpoint, nomes de campo, ações (`challenge` e `submit`), consentimento, validação e mensagens são os de lá.
  * A função é pública e já roda em produção; este site só a chama. Nada muda no Supabase.
- * Risco conhecido: a função pode aceitar só a origem hexamedical.com.br; numa prévia o envio pode falhar,
- * e o erro cai na mensagem com o e-mail da ouvidoria.
+ * A função é a de produção: o envio só fica ativo no domínio do site (canSubmitOuvidoria). Numa prévia
+ * (vercel.app, localhost) o formulário fica só para leitura, sem pedir a pergunta de verificação,
+ * para nenhum teste criar um registro real.
  */
 
 export const OUVIDORIA_ENDPOINT = "https://fevmcjnaeuxydmxmkarw.supabase.co/functions/v1/ouvidoria-public";
 
 export const OUVIDORIA_EMAIL = "ouvidoria@hexamedical.com.br";
+
+/** Os únicos endereços em que o formulário envia de verdade. */
+export const OUVIDORIA_HOSTS = ["www.hexamedical.com.br", "hexamedical.com.br"];
+
+/** true só no domínio do site; prévia, localhost e qualquer outro endereço ficam sem envio. */
+export const canSubmitOuvidoria = (hostname: string) => OUVIDORIA_HOSTS.includes(hostname);
 
 export const OUVIDORIA_MAX_FILES = 5;
 export const OUVIDORIA_MAX_FILE_BYTES = 15 * 1024 * 1024;
@@ -62,6 +69,9 @@ export const ouvidoriaText = {
   fallback: `Tente novamente ou escreva para ${OUVIDORIA_EMAIL}.`,
   /** Quando a falha não traz mensagem do servidor (rede, CORS). */
   sendError: "Não foi possível enviar a manifestação.",
+  /** Fora do domínio do site (prévia): o formulário fica só para leitura. */
+  previewNotice: `Nesta versão de prévia o envio está desativado. Escreva para ${OUVIDORIA_EMAIL}.`,
+  previewChallenge: "Indisponível nesta versão de prévia.",
   pending: "Seu registro está seguro. A confirmação por e-mail pode levar alguns minutos.",
   sent: (email: string) => `Enviamos a confirmação para ${email}.`,
 };
