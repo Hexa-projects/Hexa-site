@@ -118,8 +118,11 @@ const MagnificoScene = () => {
       const list = facts.current;
       if (!section || !box || !rim || !list || !frame.current) return;
       const items = Array.from(list.children);
+      // A trava só existe quando o quadro cabe na tela. Mais alto que ela (celular deitado, notebook baixo),
+      // o círculo abriria fora da vista e o botão de pausa ficaria cortado: a cena segue como no modo leve.
+      const fits = frame.current.offsetHeight <= window.innerHeight;
 
-      if (mode === "immersive") {
+      if (mode === "immersive" && fits) {
         const state = { open: 0 };
         // offsetWidth/Height: a caixa do layout, sem o recorte. O recorte e o anel são simétricos à caixa,
         // então o círculo fica no centro do vídeo antes, durante e depois da trava.

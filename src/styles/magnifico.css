@@ -32,7 +32,8 @@
   --mag-inline: max(var(--gutter), calc((100% - var(--content-max)) / 2 + var(--gutter)));
   position: relative;
   height: 100svh;
-  min-height: 640px;
+  /* Piso do layout dos dados sobre o vídeo. Abaixo dele o quadro passa da tela e a cena não trava (MagnificoPage). */
+  min-height: 520px;
   padding: calc(var(--header-h, 5rem) + var(--space-4)) var(--mag-inline) var(--space-5);
   overflow: hidden;
   background: var(--graphite-900);
@@ -132,7 +133,9 @@
 .mag-scene__fact dt {
   font-family: var(--font-display);
   font-stretch: var(--display-stretch);
-  font-size: var(--step-3);
+  /* Sem quebra, o valor mais longo ("cerca de 20 m²") passava da borda do vídeo entre 1024 e 1366 px:
+     a escala acompanha a largura da coluna até o --step-3. */
+  font-size: min(var(--step-3), 3.4vw);
   font-weight: 650;
   line-height: 1;
   letter-spacing: -0.03em;

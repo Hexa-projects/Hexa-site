@@ -169,6 +169,37 @@ describe("Magnifico Open: cena do vídeo", () => {
     expect(pins()).toHaveLength(1);
     unmount();
   });
+
+  describe("quadro mais alto que a tela (celular deitado, notebook baixo)", () => {
+    const frameHeight = 836;
+    let restore: () => void;
+    beforeEach(() => {
+      const original = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "offsetHeight");
+      Object.defineProperty(HTMLElement.prototype, "offsetHeight", {
+        configurable: true,
+        get(this: HTMLElement) {
+          return this.classList.contains("mag-scene__frame") ? frameHeight : 0;
+        },
+      });
+      const height = window.innerHeight;
+      window.innerHeight = 390;
+      restore = () => {
+        if (original) Object.defineProperty(HTMLElement.prototype, "offsetHeight", original);
+        window.innerHeight = height;
+      };
+    });
+    afterEach(() => restore());
+
+    it("não prende a cena: o círculo abriria fora da tela; os fatos ficam visíveis e o vídeo sem recorte", () => {
+      setScreen({ wide: false, reduced: false });
+      window.history.pushState({}, "", `${ROUTE}?palco=imersivo`);
+      const { unmount } = renderPage();
+      expect(pins()).toHaveLength(0);
+      expect((scene().querySelector(".mag-scene__aperture") as HTMLElement).style.clipPath).toBe("");
+      expect((scene().querySelector(".mag-scene__ring") as HTMLElement).style.opacity).toBe("");
+      unmount();
+    });
+  });
 });
 
 describe("Magnifico Open: rota e vitrine da home", () => {
