@@ -57,7 +57,7 @@ const CareversePage = () => {
       </PageSection>
 
       <PageSection id="evidencias" title={evidence.title} intro={<Paragraphs items={evidence.intro} />}>
-        <CardGrid items={evidence.studies} />
+        <CardGrid items={evidence.cards} />
       </PageSection>
 
       <PageSection id="perguntas" title="Perguntas frequentes">

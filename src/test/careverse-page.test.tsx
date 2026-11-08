@@ -10,8 +10,11 @@ import { careverse } from "@/data/pages/careverse";
 import { whatsappHref } from "@/data/home";
 
 const ROUTE = "/solucoes/careverse";
-/** A landing estática que esta página substitui: a fonte de toda afirmação, número e estudo. */
-const LANDING = path.resolve(process.cwd(), "..", "careverse-site", "index.html");
+/**
+ * A landing estática que esta página substitui (careverse-site/index.html no commit 4e5b789), versionada aqui:
+ * a fonte de toda afirmação, número e estudo da página.
+ */
+const LANDING = path.resolve(process.cwd(), "src", "test", "fixtures", "careverse-landing.html");
 const MEDIA_DIR = path.resolve(process.cwd(), "public", "media", "careverse");
 
 const renderPage = () =>
@@ -26,19 +29,32 @@ const renderPage = () =>
 /** Só o conteúdo da página (sem cabeçalho e rodapé do Layout). */
 const page = (container: HTMLElement) => container.querySelector(".page") as HTMLElement;
 
-/** Texto visível da landing: sem tags, scripts e estilos (atributos como width/height não contam). */
+const landingHtml = () => fs.readFileSync(LANDING, "utf8");
+
+/**
+ * Texto visível da landing: sem o comentário de proveniência, tags, scripts e estilos (atributos como width/height não
+ * contam), com espaços normalizados e a meia-risca das faixas de páginas trocada por hífen, como na página.
+ */
 const landingText = () =>
-  fs
-    .readFileSync(LANDING, "utf8")
+  landingHtml()
+    .replace(/<!--[\s\S]*?-->/g, " ")
     .replace(/<script[\s\S]*?<\/script>/gi, " ")
     .replace(/<style[\s\S]*?<\/style>/gi, " ")
-    .replace(/<[^>]+>/g, " ");
+    .replace(/<[^>]+>/g, " ")
+    .replace(/–/g, "-")
+    .replace(/\s+/g, " ");
 
 const NUMBER = /\d+(?:[.,]\d+)*/g;
 const numbers = (text: string) => text.match(NUMBER) ?? [];
 
+/** Texto, alts e metadados da página: tudo que a pessoa lê ou que o buscador mostra. */
+const everything = (root: HTMLElement) => {
+  const alts = Array.from(root.querySelectorAll("img")).map((img) => img.getAttribute("alt") ?? "");
+  return [root.textContent ?? "", ...alts, careverse.title, careverse.description, careverse.whatsappText].join(" ");
+};
+
 describe("Careverse: conteúdo portado da landing", () => {
-  it("tem um único h1 e os quatro módulos da plataforma", () => {
+  it("tem um único h1 e os quatro módulos da plataforma, os três de fora só pelo nome", () => {
     renderPage();
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 1, name: "Careverse" })).toBeInTheDocument();
@@ -46,30 +62,35 @@ describe("Careverse: conteúdo portado da landing", () => {
     for (const name of ["Digital Heart™", "Digital Brain", "StrokeFusion", "Digital Artery"]) {
       expect(within(modules).getByRole("heading", { level: 3, name: new RegExp(name) }), name).toBeInTheDocument();
     }
+    // Sem área de indicação inventada: Digital Brain, StrokeFusion e Digital Artery não trazem rótulo nem texto.
+    for (const name of ["Digital Brain", "StrokeFusion", "Digital Artery"]) {
+      const card = within(modules).getByRole("heading", { level: 3, name }).closest("li") as HTMLElement;
+      expect(card.querySelector(".page-card__meta"), name).toBeNull();
+      expect(card.querySelector(".page-card__body"), name).toBeNull();
+    }
   });
 
-  it("porta as três perspectivas do Digital Heart™, o fluxo, as evidências e as perguntas", () => {
+  it("porta a anatomia, a placa, o fluxo, as evidências e as perguntas", () => {
     const { container } = renderPage();
-    for (const title of ["Anatomia coronariana", "Análise de placa", "Função cardíaca com CT-FFR", "Da imagem ao relatório, em quatro etapas", "Perguntas frequentes"]) {
+    for (const title of ["Anatomia coronariana", "Análise de placa", "Da imagem ao relatório, em quatro etapas", "Perguntas frequentes"]) {
       expect(screen.getByRole("heading", { level: 2, name: title }), title).toBeInTheDocument();
     }
     const text = page(container).textContent ?? "";
-    for (const fact of ["Score de Cálcio (Agatston)", "CAD-RADS", "dinâmica de fluidos computacional", "DICOM/PACS", "lipídicos, fibrosos e calcificados"]) {
+    for (const fact of ["Score de Cálcio (Agatston)", "CAD-RADS", "DICOM/PACS", "lipídicos, fibrosos e calcificados"]) {
       expect(text.includes(fact), fact).toBe(true);
     }
   });
 
-  it("todo número da página existe no texto da landing (careverse-site/index.html)", () => {
+  it("todo número da página existe no texto da landing", () => {
     const { container } = renderPage();
     const source = new Set(numbers(landingText()));
     const own = numbers(page(container).textContent ?? "");
     // Não pode passar vazio: os estudos trazem ano, volume e páginas.
-    for (const expected of ["2021", "2022", "2024", "313", "233354"]) expect(own, expected).toContain(expected);
-    const missing = own.filter((value) => !source.has(value));
-    expect(missing).toEqual([]);
+    for (const expected of ["2021", "2022", "707508", "2366", "2368"]) expect(own, expected).toContain(expected);
+    expect(own.filter((value) => !source.has(value))).toEqual([]);
   });
 
-  it("cita os cinco estudos da landing com link para o original", () => {
+  it("cita os três estudos do CoronaryDoc como a landing, com link para o original", () => {
     renderPage();
     const evidence = screen.getByRole("region", { name: careverse.evidence.title });
     const hrefs = within(evidence)
@@ -79,29 +100,50 @@ describe("Careverse: conteúdo portado da landing", () => {
       "https://pubmed.ncbi.nlm.nih.gov/34805297/",
       "https://pubmed.ncbi.nlm.nih.gov/35120360/",
       "https://pubmed.ncbi.nlm.nih.gov/34895831/",
-      "https://pubmed.ncbi.nlm.nih.gov/38637226/",
-      "https://pubs.rsna.org/doi/10.1148/radiol.233354",
     ]);
-    const landing = fs.readFileSync(LANDING, "utf8");
-    for (const href of hrefs) expect(landing.includes(href ?? "-"), href ?? "").toBe(true);
-    expect(evidence.textContent).toContain("Guo B. et al.");
-    expect(evidence.textContent).toContain("313(1):e233354");
+    const html = landingHtml();
+    const source = landingText();
+    for (const study of careverse.evidence.studies) {
+      // Cada citação inteira, como a landing a escreve: autores e referência juntos, periódico, ano e tipo, título e resumo.
+      expect(html.includes(`href="${study.href}"`), study.href).toBe(true);
+      expect(source.includes(`${study.authors} · ${study.ref}`), `${study.authors} · ${study.ref}`).toBe(true);
+      expect(source.includes(`${study.journal} ${study.year} · ${study.kind}`), study.journal).toBe(true);
+      expect(source.includes(study.title), study.title).toBe(true);
+      expect(source.includes(study.summary), study.summary).toBe(true);
+      // E a página mostra a citação inteira.
+      expect(evidence.textContent).toContain(`${study.authors}, ${study.ref}`);
+      expect(evidence.textContent).toContain(`${study.journal}, ${study.year} · ${study.kind}`);
+    }
   });
 
   it("não usa travessão nem meia-risca e não faz afirmação regulatória nova", () => {
     const { container } = renderPage();
     const root = page(container);
-    const alts = Array.from(root.querySelectorAll("img")).map((img) => img.getAttribute("alt") ?? "");
-    const all = [root.textContent ?? "", ...alts, careverse.title, careverse.description, careverse.whatsappText].join(" ");
+    const all = everything(root);
     expect(all).not.toMatch(/[–—]/);
     expect(all).not.toMatch(/aprovad|registrad|anvisa/i);
     expect(all).not.toMatch(/\bFDA\b|\bCE\b|NMPA/);
     // As duas ressalvas regulatórias da landing ficam exatamente como lá.
-    const landing = landingText().replace(/\s+/g, " ");
+    const source = landingText();
     for (const note of careverse.regulatoryNotes) {
-      expect(landing.includes(note), note).toBe(true);
+      expect(source.includes(note), note).toBe(true);
       expect(root.textContent).toContain(note);
     }
+  });
+
+  it("deixa de fora o que o plano de revisão bloqueia: CT-FFR, tempo, trabalho manual, prognóstico, manejo e precisão", () => {
+    const { container } = renderPage();
+    const all = everything(page(container));
+    // CT-FFR: bloqueado para publicação até a validação regulatória (seção, imagem, estudos e pergunta).
+    expect(all).not.toMatch(/FFR|fluidos|funcional|função cardíaca|da anatomia à função/i);
+    expect(page(container).querySelector('img[src*="ct-ffr"]')).toBeNull();
+    // "Academic Radiology" (Yi Y.) fica; a "Radiology" do ensaio de CT-FFR, não.
+    expect(all).not.toMatch(/Guo B\.|Science Bulletin|(?<!Academic )Radiology/);
+    // "Bloqueios atuais": velocidade e economia de tempo, redução de trabalho manual, prognóstico e eventos agudos,
+    // melhora do manejo, precisão.
+    expect(all).not.toMatch(/etapas manuais|trabalho manual|menor dependência|economi|mais rápid|em minutos|tempo de/i);
+    expect(all).not.toMatch(/prognóstic|eventos agudos|manejo|precisão|preciso/i);
+    expect(fs.existsSync(path.join(MEDIA_DIR, "ct-ffr.webp"))).toBe(false);
   });
 });
 
@@ -132,13 +174,13 @@ describe("Careverse: mídia e rota", () => {
     expect(sources).toMatch(/careverse-site/);
     expect(sources).toMatch(/direitos e revisão regulatória pendentes/i);
     const images = Array.from(page(container).querySelectorAll("img"));
-    expect(images.length).toBeGreaterThanOrEqual(4);
+    expect(images.length).toBeGreaterThanOrEqual(3);
     for (const img of images) {
       const src = img.getAttribute("src") ?? "";
       expect(src.startsWith("/media/careverse/"), src).toBe(true);
       const file = src.replace("/media/careverse/", "");
       expect(fs.existsSync(path.join(MEDIA_DIR, file)), file).toBe(true);
-      expect(sources.includes(file), file).toBe(true);
+      expect(sources.includes(`| \`${file}\``), file).toBe(true);
       expect(img.getAttribute("alt")).toBeTruthy();
     }
   });
