@@ -25,15 +25,16 @@ export const LEGAL_NOTICE = "Versão provisória, pendente de revisão jurídica
 export const companyPage = {
   docTitle: "A Hexamedical",
   description:
-    "A Hexamedical representa a Esaote em ressonância magnética, instala e faz a manutenção dos equipamentos, com laboratório próprio e unidades em cinco capitais.",
+    "A Hexamedical trabalha com a linha de ressonância aberta Esaote, instala e faz a manutenção dos equipamentos, com laboratório próprio e unidades em cinco capitais.",
   title: "A Hexamedical",
-  // Copy aprovada da home (CompanyFacts).
-  lead: "A Hexamedical representa a Esaote em ressonância magnética e vende também tomografia veterinária, radiografia digital, bombas injetoras e software. Atendemos clínicas, hospitais, universidades e centros veterinários.",
+  // Copy da home (CompanyFacts), sem afirmar representação.
+  lead: "A Hexamedical trabalha com a linha de ressonância aberta Esaote e vende também tomografia veterinária, radiografia digital, bombas injetoras e software. Atendemos clínicas, hospitais, universidades e centros veterinários.",
   eyebrow: "Diagnóstico por imagem · todo o território nacional",
   whatsappText: "Olá! Quero conhecer melhor a Hexamedical.",
   aboutIntro:
     "Depois da instalação, o contato continua o mesmo. Nossa equipe de campo faz a manutenção em todo o país, e o laboratório próprio tenta recuperar a peça com defeito antes de propor uma troca.",
-  facts: companyFacts,
+  // O "+500 equipamentos atendidos" fica só na home (confirmação pendente com a empresa); aqui não entra sem fonte.
+  facts: companyFacts.filter((fact) => fact.value !== "+500"),
   structureIntro: "O centro técnico da Hexamedical reúne salas de teste, laboratórios, treinamento e showroom.",
   structureMedia: homeMedia.stages.laboratorio,
   // Site atual, /estrutura/.

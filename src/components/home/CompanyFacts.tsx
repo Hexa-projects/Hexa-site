@@ -8,8 +8,8 @@ const CompanyFacts = ({ items }: { items: CompanyFact[] }) => (
     <div className="about__head">
       <h2 id="about-title">Quem vende também instala e conserta</h2>
       <p>
-        A Hexamedical representa a Esaote em ressonância magnética e vende também tomografia veterinária, radiografia digital, bombas
-        injetoras e software. Atendemos clínicas, hospitais, universidades e centros veterinários.
+        A Hexamedical trabalha com a linha de ressonância aberta Esaote e vende também tomografia veterinária, radiografia digital,
+        bombas injetoras e software. Atendemos clínicas, hospitais, universidades e centros veterinários.
       </p>
       <p>
         Depois da instalação, o contato continua o mesmo. Nossa equipe de campo faz a manutenção em todo o país, e o laboratório próprio

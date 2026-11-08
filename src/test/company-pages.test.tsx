@@ -14,6 +14,7 @@ import MateriaisPage from "@/pages/empresa/MateriaisPage";
 import LegalPage from "@/pages/empresa/LegalPage";
 import { companyFacts, triage, whatsappHref } from "@/data/home";
 import { OUVIDORIA_ENDPOINT } from "@/data/ouvidoria";
+import { companyPage } from "@/data/pages/company";
 
 const renderAt = (url: string) =>
   render(
@@ -37,6 +38,31 @@ const page = (container: HTMLElement) => container.querySelector(".page") as HTM
 
 const SALAS = "de teste para tomografia, raio-X e mamografia";
 
+const ESAOTE = "A Hexamedical trabalha com a linha de ressonância aberta Esaote";
+
+describe("empresa: fatos com fonte", () => {
+  it("/empresa diz que trabalha com a linha de ressonância aberta Esaote (sem afirmar representação)", () => {
+    const { container } = renderAt("/empresa");
+    const text = page(container).textContent ?? "";
+    expect(text).toContain(`${ESAOTE} e vende também tomografia veterinária`);
+    expect(text).not.toMatch(/representa/i);
+    expect(companyPage.description).toContain(ESAOTE);
+    expect(companyPage.description).not.toMatch(/representa/i);
+  });
+
+  it("a faixa de números de /empresa não mostra o +500 (sem fonte); a home mantém", () => {
+    const { container } = renderAt("/empresa");
+    const text = page(container).textContent ?? "";
+    expect(text).not.toContain("+500");
+    expect(text).not.toContain("equipamentos atendidos");
+    expect(companyPage.facts.map((fact) => fact.value)).toEqual(["+16 anos", "5 unidades", "3 salas"]);
+  });
+
+  it("os 16 anos usam o rótulo da fonte: em manutenção de equipamentos médicos", () => {
+    expect(companyFacts.find((fact) => fact.value === "+16 anos")?.label).toBe("em manutenção de equipamentos médicos");
+  });
+});
+
 describe("empresa", () => {
   it("companyFacts da home usa o rótulo das salas de teste do site atual", () => {
     const salas = companyFacts.find((fact) => fact.value === "3 salas");
@@ -49,7 +75,7 @@ describe("empresa", () => {
     const { container } = renderAt("/empresa");
     expect(screen.getAllByRole("heading", { level: 1 })).toHaveLength(1);
     const text = page(container).textContent ?? "";
-    for (const fact of companyFacts) {
+    for (const fact of companyFacts.filter((item) => item.value !== "+500")) {
       expect(text).toContain(fact.value);
       expect(text).toContain(fact.label);
     }

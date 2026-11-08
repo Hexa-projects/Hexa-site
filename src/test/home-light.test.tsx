@@ -70,6 +70,9 @@ describe("copy da home", () => {
     renderHome();
     const region = screen.getByRole("region", { name: "Quem vende também instala e conserta" });
     expect(companyFacts.map((fact) => fact.value)).toEqual(["+16 anos", "+500", "5 unidades", "3 salas"]);
+    // Sem afirmar representação: a Hexamedical trabalha com a linha aberta da Esaote.
+    expect(region).toHaveTextContent("A Hexamedical trabalha com a linha de ressonância aberta Esaote e vende também tomografia veterinária");
+    expect(region.textContent).not.toMatch(/representa/i);
     for (const fact of companyFacts) {
       expect(within(region).getByText(fact.value)).toBeInTheDocument();
       expect(within(region).getByText(fact.label)).toBeInTheDocument();

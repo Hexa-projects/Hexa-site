@@ -9,7 +9,7 @@ export type CompanyFact = { value: string; label: string };
 
 /** Números da home anterior deste repositório (não aparecem no site oficial): confirmar antes de publicar. */
 export const companyFacts: CompanyFact[] = [
-  { value: "+16 anos", label: "em diagnóstico por imagem, com foco em ressonância magnética" },
+  { value: "+16 anos", label: "em manutenção de equipamentos médicos" },
   { value: "+500", label: "equipamentos atendidos pela equipe técnica" },
   { value: "5 unidades", label: "São Paulo, Rio de Janeiro, Belo Horizonte, Goiânia e Florianópolis" },
   { value: "3 salas", label: "de teste para tomografia, raio-X e mamografia" },
