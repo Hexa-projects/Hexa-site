@@ -30,7 +30,7 @@ const PageSection = ({ id, title, intro, tone = "light", media, children }: Page
           {children && <div className="page-section__body">{children}</div>}
         </div>
         {media && (
-          <figure className="page-section__media" data-reveal="media">
+          <figure className={media.screen ? "page-section__media page-section__media--screen" : "page-section__media"} data-reveal="media">
             <img src={media.src} width={media.width} height={media.height} alt={media.alt} loading="lazy" decoding="async" />
           </figure>
         )}

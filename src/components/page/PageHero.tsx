@@ -149,7 +149,10 @@ const PageHero = ({ tone, eyebrow, title, lead, crumbs, media, actions = [] }: P
         </div>
 
         {media && (
-          <figure className={isVideo(media) ? "page-hero__media page-hero__media--video" : "page-hero__media"} data-reveal="media">
+          <figure
+            className={isVideo(media) ? "page-hero__media page-hero__media--video" : media.screen ? "page-hero__media page-hero__media--screen" : "page-hero__media"}
+            data-reveal="media"
+          >
             {isVideo(media) ? (
               <HeroVideo video={media} />
             ) : (

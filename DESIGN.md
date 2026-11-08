@@ -129,7 +129,7 @@ components:
 
 # Design System: Hexamedical
 
-Documentado a partir do código em 2026-11-02. Tokens em `src/styles/tokens.css`; movimento em `src/lib/motion.ts`. Fora do sistema: a página Magnifico Open publicada e a LP Careverse Digital Heart.
+Documentado a partir do código em 2026-11-02. Tokens em `src/styles/tokens.css`; movimento em `src/lib/motion.ts`. Fora do sistema: a página Magnifico Open publicada e a antiga LP Careverse Digital Heart (`careverse-site`, `/lp/careverse`, que agora redireciona para `/solucoes/careverse`, montada com o kit).
 
 ## Overview
 
@@ -265,7 +265,8 @@ Anel SVG com trilho `rule-light`, progresso laranja e seis hexágonos (contorno 
 - **Don't** usar texto em gradiente.
 - **Don't** cortar ou deformar equipamento real; corte só na variante fill, para foto de cena.
 - **Don't** inventar clientes, números, depoimentos, certificações ou prazos. Só material do site oficial.
-- **Don't** aplicar este sistema à página Magnifico Open nem à LP Careverse.
+- **Don't** aplicar este sistema à página Magnifico Open publicada.
+- **Don't** trazer da antiga LP Careverse as cores, as fontes (Manrope, mono) ou o movimento: na página do Careverse, o azul e o cobre do produto ficam só dentro das imagens.
 
 ## Páginas internas
 
@@ -276,11 +277,13 @@ Exceção única: a página-vitrine do Magnifico Open (`src/pages/solucoes/Magni
 ### Componentes
 - **PageShell** `({ title, description, children })`: `Layout` com o cabeçalho normal (sticky, claro), `<title>{title} | Hexamedical</title>`, meta description, importa `page.css` e roda o `usePageReveal` uma vez para a página toda. As páginas não chamam o hook de novo; só marcam `data-reveal`.
 - **PageHero** `({ tone, eyebrow?, title, lead, crumbs, media?, actions? })`: migalha (`nav` "Você está em", separador em hexágono, último item com `aria-current="page"`), `h1` em Archivo 650 `--step-4` (o display de 5,25 rem continua só na home), lead `--step-1` até 44ch, ações (`primary` laranja, `quiet` contorno). Rota interna vira `Link`; endereço externo (WhatsApp) abre em nova aba. O `eyebrow` não vira eyebrow: aparece como placa técnica embaixo das ações (fio + `--step--1`), por exemplo "Esaote · Ressonância magnética aberta".
+- **Mídia de tela** (`MediaImage.screen`): tela de software ou arte em fundo escuro. No hero e no `PageSection`, aparece inteira, na proporção dela, sobre base `graphite-950` com fio `rule-dark`, sem o recorte 4:3 nem a base branca do equipamento. Usada no Careverse.
 - **PageSection** `({ id?, title, intro?, tone?, media?, children })`: `section` rotulada pelo próprio `h2` (Archivo 620 `--step-3`), intro em lead até 52ch. Duas seções claras seguidas ganham um fio `rule-light` na coluna em vez de somar dois respiros. Com `media` (foto), vira texto com mídia: foto 4:3 ao lado no desktop, depois do texto no celular. Filhos do corpo ficam a `--space-7` um do outro. `.page-prose` dá a coluna de leitura de 62ch para texto corrido.
 - **PointList** `({ items })`: lista com o marcador em hexágono laranja da linha do tempo, um fio por item, em colunas a partir de 22 rem.
 - **SpecTable** `({ caption, source, rows })`: ficha técnica em painel branco com fio, `caption` em Archivo, rótulo `ink-2` e valor `ink` 600 com números tabulares; "Fonte: …" sempre embaixo. Só dados do fabricante.
 - **CompareTable** `({ caption, source, columns: { label, href? }[], rows: { label, values }[] })`: comparativo no mesmo painel da ficha, um modelo por coluna (nome com link para a página dele) e um dado por linha, "Fonte: …" embaixo. Título visível fora da rolagem e `caption` para leitor de tela; no celular a tabela rola dentro do painel (região focável) com o rótulo da linha fixo, e número e unidade não se separam. Usado na linha de RM (`/solucoes/ressonancia-magnetica`).
-- **CardGrid** `({ items: { title, body?, href?, image?, meta?, fill? }[] })`: com imagem, o ladrilho da vitrine (base branca 4:3, equipamento inteiro em `contain`; `fill` só para foto de cena); sem imagem, painel branco com fio que muda de tom no hover. Grade só de equipamentos fica em duas colunas abaixo de 640 px, como a vitrine.
+- **CardGrid** `({ items: { title, body?, href?, image?, meta?, fill? }[] })`: com imagem, o ladrilho da vitrine (base branca 4:3, equipamento inteiro em `contain`; `fill` só para foto de cena); sem imagem, painel branco com fio que muda de tom no hover. Só endereço de outro site (`http`) leva a seta diagonal; rota e âncora da página levam a seta reta. Grade só de equipamentos fica em duas colunas abaixo de 640 px, como a vitrine.
+- **Ressalva** (`.page-note`): texto pequeno (`--step--1`, `ink-2`) na coluna de 62ch, para ressalva de uso clínico ou de fonte.
 - **FactStrip** `({ items: CompanyFact[] })`: números como os da empresa na home; o primeiro com o fio laranja de 2 px.
 - **Faq** `({ items: { q, a }[] })`: accordion com botão nativo dentro de `h3`, `aria-expanded` e `aria-controls`, resposta `role="region"`; cada pergunta abre sozinha; o "+" laranja gira 45°.
 - **PageVideo** `({ video, caption })`: pôster com a pílula laranja "Assistir", `preload="none"`, controles só depois do clique; vídeo vertical limitado a 22 rem (16 rem no celular).

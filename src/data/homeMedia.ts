@@ -2,7 +2,14 @@
  * Mídia da home, gerada por scripts/build-home-media.sh a partir do acervo do site oficial.
  * Proveniência em public/media/home/SOURCES.md.
  */
-export type MediaImage = { src: string; width: number; height: number; alt: string };
+export type MediaImage = {
+  src: string;
+  width: number;
+  height: number;
+  alt: string;
+  /** Tela de software ou arte em fundo escuro: no kit, inteira, na proporção dela, sobre base grafite (sem recorte 4:3). */
+  screen?: boolean;
+};
 export type MediaVideo = { mp4: string; webm?: string; poster: string; width: number; height: number; label: string };
 export type StageId = "escolha" | "projeto" | "instalacao" | "operacao" | "manutencao" | "laboratorio";
 

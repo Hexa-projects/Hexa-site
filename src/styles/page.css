@@ -233,11 +233,11 @@
 }
 
 /* Produto no escuro: o equipamento inteiro, nunca cortado, sobre a base branca da vitrine. */
-.page-hero--dark .page-hero__media:not(.page-hero__media--video) {
+.page-hero--dark .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) {
   background: var(--white);
 }
 
-.page-hero--dark .page-hero__media:not(.page-hero__media--video) img {
+.page-hero--dark .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) img {
   inset: var(--space-6);
   width: calc(100% - 2 * var(--space-6));
   height: calc(100% - 2 * var(--space-6));
@@ -363,6 +363,24 @@
   object-fit: cover;
 }
 
+/* Tela de software (ou arte em fundo escuro): depois das regras de mídia do hero e da seção, que ela sobrepõe. Inteira, na proporção dela, sobre a base grafite.
+   As cores do produto ficam dentro da imagem; o quadro é do sistema. */
+.page-hero__media--screen,
+.page-section__media--screen {
+  aspect-ratio: auto;
+  background: var(--graphite-950);
+  outline: 1px solid var(--rule-dark);
+  outline-offset: -1px;
+}
+
+.page-hero__media--screen img,
+.page-section__media--screen img {
+  position: static;
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
+
 /* Texto corrido (institucional, blog): coluna de leitura de 62ch. */
 .page-prose > * + * {
   margin-top: var(--space-4);
@@ -378,6 +396,18 @@
 .page-prose a {
   color: var(--orange-ink);
   font-weight: 600;
+}
+
+/* Ressalva curta (uso clínico, fonte): texto pequeno em ink-2, na coluna de leitura. */
+.page-note {
+  max-width: 62ch;
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.page-section--dark .page-note {
+  color: var(--on-dark-2);
 }
 
 /* ---------- Lista de pontos ---------- */
@@ -1211,7 +1241,7 @@ a.page-card__link:hover .page-card__title svg {
 }
 
 @media (max-width: 639px) {
-  .page-hero--dark .page-hero__media:not(.page-hero__media--video) img {
+  .page-hero--dark .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) img {
     inset: var(--space-4);
     width: calc(100% - 2 * var(--space-4));
     height: calc(100% - 2 * var(--space-4));

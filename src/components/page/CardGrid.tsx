@@ -20,7 +20,8 @@ export type PageCard = {
 const CardGrid = ({ items }: { items: PageCard[] }) => (
   <ul className={items.length > 0 && items.every((item) => item.image) ? "page-cards page-cards--media" : "page-cards"}>
     {items.map((item) => {
-      const external = item.href ? !item.href.startsWith("/") : false;
+      // Só endereço de outro site leva a seta diagonal; rota e âncora da própria página levam a seta reta.
+      const external = item.href ? /^https?:/.test(item.href) : false;
       const body = (
         <>
           {item.image && (
