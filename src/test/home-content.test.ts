@@ -2,7 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { lifecycle, showroom, showroomFilters, triage, whatsappHref } from "@/data/home";
-import { commercialLines, rmStories, serviceStories } from "@/data/editorial";
+import { commercialLines, rmStories } from "@/data/editorial";
+import { services } from "@/data/pages/services";
 import { wdmProducts } from "@/data/wdm";
 
 const productSlugs = new Set([
@@ -31,7 +32,7 @@ function isDeclaredRoute(href: string): boolean {
   const product = href.match(/^\/solucoes\/([^/]+)$/);
   if (product) return productSlugs.has(product[1]);
   const service = href.match(/^\/servicos\/([^/]+)$/);
-  if (service) return service[1] in serviceStories;
+  if (service) return Object.prototype.hasOwnProperty.call(services, service[1]);
   return false;
 }
 

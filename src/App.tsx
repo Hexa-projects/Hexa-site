@@ -12,9 +12,9 @@ const SolucoesHub = lazy(() => import("./pages/solucoes/SolucoesHub"));
 const RmLinePage = lazy(() => import("./pages/solucoes/RmLinePage"));
 const ProductPage = lazy(() => import("./pages/solucoes/ProductPage"));
 const LinePage = lazy(() => import("./pages/solucoes/LinePage"));
-const ServicosHub = lazy(() => import("./pages/ServicosHub"));
+const ServicosHub = lazy(() => import("./pages/servicos/ServicosHub"));
 const ProductEditorialPage = lazy(() => import("./pages/ProductEditorialPage"));
-const ServicePage = lazy(() => import("./pages/ServicePage"));
+const ServicePage = lazy(() => import("./pages/servicos/ServicePage"));
 const Ouvidoria = lazy(() => import("./pages/OuvidoriaTemp"));
 const Contato = lazy(() => import("./pages/Contato"));
 const BlogPage = lazy(() => import("./pages/BlogPage"));
@@ -63,6 +63,7 @@ const App = () => (
             ))}
             {/* Produtos (O-scan SMART, S-scan Open, G-scan Open e os modelos veterinários WDM); slug desconhecido mostra a 404 do sistema. */}
             <Route path="/solucoes/:slug" element={<ProductPage />} />
+            {/* Serviços (manutenção, contratos, instalação, reparo); slug desconhecido mostra a 404 do sistema. */}
             <Route path="/servicos/:slug" element={<ServicePage />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/ouvidoria" element={<Ouvidoria />} />
