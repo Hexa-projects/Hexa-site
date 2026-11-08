@@ -1,4 +1,4 @@
-import { blogPosts } from "@/data/blog";
+import { publishedPosts } from "@/data/blog";
 
 /** Endereço de produção usado no sitemap e no link canônico de cada página. */
 export const SITE_URL = "https://www.hexamedical.com.br";
@@ -82,7 +82,7 @@ export const publicRoutes: string[] = [
   "/ouvidoria",
   "/materiais",
   "/blog",
-  ...blogPosts.map((post) => `/blog/${post.slug}`),
+  ...publishedPosts.map((post) => `/blog/${post.slug}`),
   "/politica-de-privacidade",
   "/termos",
 ];
