@@ -11,7 +11,18 @@ import "@/styles/page.css";
  * Os movimentos do kit (usePageReveal) rodam aqui, uma vez para a página inteira:
  * as páginas só marcam `data-reveal` e não chamam o hook de novo.
  */
-const PageShell = ({ title, description, children }: { title: string; description: string; children: ReactNode }) => {
+const PageShell = ({
+  title,
+  description,
+  canonical = true,
+  children,
+}: {
+  title: string;
+  description: string;
+  /** `false` na 404: a URL pedida não é uma página do site, então não há canônico. */
+  canonical?: boolean;
+  children: ReactNode;
+}) => {
   const root = useRef<HTMLDivElement>(null);
   const { pathname } = useLocation();
   usePageReveal(root);
@@ -21,7 +32,7 @@ const PageShell = ({ title, description, children }: { title: string; descriptio
       <Helmet>
         <title>{`${title} | Hexamedical`}</title>
         <meta name="description" content={description} />
-        <link rel="canonical" href={canonicalUrl(pathname)} />
+        {canonical && <link rel="canonical" href={canonicalUrl(pathname)} />}
       </Helmet>
       <div ref={root} className="page">
         {children}

@@ -268,6 +268,8 @@ describe("404 e rodapé no sistema novo", () => {
     await new Promise((resolve) => setTimeout(resolve, 0));
     expect(document.title).toBe("Página não encontrada | Hexamedical");
     expect(document.head.querySelector('meta[name="robots"]')).toHaveAttribute("content", "noindex");
+    // A 404 não declara canônico: a URL pedida não é uma página do site.
+    expect(document.head.querySelector('link[rel="canonical"]')).toBeNull();
   });
 
   it("o rodapé mostra a Ouvidoria uma vez só", () => {

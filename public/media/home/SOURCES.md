@@ -8,6 +8,7 @@ Gerada por `scripts/build-home-media.sh` em 2026-11-02. Os arquivos de origem fo
 | `ceo-1280.mp4` | `wp-content/uploads/2026/04/V3-1920-x-1080-Horizontal-1.mp4`: entrevista do CEO publicada no site oficial | 1280×720; as legendas são as do original |
 | `ceo-poster.webp` | `wp-content/uploads/2026/04/capa-video-fabio-1.png`: capa oficial do vídeo | WebP |
 | `depoimentos-540x960.mp4`, `depoimentos-poster.webp` | `wp-content/uploads/2026/04/Hexamedical-Video-site-2.mp4`: depoimentos publicados no site oficial | Recorte da coluna vertical central; as legendas são as do original |
+| `public/og/hexamedical-1200x630.jpg` (imagem de compartilhamento do `index.html`: `og:image` e `twitter:image`) | `tunel-poster-1920.webp` desta pasta, quadro do vídeo de fabricante do Magnifico Open | Redução para 1200 × 675 e recorte central de 1200 × 630 (Pillow), JPEG qualidade 84; mesma pendência de direito de uso do vídeo da Esaote |
 | `etapa-escolha.webp` | `public/assets/hexa/Foto-Solucao-ideal-com-baixo-risco.png` (acervo do site oficial) | WebP |
 | `etapa-projeto.webp` | `wp-content/uploads/2026/04/estrutura-1.png` | WebP |
 | `etapa-instalacao.webp` | `public/assets/hexa/Desinstalacao-e-Instalacao.webp` (acervo do site oficial) | WebP |

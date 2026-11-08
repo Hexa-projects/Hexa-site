@@ -4,7 +4,7 @@ import PageHero from "@/components/page/PageHero";
 
 /** 404 do sistema: qualquer endereço sem rota (inclusive slug inexistente) cai aqui, no hero claro do kit. */
 const NotFound = () => (
-  <PageShell title="Página não encontrada" description="O endereço procurado não existe no site da Hexamedical.">
+  <PageShell title="Página não encontrada" description="O endereço procurado não existe no site da Hexamedical." canonical={false}>
     <Helmet>
       <meta name="robots" content="noindex" />
     </Helmet>

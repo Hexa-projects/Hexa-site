@@ -33,6 +33,19 @@ describe("sitemap e robots", () => {
     expect(html).not.toContain('rel="canonical"');
     for (const tag of html.match(/<title>[^<]*<\/title>|content="[^"]*"/g) ?? []) expect(tag).not.toMatch(/[—–]/);
   });
+
+  it("a imagem de compartilhamento é própria, absoluta no domínio do site e existe em public/", () => {
+    const html = read("index.html");
+    const images = [...html.matchAll(/<meta (?:property|name)="(?:og|twitter):image" content="([^"]+)"/g)].map((m) => m[1]);
+    expect(images).toHaveLength(2);
+    for (const url of images) {
+      expect(url.startsWith(`${SITE}/`), url).toBe(true);
+      expect(fs.existsSync(path.join(process.cwd(), "public", url.slice(SITE.length))), url).toBe(true);
+    }
+    expect(html).toContain('<meta property="og:image:width" content="1200"');
+    expect(html).toContain('<meta property="og:image:height" content="630"');
+    expect(html).toMatch(/<meta property="og:image:alt" content="[^"]{10,}"/);
+  });
 });
 
 describe("cada página pública", () => {
@@ -96,6 +109,7 @@ describe("sistema antigo removido", () => {
       "src/pages/SegmentosHub.tsx",
       "src/components/sections",
       "src/components/NavLink.tsx",
+      "src/components/layout/PageBreadcrumb.tsx",
       "src/data/media.ts",
       "src/data/catalog.ts",
       "src/data/segments.ts",
