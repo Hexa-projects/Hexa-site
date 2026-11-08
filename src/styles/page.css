@@ -1009,8 +1009,9 @@ a.page-card__link:hover .page-card__title svg {
   max-width: 100%;
 }
 
+/* Texto de exemplo no tamanho do corpo: ink-2 (ink-3 só em texto grande e traços). */
 .page-form ::placeholder {
-  color: var(--ink-3);
+  color: var(--ink-2);
 }
 
 .page-form [aria-invalid="true"] {

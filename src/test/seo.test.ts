@@ -114,3 +114,18 @@ describe("sistema antigo removido", () => {
     expect(read("src/main.tsx")).not.toMatch(/editorial|wdm|App\.css/);
   });
 });
+
+describe("contraste dos tokens", () => {
+  it("ink-3 como cor de texto só aparece em texto grande (DESIGN.md: ink-3 só em texto grande e traços)", () => {
+    const dir = path.join(process.cwd(), "src/styles");
+    const offenders: string[] = [];
+    for (const file of fs.readdirSync(dir).filter((name) => name.endsWith(".css"))) {
+      const css = fs.readFileSync(path.join(dir, file), "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+      for (const [, selector, body] of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+        if (!/(^|[;\s])color:\s*var\(--ink-3\)/.test(body)) continue;
+        if (!/font-size:\s*var\(--step-[2-5]\)/.test(body)) offenders.push(`${file}: ${selector.trim()}`);
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+});
