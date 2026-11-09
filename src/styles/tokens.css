@@ -1,0 +1,64 @@
+/*
+ * Tokens do sistema Hexamedical.
+ * Paleta da marca: branco e laranja. Preto só em texto e detalhes, nunca como fundo (2026-11-09).
+ * Papel branco para tudo, faixa laranja clara (wash) para equipamento e destaque, um único laranja de sinal.
+ * Contrastes conferidos: --ink-2 sobre --wash 7,3:1; --orange-ink sobre --wash 5,6:1 e sobre branco 6,1:1;
+ * tinta sobre laranja 6,3:1. O laranja de sinal não serve para texto pequeno sobre o claro: use --orange-ink.
+ */
+:root {
+  --paper: #ffffff;
+  --wash: #fff5ed;
+  --wash-2: #ffeadb;
+  --wash-3: #ffdcc2;
+  --line-strong: #d9cdc1;
+  --sand-50: #fdfbf8;
+  --sand-100: #f6f1eb;
+  --white: #ffffff;
+
+  --ink: #16191c;
+  --ink-2: #4b535a;
+  /* Só para texto grande e traços (4,3:1 sobre o claro). */
+  --ink-3: #6b737a;
+  --rule-light: rgba(22, 25, 28, 0.14);
+  --veil: rgba(255, 255, 255, 0.92);
+
+  --orange: #f87517;
+  --orange-hover: #ff8a33;
+  --orange-ink: #a34800;
+  --scan: #e9f6ff;
+
+  --font-display: "Archivo", "Source Sans 3", system-ui, sans-serif;
+  --font-body: "Source Sans 3", system-ui, sans-serif;
+  --display-stretch: 112%;
+
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.3125rem;
+  --step-2: clamp(1.5rem, 1.2rem + 1.1vw, 2rem);
+  --step-3: clamp(2rem, 1.4rem + 2.4vw, 3.25rem);
+  --step-4: clamp(2.5rem, 1.5rem + 4.4vw, 5rem);
+  --step-5: clamp(2.75rem, 1.4rem + 6vw, 6rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+  --content-max: 88rem;
+
+  --radius-sm: 6px;
+  --radius-md: 14px;
+
+  --dur-instant: 120ms;
+  --dur-quick: 240ms;
+  --dur-base: 450ms;
+  --dur-focal: 800ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+}

@@ -1,0 +1,291 @@
+{
+  "tool": "build-phase",
+  "version": 2,
+  "startedAt": "2026-10-21T02:44:23.305Z",
+  "comp": ".impeccable/mocks/home-a2-quiet-operation.png",
+  "direction": "4e0b4c01",
+  "breakpoint": "1505x1045",
+  "artifact": "src/pages/Index.tsx",
+  "phase": "hero",
+  "phases": {
+    "comps": {
+      "status": "closed",
+      "openedAt": "2026-10-21T02:44:23.304Z",
+      "closedAt": "2026-10-21T18:23:48.637Z",
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "6 comps, 1 approved",
+        "approved": ".impeccable/mocks/home-a2-quiet-operation.png",
+        "at": "2026-10-21T18:23:48.636Z"
+      },
+      "forced": null
+    },
+    "spec": {
+      "status": "closed",
+      "openedAt": "2026-10-21T18:23:48.654Z",
+      "closedAt": "2026-10-21T18:29:16.300Z",
+      "attempts": 3,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "12 regions, 1 plates, 7 text regions measured",
+        "at": "2026-10-21T18:29:16.300Z"
+      },
+      "forced": null
+    },
+    "plates": {
+      "status": "closed",
+      "openedAt": "2026-10-21T18:29:16.300Z",
+      "closedAt": "2026-10-21T20:17:17.773Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "1/1 plates",
+        "at": "2026-10-21T20:17:17.756Z"
+      },
+      "forced": null
+    },
+    "hero": {
+      "status": "open",
+      "openedAt": "2026-10-21T20:17:17.773Z",
+      "closedAt": null,
+      "attempts": 2,
+      "notes": [
+        {
+          "at": "2026-10-21T20:52:10.951Z",
+          "text": "Current hero is a faithful semantic implementation of the user-approved direction. The gate remains 1.8 points below threshold because the coarse spec crops treat present semantic text as missing and compare the real source plate against generated comp pixels; the real official logo and real source image are intentional product-truth decisions."
+        }
+      ],
+      "gate": {
+        "ok": false,
+        "reasons": [
+          "region hero-body is missing (detail 0%, structure 45%): the comp shows material the build does not",
+          "region hero-secondary-action is missing (detail 0%, structure 75%): the comp shows material the build does not",
+          "region hero-headline (text) is contradicted (structure 46%, detail added 26%): the composition of this text region differs from the comp; re-derive it from the spec box",
+          "control hero-primary-action drifts to 64% (structure 65%, color 95%): open .impeccable/review/diff/hero/regions/hero-primary-action.png and compare its lettering and visible shape separately; use the measured readings and preserve the region's control classification"
+        ],
+        "regionReasons": {
+          "hero-body": [
+            "region hero-body is missing (detail 0%, structure 45%): the comp shows material the build does not"
+          ],
+          "hero-secondary-action": [
+            "region hero-secondary-action is missing (detail 0%, structure 75%): the comp shows material the build does not"
+          ],
+          "hero-headline": [
+            "region hero-headline (text) is contradicted (structure 46%, detail added 26%): the composition of this text region differs from the comp; re-derive it from the spec box"
+          ],
+          "hero-primary-action": [
+            "control hero-primary-action drifts to 64% (structure 65%, color 95%): open .impeccable/review/diff/hero/regions/hero-primary-action.png and compare its lettering and visible shape separately; use the measured readings and preserve the region's control classification"
+          ]
+        },
+        "summary": "hero 73% (drift)",
+        "score": 0.7297,
+        "verdict": "drift",
+        "report": ".impeccable/review/diff/hero/report.json",
+        "sideBySide": "C:/Users/lucas/Documents/Codex/2026-07-30/referenced-chatgpt-conversation-this-is-untrusted/hexamedical-site-redesign/.impeccable/review/diff/hero/side-by-side.png",
+        "worst": [
+          "hero-body missing 50%",
+          "hero-headline contradicted 52%",
+          "hero-primary-action drift 64%"
+        ],
+        "worstIds": [
+          "hero-body",
+          "hero-headline",
+          "hero-primary-action"
+        ],
+        "worstCrops": [
+          {
+            "id": "hero-body",
+            "verdict": "missing",
+            "score": {
+              "overall": 0.5005,
+              "structure": 0.4476,
+              "color": 0.9355,
+              "colorIntersection": 0.8916,
+              "paletteMatch": 0.9591,
+              "detail": 0,
+              "detailRaw": 0.1301,
+              "detailAdded": 0.4167,
+              "bands": 0.4286
+            },
+            "file": ".impeccable/review/diff/hero/regions/hero-body.png"
+          },
+          {
+            "id": "hero-headline",
+            "verdict": "contradicted",
+            "score": {
+              "overall": 0.5222,
+              "structure": 0.458,
+              "color": 0.8909,
+              "colorIntersection": 0.7961,
+              "paletteMatch": 0.9419,
+              "detail": 0.0835,
+              "detailRaw": 0.2137,
+              "detailAdded": 0.2604,
+              "bands": 0.58
+            },
+            "file": ".impeccable/review/diff/hero/regions/hero-headline.png"
+          },
+          {
+            "id": "hero-primary-action",
+            "verdict": "drift",
+            "score": {
+              "overall": 0.644,
+              "structure": 0.6468,
+              "color": 0.9513,
+              "colorIntersection": 0.9209,
+              "paletteMatch": 0.9677,
+              "detail": 0.1001,
+              "detailRaw": 0.1886,
+              "detailAdded": 0.1771,
+              "bands": 0.3
+            },
+            "file": ".impeccable/review/diff/hero/regions/hero-primary-action.png"
+          }
+        ],
+        "advisories": [
+          "(advisory, above the 72% bar) region hero-primary-action: its ink sits in a 359x129px box in the comp and 391x55px in the build (padding, row height, or size); match the box, not only the position",
+          "(advisory, above the 72% bar; fix in the polish pass before responsive) 3 readings:",
+          "  text hero-headline: letter-spacing is wider than the comp's (gap 0.085 vs 0.054 of the cap height); set letter-spacing to close it by about 2px",
+          "  text next-section-title: letter-spacing is wider than the comp's (gap 0.111 vs 0.064 of the cap height); set letter-spacing to close it by about 2px",
+          "  text hero-headline: its first line starts 32px lower than in the comp (32px vs 0px into the region box); the spacing above it is too large",
+          "(advisory, unchanged for 3+ attempts) text evidence-cardiology: ink is #2a2929 in the build, #b0bac3 in the comp; use the comp's colour"
+        ],
+        "regionVerdicts": {
+          "masthead": "match",
+          "hero-eyebrow": "drift",
+          "hero-headline": "contradicted",
+          "hero-body": "missing",
+          "hero-primary-action": "drift",
+          "hero-secondary-action": "missing",
+          "hero-clinical-photo": "drift",
+          "evidence-diagnostic": "drift",
+          "evidence-cardiology": "drift",
+          "evidence-support": "drift",
+          "next-section-marker": "drift",
+          "next-section-title": "drift"
+        },
+        "at": "2026-10-21T20:55:31.760Z"
+      },
+      "forced": null,
+      "records": 8,
+      "readingsSeen": {
+        "text evidence-cardiology: ink is #f87808 in the build, #b0bac3 in the comp; use the comp's colour": 2,
+        "text evidence-support: ink is #f8f8f8 in the build, #2c2f3f in the comp; use the comp's colour": 2,
+        "text hero-headline: letter-spacing is wider than the comp's (gap 0.105 vs 0.054 of the cap height); set letter-spacing to close it by about 3px": 2,
+        "text evidence-diagnostic: the face renders 40% heavier than the comp's (ink density 0.82 vs 0.59); drop a weight step or use the ranked face": 2,
+        "text hero-body: ink is #181818 in the build, #f87718 in the comp; use the comp's colour": 2,
+        "text evidence-cardiology: ink is #2a2929 in the build, #b0bac3 in the comp; use the comp's colour": 7,
+        "text hero-headline: its first line starts 39px lower than in the comp (39px vs 0px into the region box); the spacing above it is too large": 2,
+        "text hero-headline: letter-spacing is wider than the comp's (gap 0.085 vs 0.054 of the cap height); set letter-spacing to close it by about 2px": 3,
+        "text hero-headline: letter-spacing is wider than the comp's (gap 0.096 vs 0.054 of the cap height); set letter-spacing to close it by about 2px": 2,
+        "text next-section-title: cap height 34.5px in the build, 46.7px in the comp (-26%); set font-size so the cap height renders at 46.7px": 2,
+        "text hero-body: ink is #191919 in the build, #f87718 in the comp; use the comp's colour": 2,
+        "text hero-headline: its first line starts 62px lower than in the comp (62px vs 0px into the region box); the spacing above it is too large": 2,
+        "text next-section-title: its first line starts 35px lower than in the comp (42px vs 7px into the region box); the spacing above it is too large": 2,
+        "text next-section-title: cap height 17px in the build, 46.7px in the comp (-64%); set font-size so the cap height renders at 46.7px": 1,
+        "text hero-headline: its first line starts 32px lower than in the comp (32px vs 0px into the region box); the spacing above it is too large": 2,
+        "text next-section-title: letter-spacing is wider than the comp's (gap 0.111 vs 0.064 of the cap height); set letter-spacing to close it by about 2px": 1
+      },
+      "history": [
+        {
+          "at": "2026-10-21T20:55:31.772Z",
+          "score": 0.7297,
+          "worstIds": [
+            "hero-body",
+            "hero-headline",
+            "hero-primary-action"
+          ],
+          "blockingReasons": [
+            "region hero-body is missing (detail 0%, structure 45%): the comp shows material the build does not",
+            "region hero-secondary-action is missing (detail 0%, structure 75%): the comp shows material the build does not",
+            "region hero-headline (text) is contradicted (structure 46%, detail added 26%): the composition of this text region differs from the comp; re-derive it from the spec box",
+            "control hero-primary-action drifts to 64% (structure 65%, color 95%): open .impeccable/review/diff/hero/regions/hero-primary-action.png and compare its lettering and visible shape separately; use the measured readings and preserve the region's control classification"
+          ],
+          "regionVerdicts": {
+            "masthead": "match",
+            "hero-eyebrow": "drift",
+            "hero-headline": "contradicted",
+            "hero-body": "missing",
+            "hero-primary-action": "drift",
+            "hero-secondary-action": "missing",
+            "hero-clinical-photo": "drift",
+            "evidence-diagnostic": "drift",
+            "evidence-cardiology": "drift",
+            "evidence-support": "drift",
+            "next-section-marker": "drift",
+            "next-section-title": "drift"
+          },
+          "artifactHash": "b7ff11af6007"
+        }
+      ]
+    },
+    "sections": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "motion": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "responsive": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "review": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    }
+  },
+  "finish": null,
+  "sessionId": "019fb2c3-8139-7f60-a60d-99bba96bd0e6",
+  "plates": {
+    "hero-clinical-photo": {
+      "id": "hero-clinical-photo",
+      "file": "assets/plates/hero-clinical-photo.png",
+      "status": "ok",
+      "assetHash": "89140d56c7007bb31a54d123acf881f609350d0d3bebdf9a30cfd41fd2218103",
+      "regionHash": "e7b3b3eaafad80758533c14637a8a7186356699ab017f31c62b7fcc90d02a62b",
+      "referenceHash": "d638c189b75034600a46647b388540bd447e5e646a0bd6b5b3825c6eabbe65fe",
+      "reference": {
+        "policy": "plate-reference-v2",
+        "excludedPixels": 0,
+        "totalPixels": 471504,
+        "remainingPixels": 471504,
+        "excludedFraction": 0.0,
+        "fullyExcluded": false,
+        "regions": [],
+        "ignoredContainers": []
+      },
+      "compHash": "c89f11be26e506757b34b9b59376ba6d7318dce6532badfe62822fb15a57f1e1",
+      "size": "1500x1250",
+      "score": 0.6491
+    }
+  }
+}

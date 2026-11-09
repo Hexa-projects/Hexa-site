@@ -1,0 +1,1358 @@
+/* Páginas internas: o mesmo sistema da home (tokens.css), sem palco WebGL nem rolagem suave.
+   Hero de destaque (accent) na faixa laranja clara para produto, com anéis e o equipamento na base branca da vitrine;
+   hero claro para serviço e institucional; leitura sempre no branco. */
+
+.page {
+  background: var(--sand-50);
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow-x: clip;
+}
+
+.page h1,
+.page h2,
+.page h3 {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
+/* Abaixo do display da home: o h1 interno usa o headline e o h2 de seção, o title. Entrelinhas ≥ 1. */
+.page h2 {
+  font-size: var(--step-3);
+  font-weight: 620;
+  line-height: 1.05;
+}
+
+.page p {
+  text-wrap: pretty;
+}
+
+/* ---------- Abertura ---------- */
+
+.page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.page-hero--accent {
+  background: var(--wash);
+  color: var(--ink);
+}
+
+.page-hero--light {
+  background: var(--sand-50);
+  color: var(--ink);
+  box-shadow: inset 0 -1px 0 var(--rule-light);
+}
+
+.page-hero__rings {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.page-hero__rings circle {
+  fill: none;
+  stroke: var(--rule-light);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.page-hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  grid-template-areas:
+    "crumbs crumbs"
+    "copy media";
+  gap: var(--space-7) var(--space-8);
+  align-items: center;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-5) var(--gutter) var(--space-9);
+}
+
+.page-hero--text .page-hero__inner {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "crumbs"
+    "copy";
+  padding-bottom: var(--space-8);
+}
+
+.page-crumbs {
+  grid-area: crumbs;
+}
+
+.page-crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--step--1);
+  letter-spacing: 0.02em;
+}
+
+.page-crumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 44px;
+  color: var(--ink-2);
+}
+
+/* Separador: o hexágono do logo, pequeno. */
+.page-crumbs li + li::before {
+  content: "";
+  width: 0.45em;
+  height: 0.52em;
+  background: var(--ink-3);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+
+.page-crumbs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--dur-quick) var(--ease-out);
+}
+
+.page-crumbs a:hover {
+  text-decoration-color: currentColor;
+}
+
+.page-crumbs [aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.page-hero--accent .page-crumbs li {
+  color: var(--ink-2);
+}
+
+/* O separador da migalha é um traço da cor do texto, não um fundo. */
+.page-hero--accent .page-crumbs li + li::before {
+  background: currentColor;
+}
+
+.page-hero--accent .page-crumbs [aria-current="page"] {
+  color: var(--ink);
+}
+
+.page-hero__copy {
+  grid-area: copy;
+  max-width: 40rem;
+}
+
+.page-hero__title {
+  font-size: var(--step-4);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.page-hero__lead {
+  max-width: 44ch;
+  margin-top: var(--space-5);
+  color: var(--ink-2);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.page-hero--accent .page-hero__lead {
+  color: var(--ink-2);
+}
+
+.page-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+/* O contexto da página (linha, fabricante) fica como placa técnica embaixo, nunca como eyebrow. */
+.page-hero__context {
+  max-width: 40ch;
+  margin-top: var(--space-7);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--rule-light);
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  letter-spacing: 0.02em;
+}
+
+.page-hero--accent .page-hero__context {
+  border-top-color: var(--rule-light);
+  color: var(--ink-2);
+}
+
+.page-hero__media {
+  position: relative;
+  grid-area: media;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  aspect-ratio: 4 / 3;
+  background: var(--sand-100);
+}
+
+.page-hero__media img,
+.page-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Produto na faixa de destaque: o equipamento inteiro, nunca cortado, sobre a base branca da vitrine. */
+.page-hero--accent .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) {
+  background: var(--white);
+}
+
+.page-hero--accent .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) img {
+  inset: var(--space-6);
+  width: calc(100% - 2 * var(--space-6));
+  height: calc(100% - 2 * var(--space-6));
+  object-fit: contain;
+}
+
+.page-hero__media--video {
+  aspect-ratio: 16 / 9;
+  background: var(--wash-2);
+}
+
+.page-hero__pause {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--rule-light);
+  border-radius: 999px;
+  background: var(--veil);
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  font-weight: 600;
+  transition: color var(--dur-quick) var(--ease-out), border-color var(--dur-quick) var(--ease-out);
+}
+
+.page-hero__pause:hover {
+  color: var(--ink);
+  border-color: var(--ink-2);
+}
+
+.page-hero__pause svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ---------- Seções ---------- */
+
+.page-section {
+  position: relative;
+}
+
+.page-section--accent {
+  background: var(--wash);
+  color: var(--ink);
+}
+
+.page-section__inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-8) var(--gutter);
+}
+
+/* Duas seções claras seguidas: um fio na coluna separa, em vez de somar dois respiros. */
+.page-section--light + .page-section--light .page-section__inner {
+  padding-top: 0;
+}
+
+.page-section--light + .page-section--light .page-section__inner::before {
+  content: "";
+  display: block;
+  grid-column: 1 / -1;
+  height: 1px;
+  margin-bottom: var(--space-8);
+  background: var(--rule-light);
+}
+
+.page-section__head {
+  max-width: 46rem;
+}
+
+.page-section__head > p,
+.page-section__intro p {
+  max-width: 52ch;
+  margin-top: var(--space-5);
+  color: var(--ink-2);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.page-section__intro p + p {
+  margin-top: var(--space-4);
+}
+
+.page-section--accent .page-section__head > p,
+.page-section--accent .page-section__intro p {
+  color: var(--ink-2);
+}
+
+.page-section__body {
+  margin-top: var(--space-7);
+}
+
+.page-section__body > * + * {
+  margin-top: var(--space-7);
+}
+
+/* Texto com mídia: a foto ao lado do texto no desktop; no celular, depois dele. */
+.page-section--split .page-section__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.page-section__media {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  aspect-ratio: 4 / 3;
+  background: var(--sand-100);
+}
+
+.page-section__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Tela de software (ou arte em fundo escuro): depois das regras de mídia do hero e da seção, que ela sobrepõe. Inteira, na proporção dela, sobre a faixa clara.
+   As cores do produto ficam dentro da imagem; o quadro é do sistema. */
+.page-hero__media--screen,
+.page-section__media--screen {
+  aspect-ratio: auto;
+  background: var(--paper);
+  outline: 1px solid var(--rule-light);
+  outline-offset: -1px;
+}
+
+.page-hero__media--screen img,
+.page-section__media--screen img {
+  position: static;
+  display: block;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Texto corrido (institucional, blog): coluna de leitura de 62ch. */
+.page-prose > * + * {
+  margin-top: var(--space-4);
+}
+
+.page-prose p,
+.page-prose li {
+  max-width: 62ch;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+.page-prose a {
+  color: var(--orange-ink);
+  font-weight: 600;
+}
+
+/* Ressalva curta (uso clínico, fonte): texto pequeno em ink-2, na coluna de leitura. */
+.page-note {
+  max-width: 62ch;
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.page-section--accent .page-note {
+  color: var(--ink-2);
+}
+
+/* ---------- Lista de pontos ---------- */
+
+.page-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  gap: 0 var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Marcador em hexágono, a forma do logo (como os itens da etapa na home). */
+.page-points li {
+  position: relative;
+  max-width: 52ch;
+  padding: var(--space-4) 0 var(--space-4) var(--space-6);
+  border-top: 1px solid var(--rule-light);
+  line-height: 1.45;
+}
+
+.page-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(var(--space-4) + 0.38em);
+  width: 0.62em;
+  height: 0.7em;
+  background: var(--orange);
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+}
+
+.page-section--accent .page-points li {
+  border-top-color: var(--rule-light);
+}
+
+/* ---------- Ficha técnica ---------- */
+
+.page-spec {
+  max-width: 52rem;
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  outline: 1px solid var(--rule-light);
+  outline-offset: -1px;
+  color: var(--ink);
+}
+
+.page-spec table {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.page-spec caption {
+  padding-bottom: var(--space-4);
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-1);
+  font-weight: 620;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+.page-spec th,
+.page-spec td {
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--rule-light);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.page-spec th {
+  width: 42%;
+  padding-right: var(--space-5);
+  color: var(--ink-2);
+  font-weight: 400;
+}
+
+.page-spec td {
+  font-weight: 600;
+}
+
+.page-spec__source {
+  margin-top: var(--space-4);
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- Comparativo (um modelo por coluna) ---------- */
+
+.page-compare {
+  max-width: none;
+}
+
+.page-compare__title {
+  padding-bottom: var(--space-4);
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-1);
+  font-weight: 620;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+/* No celular a tabela rola dentro do painel; a página nunca rola de lado. */
+.page-compare__scroll {
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+}
+
+.page-compare table {
+  min-width: 46rem;
+}
+
+.page-compare thead th {
+  width: auto;
+  padding-bottom: var(--space-4);
+  border-top: 0;
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-1);
+  font-weight: 620;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.page-compare thead a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-light);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color var(--dur-quick) var(--ease-out);
+}
+
+.page-compare thead a:hover {
+  text-decoration-color: var(--orange-ink);
+}
+
+.page-compare th,
+.page-compare td {
+  padding-right: var(--space-5);
+}
+
+.page-compare tbody th {
+  width: 18%;
+}
+
+.page-compare td {
+  width: 20.5%;
+}
+
+/* ---------- Grade de cards ---------- */
+
+.page-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16.5rem), 1fr));
+  gap: var(--space-6) var(--space-5);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-card__link {
+  display: grid;
+  align-content: start;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+}
+
+.page-card__plinth {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  outline: 1px solid var(--rule-light);
+  outline-offset: -1px;
+  transition: box-shadow var(--dur-base) var(--ease-out);
+}
+
+/* O equipamento inteiro, nunca cortado (regra do DESIGN.md). */
+.page-card__plinth img {
+  position: absolute;
+  inset: var(--space-5);
+  width: calc(100% - 2 * var(--space-5));
+  height: calc(100% - 2 * var(--space-5));
+  object-fit: contain;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.page-card--fill .page-card__plinth img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+a.page-card__link:hover .page-card__plinth {
+  box-shadow: 0 22px 36px -22px rgba(22, 25, 28, 0.3);
+}
+
+a.page-card__link:hover .page-card__plinth img {
+  transform: scale(1.035);
+}
+
+.page-card__text {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.page .page-card__title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-size: var(--step-1);
+  font-weight: 620;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.page-card__title svg {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  color: var(--orange-ink);
+  transform: translateY(0.14em);
+  transition: transform var(--dur-quick) var(--ease-out);
+}
+
+a.page-card__link:hover .page-card__title svg {
+  transform: translate(3px, 0.14em);
+}
+
+.page-card__meta {
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.page-card__body {
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+
+/* Card só de texto: painel branco com fio; o hover muda o tom, nada levanta. */
+/* O fio é sombra interna, não outline: outline aqui venceria o anel de :focus-visible e o foco sumiria. */
+.page-card--text .page-card__link {
+  padding: var(--space-5) var(--space-5) var(--space-6);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--rule-light);
+  color: var(--ink);
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+
+.page-card--text .page-card__text {
+  margin-top: 0;
+}
+
+.page-card--text a.page-card__link:hover {
+  background: var(--sand-100);
+}
+
+.page-section--accent .page-card--media .page-card__body {
+  color: var(--ink-2);
+}
+
+.page-section--accent .page-card--media .page-card__title svg {
+  color: var(--orange);
+}
+
+/* ---------- Faixa de números ---------- */
+
+.page-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+  gap: var(--space-6) var(--space-5);
+  margin: 0;
+}
+
+.page-facts__item {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--rule-light);
+}
+
+/* O primeiro número leva o laranja: um só destaque, como na home. */
+.page-facts__item:first-child {
+  border-top: 2px solid var(--orange);
+}
+
+.page-facts dt {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: clamp(1.5rem, 1rem + 2.2vw, 2.5rem);
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.page-facts dd {
+  max-width: 28ch;
+  margin: var(--space-2) 0 0;
+  color: var(--ink-2);
+  line-height: 1.4;
+}
+
+.page-section--accent .page-facts__item:not(:first-child) {
+  border-top-color: var(--rule-light);
+}
+
+.page-section--accent .page-facts dd {
+  color: var(--ink-2);
+}
+
+/* ---------- Perguntas frequentes ---------- */
+
+.page-faq {
+  max-width: 52rem;
+  border-bottom: 1px solid var(--rule-light);
+}
+
+.page-faq__item {
+  border-top: 1px solid var(--rule-light);
+}
+
+.page .page-faq h3 {
+  font-size: var(--step-1);
+  font-weight: 620;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.page-faq button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-5) 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.page-faq button span {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color var(--dur-quick) var(--ease-out);
+}
+
+.page-faq button:hover span {
+  text-decoration-color: currentColor;
+}
+
+.page-faq button svg {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--orange-ink);
+  transition: transform var(--dur-quick) var(--ease-out);
+}
+
+.page-faq__item.is-open button svg {
+  transform: rotate(45deg);
+}
+
+.page-faq__answer {
+  padding-bottom: var(--space-5);
+}
+
+.page-faq__answer p {
+  max-width: 62ch;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+
+.page-section--accent .page-faq,
+.page-section--accent .page-faq__item {
+  border-color: var(--rule-light);
+}
+
+.page-section--accent .page-faq button svg {
+  color: var(--orange);
+}
+
+.page-section--accent .page-faq__answer p {
+  color: var(--ink-2);
+}
+
+/* ---------- Vídeo com pôster ---------- */
+
+.page-video {
+  margin: 0;
+}
+
+/* Fora de uma seção, o vídeo respeita a coluna da página. */
+.page > .page-video {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter) var(--space-8);
+}
+
+.page-video--vertical .page-video__media {
+  max-width: 22rem;
+}
+
+.page-video__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background: var(--paper);
+}
+
+.page-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Pílula de ação sobre o pôster: laranja porque inicia a reprodução. */
+.page-video__play {
+  position: absolute;
+  left: var(--space-4);
+  bottom: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: 0 var(--space-5);
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: 0 10px 24px -14px rgba(22, 25, 28, 0.45);
+  transition: background-color var(--dur-quick) var(--ease-out);
+}
+
+.page-video__play:hover {
+  background: var(--orange-hover);
+}
+
+.page-video__play svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: currentColor;
+}
+
+.page-video figcaption {
+  max-width: 52ch;
+  margin-top: var(--space-3);
+  color: var(--ink-2);
+}
+
+.page-section--accent .page-video figcaption {
+  color: var(--ink-2);
+}
+
+/* ---------- Canais de atendimento (contato) ---------- */
+
+.page-channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.page-channels__item {
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--rule-light);
+}
+
+.page-channels dt {
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  font-weight: 600;
+}
+
+.page-channels dd {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-2);
+  margin: var(--space-2) 0 0;
+}
+
+/* O dado fica como texto: dá para selecionar e copiar sem abrir nada. */
+.page-channels__value {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-1);
+  font-weight: 620;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+
+/* ---------- Formulário (Ouvidoria) ---------- */
+
+.page-form-wrap {
+  max-width: 52rem;
+}
+
+.page-form {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.page-form__step {
+  display: grid;
+  gap: var(--space-5);
+  margin: 0;
+  padding: var(--space-6);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--rule-light);
+}
+
+.page-form__step > legend {
+  float: left;
+  width: 100%;
+  padding: 0;
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-2);
+  font-weight: 620;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.page-form__step > legend + * {
+  clear: both;
+}
+
+.page-form__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: var(--space-5);
+}
+
+.page-form__field {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+}
+
+.page-form label,
+.page-form__choices > legend {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.page-form__required {
+  color: var(--ink-2);
+  font-weight: 400;
+}
+
+.page-form input:not([type="radio"]):not([type="checkbox"]):not([type="file"]),
+.page-form select,
+.page-form textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--ink-3);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--ink);
+  font: inherit;
+  line-height: 1.4;
+}
+
+.page-form textarea {
+  resize: vertical;
+}
+
+.page-form input[type="file"] {
+  font: inherit;
+  max-width: 100%;
+}
+
+/* Texto de exemplo no tamanho do corpo: ink-2 (ink-3 só em texto grande e traços). */
+.page-form ::placeholder {
+  color: var(--ink-2);
+}
+
+.page-form [aria-invalid="true"] {
+  border-color: var(--orange-ink);
+  box-shadow: inset 0 0 0 1px var(--orange-ink);
+}
+
+.page .page-form__hint {
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  line-height: 1.45;
+}
+
+.page .page-form__error {
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--orange-ink);
+  color: var(--orange-ink);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.page-form__choices {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.page-form__choices > legend {
+  margin-bottom: var(--space-3);
+  padding: 0;
+}
+
+.page-form__choice,
+.page-form__consent {
+  display: grid;
+  grid-template-columns: 1.5rem minmax(0, 1fr);
+  gap: var(--space-1) var(--space-3);
+  align-items: start;
+}
+
+.page-form__choice .page-form__hint {
+  grid-column: 2;
+}
+
+.page-form__consent .page-form__error {
+  grid-column: 1 / -1;
+}
+
+/* Link para a Política de Privacidade dentro do rótulo do consentimento: sublinhado, para não depender só da cor. */
+.page-form__consent a {
+  color: var(--orange-ink);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.page-form input[type="radio"],
+.page-form input[type="checkbox"] {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  accent-color: var(--orange-ink);
+}
+
+.page-form__inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.page-form__inline input {
+  max-width: 8rem;
+}
+
+.page-form .button--quiet:hover,
+.page-form-wrap .button--quiet:hover {
+  background: var(--sand-100);
+}
+
+.page-form__files {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+
+/* Armadilha para robôs: fora da tela, sem foco. */
+.page-form__trap {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.page .page-form__note {
+  color: var(--ink-2);
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+/* Prévia (fora do domínio do site): o formulário fica só para leitura e o aviso leva ao e-mail. */
+.page-form__preview {
+  margin-bottom: var(--space-5);
+  padding: var(--space-4);
+  border-left: 2px solid var(--orange-ink);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--rule-light);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.page-form__failure:not(:empty) {
+  padding: var(--space-4);
+  border-left: 2px solid var(--orange-ink);
+  background: var(--sand-50);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.page-form__step > .button--primary {
+  justify-self: start;
+}
+
+.page-form__summary {
+  padding: var(--space-5);
+  border-left: 3px solid var(--orange-ink);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--rule-light);
+}
+
+.page .page-form__summary h3,
+.page .page-form__receipt h3 {
+  font-size: var(--step-1);
+  line-height: 1.2;
+}
+
+.page-form__summary ul {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding-left: var(--space-5);
+}
+
+.page-form__summary a {
+  color: var(--orange-ink);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.page-form__receipt {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  border-top: 2px solid var(--orange);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--rule-light);
+}
+
+.page-form__protocol strong {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-3);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+.page-form__receipt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* ---------- Fechamento: a triagem da home ---------- */
+
+.page > .page-section--light + .triage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--gutter);
+  right: var(--gutter);
+  height: 1px;
+  background: var(--rule-light);
+}
+
+/* ---------- Celular e tablet: conteúdo antes da imagem, mesmo ritmo ---------- */
+
+@media (max-width: 1023px) {
+  .page-hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "crumbs"
+      "copy"
+      "media";
+    gap: var(--space-6);
+    padding: var(--space-3) var(--gutter) var(--space-8);
+  }
+
+  .page-hero--text .page-hero__inner {
+    padding-bottom: var(--space-7);
+  }
+
+  .page-hero__copy {
+    max-width: 40rem;
+  }
+
+  .page-hero__rings {
+    display: none;
+  }
+
+  .page-hero__context {
+    margin-top: var(--space-6);
+  }
+
+  .page-section__inner {
+    padding-block: var(--space-7);
+  }
+
+  .page-section--light + .page-section--light .page-section__inner::before {
+    margin-bottom: var(--space-7);
+  }
+
+  .page-section__body {
+    margin-top: var(--space-6);
+  }
+
+  .page-section--split .page-section__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-6);
+  }
+
+  .page > .page-video {
+    padding-bottom: var(--space-7);
+  }
+}
+
+@media (max-width: 639px) {
+  .page-hero--accent .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) img {
+    inset: var(--space-4);
+    width: calc(100% - 2 * var(--space-4));
+    height: calc(100% - 2 * var(--space-4));
+  }
+
+  .page-hero__actions .button {
+    flex: 1 1 100%;
+  }
+
+  /* Só equipamentos: duas colunas, como a vitrine da home no celular. */
+  .page-cards--media {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5) var(--space-3);
+  }
+
+  .page-cards--media .page-card__plinth img {
+    inset: var(--space-3);
+    width: calc(100% - 2 * var(--space-3));
+    height: calc(100% - 2 * var(--space-3));
+  }
+
+  /* Foto de cena continua cobrindo o ladrilho inteiro (a regra acima é só para o recorte). */
+  .page-cards--media .page-card--fill .page-card__plinth img {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .page-cards--media .page-card__text {
+    margin-top: var(--space-3);
+  }
+
+  .page .page-cards--media .page-card__title {
+    font-size: var(--step-0);
+  }
+
+  .page-cards--media .page-card__body {
+    font-size: var(--step--1);
+  }
+
+  .page-spec {
+    padding: var(--space-5);
+  }
+
+  .page-spec th {
+    width: 45%;
+    padding-right: var(--space-4);
+  }
+
+  /* O rótulo da linha fica fixo enquanto os modelos rolam. */
+  .page-compare table {
+    min-width: 38rem;
+  }
+
+  .page-compare tbody th,
+  .page-compare thead th:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    width: 7.5rem;
+    background: var(--white);
+  }
+
+  .page-video--vertical .page-video__media {
+    max-width: 16rem;
+  }
+
+  .page-form__step,
+  .page-form__receipt {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .page-form__step > .button--primary,
+  .page-form__receipt-actions .button {
+    justify-self: stretch;
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-crumbs a,
+  .page-hero__pause,
+  .page-card__plinth,
+  .page-card__plinth img,
+  .page-card__title svg,
+  .page-card--text .page-card__link,
+  .page-faq button span,
+  .page-faq button svg,
+  .page-video__play {
+    transition: none;
+  }
+
+  a.page-card__link:hover .page-card__plinth img {
+    transform: none;
+  }
+}
+
+/* ---------- Artigo do blog ---------- */
+
+.blog-article p,
+.blog-article li {
+  max-width: 65ch;
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+.page .blog-article__meta {
+  color: var(--ink-2);
+  font-size: 0.875rem;
+}

@@ -8,8 +8,9 @@ interface LayoutProps {
 const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="flex min-h-screen flex-col">
+      <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
       <Header />
-      <main className="flex-1">{children}</main>
+      <main id="conteudo" tabIndex={-1} className="flex-1 focus:outline-none">{children}</main>
       <Footer />
     </div>
   );

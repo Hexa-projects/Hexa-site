@@ -5,8 +5,18 @@ export interface BlogPost {
   date: string;
   category: string;
   image: string;
+  imageWidth: number;
+  imageHeight: number;
   content: string[];
+  /** Rascunho: fora do índice, da página do post (404), das rotas públicas e do sitemap. */
+  draft?: boolean;
 }
+
+/*
+ * Os três textos abaixo vieram do repositório do redesenho antigo e nunca saíram no site atual;
+ * têm afirmações sem fonte. Ficam como rascunho até a equipe revisar e aprovar cada um:
+ * para publicar, tirar `draft: true` e incluir o endereço no public/sitemap.xml.
+ */
 
 export const blogPosts: BlogPost[] = [
   {
@@ -16,7 +26,10 @@ export const blogPosts: BlogPost[] = [
       "Descubra como as novas tecnologias de RM estão revolucionando o diagnóstico de patologias da coluna vertebral com maior precisão e conforto.",
     date: "2025-05-10",
     category: "Tecnologia",
-    image: "/assets/hexa/Hexamedical-Templates-Capa-de-Blog-1.webp",
+    draft: true,
+    image: "/assets/hexa/Ressonancia-Magnetica-com-Suporte-de-Peso-1024x576.png",
+    imageWidth: 1024,
+    imageHeight: 576,
     content: [
       "A evolução da ressonância magnética da coluna tem permitido exames mais assertivos para casos complexos.",
       "Tecnologias como aquisição com carga e protocolos dedicados elevam a sensibilidade diagnóstica.",
@@ -30,7 +43,10 @@ export const blogPosts: BlogPost[] = [
       "O exame de RM oferece imagens de alta resolução que auxiliam no diagnóstico e tratamento de lesões. Saiba o que é verdade e o que é mito.",
     date: "2024-10-15",
     category: "Educação",
-    image: "/assets/hexa/Hexamedical-Templates-Capa-de-Blog-2.webp",
+    draft: true,
+    image: "/assets/hexa/img-saiba-qual-a-importancia-dos-equipamentos-de-diagnostico-por-imagem-no-setor-de-saude.jpg",
+    imageWidth: 996,
+    imageHeight: 664,
     content: [
       "A RM é um exame não invasivo e fundamental para diversas especialidades médicas.",
       "Quando bem indicada, reduz retrabalho diagnóstico e acelera decisões clínicas.",
@@ -44,7 +60,10 @@ export const blogPosts: BlogPost[] = [
       "Conheça o sistema de RM de baixo campo e como essa ferramenta atua com campos magnéticos de menor intensidade para diagnósticos eficazes.",
     date: "2024-10-08",
     category: "Guia",
-    image: "/assets/hexa/Hexamedical-Templates-Capa-de-Blog-3.webp",
+    draft: true,
+    image: "/assets/hexa/magnifico-open.jpg",
+    imageWidth: 600,
+    imageHeight: 500,
     content: [
       "A RM de baixo campo é uma alternativa estratégica para clínicas com foco em eficiência operacional.",
       "Ela pode entregar excelente custo-benefício em aplicações musculoesqueléticas e rotinas específicas.",
@@ -52,3 +71,14 @@ export const blogPosts: BlogPost[] = [
     ]
   }
 ];
+
+/** Só os publicados (sem rascunho), do mais novo ao mais antigo (datas AAAA-MM-DD ordenam como texto). */
+export const publishedNewestFirst = (posts: BlogPost[]): BlogPost[] =>
+  posts.filter((post) => !post.draft).sort((a, b) => b.date.localeCompare(a.date));
+
+/** Os artigos que o site mostra hoje. */
+export const publishedPosts: BlogPost[] = publishedNewestFirst(blogPosts);
+
+/** "10 de maio de 2025", sempre em UTC para a data não andar com o fuso do leitor. */
+export const formatPostDate = (date: string) =>
+  new Intl.DateTimeFormat("pt-BR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${date}T00:00:00Z`));

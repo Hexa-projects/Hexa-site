@@ -1,0 +1,158 @@
+/* Superfícies de navegador e peças comuns do sistema. */
+
+::selection {
+  background: var(--orange);
+  color: var(--ink);
+}
+
+/* Sobre o claro o laranja de sinal não tem contraste para o foco: a variante escura do laranja. */
+:focus-visible {
+  outline: 2px solid var(--orange-ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+html {
+  scrollbar-color: var(--line-strong) var(--paper);
+  scrollbar-width: thin;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Seção alcançada por âncora para logo abaixo do cabeçalho fixo, sem ficar escondida atrás dele. */
+[id] {
+  scroll-margin-top: var(--header-h, 5rem);
+}
+
+a {
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-4);
+  top: var(--space-3);
+  z-index: 100;
+  padding: var(--space-3) var(--space-4);
+  background: var(--orange);
+  color: var(--ink);
+  font: 600 var(--step-0) / 1.2 var(--font-body);
+  border-radius: var(--radius-sm);
+  transform: translateY(-160%);
+  transition: transform var(--dur-quick) var(--ease-out);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+/* Botões do sistema: preenchido laranja (texto em tinta) e discreto (contorno). */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: 0 var(--space-5);
+  border-radius: var(--radius-sm);
+  font: 600 var(--step-0) / 1 var(--font-body);
+  text-decoration: none;
+  transition: background-color var(--dur-quick) var(--ease-out), color var(--dur-quick) var(--ease-out), border-color var(--dur-quick) var(--ease-out);
+}
+
+.button svg {
+  width: 1.1em;
+  height: 1.1em;
+  flex: none;
+  transition: transform var(--dur-quick) var(--ease-out);
+}
+
+.button:hover svg {
+  transform: translateX(3px);
+}
+
+.button--primary {
+  background: var(--orange);
+  color: var(--ink);
+}
+
+.button--primary:hover {
+  background: var(--orange-hover);
+}
+
+.button--quiet {
+  border: 1px solid currentColor;
+  color: inherit;
+}
+
+.button--quiet:hover {
+  border-color: var(--orange-ink);
+  background: var(--wash);
+}
+
+/* Link de texto do sistema (fica no claro): laranja tinta, sublinhado que aparece no hover, alvo de 44 px. */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  color: var(--orange-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--dur-quick) var(--ease-out);
+}
+
+.text-link:hover {
+  text-decoration-color: currentColor;
+}
+
+.text-link svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.not-found {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-9) var(--gutter);
+  color: var(--ink);
+}
+
+.not-found h1 {
+  font-family: var(--font-display);
+  font-stretch: var(--display-stretch);
+  font-size: var(--step-4);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.not-found p {
+  max-width: 52ch;
+  margin-top: var(--space-5);
+  font-size: var(--step-1);
+  color: var(--ink-2);
+}
+
+.not-found__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skip-link,
+  .button,
+  .button svg,
+  .text-link {
+    transition: none;
+  }
+}
+
+/* Espaço reservado enquanto o pacote da rota chega: evita salto de layout. */
+.route-loading {
+  min-height: 100vh;
+}

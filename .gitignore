@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+.impeccable/chrome-profile/
 
 # Editor directories and files
 .vscode/*
@@ -22,3 +23,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Material bruto e temporários locais
+media-src/
+tmp/
+output/
+_tmp_*/
+node_modules.stale-codex-path/
+scripts/__pycache__/
+.impeccable/review/
+
+.superpowers/

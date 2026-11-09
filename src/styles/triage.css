@@ -1,0 +1,183 @@
+/* Triagem de contato (ContactTriage): fechamento da home e de toda página interna.
+   Vem com o componente, então funciona em qualquer rota sem depender de home.css. */
+
+.triage {
+  position: relative;
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--space-9) var(--gutter);
+}
+
+.triage__head {
+  max-width: 46rem;
+}
+
+.triage__head p {
+  max-width: 52ch;
+  margin-top: var(--space-5);
+  color: var(--ink-2);
+  font-size: var(--step-1);
+  line-height: 1.45;
+}
+
+.triage__list {
+  display: grid;
+  gap: var(--space-3);
+  margin: var(--space-7) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.triage__row {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+  gap: var(--space-6);
+  align-items: center;
+  padding: var(--space-6);
+  border: 1px solid var(--rule-light);
+  border-radius: var(--radius-md);
+  background: var(--white);
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+
+.triage__row:hover,
+.triage__row:focus-within {
+  background: var(--sand-100);
+}
+
+.triage__shape {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.triage__shape path {
+  fill: none;
+  stroke: var(--orange);
+  stroke-width: 2;
+  transition: d var(--dur-focal) var(--ease-out);
+}
+
+/* O nó da etapa aparece quando o hexágono já virou anel: o caminho aponta para a linha do tempo. */
+.triage__node {
+  fill: var(--orange);
+  opacity: 0;
+  transition: opacity var(--dur-base) var(--ease-out) 600ms;
+}
+
+.triage__row.is-ring .triage__node {
+  opacity: 1;
+}
+
+.triage__stage {
+  margin-top: var(--space-2);
+  color: var(--ink-2);
+  font-size: var(--step--1);
+}
+
+/* O hexágono do logo vira o anel do túnel quando o caminho entra na tela. */
+.triage__row.is-ring .triage__shape path {
+  d: path("M24 5 C30.79 5 37.06 8.62 40.45 14.5 C43.85 20.38 43.85 27.62 40.45 33.5 C37.06 39.38 30.79 43 24 43 C17.21 43 10.94 39.38 7.55 33.5 C4.15 27.62 4.15 20.38 7.55 14.5 C10.94 8.62 17.21 5 24 5 Z");
+}
+
+.triage__copy h3 {
+  font-size: var(--step-2);
+  font-weight: 620;
+  line-height: 1.1;
+}
+
+.triage__copy p {
+  max-width: 52ch;
+  margin-top: var(--space-2);
+  color: var(--ink-2);
+}
+
+/* Botão em cima e link embaixo, alinhados à direita: os três botões ficam na mesma coluna. */
+.triage__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+}
+
+.triage__channels {
+  margin-top: var(--space-6);
+  color: var(--ink-2);
+}
+
+.triage__channels a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  color: var(--orange-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  transition: text-decoration-color var(--dur-quick) var(--ease-out);
+}
+
+.triage__channels a:hover {
+  text-decoration-color: currentColor;
+}
+
+.triage__channels svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+@media (max-width: 1023px) {
+  .triage {
+    padding-block: var(--space-8);
+  }
+
+  .triage__row {
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+
+  .triage__shape {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .triage__actions {
+    grid-column: 1 / -1;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 639px) {
+  /* Contato no celular: o anel fica em cima, e texto e botão usam a largura toda do cartão
+     (com o anel numa coluna própria, o texto ficava espremido em ~230 px). */
+  .triage__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .triage__actions {
+    align-items: stretch;
+  }
+
+  .triage__actions .text-link {
+    align-self: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .triage__row,
+  .triage__shape path,
+  .triage__channels a {
+    transition: none;
+  }
+
+  .triage__node {
+    opacity: 1;
+    transition: none;
+  }
+
+  /* Sem animação: o anel já aparece pronto. */
+  .triage__shape path {
+    d: path("M24 5 C30.79 5 37.06 8.62 40.45 14.5 C43.85 20.38 43.85 27.62 40.45 33.5 C37.06 39.38 30.79 43 24 43 C17.21 43 10.94 39.38 7.55 33.5 C4.15 27.62 4.15 20.38 7.55 14.5 C10.94 8.62 17.21 5 24 5 Z");
+  }
+}
