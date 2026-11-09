@@ -1,24 +1,12 @@
 /* Páginas internas: o mesmo sistema da home (tokens.css), sem palco WebGL nem rolagem suave.
-   Hero escuro em grafite para produto, com o equipamento sobre a base branca da vitrine;
-   hero claro em mineral para serviço e institucional; leitura sempre no mineral. */
+   Hero de destaque (accent) na faixa laranja clara para produto, com anéis e o equipamento na base branca da vitrine;
+   hero claro para serviço e institucional; leitura sempre no branco. */
 
 .page {
-  background: var(--mineral-50);
+  background: var(--sand-50);
   color: var(--ink);
   font-family: var(--font-body);
   overflow-x: clip;
-}
-
-/* No claro, o laranja de sinal não tem contraste para o foco: variante tinta, sem o halo grafite. */
-.page :focus-visible {
-  outline-color: var(--orange-ink);
-  box-shadow: none;
-}
-
-.page-hero--dark :focus-visible,
-.page-section--dark :focus-visible {
-  outline-color: var(--orange);
-  box-shadow: 0 0 0 5px var(--graphite-950);
 }
 
 .page h1,
@@ -50,13 +38,13 @@
   overflow: hidden;
 }
 
-.page-hero--dark {
-  background: var(--graphite-900);
-  color: var(--on-dark);
+.page-hero--accent {
+  background: var(--wash);
+  color: var(--ink);
 }
 
 .page-hero--light {
-  background: var(--mineral-50);
+  background: var(--sand-50);
   color: var(--ink);
   box-shadow: inset 0 -1px 0 var(--rule-light);
 }
@@ -72,7 +60,7 @@
 
 .page-hero__rings circle {
   fill: none;
-  stroke: var(--rule-dark);
+  stroke: var(--rule-light);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
@@ -150,16 +138,17 @@
   font-weight: 600;
 }
 
-.page-hero--dark .page-crumbs li {
-  color: var(--on-dark-2);
+.page-hero--accent .page-crumbs li {
+  color: var(--ink-2);
 }
 
-.page-hero--dark .page-crumbs li + li::before {
-  background: var(--on-dark-3);
+/* O separador da migalha é um traço da cor do texto, não um fundo. */
+.page-hero--accent .page-crumbs li + li::before {
+  background: currentColor;
 }
 
-.page-hero--dark .page-crumbs [aria-current="page"] {
-  color: var(--on-dark);
+.page-hero--accent .page-crumbs [aria-current="page"] {
+  color: var(--ink);
 }
 
 .page-hero__copy {
@@ -182,8 +171,8 @@
   line-height: 1.45;
 }
 
-.page-hero--dark .page-hero__lead {
-  color: var(--on-dark-2);
+.page-hero--accent .page-hero__lead {
+  color: var(--ink-2);
 }
 
 .page-hero__actions {
@@ -191,10 +180,6 @@
   flex-wrap: wrap;
   gap: var(--space-3);
   margin-top: var(--space-6);
-}
-
-.page-hero--light .button--quiet:hover {
-  background: var(--mineral-100);
 }
 
 /* O contexto da página (linha, fabricante) fica como placa técnica embaixo, nunca como eyebrow. */
@@ -208,9 +193,9 @@
   letter-spacing: 0.02em;
 }
 
-.page-hero--dark .page-hero__context {
-  border-top-color: var(--rule-dark);
-  color: var(--on-dark-3);
+.page-hero--accent .page-hero__context {
+  border-top-color: var(--rule-light);
+  color: var(--ink-2);
 }
 
 .page-hero__media {
@@ -220,7 +205,7 @@
   overflow: hidden;
   border-radius: var(--radius-md);
   aspect-ratio: 4 / 3;
-  background: var(--mineral-100);
+  background: var(--sand-100);
 }
 
 .page-hero__media img,
@@ -232,12 +217,12 @@
   object-fit: cover;
 }
 
-/* Produto no escuro: o equipamento inteiro, nunca cortado, sobre a base branca da vitrine. */
-.page-hero--dark .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) {
+/* Produto na faixa de destaque: o equipamento inteiro, nunca cortado, sobre a base branca da vitrine. */
+.page-hero--accent .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) {
   background: var(--white);
 }
 
-.page-hero--dark .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) img {
+.page-hero--accent .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) img {
   inset: var(--space-6);
   width: calc(100% - 2 * var(--space-6));
   height: calc(100% - 2 * var(--space-6));
@@ -246,7 +231,7 @@
 
 .page-hero__media--video {
   aspect-ratio: 16 / 9;
-  background: var(--graphite-800);
+  background: var(--wash-2);
 }
 
 .page-hero__pause {
@@ -258,18 +243,18 @@
   gap: var(--space-2);
   min-height: 44px;
   padding: 0 var(--space-4);
-  border: 1px solid var(--rule-dark);
+  border: 1px solid var(--rule-light);
   border-radius: 999px;
-  background: var(--stage-veil);
-  color: var(--on-dark-2);
+  background: var(--veil);
+  color: var(--ink-2);
   font-size: var(--step--1);
   font-weight: 600;
   transition: color var(--dur-quick) var(--ease-out), border-color var(--dur-quick) var(--ease-out);
 }
 
 .page-hero__pause:hover {
-  color: var(--on-dark);
-  border-color: var(--on-dark-3);
+  color: var(--ink);
+  border-color: var(--ink-2);
 }
 
 .page-hero__pause svg {
@@ -283,9 +268,9 @@
   position: relative;
 }
 
-.page-section--dark {
-  background: var(--graphite-900);
-  color: var(--on-dark);
+.page-section--accent {
+  background: var(--wash);
+  color: var(--ink);
 }
 
 .page-section__inner {
@@ -325,9 +310,9 @@
   margin-top: var(--space-4);
 }
 
-.page-section--dark .page-section__head > p,
-.page-section--dark .page-section__intro p {
-  color: var(--on-dark-2);
+.page-section--accent .page-section__head > p,
+.page-section--accent .page-section__intro p {
+  color: var(--ink-2);
 }
 
 .page-section__body {
@@ -352,7 +337,7 @@
   overflow: hidden;
   border-radius: var(--radius-md);
   aspect-ratio: 4 / 3;
-  background: var(--mineral-100);
+  background: var(--sand-100);
 }
 
 .page-section__media img {
@@ -363,13 +348,13 @@
   object-fit: cover;
 }
 
-/* Tela de software (ou arte em fundo escuro): depois das regras de mídia do hero e da seção, que ela sobrepõe. Inteira, na proporção dela, sobre a base grafite.
+/* Tela de software (ou arte em fundo escuro): depois das regras de mídia do hero e da seção, que ela sobrepõe. Inteira, na proporção dela, sobre a faixa clara.
    As cores do produto ficam dentro da imagem; o quadro é do sistema. */
 .page-hero__media--screen,
 .page-section__media--screen {
   aspect-ratio: auto;
-  background: var(--graphite-950);
-  outline: 1px solid var(--rule-dark);
+  background: var(--paper);
+  outline: 1px solid var(--rule-light);
   outline-offset: -1px;
 }
 
@@ -406,8 +391,8 @@
   line-height: 1.5;
 }
 
-.page-section--dark .page-note {
-  color: var(--on-dark-2);
+.page-section--accent .page-note {
+  color: var(--ink-2);
 }
 
 /* ---------- Lista de pontos ---------- */
@@ -441,8 +426,8 @@
   clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 }
 
-.page-section--dark .page-points li {
-  border-top-color: var(--rule-dark);
+.page-section--accent .page-points li {
+  border-top-color: var(--rule-light);
 }
 
 /* ---------- Ficha técnica ---------- */
@@ -679,14 +664,14 @@ a.page-card__link:hover .page-card__title svg {
 }
 
 .page-card--text a.page-card__link:hover {
-  background: var(--mineral-100);
+  background: var(--sand-100);
 }
 
-.page-section--dark .page-card--media .page-card__body {
-  color: var(--on-dark-2);
+.page-section--accent .page-card--media .page-card__body {
+  color: var(--ink-2);
 }
 
-.page-section--dark .page-card--media .page-card__title svg {
+.page-section--accent .page-card--media .page-card__title svg {
   color: var(--orange);
 }
 
@@ -727,12 +712,12 @@ a.page-card__link:hover .page-card__title svg {
   line-height: 1.4;
 }
 
-.page-section--dark .page-facts__item:not(:first-child) {
-  border-top-color: var(--rule-dark);
+.page-section--accent .page-facts__item:not(:first-child) {
+  border-top-color: var(--rule-light);
 }
 
-.page-section--dark .page-facts dd {
-  color: var(--on-dark-2);
+.page-section--accent .page-facts dd {
+  color: var(--ink-2);
 }
 
 /* ---------- Perguntas frequentes ---------- */
@@ -803,17 +788,17 @@ a.page-card__link:hover .page-card__title svg {
   line-height: 1.55;
 }
 
-.page-section--dark .page-faq,
-.page-section--dark .page-faq__item {
-  border-color: var(--rule-dark);
+.page-section--accent .page-faq,
+.page-section--accent .page-faq__item {
+  border-color: var(--rule-light);
 }
 
-.page-section--dark .page-faq button svg {
+.page-section--accent .page-faq button svg {
   color: var(--orange);
 }
 
-.page-section--dark .page-faq__answer p {
-  color: var(--on-dark-2);
+.page-section--accent .page-faq__answer p {
+  color: var(--ink-2);
 }
 
 /* ---------- Vídeo com pôster ---------- */
@@ -837,7 +822,7 @@ a.page-card__link:hover .page-card__title svg {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-md);
-  background: var(--graphite-950);
+  background: var(--paper);
 }
 
 .page-video video {
@@ -880,8 +865,8 @@ a.page-card__link:hover .page-card__title svg {
   color: var(--ink-2);
 }
 
-.page-section--dark .page-video figcaption {
-  color: var(--on-dark-2);
+.page-section--accent .page-video figcaption {
+  color: var(--ink-2);
 }
 
 /* ---------- Canais de atendimento (contato) ---------- */
@@ -1090,7 +1075,7 @@ a.page-card__link:hover .page-card__title svg {
 
 .page-form .button--quiet:hover,
 .page-form-wrap .button--quiet:hover {
-  background: var(--mineral-100);
+  background: var(--sand-100);
 }
 
 .page-form__files {
@@ -1132,7 +1117,7 @@ a.page-card__link:hover .page-card__title svg {
 .page-form__failure:not(:empty) {
   padding: var(--space-4);
   border-left: 2px solid var(--orange-ink);
-  background: var(--mineral-50);
+  background: var(--sand-50);
   color: var(--ink);
   font-weight: 600;
 }
@@ -1260,7 +1245,7 @@ a.page-card__link:hover .page-card__title svg {
 }
 
 @media (max-width: 639px) {
-  .page-hero--dark .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) img {
+  .page-hero--accent .page-hero__media:not(.page-hero__media--video, .page-hero__media--screen) img {
     inset: var(--space-4);
     width: calc(100% - 2 * var(--space-4));
     height: calc(100% - 2 * var(--space-4));

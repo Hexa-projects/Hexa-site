@@ -2,6 +2,7 @@
  * O anel e o túnel: o bore da ressonância visto de dentro.
  * Anéis concêntricos em perspectiva (profundidade 1/r), linhas de campo radiais,
  * a borda laranja da abertura e uma luz que segue o cursor. Todo procedural.
+ * Sobre branco (paleta da marca): os anéis são traços finos de grafite quente, a luz do cursor os acende em laranja.
  * Unidade espacial: metade da menor dimensão da tela (u_aperture = 1 cobre a tela curta).
  */
 export const RING_TUNNEL_FRAG = /* glsl */ `
@@ -17,8 +18,9 @@ uniform vec3 u_tint;
 uniform vec2 u_pointer;
 uniform vec2 u_center;
 
-const vec3 GROUND = vec3(0.047, 0.055, 0.063);
-const vec3 STEEL = vec3(0.86, 0.89, 0.90);
+const vec3 GROUND = vec3(1.0, 1.0, 1.0);
+const vec3 LINE = vec3(0.42, 0.39, 0.36);
+const vec3 SAND = vec3(0.965, 0.945, 0.92);
 const float TAU = 6.2831853;
 
 void main() {
@@ -53,18 +55,21 @@ void main() {
   vec2 lp = (u_pointer - c) / (0.5 * m);
   float light = exp(-dot(p - lp, p - lp) * 2.4);
 
-  vec3 col = GROUND;
-  float steel = (ring * (0.16 + 0.75 * light * u_glow) + radial * (0.035 + 0.18 * light * u_glow)) * outside * falloff;
-  col += STEEL * steel;
+  // Vinheta clara: as bordas da tela descansam num areia quente, o centro fica branco.
+  vec3 col = mix(SAND, GROUND, smoothstep(2.4, 0.3, r));
+
+  // Traços: grafite quente fino; perto do cursor puxam para o laranja.
+  float base = (ring * 0.2 + radial * 0.05) * outside * falloff;
+  float lit = (ring * 0.55 + radial * 0.14) * light * u_glow * outside * falloff;
+  col = mix(col, LINE, clamp(base, 0.0, 1.0));
+  col = mix(col, u_tint, clamp(lit, 0.0, 1.0));
 
   // Borda da abertura em laranja de sinal, com halo curto.
   float edge = abs(r - u_aperture);
   float rim = smoothstep(pxUnit * 2.2, 0.0, edge) * step(0.001, u_aperture);
-  float halo = exp(-edge * 16.0) * 0.22 * outside;
-  col += u_tint * (rim * 0.95 + halo * u_glow);
+  float halo = exp(-edge * 16.0) * 0.18 * outside;
+  col = mix(col, u_tint, clamp(rim * 0.95 + halo * u_glow, 0.0, 1.0));
 
-  // Vinheta para assentar o palco.
-  col *= mix(0.55, 1.0, smoothstep(2.4, 0.3, r));
   gl_FragColor = vec4(col, 1.0);
 }
 `;

@@ -27,7 +27,7 @@ const ProductPage = () => {
   return (
     <PageShell title={`${product.name}, ${product.kind}`} description={product.description}>
       <PageHero
-        tone="dark"
+        tone="accent"
         title={product.name}
         lead={product.lead}
         crumbs={[

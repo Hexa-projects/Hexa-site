@@ -29,7 +29,7 @@ const CareversePage = () => {
   return (
     <PageShell title={careverse.title} description={careverse.description}>
       <PageHero
-        tone="dark"
+        tone="accent"
         title={careverse.name}
         lead={careverse.lead}
         crumbs={[{ label: "Início", href: "/" }, { label: "Soluções", href: "/solucoes" }, { label: careverse.name }]}

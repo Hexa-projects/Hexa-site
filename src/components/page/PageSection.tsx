@@ -5,8 +5,8 @@ type PageSectionProps = {
   id?: string;
   title: string;
   intro?: ReactNode;
-  /** "light" (padrão) é o mineral da leitura. "dark" é a faixa grafite: no máximo uma por página, para equipamento ou vídeo. */
-  tone?: "light" | "dark";
+  /** "light" (padrão) é o branco da leitura. "accent" é a faixa laranja clara: no máximo uma por página, para equipamento ou vídeo. */
+  tone?: "light" | "accent";
   /** Texto com mídia: a foto fica ao lado da cabeça e do conteúdo (abaixo deles no celular). */
   media?: MediaImage;
   children?: ReactNode;

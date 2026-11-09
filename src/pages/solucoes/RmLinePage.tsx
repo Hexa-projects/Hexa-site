@@ -13,7 +13,7 @@ import { contactPaths, rmLine, rmServicesMedia } from "@/data/pages/solutions";
 const RmLinePage = () => (
   <PageShell title={rmLine.title} description={rmLine.description}>
     <PageHero
-      tone="dark"
+      tone="accent"
       title={rmLine.heroTitle}
       lead={rmLine.heroLead}
       crumbs={[{ label: "Início", href: "/" }, { label: "Soluções", href: "/solucoes" }, { label: "Ressonância magnética" }]}

@@ -1,7 +1,7 @@
 import { render, screen, within } from "@testing-library/react";
 import { HelmetProvider } from "react-helmet-async";
 import { MemoryRouter } from "react-router-dom";
-import { afterEach, describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import Header from "@/components/layout/Header";
 import Index from "@/pages/Index";
 import { companyFacts, lifecycle } from "@/data/home";
@@ -16,7 +16,7 @@ const renderHome = () =>
   );
 
 describe("home clara", () => {
-  it("só a abertura fica no palco escuro; as seções seguintes ficam na superfície clara", () => {
+  it("só a abertura fica no palco de anéis; as seções seguintes ficam na superfície clara", () => {
     renderHome();
     const hero = screen.getByRole("region", { name: /Ressonância magnética que cabe/ });
     expect(hero.closest(".home__light")).toBeNull();
@@ -24,25 +24,9 @@ describe("home clara", () => {
       expect(screen.getByRole("region", { name }).closest(".home__light"), name).not.toBeNull();
     }
   });
-
-  it("marca a abertura como o trecho escuro que o cabeçalho deve respeitar", () => {
-    renderHome();
-    const hero = screen.getByRole("region", { name: /Ressonância magnética que cabe/ });
-    expect(hero).toHaveAttribute("data-header-theme", "dark");
-  });
 });
 
 describe("cabeçalho da home", () => {
-  const dark = document.createElement("div");
-
-  const placeDarkSection = (bottom: number) => {
-    dark.setAttribute("data-header-theme", "dark");
-    dark.getBoundingClientRect = () => ({ bottom, top: bottom - 900, left: 0, right: 0, width: 0, height: 900, x: 0, y: 0, toJSON: () => ({}) });
-    document.body.appendChild(dark);
-  };
-
-  afterEach(() => dark.remove());
-
   const renderHeader = () =>
     render(
       <MemoryRouter initialEntries={["/"]}>
@@ -50,17 +34,10 @@ describe("cabeçalho da home", () => {
       </MemoryRouter>,
     );
 
-  it("fica transparente e claro sobre a abertura escura", () => {
-    placeDarkSection(900);
+  it("flutua transparente sobre a abertura clara, com o logo original", () => {
     renderHeader();
-    expect(screen.getByRole("banner")).toHaveClass("site-header--stage");
-    expect(screen.getByRole("img", { name: "Hexamedical" })).toHaveAttribute("src", "/assets/brand/hexamedical-logo-light.webp");
-  });
-
-  it("volta ao cabeçalho claro depois que a abertura sai da tela", () => {
-    placeDarkSection(-10);
-    renderHeader();
-    expect(screen.getByRole("banner")).not.toHaveClass("site-header--stage");
+    expect(screen.getByRole("banner")).toHaveClass("site-header--overlay");
+    expect(screen.getByRole("banner")).not.toHaveClass("is-scrolled");
     expect(screen.getByRole("img", { name: "Hexamedical" })).toHaveAttribute("src", "/assets/brand/hexamedical-logo.webp");
   });
 });

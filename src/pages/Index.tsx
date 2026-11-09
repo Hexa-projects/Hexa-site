@@ -24,7 +24,7 @@ const Index = () => {
   const downgrade = useCallback(() => setMode("light"), []);
   const home = useRef<HTMLDivElement>(null);
 
-  // O palco escuro existe só na abertura; as seções claras o cobrem, então ele para de desenhar.
+  // O palco de anéis existe só na abertura; as seções claras o cobrem, então ele para de desenhar.
   useGSAP(
     () => {
       stageState.set({ visible: true });

@@ -11,7 +11,7 @@ import { contactPaths, hub, rmServicesMedia } from "@/data/pages/solutions";
 const SolucoesHub = () => (
   <PageShell title={hub.title} description={hub.description}>
     <PageHero
-      tone="dark"
+      tone="accent"
       title={hub.heroTitle}
       lead={hub.heroLead}
       crumbs={[{ label: "Início", href: "/" }, { label: "Soluções" }]}

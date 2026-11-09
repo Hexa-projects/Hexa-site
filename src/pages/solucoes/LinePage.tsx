@@ -20,7 +20,7 @@ const LinePage = ({ slug }: { slug: string }) => {
   return (
     <PageShell title={line.docTitle} description={line.description}>
       <PageHero
-        tone="dark"
+        tone="accent"
         title={line.title}
         lead={line.lead}
         crumbs={[{ label: "Início", href: "/" }, { label: "Soluções", href: "/solucoes" }, { label: line.crumb }]}

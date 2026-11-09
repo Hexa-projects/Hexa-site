@@ -21,7 +21,7 @@ import "@/styles/magnifico.css";
 
 /** Folga entre o recorte do vídeo e o anel laranja, como a borda do palco na home. */
 const RIM_GAP = 3;
-/** Anéis do túnel atrás do vídeo: densidade crescente para o centro, como no hero escuro do kit. */
+/** Anéis do túnel atrás do vídeo: densidade crescente para o centro, como no hero de destaque do kit. */
 const RINGS = Array.from({ length: 10 }, (_, k) => Math.round(60 * 1.3 ** k));
 
 const isNarrow = () => typeof window !== "undefined" && window.matchMedia("(max-width: 1023px)").matches;
@@ -294,7 +294,7 @@ const MagnificoPage = () => {
   return (
     <PageShell title={magnifico.title} description={magnifico.description}>
       <PageHero
-        tone="dark"
+        tone="accent"
         title={magnifico.name}
         lead={magnifico.lead}
         crumbs={[

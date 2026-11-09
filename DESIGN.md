@@ -2,22 +2,19 @@
 name: Hexamedical
 description: Uma equipe só, da compra ao reparo, vista de dentro do túnel da ressonância.
 colors:
-  graphite-950: "#0c0e10"
-  graphite-900: "#121518"
-  graphite-800: "#1b1f23"
-  graphite-700: "#2a2f34"
-  graphite-600: "#3d444a"
-  mineral-50: "#f2f3f1"
-  mineral-100: "#e6e8e5"
+  paper: "#ffffff"
+  wash: "#fff5ed"
+  wash-2: "#ffeadb"
+  wash-3: "#ffdcc2"
+  line-strong: "#d9cdc1"
+  sand-50: "#fdfbf8"
+  sand-100: "#f6f1eb"
   white: "#ffffff"
   ink: "#16191c"
   ink-2: "#4b535a"
   ink-3: "#6b737a"
-  on-dark: "#eef0ee"
-  on-dark-2: "#a7afb5"
-  on-dark-3: "#8a939a"
-  rule-dark: "rgba(238, 240, 238, 0.14)"
   rule-light: "rgba(22, 25, 28, 0.14)"
+  veil: "rgba(255, 255, 255, 0.92)"
   orange: "#f87517"
   orange-ink: "#a34800"
   scan: "#e9f6ff"
@@ -96,7 +93,7 @@ components:
   button-primary-hover:
     backgroundColor: "#ff8a33"
   button-quiet:
-    textColor: "{colors.on-dark}"
+    textColor: "{colors.ink}"
     typography: "{typography.label}"
     rounded: "{rounded.sm}"
     padding: "0 1.5rem"
@@ -107,8 +104,8 @@ components:
     padding: "0 1rem"
     height: "44px"
   chip-pressed:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.white}"
+    backgroundColor: "{colors.orange}"
+    textColor: "{colors.ink}"
   showroom-plinth:
     backgroundColor: "{colors.white}"
     rounded: "{rounded.md}"
@@ -118,7 +115,7 @@ components:
     rounded: "{rounded.md}"
     padding: "2rem"
   triage-row-hover:
-    backgroundColor: "{colors.mineral-100}"
+    backgroundColor: "{colors.sand-100}"
   proof-play:
     backgroundColor: "{colors.orange}"
     textColor: "{colors.ink}"
@@ -135,10 +132,10 @@ Documentado a partir do código em 2026-11-02. Tokens em `src/styles/tokens.css`
 
 **Creative North Star: "Dentro do túnel"**
 
-A home entra pelo anel da ressonância e depois acende a luz. A abertura acontece num palco grafite (`graphite-950`) com o anel do túnel desenhado em WebGL: ele mostra o vídeo real do Magnifico Open e se abre com o scroll até o equipamento ocupar a tela. Todo o resto da página fica na superfície clara (`mineral-50`), que sobe sobre o palco; ali o anel continua como desenho em SVG (linha do tempo, emblemas, triagem). Todo o conteúdo é HTML e existe sem JavaScript. O equipamento real aparece inteiro, sobre base branca; a única cor de sinal é o laranja Hexamedical.
+A home entra pelo anel da ressonância e depois acende a luz. A abertura acontece num palco branco (`paper`) com o anel do túnel desenhado em WebGL, em traços finos de grafite quente: ele mostra o vídeo real do Magnifico Open e se abre com o scroll até o equipamento ocupar a tela. Todo o resto da página fica na superfície clara (`sand-50`), que sobe sobre o palco; ali o anel continua como desenho em SVG (linha do tempo, emblemas, triagem). Todo o conteúdo é HTML e existe sem JavaScript. O equipamento real aparece inteiro, sobre base branca; a única cor de sinal é o laranja Hexamedical.
 
 **Key Characteristics:**
-- Um único momento escuro, a abertura; o resto da home é claro e plano, com profundidade por fios e pela base branca dos equipamentos.
+- Nenhum fundo escuro (paleta branco e laranja); a abertura é o único momento de palco, branco com anéis; o resto da home é claro e plano, com profundidade por fios e pela base branca dos equipamentos.
 - Um laranja só (`orange`), usado em ação, progresso e na borda do anel.
 - Archivo expandida (largura 112%) nos títulos, Source Sans 3 no texto.
 - Três dispositivos de assinatura: o anel/abertura, o hexágono que vira anel e a varredura de 1 px.
@@ -146,7 +143,7 @@ A home entra pelo anel da ressonância e depois acende a luz. A abertura acontec
 
 ### Palco e movimento
 
-- **Palco imersivo** (`src/motion/stage/`): canvas fixo atrás do conteúdo (`z-index: -1`, `pointer-events: none`), shader procedural próprio, sem three.js. Desenha anéis em perspectiva (densidade 1/r), 72 linhas de campo finas, a borda laranja da abertura com halo curto, luz que segue o cursor e vinheta. Densidade de pixels limitada a 1,5×; não desenha com a aba oculta, com a home fora de vista ou com o vídeo cobrindo a tela (abertura > 2,05). Só desenha enquanto a abertura está na tela; depois dela a superfície clara o cobre.
+- **Palco imersivo** (`src/motion/stage/`): canvas fixo atrás do conteúdo (`z-index: -1`, `pointer-events: none`), shader procedural próprio, sem three.js. Desenha anéis em perspectiva (densidade 1/r), 72 linhas de campo finas, a borda laranja da abertura com halo curto, luz que acende os anéis em laranja perto do cursor e vinheta em areia. Densidade de pixels limitada a 1,5×; não desenha com a aba oculta, com a home fora de vista ou com o vídeo cobrindo a tela (abertura > 2,05). Só desenha enquanto a abertura está na tela; depois dela a superfície clara o cobre.
 - **Modo imersivo ou leve** (`src/motion/capability.ts`): vai para o leve com movimento reduzido, Save-Data, sem WebGL ou menos de 4 núcleos. A largura da tela não rebaixa: o celular tem a versão adaptada (docs/superpowers/specs/2026-11-03-animacoes-mobile-design.md). Depois do `load` + 800 ms, mede janelas de 1 s; duas seguidas abaixo de 45 fps, ou perda do contexto WebGL, rebaixam a página para o leve. `?palco=leve` e `?palco=imersivo` fixam o modo para revisão.
 - **Reserva leve**: SVG estático com nove anéis e a borda laranja (r = 13), opacidade 0,5. No desktop leve com movimento, fica fixo e deslocado 20% para a direita, acompanhando a abertura; no celular (< 640 px) a borda laranja some para não passar atrás dos botões.
 - **Rolagem suave**: Lenis (`lerp: 0.1`, `syncTouch: false`, âncoras ativas) só no desktop imersivo; no toque a rolagem é a nativa. Links com âncora deslizam até a seção (`src/components/RouteScroll.tsx`) e página nova abre no topo. Não muda direção nem velocidade final.
@@ -156,24 +153,24 @@ A home entra pelo anel da ressonância e depois acende a luz. A abertura acontec
 
 ## Colors
 
-Grafite só na abertura e no rodapé, mineral para toda a leitura (inclusive na home) e um único laranja de sinal. Contrastes conferidos em `tokens.css`: laranja sobre grafite 6,9:1; grafite sobre laranja 6,3:1; `orange-ink` sobre mineral 5,4:1; `on-dark-2` sobre grafite 8,7:1. Calculado nesta documentação: `on-dark-3` sobre `graphite-950` ≈ 6,2:1.
+**Paleta da marca: branco e laranja (decisão do Lucas, 2026-11-09).** Nenhum fundo escuro: preto só em texto, ícones e detalhes. Branco e areia quente para a leitura, faixa laranja clara (`wash`) para equipamento e destaque, e um único laranja de sinal. O teste `src/test/light-theme.test.tsx` falha se alguma folha de estilo pintar fundo com luminância abaixo de 0,1. Contrastes conferidos em `tokens.css`: `ink-2` sobre `wash` 7,3:1; `orange-ink` sobre `wash` 5,6:1 e sobre branco 6,1:1; tinta sobre laranja 6,3:1.
 
 ### Primary
-- **Laranja de sinal** (`orange`): botão primário, pílula "Assistir", CTA do cabeçalho no palco, links de texto, progresso do anel, hexágonos alcançados, borda do anel, seleção de texto e anel de foco.
-- **Laranja tinta** (`orange-ink`): o laranja em texto e no anel de foco sobre fundo claro (links de texto da home, link ativo e hover da navegação).
+- **Laranja de sinal** (`orange`): botão primário, pílula "Assistir", CTA do cabeçalho, chip selecionado, progresso do anel, hexágonos alcançados, borda do anel, ícones e seleção de texto. Nunca em texto pequeno sobre o claro.
+- **Laranja tinta** (`orange-ink`): o laranja em texto e no anel de foco (links de texto, link ativo e hover da navegação, contato do rodapé).
 
 ### Tertiary
 - **Luz de varredura** (`scan`): só a linha de 1 px da varredura e seu brilho.
 
 ### Neutral
-- **Grafite profundo** (`graphite-950`): a abertura da home e o halo do anel de foco no escuro.
-- **Grafite 900 / 800 / 700** (`graphite-900`, `graphite-800`, `graphite-700`): rodapé; fundo da abertura e painel da navegação no palco; hover dentro desse painel.
-- **Grafite 600** (`graphite-600`): polegar da barra de rolagem.
-- **Mineral** (`mineral-50`, `mineral-100`): fundo das seções da home depois da abertura, das páginas claras, do cabeçalho claro e do menu móvel claro; `mineral-100` no fundo das fotos de etapa e no hover da triagem.
-- **Branco** (`white`): a base dos equipamentos no portfólio, as linhas da triagem e o painel da navegação clara. Nunca fundo de seção.
+- **Papel** (`paper`): o palco branco da abertura da home (o shader pinta sobre branco, com vinheta em areia).
+- **Faixa laranja clara** (`wash`, `wash-2`, `wash-3`): rodapé, hero de produto (`tone="accent"`), faixa de destaque das páginas, cena do Magnifico; `wash` também no hover da navegação e do botão discreto.
+- **Linha forte** (`line-strong`): polegar da barra de rolagem.
+- **Areia** (`sand-50`, `sand-100`): fundo das seções da home depois da abertura, das páginas claras, do cabeçalho e do menu móvel; `sand-100` no fundo das fotos de etapa, do vídeo e no hover da triagem.
+- **Branco** (`white`): a base dos equipamentos no portfólio, as linhas da triagem e o painel da navegação.
 - **Tinta** (`ink`, `ink-2`, `ink-3`): texto sobre claro e sobre laranja; texto secundário em claro; `ink-3` (4,3:1) só em texto grande, como a etapa inativa, e em traços.
-- **Texto no escuro** (`on-dark`, `on-dark-2`, `on-dark-3`): títulos; parágrafos e legendas; créditos, etapa inativa, rótulos pequenos.
-- **Fios** (`rule-dark`, `rule-light`): divisórias de 1 px, trilho do anel, contorno de chips e da pílula de pausa.
+- **Fios** (`rule-light`): divisórias de 1 px, trilho do anel, anéis em SVG, contorno de chips e da pílula de pausa.
+- **Véu** (`veil`): branco a 92% no cabeçalho rolado da home, na pílula de pausa e sob os dados do vídeo do Magnifico.
 
 **The One Signal Rule.** O laranja é o único acento. Nada de segunda cor de destaque, e nenhum laranja diferente de `#f87517` (o hover `--orange-hover` `#ff8a33` é o único derivado).
 
@@ -203,7 +200,7 @@ Grades: linha do tempo `1.05fr / 1fr` com o anel `min(38vw, 36rem)`; portfólio 
 
 ## Elevation & Depth
 
-Na abertura, profundidade pelo próprio túnel; no claro, por fios `rule-light` e pela base branca sobre o mineral, não por sombra. Sombra só aparece em estado ou em peça que flutua sobre mídia.
+Na abertura, profundidade pelo próprio túnel; no claro, por fios `rule-light` e pela base branca sobre a areia, não por sombra. Sombra só aparece em estado ou em peça que flutua sobre mídia.
 
 ### Shadow Vocabulary
 - **Piso do equipamento** (`0 22px 36px -22px rgba(22,25,28,0.3)`): sob a base branca, só no hover.
@@ -234,16 +231,16 @@ Filtros do portfólio em pílula, 44 px, contorno `rule-light`, texto `ink-2`. P
 
 ### Cards / Containers
 - **Ladrilho do portfólio**: base branca 4:3 com fio interno `rule-light`, raio `md`, equipamento inteiro com `object-fit: contain` e 1,5rem de folga (0,75rem abaixo de 640 px). Hover: piso de sombra e escala de 1,035 na imagem. Variante **fill**, só para foto de cena e não recorte (hoje Vet-MR Grande e HexAI): a imagem cobre o ladrilho.
-- **Linha da triagem**: branca com fio `rule-light`, raio `md`, hexágono/anel, título, texto, etapa e, à direita, o botão do WhatsApp com o link de página embaixo. Hover e foco interno: `mineral-100`.
+- **Linha da triagem**: branca com fio `rule-light`, raio `md`, hexágono/anel, título, texto, etapa e, à direita, o botão do WhatsApp com o link de página embaixo. Hover e foco interno: `sand-100`.
 - **Números da empresa**: lista de definições em duas colunas; número em Archivo 650 `--step-3`, rótulo `ink-2`; fio `rule-light` em cima, e o primeiro com fio laranja de 2 px (o único destaque).
 - **Itens da etapa**: lista curta sob o texto de cada etapa, com marcador em hexágono laranja.
 - **Vídeo de prova**: pôster com a pílula laranja "Assistir"; os controles nativos só aparecem depois do clique, e o foco vai para o vídeo.
 
 ### Navigation
-- **Cabeçalho normal** (páginas internas): `position: sticky` no topo, fundo `mineral-50`, fio `rule-light`, logo escuro, CTA "Falar com especialista" em `ink` que fica laranja no hover.
-- **Cabeçalho da home**: `position: fixed` o tempo todo (`site-header--overlay`). Enquanto a abertura (`data-header-theme="dark"`) está por baixo dele, fica no modo palco: transparente, logo claro, CTA laranja e, depois de 24 px de rolagem, fundo `--stage-veil` (grafite a 92%) com fio `rule-dark`. Depois da abertura vira o cabeçalho claro, sem mudar de posição.
+- **Cabeçalho normal** (páginas internas): `position: sticky` no topo, fundo `sand-50`, fio `rule-light`, logo original, CTA "Falar com especialista" laranja (hover `orange-hover`).
+- **Cabeçalho da home**: `position: fixed` o tempo todo (`site-header--overlay`): transparente sobre a abertura e, depois de 24 px de rolagem, fundo `veil` (branco a 92%) com fio `rule-light`. Logo sempre o original (não existe mais modo escuro do cabeçalho).
 - Os dois somem ao rolar para baixo (após 160 px) e voltam ao subir, nunca com menu aberto ou foco dentro. Painéis abrem por hover e foco; Esc fecha e devolve o foco. Abaixo de 1024 px, botão de menu de 44 px.
-- **Rodapé**: `graphite-900`, logo claro, contato em laranja, três grupos com títulos em Archivo 620 e links de 44 px (a Ouvidoria fica no grupo Empresa); telefone e e-mail acima da linha legal.
+- **Rodapé**: `wash` (laranja claro), logo original, contato em `orange-ink`, três grupos com títulos em Archivo 620 e links de 44 px (a Ouvidoria fica no grupo Empresa); telefone e e-mail acima da linha legal.
 
 ### Linha do tempo e emblema
 Anel SVG com trilho `rule-light`, progresso laranja e seis hexágonos (contorno `ink-3`, laranja quando alcançados); portal circular com a foto da etapa. No celular, cada etapa traz um emblema: a foto dentro do anel, os seis hexágonos e o arco até a etapa atual.
@@ -254,7 +251,7 @@ Anel SVG com trilho `rule-light`, progresso laranja e seis hexágonos (contorno 
 - **Do** manter o conteúdo visível sem JavaScript; a animação parte do estado final.
 - **Do** declarar cada cena nos três contextos (`desktop`, `mobile`, `reduced`) e prever o modo leve.
 - **Do** dar pausa a todo vídeo que toca sozinho; o vídeo do hero pausa fora da tela.
-- **Do** manter alvos de toque de 44 px (48 px nos botões), o skip link "Pular para o conteúdo" e o anel de foco (2 px laranja, afastado 3 px, halo grafite de 5 px; no claro, 2 px `orange-ink` sem halo).
+- **Do** manter alvos de toque de 44 px (48 px nos botões), o skip link "Pular para o conteúdo" e o anel de foco (2 px `orange-ink`, afastado 3 px, sem halo).
 - **Do** trazer de volta o texto do hero quando o foco do teclado voltar a ele (`:focus-within`).
 - **Do** registrar a origem de toda mídia em `SOURCES.md` antes de publicar.
 
@@ -277,7 +274,7 @@ Exceção única: a página-vitrine do Magnifico Open (`src/pages/solucoes/Magni
 ### Componentes
 - **PageShell** `({ title, description, children })`: `Layout` com o cabeçalho normal (sticky, claro), `<title>{title} | Hexamedical</title>`, meta description, link canônico da rota (`canonicalUrl` em `src/data/routes.ts`), importa `page.css` e roda o `usePageReveal` uma vez para a página toda. As páginas não chamam o hook de novo; só marcam `data-reveal`.
 - **PageHero** `({ tone, eyebrow?, title, lead, crumbs, media?, actions? })`: migalha (`nav` "Você está em", separador em hexágono, último item com `aria-current="page"`), `h1` em Archivo 650 `--step-4` (o display de 5,25 rem continua só na home), lead `--step-1` até 44ch, ações (`primary` laranja, `quiet` contorno). Rota interna vira `Link`; endereço externo (WhatsApp) abre em nova aba. O `eyebrow` não vira eyebrow: aparece como placa técnica embaixo das ações (fio + `--step--1`), por exemplo "Esaote · Ressonância magnética aberta".
-- **Mídia de tela** (`MediaImage.screen`): tela de software ou arte em fundo escuro. No hero e no `PageSection`, aparece inteira, na proporção dela, sobre base `graphite-950` com fio `rule-dark`, sem o recorte 4:3 nem a base branca do equipamento. Usada no Careverse.
+- **Mídia de tela** (`MediaImage.screen`): tela de software ou arte em fundo escuro. No hero e no `PageSection`, aparece inteira, na proporção dela, sobre a faixa clara com fio `rule-light`, sem o recorte 4:3 nem a base branca do equipamento. Usada no Careverse.
 - **PageSection** `({ id?, title, intro?, tone?, media?, children })`: `section` rotulada pelo próprio `h2` (Archivo 620 `--step-3`), intro em lead até 52ch. Duas seções claras seguidas ganham um fio `rule-light` na coluna em vez de somar dois respiros. Com `media` (foto), vira texto com mídia: foto 4:3 ao lado no desktop, depois do texto no celular. Filhos do corpo ficam a `--space-7` um do outro. `.page-prose` dá a coluna de leitura de 62ch para texto corrido.
 - **PointList** `({ items })`: lista com o marcador em hexágono laranja da linha do tempo, um fio por item, em colunas a partir de 22 rem.
 - **SpecTable** `({ caption, source, rows })`: ficha técnica em painel branco com fio, `caption` em Archivo, rótulo `ink-2` e valor `ink` 600 com números tabulares; "Fonte: …" sempre embaixo. Só dados do fabricante.
@@ -291,10 +288,10 @@ Exceção única: a página-vitrine do Magnifico Open (`src/pages/solucoes/Magni
 - **OuvidoriaForm** `({ hostname? })`: o único formulário do site, com o contrato da Ouvidoria do site atual (`src/data/ouvidoria.ts`: endpoint, nomes de campo, ações `challenge` e `submit`). Três `fieldset` com legenda (Identificação, Manifestação, Anexos e envio), rótulo visível em todo campo, "(obrigatório)" escrito, ajuda e erro ligados por `aria-describedby`. Ao enviar com erro, um resumo `role="alert"` recebe o foco e cada item leva ao campo. O envio só sai com a pergunta de verificação carregada; resposta sem protocolo vira erro com o e-mail da ouvidoria. A armadilha para robôs fica com `aria-hidden` e `tabIndex={-1}`. O comprovante (protocolo, copiar, registrar outra) entra numa região `aria-live` e o título dele recebe o foco. Anexos: até 5 de 15 MB, tamanho em KB abaixo de 0,1 MB. O envio só fica ativo em `www.hexamedical.com.br` e `hexamedical.com.br` (`canSubmitOuvidoria`); em outro endereço (prévia) os campos ficam desativados, o aviso `page-form__preview` mostra o e-mail da ouvidoria e a pergunta de verificação não é pedida. `hostname` existe só para os testes.
 - **PageContact** `({ title?, intro?, paths })`: a triagem da home (`ContactTriage`, com CSS próprio em `src/styles/triage.css`) com a mensagem pronta da página. Sem título, usa "Fale com a equipe certa".
 
-### Hero escuro ou claro
-- **Escuro** (`graphite-900`): páginas de produto. O equipamento aparece inteiro sobre a base branca da vitrine e, no desktop, os anéis do túnel em `rule-dark` ficam atrás dele (sem laranja). Vídeo no hero é mudo, em loop, só toca na tela e sempre tem "Pausar vídeo"; com movimento reduzido fica no pôster. O cabeçalho continua o claro (o modo palco é só da home).
-- **Claro** (`mineral-50` com fio embaixo): serviços, institucional, contato, blog e 404. Mídia é foto de cena em quadro 4:3 de raio `md`, cobrindo o quadro.
-- Fora o hero, no máximo uma faixa escura (`tone="dark"`) por página, para equipamento ou vídeo. O resto é mineral.
+### Hero de destaque ou claro
+- **Destaque** (`tone="accent"`, `wash`): páginas de produto. O equipamento aparece inteiro sobre a base branca da vitrine e, no desktop, os anéis do túnel em `rule-light` ficam atrás dele (sem laranja). Vídeo no hero é mudo, em loop, só toca na tela e sempre tem "Pausar vídeo"; com movimento reduzido fica no pôster. O cabeçalho é o claro.
+- **Claro** (`sand-50` com fio embaixo): serviços, institucional, contato, blog e 404. Mídia é foto de cena em quadro 4:3 de raio `md`, cobrindo o quadro.
+- Fora o hero, no máximo uma faixa de destaque (`tone="accent"`, `wash`) por página, para equipamento ou vídeo. O resto é branco e areia.
 
 ### Movimento (`usePageReveal`)
 Três movimentos, uma vez cada, quando o elemento chega a 85% da altura da tela (`ScrollTrigger`, `start: "top 85%"`, `once: true`):

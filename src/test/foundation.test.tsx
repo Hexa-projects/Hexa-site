@@ -31,7 +31,7 @@ describe("layout", () => {
 });
 
 describe("cabeçalho e rodapé", () => {
-  // O tema escuro do cabeçalho segue a abertura (src/test/home-light.test.tsx); aqui, só a posição.
+  // O cabeçalho é sempre claro (src/test/light-theme.test.tsx); aqui, só a posição.
   it("na home, o cabeçalho flutua sobre a página", () => {
     const { container } = renderAt(<Layout><p>home</p></Layout>, "/");
     expect(container.querySelector(".site-header")).toHaveClass("site-header--overlay");

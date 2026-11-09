@@ -1,4 +1,4 @@
-/* Cabeçalho e rodapé do sistema. Variante "stage": sobre o palco grafite da home. */
+/* Cabeçalho e rodapé do sistema. Na home o cabeçalho flutua transparente sobre a abertura clara. */
 
 :root {
   --header-h: 80px;
@@ -9,7 +9,7 @@
   top: 0;
   z-index: 50;
   border-bottom: 1px solid var(--rule-light);
-  background: var(--mineral-50);
+  background: var(--sand-50);
   color: var(--ink);
   transition: transform var(--dur-quick) var(--ease-out), background-color var(--dur-quick) var(--ease-out), border-color var(--dur-quick) var(--ease-out);
 }
@@ -24,15 +24,13 @@
   inset: 0 0 auto;
 }
 
-.site-header--stage {
+.site-header--overlay:not(.is-scrolled) {
   border-bottom-color: transparent;
   background: transparent;
-  color: var(--on-dark);
 }
 
-.site-header--stage.is-scrolled {
-  border-bottom-color: var(--rule-dark);
-  background: var(--stage-veil);
+.site-header--overlay.is-scrolled {
+  background: var(--veil);
 }
 
 .site-header__inner {
@@ -87,11 +85,6 @@
   color: var(--orange-ink);
 }
 
-.site-header--stage .site-nav-item:hover .site-nav-link,
-.site-header--stage .site-nav-link--active {
-  color: var(--orange);
-}
-
 .site-nav-item:hover .site-nav-link svg {
   transform: rotate(180deg);
 }
@@ -107,11 +100,6 @@
   box-shadow: 0 18px 40px rgba(17, 20, 22, 0.16);
 }
 
-.site-header--stage .site-nav-panel {
-  background: var(--graphite-800);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
-}
-
 .site-nav-panel__link {
   display: block;
   padding: 11px 12px;
@@ -123,17 +111,8 @@
 }
 
 .site-nav-panel__link:hover {
-  background: var(--mineral-50);
+  background: var(--wash);
   color: var(--ink);
-}
-
-.site-header--stage .site-nav-panel__link {
-  color: var(--on-dark-2);
-}
-
-.site-header--stage .site-nav-panel__link:hover {
-  background: var(--graphite-700);
-  color: var(--on-dark);
 }
 
 .site-header__cta {
@@ -145,8 +124,8 @@
   min-height: 46px;
   padding-inline: var(--space-5);
   border-radius: var(--radius-sm);
-  background: var(--ink);
-  color: var(--white);
+  background: var(--orange);
+  color: var(--ink);
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1;
@@ -155,13 +134,7 @@
   transition: background-color var(--dur-quick) var(--ease-out), color var(--dur-quick) var(--ease-out);
 }
 
-.site-header__cta:hover,
-.site-header--stage .site-header__cta {
-  background: var(--orange);
-  color: var(--ink);
-}
-
-.site-header--stage .site-header__cta:hover {
+.site-header__cta:hover {
   background: var(--orange-hover);
 }
 
@@ -180,8 +153,8 @@
 .site-footer {
   position: relative;
   z-index: 1;
-  background: var(--graphite-900);
-  color: var(--on-dark);
+  background: var(--wash);
+  color: var(--ink);
 }
 
 .site-footer__top {
@@ -201,7 +174,7 @@
 .site-footer__brand > p {
   max-width: 32rem;
   margin-top: var(--space-6);
-  color: var(--on-dark-2);
+  color: var(--ink-2);
   font-size: var(--step-1);
   line-height: 1.5;
 }
@@ -212,7 +185,7 @@
   gap: var(--space-3);
   min-height: 44px;
   margin-top: var(--space-6);
-  color: var(--orange);
+  color: var(--orange-ink);
   font-weight: 600;
   text-decoration: none;
 }
@@ -234,7 +207,7 @@
 
 .site-footer__group h2 {
   margin-bottom: var(--space-4);
-  color: var(--on-dark);
+  color: var(--ink);
   font-family: var(--font-display);
   font-stretch: var(--display-stretch);
   font-size: var(--step-0);
@@ -250,14 +223,14 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  color: var(--on-dark-2);
+  color: var(--ink-2);
   font-size: 0.9375rem;
   text-decoration: none;
   transition: color var(--dur-quick) var(--ease-out);
 }
 
 .site-footer__group a:hover {
-  color: var(--on-dark);
+  color: var(--ink);
 }
 
 .site-footer__meta {
@@ -278,8 +251,8 @@
 /* As duas linhas do rodapé têm a mesma largura: a da coluna de conteúdo. */
 .site-footer__details {
   padding-block: var(--space-5);
-  border-top: 1px solid var(--rule-dark);
-  color: var(--on-dark-2);
+  border-top: 1px solid var(--rule-light);
+  color: var(--ink-2);
   font-size: 0.875rem;
 }
 
@@ -293,7 +266,7 @@
 }
 
 .site-footer__details a:hover {
-  color: var(--on-dark);
+  color: var(--ink);
 }
 
 .site-footer__details svg {
@@ -304,8 +277,8 @@
 
 .site-footer__legal {
   padding-top: var(--space-5);
-  border-top: 1px solid var(--rule-dark);
-  color: var(--on-dark-3);
+  border-top: 1px solid var(--rule-light);
+  color: var(--ink-2);
   font-size: 0.8125rem;
 }
 
@@ -318,7 +291,7 @@
 }
 
 .site-footer__legal a:hover {
-  color: var(--on-dark);
+  color: var(--ink);
 }
 
 @media (max-width: 1023px) {
@@ -359,26 +332,17 @@
     overflow-y: auto;
     padding: var(--space-4) var(--gutter) var(--space-6);
     border-top: 1px solid var(--rule-light);
-    background: var(--mineral-50);
+    background: var(--sand-50);
     color: var(--ink);
   }
 
-  .site-header--stage .mobile-navigation {
-    border-top-color: var(--rule-dark);
-    background: var(--graphite-900);
-    color: var(--on-dark);
-  }
-
-  .site-header--stage:has(.mobile-navigation) {
-    background: var(--graphite-900);
+  .site-header--overlay:has(.mobile-navigation) {
+    border-bottom-color: var(--rule-light);
+    background: var(--sand-50);
   }
 
   .mobile-navigation__group {
     border-bottom: 1px solid var(--rule-light);
-  }
-
-  .site-header--stage .mobile-navigation__group {
-    border-bottom-color: var(--rule-dark);
   }
 
   .mobile-navigation__heading {
@@ -423,10 +387,6 @@
     min-height: 44px;
     color: var(--ink-2);
     text-decoration: none;
-  }
-
-  .site-header--stage .mobile-navigation__children a {
-    color: var(--on-dark-2);
   }
 
   .mobile-navigation__cta {

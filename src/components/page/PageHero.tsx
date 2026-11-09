@@ -8,7 +8,7 @@ export type PageCrumb = { label: string; href?: string };
 export type PageAction = { label: string; href: string; kind: "primary" | "quiet" };
 
 type PageHeroProps = {
-  tone: "dark" | "light";
+  tone: "accent" | "light";
   /** Contexto da página (linha, fabricante). Aparece como placa técnica abaixo das ações, nunca acima do título. */
   eyebrow?: string;
   title: string;
@@ -18,7 +18,7 @@ type PageHeroProps = {
   actions?: PageAction[];
 };
 
-/** Anéis do túnel atrás do equipamento (hero escuro): densidade crescente para o centro, como o palco da home. */
+/** Anéis do túnel atrás do equipamento (hero de destaque): densidade crescente para o centro, como o palco da home. */
 const RINGS = Array.from({ length: 10 }, (_, k) => Math.round(60 * 1.3 ** k));
 
 const isVideo = (media: MediaImage | MediaVideo): media is MediaVideo => "mp4" in media;
@@ -96,8 +96,8 @@ const HeroVideo = ({ video }: { video: MediaVideo }) => {
 };
 
 /**
- * Abertura das páginas internas. Escura (grafite) para produto: o equipamento inteiro sobre a base branca
- * da vitrine. Clara (mineral) para serviço e institucional: foto de cena no quadro de raio `md`.
+ * Abertura das páginas internas. De destaque (faixa laranja clara) para produto: o equipamento inteiro sobre a base branca
+ * da vitrine. Clara (branca) para serviço e institucional: foto de cena no quadro de raio `md`.
  */
 const PageHero = ({ tone, eyebrow, title, lead, crumbs, media, actions = [] }: PageHeroProps) => {
   const titleId = useId();
@@ -105,7 +105,7 @@ const PageHero = ({ tone, eyebrow, title, lead, crumbs, media, actions = [] }: P
 
   return (
     <section className={`page-hero page-hero--${tone}${media ? "" : " page-hero--text"}`} aria-labelledby={titleId}>
-      {tone === "dark" && (
+      {tone === "accent" && (
         <svg className="page-hero__rings" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
           {RINGS.map((r) => (
             <circle key={r} cx={media ? 1180 : 1320} cy={470} r={r} />

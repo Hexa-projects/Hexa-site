@@ -1,25 +1,19 @@
-/* Home: a abertura acontece no palco grafite (canvas fixo por trás); todo o resto fica na superfície clara,
+/* Home: a abertura acontece no palco branco com anéis (canvas fixo por trás); todo o resto fica na superfície clara,
    que cobre o palco ao subir sobre ele. */
 
 .home {
   position: relative;
   isolation: isolate;
-  background: var(--graphite-950);
-  color: var(--on-dark);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-body);
   overflow-x: clip;
 }
 
 .home__light {
   position: relative;
-  background: var(--mineral-50);
+  background: var(--sand-50);
   color: var(--ink);
-}
-
-/* Sobre o claro, o laranja de sinal não tem contraste para o foco: usa a variante escura, sem o halo grafite. */
-.home__light :focus-visible {
-  outline-color: var(--orange-ink);
-  box-shadow: none;
 }
 
 .home h2,
@@ -57,7 +51,7 @@
   inset: 0 0 auto;
   height: 100svh;
   z-index: -1;
-  color: var(--on-dark-3);
+  color: var(--ink-2);
   overflow: hidden;
   pointer-events: none;
 }
@@ -92,7 +86,7 @@
   inset: 0;
   margin: 0;
   clip-path: circle(var(--r) at var(--cx) var(--cy));
-  background: var(--graphite-800);
+  background: var(--wash-2);
 }
 
 /* O centro do vídeo acompanha o centro da abertura, então o equipamento fica no anel. */
@@ -110,7 +104,7 @@
   top: calc(var(--cy) + var(--r) + var(--space-4));
   z-index: 1;
   transform: translateX(-50%);
-  color: var(--on-dark-3);
+  color: var(--ink-2);
   font-size: var(--step--1);
   letter-spacing: 0.02em;
   white-space: nowrap;
@@ -142,7 +136,7 @@
 .hero__lead {
   max-width: 40ch;
   margin-top: var(--space-5);
-  color: var(--on-dark-2);
+  color: var(--ink-2);
   font-size: var(--step-1);
   line-height: 1.45;
 }
@@ -164,18 +158,18 @@
   gap: var(--space-2);
   min-height: 44px;
   padding: 0 var(--space-4);
-  border: 1px solid var(--rule-dark);
+  border: 1px solid var(--rule-light);
   border-radius: 999px;
-  color: var(--on-dark-2);
+  color: var(--ink-2);
   font-size: var(--step--1);
   font-weight: 600;
-  background: rgba(12, 14, 16, 0.6);
+  background: var(--veil);
   transition: color var(--dur-quick) var(--ease-out), border-color var(--dur-quick) var(--ease-out);
 }
 
 .hero__pause:hover {
-  color: var(--on-dark);
-  border-color: var(--on-dark-3);
+  color: var(--ink);
+  border-color: var(--ink-2);
 }
 
 .hero__pause svg {
@@ -339,7 +333,7 @@
 }
 
 .lifecycle__marker {
-  fill: var(--mineral-50);
+  fill: var(--sand-50);
   stroke: var(--ink-3);
   stroke-width: 0.3;
   transition: fill var(--dur-base) var(--ease-out), stroke var(--dur-base) var(--ease-out);
@@ -355,7 +349,7 @@
   inset: 9%;
   border-radius: 50%;
   overflow: hidden;
-  background: var(--mineral-100);
+  background: var(--sand-100);
 }
 
 .lifecycle__photo {
@@ -462,7 +456,7 @@
 }
 
 .lifecycle__badge-node {
-  fill: var(--mineral-50);
+  fill: var(--sand-50);
   stroke: var(--ink-3);
   stroke-width: 0.45;
 }
@@ -479,7 +473,7 @@
   height: 80%;
   border-radius: 50%;
   object-fit: cover;
-  background: var(--mineral-100);
+  background: var(--sand-100);
 }
 
 /* ---------- H3: portfólio ---------- */
@@ -508,9 +502,9 @@
 }
 
 .chip[aria-pressed="true"] {
-  color: var(--white);
-  background: var(--ink);
-  border-color: var(--ink);
+  color: var(--ink);
+  background: var(--orange);
+  border-color: var(--orange);
 }
 
 .showroom__grid {
@@ -629,7 +623,7 @@
   width: 100%;
   height: auto;
   border-radius: var(--radius-md);
-  background: #000;
+  background: var(--sand-100);
 }
 
 /* Pílula de ação sobre o pôster: laranja porque inicia a reprodução (a do hero é discreta porque só pausa). */
@@ -741,7 +735,7 @@
     z-index: 2;
     margin-inline: calc(-1 * var(--gutter));
     padding: var(--space-4) var(--gutter);
-    background: var(--mineral-50);
+    background: var(--sand-50);
     box-shadow: 0 1px 0 var(--rule-light);
   }
 

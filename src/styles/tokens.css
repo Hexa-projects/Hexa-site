@@ -1,29 +1,26 @@
 /*
  * Tokens do sistema Hexamedical.
- * Palco grafite para equipamento, campo mineral para leitura e um único laranja de sinal.
- * Contrastes conferidos: laranja sobre grafite 6,9:1; grafite sobre laranja 6,3:1;
- * --orange-ink sobre mineral 5,4:1; --on-dark-2 sobre grafite 8,7:1.
+ * Paleta da marca: branco e laranja. Preto só em texto e detalhes, nunca como fundo (2026-11-09).
+ * Papel branco para tudo, faixa laranja clara (wash) para equipamento e destaque, um único laranja de sinal.
+ * Contrastes conferidos: --ink-2 sobre --wash 7,3:1; --orange-ink sobre --wash 5,6:1 e sobre branco 6,1:1;
+ * tinta sobre laranja 6,3:1. O laranja de sinal não serve para texto pequeno sobre o claro: use --orange-ink.
  */
 :root {
-  --graphite-950: #0c0e10;
-  --graphite-900: #121518;
-  --graphite-800: #1b1f23;
-  --graphite-700: #2a2f34;
-  --graphite-600: #3d444a;
-  --mineral-50: #f2f3f1;
-  --mineral-100: #e6e8e5;
+  --paper: #ffffff;
+  --wash: #fff5ed;
+  --wash-2: #ffeadb;
+  --wash-3: #ffdcc2;
+  --line-strong: #d9cdc1;
+  --sand-50: #fdfbf8;
+  --sand-100: #f6f1eb;
   --white: #ffffff;
 
   --ink: #16191c;
   --ink-2: #4b535a;
-  /* Só para texto grande e traços (4,3:1 sobre mineral). */
+  /* Só para texto grande e traços (4,3:1 sobre o claro). */
   --ink-3: #6b737a;
-  --on-dark: #eef0ee;
-  --on-dark-2: #a7afb5;
-  --on-dark-3: #8a939a;
-  --rule-dark: rgba(238, 240, 238, 0.14);
   --rule-light: rgba(22, 25, 28, 0.14);
-  --stage-veil: rgba(12, 14, 16, 0.92);
+  --veil: rgba(255, 255, 255, 0.92);
 
   --orange: #f87517;
   --orange-hover: #ff8a33;

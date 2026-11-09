@@ -42,7 +42,7 @@
 
 .triage__row:hover,
 .triage__row:focus-within {
-  background: var(--mineral-100);
+  background: var(--sand-100);
 }
 
 .triage__shape {

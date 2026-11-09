@@ -63,7 +63,7 @@ const paths: TriagePath[] = [
 const fullPage = () => (
   <PageShell title="Página de teste" description="Descrição de teste.">
     <PageHero
-      tone="dark"
+      tone="accent"
       eyebrow="Ressonância magnética"
       title="Equipamento de teste"
       lead="Linha de apoio do equipamento."
@@ -80,7 +80,7 @@ const fullPage = () => (
     <PageSection title="Ficha técnica">
       <SpecTable caption="Especificações" source="Folder oficial do fabricante" rows={[["Campo", "0,4 T"], ["Consumo", "até 3 kW"]]} />
     </PageSection>
-    <PageSection title="Linha" tone="dark">
+    <PageSection title="Linha" tone="accent">
       <CardGrid items={[{ title: "Card", body: "Texto", href: "/solucoes", image: homeMedia.stages.escolha, meta: "Esaote" }, { title: "Sem link" }]} />
       <FactStrip items={[{ value: "+16 anos", label: "em diagnóstico por imagem" }]} />
     </PageSection>

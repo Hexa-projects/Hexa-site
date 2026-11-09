@@ -5,15 +5,15 @@
   color: var(--ink);
 }
 
+/* Sobre o claro o laranja de sinal não tem contraste para o foco: a variante escura do laranja. */
 :focus-visible {
-  outline: 2px solid var(--orange);
+  outline: 2px solid var(--orange-ink);
   outline-offset: 3px;
-  box-shadow: 0 0 0 5px var(--graphite-950);
   border-radius: 2px;
 }
 
 html {
-  scrollbar-color: var(--graphite-600) var(--graphite-950);
+  scrollbar-color: var(--line-strong) var(--paper);
   scrollbar-width: thin;
   -webkit-text-size-adjust: 100%;
 }
@@ -46,7 +46,7 @@ a {
   transform: translateY(0);
 }
 
-/* Botões do sistema: preenchido laranja (texto grafite) e discreto. */
+/* Botões do sistema: preenchido laranja (texto em tinta) e discreto (contorno). */
 .button {
   display: inline-flex;
   align-items: center;
@@ -86,7 +86,8 @@ a {
 }
 
 .button--quiet:hover {
-  background: rgba(238, 240, 238, 0.08);
+  border-color: var(--orange-ink);
+  background: var(--wash);
 }
 
 /* Link de texto do sistema (fica no claro): laranja tinta, sublinhado que aparece no hover, alvo de 44 px. */

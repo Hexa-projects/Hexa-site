@@ -196,7 +196,7 @@ const HomeHero = ({ mode }: { mode: StageMode }) => {
   }, [mode]);
 
   return (
-    <section ref={root} className="hero" aria-labelledby="hero-title" data-mode={mode} data-header-theme="dark">
+    <section ref={root} className="hero" aria-labelledby="hero-title" data-mode={mode}>
       <div ref={frame} className="hero__frame">
         <figure ref={figure} className="hero__aperture">
           <video
